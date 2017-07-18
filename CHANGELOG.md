@@ -1,5 +1,7 @@
 # HEAD
 
+- Updated: Move layout-specific properties closer to each other. https://github.com/primer/stylelint-config-primer/pull/12
+
 # 1.4.0
 
 - Updated: Development dependencies are any version `*`
