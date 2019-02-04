@@ -51,8 +51,8 @@ describe('stylelint-config-primer', () => {
         const {warnings} = results[0]
         expect(errored).toBeTruthy()
         expect(warnings).toHaveLength(2)
-        expect(warnings[0].text).toBe('Expected "top" to come before "color" (order/properties-order)')
-        expect(warnings[1].text).toBe('Expected a leading zero (number-leading-zero)')
+        expect(warnings[0].text.trim()).toBe('Expected "top" to come before "color" (order/properties-order)')
+        expect(warnings[1].text.trim()).toBe('Expected a leading zero (number-leading-zero)')
       })
   })
 
