@@ -1,0 +1,36 @@
+{
+  "name": "stylelint-config-primer",
+  "version": "3.0.1",
+  "description": "Sharable stylelint config used by GitHub's CSS",
+  "homepage": "http://primer.style/css/tools",
+  "author": "GitHub, Inc.",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "repository": "https://github.com/primer/stylelint-config-primer",
+  "dependencies": {
+    "stylelint-no-unsupported-browser-features": "^1.0.0",
+    "stylelint-order": "^0.4.4",
+    "stylelint-scss": "^1.4.1",
+    "stylelint-selector-no-utility": "2.0.2"
+  },
+  "devDependencies": {
+    "eslint": "4.19.1",
+    "eslint-plugin-github": "1.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jest": "21.15.1",
+    "eslint-rule-documentation": "^1.0.11",
+    "jest": "^24.0.0",
+    "prettier": "^1.16.4"
+  },
+  "keywords": [
+    "github",
+    "primer",
+    "css",
+    "stylelint-config",
+    "stylelint"
+  ]
+}
