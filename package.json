@@ -1,45 +1,36 @@
 {
   "name": "stylelint-config-primer",
-  "version": "2.1.0",
+  "version": "3.0.1",
   "description": "Sharable stylelint config used by GitHub's CSS",
-  "main": "index.js",
-  "scripts": {
-    "ava": "ava --verbose \"tests/**/*.js\"",
-    "lint": "eslint **/*.js",
-    "test": "npm run lint && npm run ava"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/primer/stylelint-config-primer.git"
-  },
-  "keywords": [
-    "github",
-    "primer",
-    "stylelint-config",
-    "stylelint",
-    "css"
-  ],
+  "homepage": "http://primer.style/css/tools",
   "author": "GitHub, Inc.",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/primer/stylelint-config-primer/issues"
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint ."
   },
-  "homepage": "https://github.com/primer/stylelint-config-primer#readme",
+  "repository": "https://github.com/primer/stylelint-config-primer",
   "dependencies": {
     "stylelint-no-unsupported-browser-features": "^1.0.0",
     "stylelint-order": "^0.4.4",
     "stylelint-scss": "^1.4.1",
-    "stylelint-selector-no-utility": "^1.7.0"
+    "stylelint-selector-no-utility": "2.0.2"
   },
   "devDependencies": {
-    "ava": "^0.20.0",
-    "eslint": "^3.19.0",
+    "eslint": "4.19.1",
+    "eslint-plugin-github": "1.0.0",
     "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jest": "21.15.1",
     "eslint-rule-documentation": "^1.0.11",
-    "eslint-plugin-github": "^0.12.0",
-    "stylelint": "^7.13.0"
+    "jest": "^24.0.0",
+    "prettier": "^1.16.4"
   },
-  "peerDependencies": {
-    "stylelint": "^7.13.0"
-  }
+  "keywords": [
+    "github",
+    "primer",
+    "css",
+    "stylelint-config",
+    "stylelint"
+  ]
 }
