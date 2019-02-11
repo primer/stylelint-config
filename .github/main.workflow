@@ -1,6 +1,10 @@
 workflow "lint & test" {
   on = "push"
-  resolves = ["lint", "test"]
+  resolves = [
+    "lint",
+    "test",
+    "publish",
+  ]
 }
 
 action "install" {
@@ -18,4 +22,10 @@ action "test" {
   needs = "install"
   uses = "actions/npm@master"
   args = "test"
+}
+
+action "publish" {
+  uses = "primer/publish@v1.0.0"
+  needs = ["test"]
+  secrets = ["GITHUB_TOKEN", "NPM_AUTH_TOKEN"]
 }
