@@ -15,7 +15,7 @@
     "stylelint-no-unsupported-browser-features": "^1.0.0",
     "stylelint-order": "^2.0.0",
     "stylelint-scss": "3.5.2",
-    "stylelint-selector-no-utility": "3.0.1"
+    "stylelint-selector-no-utility": "4.0.0"
   },
   "devDependencies": {
     "@primer/css": "^12.2.0",
