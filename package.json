@@ -18,7 +18,7 @@
     "stylelint-selector-no-utility": "3.0.1"
   },
   "devDependencies": {
-    "@primer/css": "^12.0.0-rc.5e301d3",
+    "@primer/css": "^12.2.0",
     "eslint": "4.19.1",
     "eslint-plugin-github": "^1.8.1",
     "eslint-plugin-import": "^2.16.0",
