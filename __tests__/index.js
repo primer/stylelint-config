@@ -88,7 +88,7 @@ describe('stylelint-config-primer', () => {
         expect(errored).toBe(true)
         expect(warnings).toHaveLength(1)
         expect(warnings[0].text.trim()).toBe(
-          'Avoid styling the utility class selector ".text-gray" (primer/no-override)'
+          `The class selector ".text-gray" is immutable. (primer/no-override)`
         )
       })
   })
