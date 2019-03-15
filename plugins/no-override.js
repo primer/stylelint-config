@@ -14,13 +14,13 @@ try {
 }
 
 const messages = stylelint.utils.ruleMessages(ruleName, {
-  rejected: selector => `Avoid styling the utility class selector "${selector}"`
+  rejected: selector => `The class selector "${selector}" is immutable.`
 })
 
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   const {bundles = ['utilities']} = options
 
-  const utilitySelectors = new Set()
+  const immutableSelectors = new Set()
   for (const bundle of bundles) {
     if (!availableBundles.includes(bundle)) {
       throw new Error(`Unknown @primer/css bundle: "${bundle}"!`)
@@ -28,12 +28,12 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
     const {cssstats} = require(`@primer/css/dist/${bundle}`)
     for (const selector of cssstats.selectors.values) {
       for (const classSelector of getClassSelectors(selector)) {
-        utilitySelectors.add(classSelector)
+        immutableSelectors.add(classSelector)
       }
     }
   }
 
-  // console.warn(`Got ${utilitySelectors.size} utility selectors from: "${bundles.join('", "')}"`)
+  // console.warn(`Got ${immutableSelectors.size} immutable selectors from: "${bundles.join('", "')}"`)
 
   return (root, result) => {
     const validOptions = stylelint.utils.validateOptions(result, ruleName, {
@@ -47,7 +47,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 
     root.walkRules(rule => {
       for (const classSelector of getClassSelectors(rule.selector)) {
-        if (utilitySelectors.has(classSelector)) {
+        if (immutableSelectors.has(classSelector)) {
           stylelint.utils.report({
             message: messages.rejected(classSelector),
             node: rule,
