@@ -87,9 +87,7 @@ describe('stylelint-config-primer', () => {
         const {warnings} = results[0]
         expect(errored).toBe(true)
         expect(warnings).toHaveLength(1)
-        expect(warnings[0].text.trim()).toBe(
-          `The class selector ".text-gray" is immutable. (primer/no-override)`
-        )
+        expect(warnings[0].text.trim()).toBe(`The class selector ".text-gray" is immutable. (primer/no-override)`)
       })
   })
 })
