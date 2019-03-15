@@ -2,7 +2,7 @@
   "name": "stylelint-config-primer",
   "version": "6.0.0",
   "description": "Sharable stylelint config used by GitHub's CSS",
-  "homepage": "http://primer.style/css/tools",
+  "homepage": "http://primer.style/css/tools/linting",
   "author": "GitHub, Inc.",
   "license": "MIT",
   "main": "index.js",
