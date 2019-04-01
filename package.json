@@ -6,12 +6,20 @@
   "author": "GitHub, Inc.",
   "license": "MIT",
   "main": "index.js",
+  "repository": "primer/stylelint-config-primer",
+  "keywords": [
+    "github",
+    "primer",
+    "css",
+    "stylelint-config",
+    "stylelint"
+  ],
   "scripts": {
     "test": "jest",
     "lint": "eslint ."
   },
-  "repository": "https://github.com/primer/stylelint-config-primer",
   "dependencies": {
+    "sast": "0.7.0",
     "stylelint-no-unsupported-browser-features": "^1.0.0",
     "stylelint-order": "^2.0.0",
     "stylelint-scss": "^3.10.0"
@@ -29,12 +37,5 @@
     "eslint-rule-documentation": "^1.0.11",
     "jest": "24.8.0",
     "prettier": "1.16.4"
-  },
-  "keywords": [
-    "github",
-    "primer",
-    "css",
-    "stylelint-config",
-    "stylelint"
-  ]
+  }
 }
