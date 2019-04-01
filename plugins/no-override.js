@@ -49,12 +49,13 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
       return
     }
 
-    const report = (rule, selector) => stylelint.utils.report({
-      message: messages.rejected(selector),
-      node: rule,
-      result,
-      ruleName
-    })
+    const report = (rule, selector) =>
+      stylelint.utils.report({
+        message: messages.rejected(selector),
+        node: rule,
+        result,
+        ruleName
+      })
 
     root.walkRules(rule => {
       if (immutableSelectors.has(rule.selector)) {
