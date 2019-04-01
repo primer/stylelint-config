@@ -1,37 +1,27 @@
-const {join} = require('path')
-const dedent = require('dedent')
-const stylelint = require('stylelint')
-const defaultConfig = require('../')
+const {lint, extendDefaultConfig} = require('./utils')
 
-const lint = (code, config = defaultConfig, options = {}) => {
-  return stylelint.lint(
-    Object.assign(options, {
-      code: dedent(code) + '\n',
-      config
-    })
-  )
-}
+const SAFE_SCSS_EXAMPLE = `
+  .Component { color: $gray-500; }
+`
 
 describe('stylelint-config-primer', () => {
+
   it('stylelint runs with our config', () => {
     return lint('.bold { font-weight: bold; }').then(data => {
-      expect(data).toBeInstanceOf(Object)
-      const {errored, results} = data
-      expect(errored).toBe(false)
-      expect(results).toHaveLength(1)
+      expect(data).not.toHaveErrored()
+      expect(data).toHaveResultsLength(1)
     })
   })
 
   it('produces zero warnings with valid css', () => {
     return lint(`
-        .selector-x { width: 10%; }
-        .selector-y { width: 20%; }
-        .selector-z { width: 30%; }
-      `).then(data => {
-      const {errored, results} = data
-      const {warnings} = results[0]
-      expect(warnings).toHaveLength(0)
-      expect(errored).toBe(false)
+      .selector-x { width: 10%; }
+      .selector-y { width: 20%; }
+      .selector-z { width: 30%; }
+    `).then(data => {
+      expect(data).not.toHaveErrored()
+      expect(data).toHaveResultsLength(1)
+      expect(data).toHaveWarningsLength(0)
     })
   })
 
@@ -42,40 +32,33 @@ describe('stylelint-config-primer', () => {
           top: .2em;
         }
       `).then(data => {
-      const {errored, results} = data
-      const {warnings} = results[0]
-      expect(errored).toBe(true)
-      expect(warnings).toHaveLength(2)
-      expect(warnings[0].text.trim()).toBe('Expected "top" to come before "color" (order/properties-order)')
-      expect(warnings[1].text.trim()).toBe('Expected a leading zero (number-leading-zero)')
+      expect(data).toHaveErrored()
+      expect(data).toHaveWarningsLength(2)
+      expect(data).toHaveWarnings([
+        'Expected "top" to come before "color" (order/properties-order)',
+        'Expected a leading zero (number-leading-zero)'
+      ])
     })
   })
 
   it('does not report any deprecations', () => {
-    return lint('').then(data => {
-      const {errored, results} = data
-      expect(errored).toBe(false)
-      expect(results).not.toHaveLength(0)
-      expect(results[0].deprecations).toHaveLength(
-        0,
-        `Expected there to be no deprecated config warnings. Please fix these:\n\n${results[0].deprecations
-          .map(d => d.text)
-          .join('\n')}`
-      )
+    return lint(SAFE_SCSS_EXAMPLE).then(data => {
+      expect(data).not.toHaveErrored()
+      expect(data).not.toHaveResultsLength(0)
+      expect(data).toHaveDeprecationsLength(0)
     })
   })
 
   it('warns about the planned deprecation of primer/selector-no-utility', () => {
-    return lint('', {
-      extends: join(__dirname, '..'),
+    return lint(SAFE_SCSS_EXAMPLE, extendDefaultConfig({
       rules: {
         'primer/selector-no-utility': true
       }
-    }).then(data => {
-      const {errored, results} = data
-      expect(errored).toBe(false)
-      expect(results).not.toHaveLength(0)
-      expect(results[0].deprecations).toEqual([
+    })).then(data => {
+      expect(data).not.toHaveErrored()
+      expect(data).not.toHaveResultsLength(0)
+      expect(data).toHaveDeprecationsLength(1)
+      expect(data.results[0].deprecations).toEqual([
         {
           text: `'primer/selector-no-utility' has been deprecated and will be removed in stylelint-config-primer@7.0.0. Please update your rules to use 'primer/no-override'.`,
           reference: 'https://github.com/primer/stylelint-config-primer#deprecations'
@@ -84,24 +67,4 @@ describe('stylelint-config-primer', () => {
     })
   })
 
-  it('reports instances of utility classes', () => {
-    return lint('.text-gray { color: #111; }').then(data => {
-      const {errored, results} = data
-      const {warnings} = results[0]
-      expect(errored).toBe(true)
-      expect(warnings).toHaveLength(1)
-      expect(warnings[0].text.trim()).toBe(`The selector ".text-gray" should not be overridden. (primer/no-override)`)
-    })
-  })
-
-  it('reports instances of complete utility selectors', () => {
-    const selector = '.show-on-focus:focus'
-    return lint(`${selector} { color: #f00; }`).then(data => {
-      const {errored, results} = data
-      const {warnings} = results[0]
-      expect(errored).toBe(true)
-      expect(warnings).toHaveLength(1)
-      expect(warnings[0].text.trim()).toBe(`The selector "${selector}" should not be overridden. (primer/no-override)`)
-    })
-  })
 })
