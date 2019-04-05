@@ -10,15 +10,18 @@ module.exports = {
 }
 
 function extendDefaultConfig(config) {
-  return Object.assign({
-    extends: join(__dirname, '../..')
-  }, config)
+  return Object.assign(
+    {
+      extends: join(__dirname, '../..')
+    },
+    config
+  )
 }
 
 function lint(code, config = defaultConfig, options = {}) {
   return stylelint.lint(
     Object.assign(options, {
-      code: dedent(code).trim() + '\n',
+      code: `${dedent(code).trim()}\n`,
       config
     })
   )

@@ -24,7 +24,6 @@ expect.extend({
   },
 
   toHaveWarnings(data, warningTexts) {
-    const set = warningTexts
     const trimmedWarnings = new Set(data.results[0].warnings.map(({text}) => text.trim()))
     return {
       pass: warningTexts.every(text => trimmedWarnings.has(text)),

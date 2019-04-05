@@ -1,4 +1,4 @@
-const {lint, extendDefaultConfig} = require('./utils')
+const {lint} = require('./utils')
 
 describe('primer/no-override', () => {
   it('reports instances of utility classes', () => {
@@ -18,4 +18,3 @@ describe('primer/no-override', () => {
     })
   })
 })
-

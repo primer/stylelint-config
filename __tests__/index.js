@@ -5,7 +5,6 @@ const SAFE_SCSS_EXAMPLE = `
 `
 
 describe('stylelint-config-primer', () => {
-
   it('stylelint runs with our config', () => {
     return lint('.bold { font-weight: bold; }').then(data => {
       expect(data).not.toHaveErrored()
@@ -50,11 +49,14 @@ describe('stylelint-config-primer', () => {
   })
 
   it('warns about the planned deprecation of primer/selector-no-utility', () => {
-    return lint(SAFE_SCSS_EXAMPLE, extendDefaultConfig({
-      rules: {
-        'primer/selector-no-utility': true
-      }
-    })).then(data => {
+    return lint(
+      SAFE_SCSS_EXAMPLE,
+      extendDefaultConfig({
+        rules: {
+          'primer/selector-no-utility': true
+        }
+      })
+    ).then(data => {
       expect(data).not.toHaveErrored()
       expect(data).not.toHaveResultsLength(0)
       expect(data).toHaveDeprecationsLength(1)
@@ -66,5 +68,4 @@ describe('stylelint-config-primer', () => {
       ])
     })
   })
-
 })
