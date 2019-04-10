@@ -1,3 +1,10 @@
+// we do this here rather than in each of the plugins
+try {
+  require.resolve('@primer/css')
+} catch (error) {
+  throw new Error(`Unable to require('@primer/css')! Did you install it as a peerDependency?`)
+}
+
 const browsers = require('./browsers')
 const propertyOrder = require('./property-order')
 
@@ -5,8 +12,9 @@ module.exports = {
   plugins: [
     'stylelint-no-unsupported-browser-features',
     'stylelint-order',
-    'stylelint-selector-no-utility',
-    'stylelint-scss'
+    'stylelint-scss',
+    './plugins/no-override',
+    './plugins/selector-no-utility'
   ],
   rules: {
     'at-rule-blacklist': ['extend'],
@@ -92,7 +100,7 @@ module.exports = {
         browsers
       }
     ],
-    'primer/selector-no-utility': true,
+    'primer/no-override': true,
     'property-case': 'lower',
     'property-no-vendor-prefix': true,
     'rule-empty-line-before': [
