@@ -36,6 +36,9 @@ describe('primer/no-override', () => {
     return lint('', config).then(data => {
       expect(data).not.toHaveErrored()
       expect(data.results[0].invalidOptionWarnings).toHaveLength(1)
+      expect(data.results[0].invalidOptionWarnings[0]).toEqual({
+        text: `The "bundles" option must be an array of valid bundles; got: "asdf"`
+      })
     })
   })
 })
