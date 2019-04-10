@@ -44,13 +44,10 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
       const invalidBundles = Array.isArray(bundles)
         ? `"${bundles.filter(bundle => !availableBundles.includes(bundle)).join('", "')}"`
         : '(not an array)'
-      result.warn(
-        `The "bundles" option must be an array of valid bundles; got: ${invalidBundles}`,
-        {
-          stylelintType: 'invalidOption',
-          stylelintReference: 'https://github.com/primer/stylelint-config-primer#options'
-        }
-      )
+      result.warn(`The "bundles" option must be an array of valid bundles; got: ${invalidBundles}`, {
+        stylelintType: 'invalidOption',
+        stylelintReference: 'https://github.com/primer/stylelint-config-primer#options'
+      })
     }
 
     if (!enabled) {
