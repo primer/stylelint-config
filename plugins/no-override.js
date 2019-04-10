@@ -26,10 +26,10 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   const immutableClassSelectors = new Set()
   for (const bundle of bundles) {
     if (!availableBundles.includes(bundle)) {
-      throw new Error(`Unknown @primer/css bundle: "${bundle}"!`)
+      continue
     }
-    const {cssstats} = require(`@primer/css/dist/${bundle}`)
-    for (const selector of cssstats.selectors.values) {
+    const stats = require(`@primer/css/dist/stats/${bundle}.json`)
+    for (const selector of stats.selectors.values) {
       immutableSelectors.add(selector)
       for (const classSelector of getClassSelectors(selector)) {
         immutableClassSelectors.add(classSelector)
@@ -40,12 +40,20 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   // console.warn(`Got ${immutableSelectors.size} immutable selectors from: "${bundles.join('", "')}"`)
 
   return (root, result) => {
-    const validOptions = stylelint.utils.validateOptions(result, ruleName, {
-      actual: enabled,
-      possible: [true, false]
-    })
+    if (!Array.isArray(bundles) || bundles.some(bundle => !availableBundles.includes(bundle))) {
+      const invalidBundles = Array.isArray(bundles)
+        ? `"${bundles.filter(bundle => !availableBundles.includes(bundle)).join('", "')}"`
+        : '(not an array)'
+      result.warn(
+        `The "bundles" option must be an array of valid bundles; got: ${invalidBundles}`,
+        {
+          stylelintType: 'invalidOption',
+          stylelintReference: 'https://github.com/primer/stylelint-config-primer#options'
+        }
+      )
+    }
 
-    if (!validOptions) {
+    if (!enabled) {
       return
     }
 
