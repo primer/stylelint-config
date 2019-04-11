@@ -20,7 +20,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
     if (!availableBundles.includes(bundle)) {
       continue
     }
-    const stats = require(`@primer/css/dist/stats/${bundle}.json`)
+    const stats = requirePrimerFile(`dist/stats/${bundle}.json`)
     for (const selector of stats.selectors.values) {
       immutableSelectors.add(selector)
       for (const classSelector of getClassSelectors(selector)) {
