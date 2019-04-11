@@ -1,10 +1,3 @@
-// we do this here rather than in each of the plugins
-try {
-  require.resolve('@primer/css')
-} catch (error) {
-  throw new Error(`Unable to require('@primer/css')! Did you install it as a peerDependency?`)
-}
-
 const browsers = require('./browsers')
 const propertyOrder = require('./property-order')
 
