@@ -1,5 +1,16 @@
 const stylelint = require('stylelint')
-const {rule, ruleName} = require('stylelint-selector-no-utility')
+
+const ruleName = 'primer/selector-no-utility'
+let rule = () => null
+let selectorNoUtility
+try {
+  selectorNoUtility = require('stylelint-selector-no-utility')
+} catch (error) {
+  // eslint-disable-next-line no-console
+  console.warn(`Unable to require('stylelint-selector-no-utility'): ${error}`)
+}
+
+rule = selectorNoUtility.rule
 
 module.exports = stylelint.createPlugin(ruleName, (enabled, ...args) => {
   const deprecatedPlugin = rule(enabled, ...args)
