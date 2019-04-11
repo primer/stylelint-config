@@ -1,18 +1,22 @@
 const stylelint = require('stylelint')
 
 const ruleName = 'primer/selector-no-utility'
-let rule = () => null
-let selectorNoUtility
-try {
-  selectorNoUtility = require('stylelint-selector-no-utility')
-  rule = selectorNoUtility.rule
-} catch (error) {
-  // eslint-disable-next-line no-console
-  console.warn(`Unable to require('stylelint-selector-no-utility'): ${error}`)
-}
 
 module.exports = stylelint.createPlugin(ruleName, (enabled, ...args) => {
-  const deprecatedPlugin = rule(enabled, ...args)
+  if (!enabled) {
+    return noop
+  }
+
+  let selectorNoUtility
+  try {
+    selectorNoUtility = require('stylelint-selector-no-utility')
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn(`Unable to require('stylelint-selector-no-utility'): ${error}`)
+    return noop
+  }
+
+  const deprecatedPlugin = selectorNoUtility.rule(enabled, ...args)
   return (root, result) => {
     if (enabled === false) {
       return
@@ -27,3 +31,6 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, ...args) => {
     return deprecatedPlugin(root, result)
   }
 })
+
+function noop() {
+}

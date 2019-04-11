@@ -9,6 +9,10 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 })
 
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
+  if (!enabled) {
+    return noop
+  }
+
   const {bundles = ['utilities']} = options
 
   const primerMeta = requirePrimerFile('dist/meta.json')
@@ -71,4 +75,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 function getClassSelectors(selector) {
   const match = selector.match(CLASS_PATTERN)
   return match ? [...match] : []
+}
+
+function noop() {
 }
