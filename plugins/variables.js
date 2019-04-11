@@ -1,12 +1,7 @@
 const stylelint = require('stylelint')
-const {readVariablesFromImports} = require('../src/variables')
 
 const ruleName = 'primer/variables'
 
-const primerSupportPath = require.resolve('@primer/css/support/index.scss')
-const primerSupportVars = readVariablesFromImports(primerSupportPath)
-
-const ALLOWED_STATIC_VALUES = new Set(['currentColor', 'inherit', 'none', 'transparent'])
 const DIRS = ['top', 'right', 'bottom', 'left']
 
 const PROP_CATEGORIES = {
@@ -15,7 +10,7 @@ const PROP_CATEGORIES = {
     allowedValues: ['currentColor', 'inherit', 'transparent']
   },
   spacing: {
-    props: ['margin', 'padding', ...DIRS.map(dir => `margin-${dir}`), ...DIRS.map(dir => `padding-{dir}`)],
+    props: ['margin', 'padding', ...DIRS.map(dir => `margin-${dir}`), ...DIRS.map(dir => `padding-${dir}`)],
     allowedValues: ['0']
   },
   typography: {
@@ -24,16 +19,12 @@ const PROP_CATEGORIES = {
   }
 }
 
-const getCategoryForProperty = propertyCategorizer(PROP_CATEGORIES)
-
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
-  return (root, result) => {
-    const validOptions = stylelint.utils.validateOptions(result, ruleName, {
-      actual: enabled,
-      possible: [true, false]
-    })
+  const {categories = PROP_CATEGORIES} = options
+  const getCategoryForProperty = propertyCategorizer(categories)
 
-    if (!validOptions) {
+  return (root, result) => {
+    if (enabled === false) {
       return
     }
 
@@ -47,11 +38,9 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
       if (category && !isValidValue(decl, category)) {
         const {name, allowedValues} = category
         let message = `Please use a ${name} variable for "${prop}" instead of "${value}"`
-        /*
         if (allowedValues && allowedValues.length) {
           message = `${message}, or one of: "${allowedValues.join('", "')}"`
         }
-        */
         stylelint.utils.report({
           message: messages.rejected(`${message}.`),
           node: decl,
@@ -70,11 +59,11 @@ function propertyCategorizer(categories) {
       propertyMap.set(prop, {name, allowedValues})
     }
   }
-  return (prop, value) => propertyMap.get(prop)
+  return prop => propertyMap.get(prop)
 }
 
 function isValidValue(decl, category) {
-  const {prop, value} = decl
+  const {value} = decl
   const {allowedValues, allowedVariables} = category
   if (allowedValues.includes(value)) {
     return true
