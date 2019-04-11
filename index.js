@@ -5,8 +5,9 @@ module.exports = {
   plugins: [
     'stylelint-no-unsupported-browser-features',
     'stylelint-order',
-    'stylelint-selector-no-utility',
-    'stylelint-scss'
+    'stylelint-scss',
+    './plugins/no-override',
+    './plugins/selector-no-utility'
   ],
   rules: {
     'at-rule-blacklist': ['extend'],
@@ -92,7 +93,7 @@ module.exports = {
         browsers
       }
     ],
-    'primer/selector-no-utility': true,
+    'primer/no-override': true,
     'property-case': 'lower',
     'property-no-vendor-prefix': true,
     'rule-empty-line-before': [

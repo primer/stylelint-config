@@ -1,3 +1,2 @@
-*.log
 coverage/
 node_modules/
