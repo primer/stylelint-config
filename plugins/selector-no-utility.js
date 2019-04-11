@@ -32,5 +32,4 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, ...args) => {
   }
 })
 
-function noop() {
-}
+function noop() {}

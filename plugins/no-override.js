@@ -77,5 +77,4 @@ function getClassSelectors(selector) {
   return match ? [...match] : []
 }
 
-function noop() {
-}
+function noop() {}
