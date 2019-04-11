@@ -33,7 +33,7 @@ describe('primer/no-override', () => {
         'primer/no-override': [true, {bundles: ['asdf']}]
       }
     })
-    return lint('', config).then(data => {
+    return lint('.foo { color: #f00; }', config).then(data => {
       expect(data).not.toHaveErrored()
       expect(data.results[0].invalidOptionWarnings).toHaveLength(1)
       expect(data.results[0].invalidOptionWarnings[0]).toEqual({
