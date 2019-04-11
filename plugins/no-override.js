@@ -1,19 +1,8 @@
 const stylelint = require('stylelint')
+const {requirePrimerFile} = require('../src/primer')
 
 const ruleName = 'primer/no-override'
 const CLASS_PATTERN = /(\.[-\w]+)/g
-
-let primerMeta = {}
-let availableBundles = []
-try {
-  primerMeta = require('@primer/css/dist/meta.json')
-} catch (error) {
-  throw new Error(
-    `[${ruleName}] Unable to require('@primer/css/dist/meta.json')! Did you install it as a peerDependency?`
-  )
-}
-
-availableBundles = Object.keys(primerMeta.bundles)
 
 const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: selector => `The selector "${selector}" should not be overridden.`
@@ -21,6 +10,9 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   const {bundles = ['utilities']} = options
+
+  const primerMeta = requirePrimerFile('dist/meta.json')
+  const availableBundles = Object.keys(primerMeta.bundles)
 
   const immutableSelectors = new Set()
   const immutableClassSelectors = new Set()
