@@ -18,7 +18,7 @@
     "stylelint-selector-no-utility": "4.0.0"
   },
   "peerDependencies": {
-    "@primer/css": ">=12"
+    "@primer/css": "*"
   },
   "devDependencies": {
     "@primer/css": "^12.2.0",
