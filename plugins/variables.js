@@ -5,8 +5,14 @@ const ruleName = 'primer/variables'
 const DIRS = ['top', 'right', 'bottom', 'left']
 
 const PROP_CATEGORIES = {
+  bg: {
+    name: 'background color',
+    props: ['background-color'],
+    allowedValues: ['transparent', 'none'],
+    allowedVariables: [/^\$bg-/]
+  },
   color: {
-    props: ['color', 'background-color', 'border-color', ...DIRS.map(dir => `border-${dir}-color`)],
+    props: ['color', 'border-color', ...DIRS.map(dir => `border-${dir}-color`)],
     allowedValues: ['currentColor', 'inherit', 'transparent']
   },
   spacing: {
@@ -38,9 +44,11 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
       if (category && !isValidValue(decl, category)) {
         const {name, allowedValues} = category
         let message = `Please use a ${name} variable for "${prop}" instead of "${value}"`
+        /*
         if (allowedValues && allowedValues.length) {
           message = `${message}, or one of: "${allowedValues.join('", "')}"`
         }
+        */
         stylelint.utils.report({
           message: messages.rejected(`${message}.`),
           node: decl,
@@ -54,9 +62,12 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 
 function propertyCategorizer(categories) {
   const propertyMap = new Map()
-  for (const [name, {props, allowedValues}] of Object.entries(categories)) {
-    for (const prop of props) {
-      propertyMap.set(prop, {name, allowedValues})
+  for (const [name, category] of Object.entries(categories)) {
+    if (!category.name) {
+      category.name = name
+    }
+    for (const prop of category.props) {
+      propertyMap.set(prop, category)
     }
   }
   return prop => propertyMap.get(prop)
@@ -68,15 +79,15 @@ function isValidValue(decl, category) {
   if (allowedValues.includes(value)) {
     return true
   }
-  return includesVariable(value, allowedVariables)
+  return includesValidVariable(value, allowedVariables)
 }
 
-function includesVariable(value, allowed) {
+function includesValidVariable(value, allowedVariables) {
   const matches = value.match(/\$([-\w]+)/g)
-  if (allowed && matches) {
-    for (const match of matches) {
-      if (!(match in allowed)) {
-        return false
+  if (allowedVariables && matches) {
+    for (const variable of matches) {
+      if (allowedVariables.some(pattern => pattern.test(variable))) {
+        return true
       }
     }
   } else if (matches) {
