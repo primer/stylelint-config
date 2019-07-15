@@ -56,7 +56,9 @@ describe('primer/variables', () => {
       ).then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
-        expect(data).toHaveWarnings([`Please use a background color variable for "background-color" instead of "$red". (primer/variables)`])
+        expect(data).toHaveWarnings([
+          `Please use a background color variable for "background-color" instead of "$red". (primer/variables)`
+        ])
       })
     })
 
@@ -87,6 +89,5 @@ describe('primer/variables', () => {
         expect(data).toHaveWarningsLength(0)
       })
     })
-
   })
 })

@@ -42,9 +42,10 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
       const {prop, value} = decl
       const category = getCategoryForProperty(prop)
       if (category && !isValidValue(decl, category)) {
-        const {name, allowedValues} = category
-        let message = `Please use a ${name} variable for "${prop}" instead of "${value}"`
+        const {name} = category
+        const message = `Please use a ${name} variable for "${prop}" instead of "${value}"`
         /*
+        const {allowedValues} = category
         if (allowedValues && allowedValues.length) {
           message = `${message}, or one of: "${allowedValues.join('", "')}"`
         }
