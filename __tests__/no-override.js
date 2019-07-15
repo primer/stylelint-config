@@ -1,6 +1,20 @@
 const {lint, extendDefaultConfig} = require('./utils')
 
 describe('primer/no-override', () => {
+  it(`doesn't run when disabled`, () => {
+    return lint(
+      '.x { color: #f00; }',
+      extendDefaultConfig({
+        rules: {
+          'primer/no-override': false
+        }
+      })
+    ).then(data => {
+      expect(data).not.toHaveErrored()
+      expect(data).toHaveWarningsLength(0)
+    })
+  })
+
   it('reports instances of utility classes', () => {
     return lint('.text-gray { color: #111; }').then(data => {
       expect(data).toHaveErrored()
