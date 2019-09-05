@@ -5,7 +5,7 @@ describe('primer/no-override', () => {
     return lint('.text-gray { color: #111; }').then(data => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
-      expect(data).toHaveWarnings([`The selector ".text-gray" should not be overridden. (primer/no-override)`])
+      expect(data).toHaveWarnings([`".text-gray" should not be overridden (found in utilities). (primer/no-override)`])
     })
   })
 
@@ -14,7 +14,7 @@ describe('primer/no-override', () => {
     return lint(`${selector} { color: #f00; }`).then(data => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
-      expect(data).toHaveWarnings([`The selector "${selector}" should not be overridden. (primer/no-override)`])
+      expect(data).toHaveWarnings([`"${selector}" should not be overridden (found in utilities). (primer/no-override)`])
     })
   })
 
@@ -23,7 +23,7 @@ describe('primer/no-override', () => {
     return lint(`.foo ${selector}:focus { color: #f00; }`).then(data => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
-      expect(data).toHaveWarnings([`The selector "${selector}" should not be overridden. (primer/no-override)`])
+      expect(data).toHaveWarnings([`"${selector}" should not be overridden in ".foo ${selector}:focus" (found in utilities). (primer/no-override)`])
     })
   })
 
