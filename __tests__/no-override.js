@@ -23,7 +23,9 @@ describe('primer/no-override', () => {
     return lint(`.foo ${selector}:focus { color: #f00; }`).then(data => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
-      expect(data).toHaveWarnings([`"${selector}" should not be overridden in ".foo ${selector}:focus" (found in utilities). (primer/no-override)`])
+      expect(data).toHaveWarnings([
+        `"${selector}" should not be overridden in ".foo ${selector}:focus" (found in utilities). (primer/no-override)`
+      ])
     })
   })
 
