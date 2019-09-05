@@ -22,7 +22,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
       continue
     }
     const stats = requirePrimerFile(`dist/stats/${bundle}.json`)
-    const selectors = stats.selectors.values.filter(selector => !!CLASS_PATTERN.test(selector))
+    const selectors = stats.selectors.values.filter(selector => CLASS_PATTERN.test(selector))
     for (const selector of selectors) {
       immutableSelectors.set(selector, bundle)
       for (const classSelector of getClassSelectors(selector)) {
