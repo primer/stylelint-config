@@ -14,7 +14,7 @@
   "dependencies": {
     "stylelint-no-unsupported-browser-features": "^1.0.0",
     "stylelint-order": "^2.0.0",
-    "stylelint-scss": "3.5.2",
+    "stylelint-scss": "^3.10.0",
     "stylelint-selector-no-utility": "4.0.0"
   },
   "peerDependencies": {
