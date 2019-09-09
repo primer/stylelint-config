@@ -2,13 +2,7 @@ const browsers = require('./browsers')
 const propertyOrder = require('./property-order')
 
 module.exports = {
-  plugins: [
-    'stylelint-no-unsupported-browser-features',
-    'stylelint-order',
-    'stylelint-scss',
-    './plugins/no-override',
-    './plugins/selector-no-utility'
-  ],
+  plugins: ['stylelint-no-unsupported-browser-features', 'stylelint-order', 'stylelint-scss', './plugins/no-override'],
   rules: {
     'at-rule-blacklist': ['extend'],
     'at-rule-name-case': 'lower',
