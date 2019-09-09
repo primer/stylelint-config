@@ -1,6 +1,6 @@
 {
   "name": "stylelint-config-primer",
-  "version": "7.0.1",
+  "version": "8.0.0",
   "description": "Sharable stylelint config used by GitHub's CSS",
   "homepage": "http://primer.style/css/tools/linting",
   "author": "GitHub, Inc.",
@@ -14,8 +14,7 @@
   "dependencies": {
     "stylelint-no-unsupported-browser-features": "^1.0.0",
     "stylelint-order": "^2.0.0",
-    "stylelint-scss": "3.5.2",
-    "stylelint-selector-no-utility": "4.0.0"
+    "stylelint-scss": "^3.10.0"
   },
   "peerDependencies": {
     "@primer/css": "*"

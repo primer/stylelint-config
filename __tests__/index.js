@@ -1,4 +1,4 @@
-const {lint, extendDefaultConfig} = require('./utils')
+const {lint} = require('./utils')
 
 const SAFE_SCSS_EXAMPLE = `
   .Component { color: $gray-500; }
@@ -45,27 +45,6 @@ describe('stylelint-config-primer', () => {
       expect(data).not.toHaveErrored()
       expect(data).not.toHaveResultsLength(0)
       expect(data).toHaveDeprecationsLength(0)
-    })
-  })
-
-  it('warns about the planned deprecation of primer/selector-no-utility', () => {
-    return lint(
-      SAFE_SCSS_EXAMPLE,
-      extendDefaultConfig({
-        rules: {
-          'primer/selector-no-utility': true
-        }
-      })
-    ).then(data => {
-      expect(data).not.toHaveErrored()
-      expect(data).not.toHaveResultsLength(0)
-      expect(data).toHaveDeprecationsLength(1)
-      expect(data.results[0].deprecations).toEqual([
-        {
-          text: `'primer/selector-no-utility' has been deprecated and will be removed in stylelint-config-primer@7.0.0. Please update your rules to use 'primer/no-override'.`,
-          reference: 'https://github.com/primer/stylelint-config-primer#deprecations'
-        }
-      ])
     })
   })
 })
