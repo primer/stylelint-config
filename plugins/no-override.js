@@ -4,6 +4,7 @@ const {requirePrimerFile} = require('../src/primer')
 const ruleName = 'primer/no-override'
 const CLASS_PATTERN = /(\.[-\w]+)/
 const CLASS_PATTERN_ALL = new RegExp(CLASS_PATTERN, 'g')
+const CLASS_PATTERN_ONLY = /^\.[-\w]+(:{1,2}[-\w]+)?$/
 
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   if (!enabled) {
@@ -34,8 +35,9 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   const messages = stylelint.utils.ruleMessages(ruleName, {
     rejected: (rule, {selector, bundle}) => {
       const suffix = bundle ? ` (found in ${bundle})` : ''
+      const context = selector === rule.selector ? '' : ` in "${rule.selector}"`
       return selector
-        ? `"${selector}" should not be overridden in "${rule.selector}"${suffix}.`
+        ? `"${selector}" should not be overridden${context}${suffix}.`
         : `"${rule.selector}" should not be overridden${suffix}.`
     }
   })
@@ -66,15 +68,17 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
     root.walkRules(rule => {
       const subject = {rule}
       if (immutableSelectors.has(rule.selector)) {
-        subject.bundle = immutableSelectors.get(rule.selector)
-        report(rule, subject)
-      } else {
-        for (const classSelector of getClassSelectors(rule.selector)) {
-          if (immutableClassSelectors.has(classSelector)) {
-            subject.bundle = immutableClassSelectors.get(classSelector)
-            subject.selector = classSelector
-            report(rule, subject)
-          }
+        if (isClassSelector(rule.selector)) {
+          subject.bundle = immutableSelectors.get(rule.selector)
+          subject.selector = rule.selector
+          return report(rule, subject)
+        }
+      }
+      for (const classSelector of getClassSelectors(rule.selector)) {
+        if (immutableClassSelectors.has(classSelector)) {
+          subject.bundle = immutableClassSelectors.get(classSelector)
+          subject.selector = classSelector
+          return report(rule, subject)
         }
       }
     })
@@ -84,6 +88,10 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 function getClassSelectors(selector) {
   const match = selector.match(CLASS_PATTERN_ALL)
   return match ? [...match] : []
+}
+
+function isClassSelector(selector) {
+  return CLASS_PATTERN_ONLY.test(selector)
 }
 
 function noop() {}
