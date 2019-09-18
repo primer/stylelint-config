@@ -29,6 +29,19 @@ describe('primer/no-override', () => {
     })
   })
 
+  it('only reports class selectors', () => {
+    const config = {
+      plugins: [require.resolve('../plugins/no-override')],
+      rules: {
+        'primer/no-override': [true, {bundles: ['base']}]
+      }
+    }
+    return lint(`hr { color: #f00; }`, config).then(data => {
+      expect(data).not.toHaveErrored()
+      expect(data).toHaveWarningsLength(0)
+    })
+  })
+
   it('warns when you pass an invalid bundle name', () => {
     const config = extendDefaultConfig({
       rules: {
