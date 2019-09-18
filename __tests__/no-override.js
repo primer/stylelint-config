@@ -42,6 +42,51 @@ describe('primer/no-override', () => {
     })
   })
 
+  it('ignores selectors listed as strings', () => {
+    const config = extendDefaultConfig({
+      rules: {
+        'primer/no-override': [true, {
+          bundles: ['utilities'],
+          ignoreSelectors: ['.px-4']
+        }]
+      }
+    })
+    return lint(`.px-4 { margin: 0 4px !important; }`, config).then(data => {
+      expect(data).not.toHaveErrored()
+      expect(data).toHaveWarningsLength(0)
+    })
+  })
+
+  it('ignores selectors listed as regular expressions', () => {
+    const config = extendDefaultConfig({
+      rules: {
+        'primer/no-override': [true, {
+          bundles: ['utilities'],
+          ignoreSelectors: [/\.px-[0-9]/]
+        }]
+      }
+    })
+    return lint(`.px-4 { margin: 0 4px !important; }`, config).then(data => {
+      expect(data).not.toHaveErrored()
+      expect(data).toHaveWarningsLength(0)
+    })
+  })
+
+  it('ignores selectors when ignoreSelectors is a function', () => {
+    const config = extendDefaultConfig({
+      rules: {
+        'primer/no-override': [true, {
+          bundles: ['utilities'],
+          ignoreSelectors: selector => selector === '.px-4'
+        }]
+      }
+    })
+    return lint(`.px-4 { margin: 0 4px !important; }`, config).then(data => {
+      expect(data).not.toHaveErrored()
+      expect(data).toHaveWarningsLength(0)
+    })
+  })
+
   it('warns when you pass an invalid bundle name', () => {
     const config = extendDefaultConfig({
       rules: {

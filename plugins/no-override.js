@@ -11,7 +11,16 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
     return noop
   }
 
-  const {bundles = ['utilities']} = options
+  const {bundles = ['utilities'], ignoreSelectors = []} = options
+
+  const isSelectorIgnored =
+    typeof ignoreSelectors === 'function'
+      ? ignoreSelectors
+      : selector => {
+          return ignoreSelectors.some(pattern => {
+            return pattern instanceof RegExp ? pattern.test(selector) : selector.includes(pattern)
+          })
+        }
 
   const primerMeta = requirePrimerFile('dist/meta.json')
   const availableBundles = Object.keys(primerMeta.bundles)
@@ -69,16 +78,20 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
       const subject = {rule}
       if (immutableSelectors.has(rule.selector)) {
         if (isClassSelector(rule.selector)) {
-          subject.bundle = immutableSelectors.get(rule.selector)
-          subject.selector = rule.selector
-          return report(rule, subject)
+          if (!isSelectorIgnored(rule.selector)) {
+            subject.bundle = immutableSelectors.get(rule.selector)
+            subject.selector = rule.selector
+            return report(rule, subject)
+          }
         }
       }
       for (const classSelector of getClassSelectors(rule.selector)) {
         if (immutableClassSelectors.has(classSelector)) {
-          subject.bundle = immutableClassSelectors.get(classSelector)
-          subject.selector = classSelector
-          return report(rule, subject)
+          if (!isSelectorIgnored(classSelector)) {
+            subject.bundle = immutableClassSelectors.get(classSelector)
+            subject.selector = classSelector
+            return report(rule, subject)
+          }
         }
       }
     })
