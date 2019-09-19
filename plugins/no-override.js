@@ -47,12 +47,11 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   }
 
   const messages = stylelint.utils.ruleMessages(ruleName, {
-    rejected: (rule, {selector, bundle}) => {
-      const suffix = bundle ? ` (found in ${bundle})` : ''
-      const context = selector === rule.selector ? '' : ` in "${rule.selector}"`
-      return selector
-        ? `"${selector}" should not be overridden${context}${suffix}.`
-        : `"${rule.selector}" should not be overridden${suffix}.`
+    rejected: ({rule, selector, bundle}) => {
+      const definedIn = ` (defined in @primer/css/${bundle})`
+      const ruleSelector = collapseWhitespace(rule.selector)
+      const context = selector === rule.selector ? '' : ` in "${ruleSelector}"`
+      return `"${collapseWhitespace(selector)}" should not be overridden${context}${definedIn}.`
     }
   })
 
