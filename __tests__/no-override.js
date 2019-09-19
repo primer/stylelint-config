@@ -52,77 +52,98 @@ describe('primer/no-override', () => {
         'primer/no-override': [true, {bundles: ['base']}]
       }
     }
-    return lint(`hr { color: #f00; }`, config).then(data => {
+    return lint(`body { color: #f00; }`, config).then(data => {
       expect(data).not.toHaveErrored()
       expect(data).toHaveWarningsLength(0)
     })
   })
 
-  it('ignores selectors listed as strings', () => {
-    const config = extendDefaultConfig({
-      rules: {
-        'primer/no-override': [
-          true,
+  describe('ignoreSelectors option', () => {
+    it('ignores selectors listed as strings', () => {
+      const config = extendDefaultConfig({
+        rules: {
+          'primer/no-override': [
+            true,
+            {
+              bundles: ['utilities'],
+              ignoreSelectors: ['.px-4']
+            }
+          ]
+        }
+      })
+      return lint(`.px-4 { margin: 0 4px !important; }`, config).then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+    })
+
+    it('ignores selectors listed as regular expressions', () => {
+      const config = extendDefaultConfig({
+        rules: {
+          'primer/no-override': [
+            true,
+            {
+              bundles: ['utilities'],
+              ignoreSelectors: [/\.px-[0-9]/]
+            }
+          ]
+        }
+      })
+      return lint(`.px-4 { margin: 0 4px !important; }`, config).then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+    })
+
+    it('ignores selectors when ignoreSelectors is a function', () => {
+      const config = extendDefaultConfig({
+        rules: {
+          'primer/no-override': [
+            true,
+            {
+              bundles: ['utilities'],
+              ignoreSelectors: selector => selector === '.px-4'
+            }
+          ]
+        }
+      })
+      return lint(`.px-4 { margin: 0 4px !important; }`, config).then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+    })
+  })
+
+  describe('invalid options', () => {
+    it('warns when you bundles is not an array', () => {
+      const config = extendDefaultConfig({
+        rules: {
+          'primer/no-override': [true, {bundles: 'derp'}]
+        }
+      })
+      return lint('.foo { color: #f00; }', config).then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data.results[0].invalidOptionWarnings).toEqual([
           {
-            bundles: ['utilities'],
-            ignoreSelectors: ['.px-4']
+            text: `The "bundles" option must be an array of valid bundles; got: (not an array)`
           }
-        ]
-      }
+        ])
+      })
     })
-    return lint(`.px-4 { margin: 0 4px !important; }`, config).then(data => {
-      expect(data).not.toHaveErrored()
-      expect(data).toHaveWarningsLength(0)
-    })
-  })
 
-  it('ignores selectors listed as regular expressions', () => {
-    const config = extendDefaultConfig({
-      rules: {
-        'primer/no-override': [
-          true,
+    it('warns when you pass an invalid bundle name', () => {
+      const config = extendDefaultConfig({
+        rules: {
+          'primer/no-override': [true, {bundles: ['asdf']}]
+        }
+      })
+      return lint('.foo { color: #f00; }', config).then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data.results[0].invalidOptionWarnings).toEqual([
           {
-            bundles: ['utilities'],
-            ignoreSelectors: [/\.px-[0-9]/]
+            text: `The "bundles" option must be an array of valid bundles; got: "asdf"`
           }
-        ]
-      }
-    })
-    return lint(`.px-4 { margin: 0 4px !important; }`, config).then(data => {
-      expect(data).not.toHaveErrored()
-      expect(data).toHaveWarningsLength(0)
-    })
-  })
-
-  it('ignores selectors when ignoreSelectors is a function', () => {
-    const config = extendDefaultConfig({
-      rules: {
-        'primer/no-override': [
-          true,
-          {
-            bundles: ['utilities'],
-            ignoreSelectors: selector => selector === '.px-4'
-          }
-        ]
-      }
-    })
-    return lint(`.px-4 { margin: 0 4px !important; }`, config).then(data => {
-      expect(data).not.toHaveErrored()
-      expect(data).toHaveWarningsLength(0)
-    })
-  })
-
-  it('warns when you pass an invalid bundle name', () => {
-    const config = extendDefaultConfig({
-      rules: {
-        'primer/no-override': [true, {bundles: ['asdf']}]
-      }
-    })
-    return lint('.foo { color: #f00; }', config).then(data => {
-      expect(data).not.toHaveErrored()
-      expect(data.results[0].invalidOptionWarnings).toHaveLength(1)
-      expect(data.results[0].invalidOptionWarnings[0]).toEqual({
-        text: `The "bundles" option must be an array of valid bundles; got: "asdf"`
+        ])
       })
     })
   })
