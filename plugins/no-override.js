@@ -111,4 +111,8 @@ function isClassSelector(selector) {
   return CLASS_PATTERN_ONLY.test(selector)
 }
 
+function collapseWhitespace(str) {
+  return str.trim().replace(/\s+/g, ' ')
+}
+
 function noop() {}
