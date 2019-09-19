@@ -66,35 +66,37 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
       })
     }
 
-    if (!enabled) {
-      return
-    }
-
-    const report = (rule, subject) =>
+    const report = subject =>
       stylelint.utils.report({
-        message: messages.rejected(rule, subject),
-        node: rule,
+        message: messages.rejected(subject),
+        node: subject.rule,
         result,
         ruleName
       })
 
     root.walkRules(rule => {
-      const subject = {rule}
-      if (immutableSelectors.has(rule.selector)) {
-        if (isClassSelector(rule.selector)) {
-          if (!isSelectorIgnored(rule.selector)) {
-            subject.bundle = immutableSelectors.get(rule.selector)
-            subject.selector = rule.selector
-            return report(rule, subject)
+      const {selector} = rule
+      if (immutableSelectors.has(selector)) {
+        if (isClassSelector(selector)) {
+          if (!isSelectorIgnored(selector)) {
+            return report({
+              rule,
+              bundle: immutableSelectors.get(selector),
+              selector
+            })
           }
+        } else {
+          // console.log(`not a class selector: "${selector}"`)
         }
       }
-      for (const classSelector of getClassSelectors(rule.selector)) {
+      for (const classSelector of getClassSelectors(selector)) {
         if (immutableClassSelectors.has(classSelector)) {
           if (!isSelectorIgnored(classSelector)) {
-            subject.bundle = immutableClassSelectors.get(classSelector)
-            subject.selector = classSelector
-            return report(rule, subject)
+            return report({
+              rule,
+              bundle: immutableClassSelectors.get(classSelector),
+              selector: classSelector
+            })
           }
         }
       }
