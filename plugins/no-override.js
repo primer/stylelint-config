@@ -25,14 +25,19 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   const primerMeta = requirePrimerFile('dist/meta.json')
   const availableBundles = Object.keys(primerMeta.bundles)
 
+  // These map selectors to the bundle in which they're defined.
+  // If there's no entry for a given selector, it means that it's not defined
+  // in one of the *specified* bundles, since we're iterating over the list of
+  // bundle names in the options.
   const immutableSelectors = new Map()
   const immutableClassSelectors = new Map()
+
   for (const bundle of bundles) {
     if (!availableBundles.includes(bundle)) {
       continue
     }
     const stats = requirePrimerFile(`dist/stats/${bundle}.json`)
-    const selectors = stats.selectors.values.filter(selector => CLASS_PATTERN.test(selector))
+    const selectors = stats.selectors.values
     for (const selector of selectors) {
       immutableSelectors.set(selector, bundle)
       for (const classSelector of getClassSelectors(selector)) {
