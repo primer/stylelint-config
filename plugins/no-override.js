@@ -4,25 +4,40 @@ const {requirePrimerFile} = require('../src/primer')
 const ruleName = 'primer/no-override'
 const CLASS_PATTERN = /(\.[-\w]+)/
 const CLASS_PATTERN_ALL = new RegExp(CLASS_PATTERN, 'g')
+const CLASS_PATTERN_ONLY = /^\.[-\w]+(:{1,2}[-\w]+)?$/
 
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   if (!enabled) {
     return noop
   }
 
-  const {bundles = ['utilities']} = options
+  const {bundles = ['utilities'], ignoreSelectors = []} = options
+
+  const isSelectorIgnored =
+    typeof ignoreSelectors === 'function'
+      ? ignoreSelectors
+      : selector => {
+          return ignoreSelectors.some(pattern => {
+            return pattern instanceof RegExp ? pattern.test(selector) : selector.includes(pattern)
+          })
+        }
 
   const primerMeta = requirePrimerFile('dist/meta.json')
   const availableBundles = Object.keys(primerMeta.bundles)
 
+  // These map selectors to the bundle in which they're defined.
+  // If there's no entry for a given selector, it means that it's not defined
+  // in one of the *specified* bundles, since we're iterating over the list of
+  // bundle names in the options.
   const immutableSelectors = new Map()
   const immutableClassSelectors = new Map()
+
   for (const bundle of bundles) {
     if (!availableBundles.includes(bundle)) {
       continue
     }
     const stats = requirePrimerFile(`dist/stats/${bundle}.json`)
-    const selectors = stats.selectors.values.filter(selector => CLASS_PATTERN.test(selector))
+    const selectors = stats.selectors.values
     for (const selector of selectors) {
       immutableSelectors.set(selector, bundle)
       for (const classSelector of getClassSelectors(selector)) {
@@ -32,11 +47,11 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   }
 
   const messages = stylelint.utils.ruleMessages(ruleName, {
-    rejected: (rule, {selector, bundle}) => {
-      const suffix = bundle ? ` (found in ${bundle})` : ''
-      return selector
-        ? `"${selector}" should not be overridden in "${rule.selector}"${suffix}.`
-        : `"${rule.selector}" should not be overridden${suffix}.`
+    rejected: ({rule, selector, bundle}) => {
+      const definedIn = ` (defined in @primer/css/${bundle})`
+      const ruleSelector = collapseWhitespace(rule.selector)
+      const context = selector === rule.selector ? '' : ` in "${ruleSelector}"`
+      return `"${collapseWhitespace(selector)}" should not be overridden${context}${definedIn}.`
     }
   })
 
@@ -51,29 +66,37 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
       })
     }
 
-    if (!enabled) {
-      return
-    }
-
-    const report = (rule, subject) =>
+    const report = subject =>
       stylelint.utils.report({
-        message: messages.rejected(rule, subject),
-        node: rule,
+        message: messages.rejected(subject),
+        node: subject.rule,
         result,
         ruleName
       })
 
     root.walkRules(rule => {
-      const subject = {rule}
-      if (immutableSelectors.has(rule.selector)) {
-        subject.bundle = immutableSelectors.get(rule.selector)
-        report(rule, subject)
-      } else {
-        for (const classSelector of getClassSelectors(rule.selector)) {
-          if (immutableClassSelectors.has(classSelector)) {
-            subject.bundle = immutableClassSelectors.get(classSelector)
-            subject.selector = classSelector
-            report(rule, subject)
+      const {selector} = rule
+      if (immutableSelectors.has(selector)) {
+        if (isClassSelector(selector)) {
+          if (!isSelectorIgnored(selector)) {
+            return report({
+              rule,
+              bundle: immutableSelectors.get(selector),
+              selector
+            })
+          }
+        } else {
+          // console.log(`not a class selector: "${selector}"`)
+        }
+      }
+      for (const classSelector of getClassSelectors(selector)) {
+        if (immutableClassSelectors.has(classSelector)) {
+          if (!isSelectorIgnored(classSelector)) {
+            return report({
+              rule,
+              bundle: immutableClassSelectors.get(classSelector),
+              selector: classSelector
+            })
           }
         }
       }
@@ -84,6 +107,14 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 function getClassSelectors(selector) {
   const match = selector.match(CLASS_PATTERN_ALL)
   return match ? [...match] : []
+}
+
+function isClassSelector(selector) {
+  return CLASS_PATTERN_ONLY.test(selector)
+}
+
+function collapseWhitespace(str) {
+  return str.trim().replace(/\s+/g, ' ')
 }
 
 function noop() {}
