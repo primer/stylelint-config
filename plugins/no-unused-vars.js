@@ -1,6 +1,7 @@
 const TapMap = require('tap-map')
-const stylelint = require('stylelint')
 const globby = require('globby')
+const matchAll = require('string.prototype.matchall')
+const stylelint = require('stylelint')
 const {readFileSync} = require('fs')
 
 const ruleName = 'primer/no-unused-vars'
@@ -28,7 +29,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 
   return (root, result) => {
     root.walkDecls(decl => {
-      for (const match of decl.prop.matchAll(variablePattern)) {
+      for (const match of matchAll(decl.prop, variablePattern)) {
         const name = match[1]
         if (!refs.has(name)) {
           stylelint.utils.report({
@@ -56,7 +57,7 @@ function getCachedVariables(options, log) {
     log(`Looking for variables in ${files} ...`)
     for (const file of globby.sync(files)) {
       const css = readFileSync(file, 'utf8')
-      for (const match of css.matchAll(variablePattern)) {
+      for (const match of matchAll(css, variablePattern)) {
         const after = css.substr(match.index + match[0].length)
         const name = match[1]
         if (after.startsWith(COLON)) {
