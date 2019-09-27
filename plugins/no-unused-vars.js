@@ -8,7 +8,7 @@ const ruleName = 'primer/no-unused-vars'
 
 const cwd = process.cwd()
 const COLON = ':'
-const SCSS_VARIABLE_PATTERN = /(\$[-a-z0-9]+)/gi
+const SCSS_VARIABLE_PATTERN = /(\$[-\w]+)/g
 
 const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: name => `The variable "${name}" is not referenced.`
@@ -29,8 +29,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 
   return (root, result) => {
     root.walkDecls(decl => {
-      for (const match of matchAll(decl.prop, variablePattern)) {
-        const name = match[1]
+      for (const [name] of matchAll(decl.prop, variablePattern)) {
         if (!refs.has(name)) {
           stylelint.utils.report({
             message: messages.rejected(name),
@@ -59,7 +58,7 @@ function getCachedVariables(options, log) {
       const css = readFileSync(file, 'utf8')
       for (const match of matchAll(css, variablePattern)) {
         const after = css.substr(match.index + match[0].length)
-        const name = match[1]
+        const name = match[0]
         if (after.startsWith(COLON)) {
           decs.tap(name, set).add(file)
         } else {
