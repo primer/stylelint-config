@@ -102,3 +102,4 @@ and references in its options:
   project layouts.
 
 [primer css]: https://primer.style/css
+[globby]: https://www.npmjs.com/package/globby
