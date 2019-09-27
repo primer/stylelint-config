@@ -35,7 +35,7 @@ CSS]. By default, it will only fail selectors that target utility classes:
 You can further constrain overrides to exclude _any_ class selector in Primer
 by providing additional names in the `bundles` option:
 
-```
+```js
 // stylelint.config.js
 module.exports = {
   // ...
