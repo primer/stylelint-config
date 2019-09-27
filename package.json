@@ -14,7 +14,8 @@
   "dependencies": {
     "stylelint-no-unsupported-browser-features": "^1.0.0",
     "stylelint-order": "^2.0.0",
-    "stylelint-scss": "^3.10.0"
+    "stylelint-scss": "^3.10.0",
+    "tap-map": "^1.0.0"
   },
   "peerDependencies": {
     "@primer/css": "*"
