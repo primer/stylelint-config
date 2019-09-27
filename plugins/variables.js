@@ -19,6 +19,10 @@ const PROP_CATEGORIES = {
     props: ['margin', 'padding', ...DIRS.map(dir => `margin-${dir}`), ...DIRS.map(dir => `padding-${dir}`)],
     allowedValues: ['0']
   },
+  borders: {
+    props: ['border', 'border-width', ...DIRS.map(dir => `border-${dir}-width`)],
+    allowedVariables: [/^\$border/]
+  },
   typography: {
     props: ['font-size', 'font-weight', 'line-height'],
     allowedValues: ['inherit', '1em', '0']
