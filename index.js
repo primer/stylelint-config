@@ -7,7 +7,8 @@ module.exports = {
     'stylelint-order',
     'stylelint-scss',
     './plugins/no-override',
-    './plugins/no-unused-vars'
+    './plugins/no-unused-vars',
+    './plugins/variables'
   ],
   rules: {
     'at-rule-blacklist': ['extend'],
