@@ -1,8 +1,12 @@
+const anymatch = require('anymatch')
 const minimatch = require('minimatch')
 const stylelint = require('stylelint')
 const TapMap = require('tap-map')
+const braces = require('braces')
+const {splitTokens} = require('./lib/tokens')
 
 const ruleName = 'primer/variables'
+const IMPORTANT = '!important'
 
 const DEFAULT_RULES = require('./lib/variable-rules')
 
@@ -11,25 +15,64 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
     return noop
   }
 
+  // The stylelint docs suggest respecting a "disableFix" rule option that
+  // overrides the "global" context.fix (--fix) linting option.
   const fixEnabled = context.fix && !options.disableFix
+  const {verbose = false} = options
 
+  /* Rules are keyed on their name so that it's easy to override or disable
+   * them while still "inheriting" the defaults:
+   *
+   * ```js
+   * 'primer/variables': [true, {
+   *   rules: {
+   *     'background color': false,
+   *     'text color': {
+   *       props: ['fill', 'color'],
+   *       values: ['$text-*', '$fill-*', 'transparent', 'currentColor']
+   *     }
+   *   }
+   * }
+   * ```
+   */
   const rules = Object.assign({}, DEFAULT_RULES, options.rules)
   const cache = new TapMap()
-  const entries = Object.entries(rules).map(([name, rule]) => {
-    if (!rule.props) {
-      // eslint-disable-next-line no-console
-      console.warn(`[${ruleName}] rule "${name}" has no .props; the name will be used.`)
-      rule.props = name
+  const tokenReplacementsByProperty = new Map()
+  const entries = Object.entries(rules)
+    .map(([name, rule]) => {
+      if (!rule) {
+        return false
+      } else if (!rule.props && verbose) {
+        // eslint-disable-next-line no-console
+        console.warn(`[${ruleName}] rule "${name}" has no .props; the name will be used.`)
+        rule.props = name
+      }
+      return Object.assign(
+        {
+          name,
+          match: anymatch(rule.props),
+          replacements: {}
+        },
+        rule,
+        {
+          testValue: getRuleValueTester(rule)
+        }
+      )
+    })
+    .filter(Boolean)
+
+  for (const entry of entries) {
+    const props = arrayify(entry.props).flatMap(braces.expand)
+    for (const prop of props) {
+      for (const [token, replacement] of Object.entries(entry.replacements)) {
+        tokenReplacementsByProperty.set(`${prop}:${token}`, replacement)
+        if (verbose) {
+          // eslint-disable-next-line no-console
+          console.warn(`replace: {${prop}: ${token}} -> "${replacement}"`)
+        }
+      }
     }
-    return Object.assign(
-      {
-        name,
-        match: matchAny(rule.props),
-        fixes: {}
-      },
-      rule
-    )
-  })
+  }
 
   return (root, result) => {
     const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -39,6 +82,17 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
     root.walkDecls(decl => check(decl))
 
     function check(decl, prop = decl.prop, value = decl.value) {
+      let replacementKey = `${prop}:${value}`
+      let message
+      if (prop === decl.prop && tokenReplacementsByProperty.has(replacementKey)) {
+        const replacement = tokenReplacementsByProperty.get(replacementKey)
+        if (fixEnabled) {
+          decl.value = replacement
+        } else {
+          message = `Please use "${replacement}" instead of "${value}"`
+        }
+      }
+
       const rule = cache.tap(prop, () => entries.find(entry => entry.match(prop)))
       if (rule) {
         const {name} = rule
@@ -55,93 +109,68 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
           }
         } else {
           for (const [index, token] of Object.entries(tokens)) {
-            if (fixEnabled && rule.fixes.hasOwnProperty(token)) {
-              tokens[index] = rule.fixes[token]
+            replacementKey = `${prop}:${token}`
+            if (fixEnabled && rule.replacements.hasOwnProperty(token)) {
+              tokens[index] = rule.replacements[token]
               fixed = true
-            } else if (!hasValue(rule, token)) {
-              const message = `Please use a ${name} variable instead of "${value}"`
-              stylelint.utils.report({
-                message: messages.rejected(`${message}.`),
-                node: decl,
-                result,
-                ruleName
-              })
+            } else if (tokenReplacementsByProperty.has(replacementKey)) {
+              const replacement = tokenReplacementsByProperty.get(replacementKey)
+              if (verbose) {
+                // eslint-disable-next-line no-console
+                console.warn(`found exact replacement for {${prop}: ${token}}: "${replacement}"`)
+              }
+              if (fixEnabled) {
+                tokens[index] = replacement
+                fixed = true
+              } else {
+                message = `Please use "${replacement}" instead of "${token}"`
+                break
+              }
+            } else if (!rule.testValue(token)) {
+              message = `Please use a ${name} variable instead of "${value}"`
+              break
             }
           }
         }
+
         if (fixed) {
           if (prop === decl.prop) {
             decl.value = tokens.join(' ')
           } else {
             return tokens.join(' ')
           }
+        } else if (message) {
+          stylelint.utils.report({
+            message: messages.rejected(`${message}.`),
+            node: decl,
+            result,
+            ruleName
+          })
         }
       }
     }
   }
 })
 
-function hasValue(rule, value) {
-  const {values, test = v => values.some(p => minimatch(v, p))} = rule
-  return test(value)
-}
+// export the default rules object so that it can be built on
+Object.assign(module.exports, {DEFAULT_RULES})
 
-/**
- * In order to recognize "components" of compound properties like
- * border and font, we have to know how to split up a CSS property
- * value string into its constituent parts. However, just splitting on
- * spaces isn't good enough, for instance:
- *
- * ```css
- * border: ($spacer-2 - 1) solid lighten($gray-300, 4%);
- * ```
- *
- * Math expressions, functions, and nested instances of each are
- * treated as singular "tokens", so the above value would yield:
- *
- * 1. "($spacer-2 - 1)"
- * 2. "solid"
- * 3. "lighten($gray-300, 4%)"
- */
-function splitTokens(value) {
-  const tokens = []
-  let token = ''
-  let parens = 0
-  for (let i = 0; i < value.length; i++) {
-    const chr = value.charAt(i)
-    if (chr === '(') {
-      token += chr
-      parens++
-    } else if (parens) {
-      token += chr
-      if (chr === ')') {
-        if (--parens === 0) {
-          tokens.push(token)
-          token = ''
-        }
-      }
-    } else if (chr === ' ') {
-      if (token) {
-        tokens.push(token)
-      }
-      token = ''
-    } else {
-      token += chr
-    }
+function getRuleValueTester(rule) {
+  const {values = []} = rule
+  if (values && values.length) {
+    const match = anymatch(values)
+    return v => v === IMPORTANT || match(v)
+  } else {
+    return returnFalse
   }
-  if (token) {
-    tokens.push(token)
-  }
-  return tokens.map(token => token.replace(/,$/, ''))
 }
 
-function matchAny(pattern) {
-  return Array.isArray(pattern) ? filterSome(pattern) : minimatch.filter(pattern)
-}
-
-function filterSome(patterns) {
-  const filters = patterns.map(pattern => minimatch.filter(pattern))
-  return value => filters.some(filter => filter(value))
+function returnFalse() {
+  return false
 }
 
 function noop() {}
+
+function arrayify(value) {
+  return Array.isArray(value) ? value : [value]
+}
