@@ -157,16 +157,8 @@ Object.assign(module.exports, {DEFAULT_RULES})
 
 function getRuleValueTester(rule) {
   const {values = []} = rule
-  if (values && values.length) {
-    const match = anymatch(values)
-    return v => v === IMPORTANT || match(v)
-  } else {
-    return returnFalse
-  }
-}
-
-function returnFalse() {
-  return false
+  const match = anymatch(values)
+  return v => v === IMPORTANT || match(v)
 }
 
 function noop() {}
