@@ -6,7 +6,13 @@ const ruleName = 'primer/variables'
 
 const DEFAULT_RULES = require('./lib/variable-rules')
 
-module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
+module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, context = {}) => {
+  if (enabled === false) {
+    return noop
+  }
+
+  const fixEnabled = context.fix && !options.disableFix
+
   const rules = Object.assign({}, DEFAULT_RULES, options.rules)
   const cache = new TapMap()
   const entries = Object.entries(rules).map(([name, rule]) => {
@@ -15,14 +21,17 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
       console.warn(`[${ruleName}] rule "${name}" has no .props; the name will be used.`)
       rule.props = name
     }
-    return Object.assign({name, match: matchAny(rule.props)}, rule)
+    return Object.assign(
+      {
+        name,
+        match: matchAny(rule.props),
+        fixes: {}
+      },
+      rule
+    )
   })
 
   return (root, result) => {
-    if (enabled === false) {
-      return
-    }
-
     const messages = stylelint.utils.ruleMessages(ruleName, {
       rejected: message => message
     })
@@ -34,13 +43,22 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
       if (rule) {
         const {name} = rule
         const tokens = splitTokens(value)
+        let fixed = false
         if (tokens.length > 1 && Array.isArray(rule.components)) {
           for (const [index, comp] of Object.entries(rule.components)) {
-            check(decl, comp, tokens[index])
+            const token = tokens[index]
+            const fixedToken = check(decl, comp, token)
+            if (fixEnabled && fixedToken) {
+              tokens[index] = fixedToken
+              fixed = true
+            }
           }
         } else {
-          for (const token of tokens) {
-            if (!hasValue(rule, token)) {
+          for (const [index, token] of Object.entries(tokens)) {
+            if (fixEnabled && rule.fixes.hasOwnProperty(token)) {
+              tokens[index] = rule.fixes[token]
+              fixed = true
+            } else if (!hasValue(rule, token)) {
               const message = `Please use a ${name} variable instead of "${value}"`
               stylelint.utils.report({
                 message: messages.rejected(`${message}.`),
@@ -49,6 +67,13 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
                 ruleName
               })
             }
+          }
+        }
+        if (fixed) {
+          if (prop === decl.prop) {
+            decl.value = tokens.join(' ')
+          } else {
+            return tokens.join(' ')
           }
         }
       }
@@ -118,3 +143,5 @@ function filterSome(patterns) {
   const filters = patterns.map(pattern => minimatch.filter(pattern))
   return value => filters.some(filter => filter(value))
 }
+
+function noop() {}
