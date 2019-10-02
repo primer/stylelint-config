@@ -54,7 +54,7 @@ module.exports = {
     )
   },
   border: {
-    props: 'border',
+    props: 'border{,-top,-right,-bottom,-left}',
     values: ['$border', 'none'],
     components: ['border-width', 'border-style', 'border-color'],
     replacements: {
