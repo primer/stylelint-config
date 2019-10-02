@@ -50,6 +50,44 @@ describe(ruleName, () => {
     })
   })
 
+  describe('font-size', () => {
+    it('reports color properties w/o variables', () => {
+      return stylelint
+        .lint({
+          code: dedent`
+            .x { font-size: 11px; }
+            .y { font-size: $spacer-3; }
+          `,
+          config: configWithOptions(true)
+        })
+        .then(data => {
+          expect(data).toHaveErrored()
+          expect(data).toHaveWarnings([
+            `Please use a font-size variable instead of "11px". (${ruleName})`,
+            `Please use a font-size variable instead of "$spacer-3". (${ruleName})`
+          ])
+        })
+    })
+
+    it('can fix them', () => {
+      return stylelint
+        .lint({
+          code: dedent`
+            .x { font-size: 32px; }
+          `,
+          config: configWithOptions(true, {verbose: true}),
+          fix: true
+        })
+        .then(data => {
+          expect(data).not.toHaveErrored()
+          expect(data).toHaveWarningsLength(0)
+          expect(data.output).toEqual(dedent`
+            .x { font-size: $h1-size; }
+          `)
+        })
+    })
+  })
+
   describe('color properties', () => {
     it('reports color properties w/o variables', () => {
       return stylelint

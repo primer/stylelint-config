@@ -55,7 +55,7 @@ module.exports = {
   },
   border: {
     props: 'border{,-top,-right,-bottom,-left}',
-    values: ['$border', 'none'],
+    values: ['$border', 'none', '0'],
     components: ['border-width', 'border-style', 'border-color'],
     replacements: {
       '$border-width $border-style $border-color': '$border',
@@ -156,7 +156,7 @@ module.exports = {
   },
   'font-size': {
     props: 'font-size',
-    values: ['$h[0-6]{1,2}-size{,-mobile}', '$font-size-*', '1', '1em', 'inherit'],
+    values: ['$h{1..6}-size{,-mobile}', '$font-size-*', '1', '1em', 'inherit'],
     replacements: reverseAssignments(`
       // XXX should we include h*-size-mobile??
       $h00-size: 48px !default;
