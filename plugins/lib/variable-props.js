@@ -1,4 +1,3 @@
-const BORDER_VARS = ['$border*']
 const SPACER_VARS = ['$spacer-*']
 
 const ALLOWED_COLOR_VALUES = ['currentColor', 'inherit', 'none', 'transparent']
