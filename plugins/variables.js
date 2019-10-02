@@ -11,6 +11,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   const cache = new TapMap()
   const entries = Object.entries(rules).map(([name, rule]) => {
     if (!rule.props) {
+      // eslint-disable-next-line no-console
       console.warn(`[${ruleName}] rule "${name}" has no .props; the name will be used.`)
       rule.props = name
     }
