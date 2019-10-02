@@ -123,7 +123,8 @@ module.exports = {
 
 function reverseAssignments(css) {
   const map = {}
-  for (const [_, left, right] of matchAll(css, /(\$[-\w]+):\s+([^\!]+) !default;/g)) {
+  // eslint-disable-next-line no-unused-vars
+  for (const [_, left, right] of matchAll(css, /(\$[-\w]+):\s+([^!]+) !default;/g)) {
     map[right] = left
   }
   return map
