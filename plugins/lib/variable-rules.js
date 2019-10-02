@@ -64,7 +64,7 @@ module.exports = {
   },
   'border color': {
     props: 'border{,-top,-right,-bottom,-left}-color',
-    values: ['$border-*', '0'].concat(COLOR_VALUES),
+    values: ['$border-*'].concat(COLOR_VALUES),
     replacements: reverseAssignments(`
       $border-black-fade:  $black-fade-15 !default;
       $border-white-fade:  $white-fade-15 !default;
