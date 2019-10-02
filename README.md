@@ -28,6 +28,7 @@ Within your [stylelint config object](http://stylelint.io/user-guide/configurati
   * [scss/selector-no-redundant-nesting-selector](https://github.com/kristerkari/stylelint-scss/blob/master/src/rules/selector-no-redundant-nesting-selector/README.md): Disallow redundant nesting selectors (`&`).
 * [primer/no-override](./plugins/#primerno-override): Prohibits custom styles that target Primer CSS selectors.
 * [primer/no-unused-vars](./plugins/primerno-unused-vars): Warns about SCSS variables that are declared by not used in your local files.
+* [primer/variables](./plugins/primervariables): Constrains certain CSS properties to Primer CSS variables for consistency of color, typography, whitespace, etc.
 
 ### Configured lints
 
