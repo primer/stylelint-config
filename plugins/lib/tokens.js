@@ -1,5 +1,3 @@
-const minimatch = require('minimatch')
-
 module.exports = {splitTokens}
 
 /**

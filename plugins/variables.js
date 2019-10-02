@@ -1,5 +1,4 @@
 const anymatch = require('anymatch')
-const minimatch = require('minimatch')
 const stylelint = require('stylelint')
 const TapMap = require('tap-map')
 const braces = require('braces')
