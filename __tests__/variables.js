@@ -69,6 +69,23 @@ describe(ruleName, () => {
         })
     })
 
+    it('does not report font size variables', () => {
+      return stylelint
+        .lint({
+          code: dedent`
+            .h1 { font-size: $h1-size; }
+            .h2 { font-size: $h2-size; }
+            .h3-mobile { font-size: $h3-size-mobile; }
+            small { font-size: $font-size-small; }
+          `,
+          config: configWithOptions(true)
+        })
+        .then(data => {
+          expect(data).not.toHaveErrored()
+          expect(data).toHaveWarningsLength(0)
+        })
+    })
+
     it('can fix them', () => {
       return stylelint
         .lint({

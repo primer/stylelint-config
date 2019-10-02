@@ -156,7 +156,12 @@ module.exports = {
   },
   'font-size': {
     props: 'font-size',
-    values: ['$h{1..6}-size{,-mobile}', '$font-size-*', '1', '1em', 'inherit'],
+    values: [
+      '$h{00,0,1,2,3,4,5,6}-size',
+      '$h{00,0,1,2,3,4,5,6}-size-mobile',
+      '$font-size-*',
+      '1', '1em', 'inherit'
+    ],
     replacements: reverseAssignments(`
       // XXX should we include h*-size-mobile??
       $h00-size: 48px !default;
