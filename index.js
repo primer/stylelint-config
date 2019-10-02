@@ -2,7 +2,14 @@ const browsers = require('./browsers')
 const propertyOrder = require('./property-order')
 
 module.exports = {
-  plugins: ['stylelint-no-unsupported-browser-features', 'stylelint-order', 'stylelint-scss', './plugins/no-override'],
+  plugins: [
+    'stylelint-no-unsupported-browser-features',
+    'stylelint-order',
+    'stylelint-scss',
+    './plugins/no-override',
+    './plugins/no-unused-vars',
+    './plugins/variables'
+  ],
   rules: {
     'at-rule-blacklist': ['extend'],
     'at-rule-name-case': 'lower',
@@ -88,6 +95,9 @@ module.exports = {
       }
     ],
     'primer/no-override': true,
+    // unused vars are not necessarily an error, since they may be referenced
+    // in other projects
+    'primer/no-unused-vars': [true, {severity: 'warning'}],
     'property-case': 'lower',
     'property-no-vendor-prefix': true,
     'rule-empty-line-before': [
