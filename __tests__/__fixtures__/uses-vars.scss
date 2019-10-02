@@ -1,0 +1,5 @@
+@import "./has-unused-vars.scss";
+
+.card {
+  max-width: $used-elsewhere;
+}

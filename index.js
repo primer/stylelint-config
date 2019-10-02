@@ -7,6 +7,7 @@ module.exports = {
     'stylelint-order',
     'stylelint-scss',
     './plugins/no-override',
+    './plugins/no-unused-vars',
     './plugins/variables'
   ],
   rules: {
@@ -94,6 +95,9 @@ module.exports = {
       }
     ],
     'primer/no-override': true,
+    // unused vars are not necessarily an error, since they may be referenced
+    // in other projects
+    'primer/no-unused-vars': [true, {severity: 'warning'}],
     'property-case': 'lower',
     'property-no-vendor-prefix': true,
     'rule-empty-line-before': [
