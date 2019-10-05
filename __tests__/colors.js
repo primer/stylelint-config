@@ -1,8 +1,8 @@
 const dedent = require('dedent')
 const stylelint = require('stylelint')
-const ruleName = 'primer/variables'
 const pluginPath = require.resolve('../plugins/colors')
 
+const ruleName = 'primer/colors'
 const configWithOptions = args => ({
   plugins: [pluginPath],
   rules: {
