@@ -1,5 +1,6 @@
 const anymatch = require('anymatch')
 const braces = require('braces')
+const matchAll = require('string.prototype.matchall')
 const stylelint = require('stylelint')
 const TapMap = require('tap-map')
 const {splitTokens} = require('./tokens')
@@ -10,6 +11,7 @@ const CSS_CORNERS = ['top-right', 'bottom-right', 'bottom-left', 'top-left']
 
 module.exports = {
   createVariableRule,
+  reverseAssignments,
   CSS_DIRECTIONS,
   CSS_CORNERS,
   CSS_IMPORTANT
@@ -169,4 +171,13 @@ function noop() {}
 
 function arrayify(value) {
   return Array.isArray(value) ? value : [value]
+}
+
+function reverseAssignments(css) {
+  const map = {}
+  // eslint-disable-next-line no-unused-vars
+  for (const [_, left, right] of matchAll(css, /(\$[-\w]+):\s+([^!]+) !default;/g)) {
+    map[right] = left
+  }
+  return map
 }
