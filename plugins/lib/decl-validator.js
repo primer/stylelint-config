@@ -173,7 +173,7 @@ module.exports = function declarationValidator(rules, options = {}) {
 }
 
 function defaultMessageFormatter(error) {
-  const {expects, prop, value, replacement} = error
+  const {expects, value, replacement} = error
   const expected = replacement ? `"${replacement}"` : expects
   return `Please use ${expected} instead of "${value}"`
 }

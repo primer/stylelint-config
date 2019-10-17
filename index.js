@@ -12,7 +12,7 @@ module.exports = {
     './plugins/box-shadow',
     './plugins/colors',
     './plugins/spacing',
-    './plugins/typography',
+    './plugins/typography'
   ],
   rules: {
     'at-rule-blacklist': ['extend'],

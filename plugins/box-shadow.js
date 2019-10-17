@@ -1,4 +1,4 @@
-const {createVariableRule, reverseAssignments} = require('./lib/variable-rules')
+const {createVariableRule} = require('./lib/variable-rules')
 
 module.exports = createVariableRule('primer/box-shadow', {
   'box shadow': {
@@ -11,5 +11,5 @@ module.exports = createVariableRule('primer/box-shadow', {
       '0 1px 15px $black-fade-15': '$box-shadow-large',
       '0 10px 50px rgba($black, 0.07)': '$box-shadow-extra-large'
     }
-  },
+  }
 })

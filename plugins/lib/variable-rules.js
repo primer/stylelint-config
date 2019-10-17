@@ -34,19 +34,17 @@ function createVariableRule(ruleName, rules) {
     return (root, result) => {
       root.walkDecls(decl => {
         const validated = validate(decl)
-        if (verbose) {
-          console.warn(`valid? ${decl.parent.selector} { ${prop}: ${value}; }`)
-          console.warn(`  result: ${JSON.stringify(validated)}`)
-        }
-
         const {valid, fixable, replacement, errors} = validated
         if (valid) {
+          // eslint-disable-next-line no-console
           verbose && console.warn(`  valid!`)
           return
         } else if (fixEnabled && fixable) {
+          // eslint-disable-next-line no-console
           verbose && console.warn(`  fixed: ${replacement}`)
           decl.value = replacement
         } else {
+          // eslint-disable-next-line no-console
           verbose && console.warn(`  ${errors.length} error(s)`)
           for (const error of errors) {
             stylelint.utils.report({
@@ -63,10 +61,6 @@ function createVariableRule(ruleName, rules) {
 }
 
 function noop() {}
-
-function arrayify(value) {
-  return Array.isArray(value) ? value : [value]
-}
 
 function reverseAssignments(css) {
   const map = {}
