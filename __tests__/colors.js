@@ -24,6 +24,18 @@ describe(ruleName, () => {
       })
   })
 
+  it('does not run when disabled', () => {
+    return stylelint
+      .lint({
+        code: `.x { color: #f00; }`,
+        config: configWithOptions(false)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
   it('does not report color properties with allowed values', () => {
     return stylelint
       .lint({
@@ -99,5 +111,36 @@ describe(ruleName, () => {
           `)
         })
     })
+
+    it('does not fix other properties', () => {
+      return stylelint
+        .lint({
+          code: dedent`
+            .x { border-color: $red-500; }
+          `,
+          config: configWithOptions(true, {verbose: true}),
+          fix: true
+        })
+        .then(data => {
+          expect(data).not.toHaveErrored()
+          expect(data).toHaveWarningsLength(0)
+          expect(data.output).toEqual(dedent`
+            .x { border-color: $red-500; }
+          `)
+        })
+    })
+  })
+
+  it('gets chatty with {verbose: true}', () => {
+    return stylelint
+      .lint({
+        code: `.x { color: #f00; }`,
+        config: configWithOptions(true, {verbose: true})
+      })
+      .then(data => {
+        expect(data).toHaveErrored()
+        expect(data).toHaveWarningsLength(1)
+        expect(data).toHaveWarnings([`Please use a text color variable instead of "#f00". (${ruleName})`])
+      })
   })
 })
