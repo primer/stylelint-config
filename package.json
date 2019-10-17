@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "anymatch": "^3.1.1",
-    "braces": "^3.0.2",
     "globby": "^9.2.0",
+    "postcss-value-parser": "^4.0.2",
     "string.prototype.matchall": "^3.0.1",
     "stylelint-no-unsupported-browser-features": "^1.0.0",
     "stylelint-order": "^2.0.0",
