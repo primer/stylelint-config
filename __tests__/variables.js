@@ -1,14 +1,15 @@
-const dedent = require('dedent')
 const stylelint = require('stylelint')
 const {createVariableRule, reverseAssignments} = require('../plugins/lib/variable-rules')
 
 describe('reverseAssignments()', () => {
   it('works', () => {
-    expect(reverseAssignments(`
+    expect(
+      reverseAssignments(`
       $spacer-1: 8px !default;
       $h0-size: 30px !default;
       $h6-size: 12px !default;
-    `)).toEqual({
+    `)
+    ).toEqual({
       '8px': '$spacer-1',
       '30px': '$h0-size',
       '12px': '$h6-size'
@@ -57,7 +58,7 @@ xdescribe('createVariableRule()', () => {
     return stylelint
       .lint({
         code: `.x { display: block; }`,
-        config: configWithOptions(plugin, false)
+        config: configWithRule(plugin, false)
       })
       .then(data => {
         expect(data).not.toHaveErrored()

@@ -15,7 +15,7 @@ module.exports = {
 }
 
 function createVariableRule(ruleName, rules) {
-  return stylelint.createPlugin(ruleName, (enabled, options = {}, context = {}) => {
+  return stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
     if (enabled === false) {
       return noop
     }
@@ -29,7 +29,7 @@ function createVariableRule(ruleName, rules) {
     // The stylelint docs suggest respecting a "disableFix" rule option that
     // overrides the "global" context.fix (--fix) linting option.
     const {verbose = false, disableFix} = options
-    const fixEnabled = context.fix && !disableFix
+    const fixEnabled = context && context.fix && !disableFix
 
     return (root, result) => {
       root.walkDecls(decl => {
@@ -37,15 +37,15 @@ function createVariableRule(ruleName, rules) {
         const {valid, fixable, replacement, errors} = validated
         if (valid) {
           // eslint-disable-next-line no-console
-          verbose && console.warn(`  valid!`)
+          if (verbose) console.warn(`  valid!`)
           return
         } else if (fixEnabled && fixable) {
           // eslint-disable-next-line no-console
-          verbose && console.warn(`  fixed: ${replacement}`)
+          if (verbose) console.warn(`  fixed: ${replacement}`)
           decl.value = replacement
         } else {
           // eslint-disable-next-line no-console
-          verbose && console.warn(`  ${errors.length} error(s)`)
+          if (verbose) console.warn(`  ${errors.length} error(s)`)
           for (const error of errors) {
             stylelint.utils.report({
               message: messages.rejected(error),
