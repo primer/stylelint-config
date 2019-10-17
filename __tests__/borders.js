@@ -21,7 +21,7 @@ describe(ruleName, () => {
       })
       .then(data => {
         expect(data).toHaveErrored()
-        expect(data).toHaveWarnings([`Please use a border variable instead of "$red". (${ruleName})`])
+        expect(data).toHaveWarnings([`Please use "$border-red" instead of "$red". (${ruleName})`])
       })
   })
 

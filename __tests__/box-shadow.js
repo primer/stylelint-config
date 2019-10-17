@@ -20,11 +20,11 @@ describe(ruleName, () => {
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
-        expect(data).toHaveWarnings([`Please use a box shadow variable instead of "0 1px 1px rgba($black, 0.1)". (${ruleName})`])
+        expect(data).toHaveWarnings([`Please use "$box-shadow" instead of "0 1px 1px rgba($black, 0.1)". (${ruleName})`])
       })
   })
 
-  xdescribe('autofix', () => {
+  describe('autofix', () => {
     it('fixes box shadow variables', () => {
       return stylelint
         .lint({

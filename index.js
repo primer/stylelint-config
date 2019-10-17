@@ -8,7 +8,11 @@ module.exports = {
     'stylelint-scss',
     './plugins/no-override',
     './plugins/no-unused-vars',
-    './plugins/variables'
+    './plugins/borders',
+    './plugins/box-shadow',
+    './plugins/colors',
+    './plugins/spacing',
+    './plugins/typography',
   ],
   rules: {
     'at-rule-blacklist': ['extend'],

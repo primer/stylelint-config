@@ -2,6 +2,7 @@ const {createVariableRule, reverseAssignments} = require('./lib/variable-rules')
 
 module.exports = createVariableRule('primer/colors', {
   'background color': {
+    expects: 'a background color variable',
     props: ['background-color'],
     values: ['$bg-*', 'transparent', 'none'],
     replacements: Object.assign(
@@ -44,6 +45,7 @@ module.exports = createVariableRule('primer/colors', {
     )
   },
   'text color': {
+    expects: 'a text color variable',
     props: 'color',
     values: ['$text-*'],
     replacements: Object.assign(

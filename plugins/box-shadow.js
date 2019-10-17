@@ -2,8 +2,9 @@ const {createVariableRule, reverseAssignments} = require('./lib/variable-rules')
 
 module.exports = createVariableRule('primer/box-shadow', {
   'box shadow': {
+    expects: 'a box-shadow variable',
     props: 'box-shadow',
-    values: ['$box-shadow*', '0', 'none'],
+    values: ['$box-shadow*', 'none'],
     replacements: {
       '0 1px 1px rgba($black, 0.1)': '$box-shadow',
       '0 1px 5px $black-fade-15': '$box-shadow-medium',
