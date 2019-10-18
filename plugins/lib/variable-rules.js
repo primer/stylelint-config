@@ -1,4 +1,4 @@
-const matchAll = require('string.prototype.matchAll')
+const matchAll = require('string.prototype.matchall')
 const stylelint = require('stylelint')
 const declarationValidator = require('./decl-validator')
 
