@@ -27,7 +27,7 @@ describe(ruleName, () => {
     return stylelint
       .lint({
         code: `.x { display: block; }`,
-        config: configWithOptions(false)
+        config: configWithOptions(true)
       })
       .then(data => {
         expect(data).not.toHaveErrored()
