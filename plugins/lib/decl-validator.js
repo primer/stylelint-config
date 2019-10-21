@@ -5,11 +5,21 @@ const TapMap = require('tap-map')
 const SKIP_VALUE_NODE_TYPES = new Set(['space', 'div'])
 
 module.exports = function declarationValidator(rules, options = {}) {
-  const {formatMessage = defaultMessageFormatter} = options
+  const {formatMessage = defaultMessageFormatter, variables} = options
+  const variableReplacements = new TapMap()
+  if (variables) {
+    for (const [name, {values}] of Object.entries(variables)) {
+      for (const value of values) {
+        variableReplacements.tap(value, () => []).push(name)
+      }
+    }
+  }
 
   const validators = Object.entries(rules).map(([key, rule]) => {
     const {name = key, props = name, expects = `a ${name} value`} = rule
-    Object.assign(rule, {name, props, expects})
+    const replacements = Object.assign({}, rule.replacements, getVariableReplacements(rule.values))
+    // console.warn(`replacements for "${key}": ${JSON.stringify(replacements)}`)
+    Object.assign(rule, {name, props, expects, replacements})
     return {
       rule,
       matchesProp: anymatch(props),
@@ -36,6 +46,20 @@ module.exports = function declarationValidator(rules, options = {}) {
     } else {
       return {valid: true}
     }
+  }
+
+  function getVariableReplacements(values) {
+    const replacements = {}
+    const varValues = (Array.isArray(values) ? values : [values]).filter(v => v.includes('$'))
+    const matches = anymatch(varValues)
+    for (const [value, aliases] of variableReplacements.entries()) {
+      for (const alias of aliases) {
+        if (matches(alias)) {
+          replacements[value] = alias
+        }
+      }
+    }
+    return replacements
   }
 
   function getPropValidator(prop) {
