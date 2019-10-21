@@ -15,12 +15,13 @@ module.exports = {
 }
 
 function createVariableRule(ruleName, rules) {
+  const variables = require('@primer/css/dist/variables.json')
+  const validate = declarationValidator(rules, {variables})
+
   return stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
     if (enabled === false) {
       return noop
     }
-
-    const validate = declarationValidator(rules, options)
 
     const messages = stylelint.utils.ruleMessages(ruleName, {
       rejected: message => `${message}.`
