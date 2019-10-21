@@ -1,4 +1,3 @@
-const matchAll = require('string.prototype.matchall')
 const stylelint = require('stylelint')
 const declarationValidator = require('./decl-validator')
 
@@ -8,7 +7,6 @@ const CSS_CORNERS = ['top-right', 'bottom-right', 'bottom-left', 'top-left']
 
 module.exports = {
   createVariableRule,
-  reverseAssignments,
   CSS_DIRECTIONS,
   CSS_CORNERS,
   CSS_IMPORTANT
@@ -62,12 +60,3 @@ function createVariableRule(ruleName, rules) {
 }
 
 function noop() {}
-
-function reverseAssignments(css) {
-  const map = {}
-  // eslint-disable-next-line no-unused-vars
-  for (const [_, left, right] of matchAll(css, /(\$[-\w]+):\s+([^!]+) !default;/g)) {
-    map[right] = left
-  }
-  return map
-}
