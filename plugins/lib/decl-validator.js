@@ -5,17 +5,32 @@ const TapMap = require('tap-map')
 const SKIP_VALUE_NODE_TYPES = new Set(['space', 'div'])
 
 module.exports = function declarationValidator(rules, options = {}) {
-  const {formatMessage = defaultMessageFormatter} = options
-
-  const validators = Object.entries(rules).map(([key, rule]) => {
-    const {name = key, props = name, expects = `a ${name} value`} = rule
-    Object.assign(rule, {name, props, expects})
-    return {
-      rule,
-      matchesProp: anymatch(props),
-      validate: Array.isArray(rule.components) ? componentValidator(rule) : valueValidator(rule)
+  const {formatMessage = defaultMessageFormatter, variables} = options
+  const variableReplacements = new TapMap()
+  if (variables) {
+    for (const [name, {values}] of Object.entries(variables)) {
+      for (const value of values) {
+        variableReplacements.tap(value, () => []).push(name)
+      }
     }
-  })
+  }
+
+  const validators = Object.entries(rules)
+    .map(([key, rule]) => {
+      if (rule === false) {
+        return false
+      }
+      const {name = key, props = name, expects = `a ${name} value`} = rule
+      const replacements = Object.assign({}, rule.replacements, getVariableReplacements(rule.values))
+      // console.warn(`replacements for "${key}": ${JSON.stringify(replacements)}`)
+      Object.assign(rule, {name, props, expects, replacements})
+      return {
+        rule,
+        matchesProp: anymatch(props),
+        validate: Array.isArray(rule.components) ? componentValidator(rule) : valueValidator(rule)
+      }
+    })
+    .filter(Boolean)
 
   const validatorsByProp = new TapMap()
   const validatorsByReplacementValue = new Map()
@@ -38,6 +53,20 @@ module.exports = function declarationValidator(rules, options = {}) {
     }
   }
 
+  function getVariableReplacements(values) {
+    const replacements = {}
+    const varValues = (Array.isArray(values) ? values : [values]).filter(v => v.includes('$'))
+    const matches = anymatch(varValues)
+    for (const [value, aliases] of variableReplacements.entries()) {
+      for (const alias of aliases) {
+        if (matches(alias)) {
+          replacements[value] = alias
+        }
+      }
+    }
+    return replacements
+  }
+
   function getPropValidator(prop) {
     return validatorsByProp.tap(prop, () => validators.find(v => v.matchesProp(prop)))
   }
@@ -53,7 +82,10 @@ module.exports = function declarationValidator(rules, options = {}) {
           replacement: undefined
         }
       } else if (replacements && replacements.hasOwnProperty(value)) {
-        const replacement = replacements[value]
+        let replacement = value
+        do {
+          replacement = replacements[replacement]
+        } while (replacements[replacement])
         return {
           valid: false,
           errors: [{expects, prop, value, replacement}],
@@ -109,10 +141,15 @@ module.exports = function declarationValidator(rules, options = {}) {
     }
   }
 
-  function componentValidator({expects, components, replacements = {}}) {
+  function componentValidator({expects, components, values, replacements = {}}) {
+    const matchesCompoundValue = anymatch(values)
     return decl => {
       const {prop, value: compoundValue} = decl
       const parsed = valueParser(compoundValue)
+      if (parsed.nodes.length === 1 && matchesCompoundValue(compoundValue)) {
+        return {valid: true, errors: []}
+      }
+
       const errors = []
 
       let fixable = false
@@ -153,7 +190,9 @@ module.exports = function declarationValidator(rules, options = {}) {
 
       // if a compound replacement exists, suggest *that* instead
       if (replacement && replacements && replacements.hasOwnProperty(replacement)) {
-        replacement = replacements[replacement]
+        do {
+          replacement = replacements[replacement]
+        } while (replacements[replacement])
         return {
           valid: false,
           errors: [{expects, prop, value: compoundValue, replacement}],

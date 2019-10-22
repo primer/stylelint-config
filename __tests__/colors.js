@@ -3,7 +3,7 @@ const stylelint = require('stylelint')
 const pluginPath = require.resolve('../plugins/colors')
 
 const ruleName = 'primer/colors'
-const configWithOptions = args => ({
+const configWithOptions = (...args) => ({
   plugins: [pluginPath],
   rules: {
     [ruleName]: args
@@ -141,6 +141,22 @@ describe(ruleName, () => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([`Please use a text color variable instead of "#f00". (${ruleName})`])
+      })
+  })
+
+  it('can override via options.rules', () => {
+    return stylelint
+      .lint({
+        code: `.x { color: #f00; }`,
+        config: configWithOptions(true, {
+          rules: {
+            'text color': false
+          }
+        })
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
       })
   })
 })

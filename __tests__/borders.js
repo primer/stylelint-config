@@ -60,12 +60,33 @@ describe(ruleName, () => {
       })
   })
 
+  it('allows $border shorthand in border{,-top,-right,-bottom,-left}', () => {
+    return stylelint
+      .lint({
+        code: dedent`
+          .a { border: $border; }
+          .b { border-top: $border; }
+          .c { border-right: $border; }
+          .d { border-bottom: $border; }
+          .e { border-left: $border; }
+        `,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
   describe('autofix', () => {
     it('fixes border variables', () => {
       return stylelint
         .lint({
           code: dedent`
-            .x { border: 1px solid $gray-300; }
+            .a { border: 1px solid $gray-300; }
+            .b { border: 1px solid $gray-200; }
+            .c { border: solid 1px $border-gray; }
+            .d { border: 1px $border-color solid; }
           `,
           config: configWithOptions(true),
           fix: true
@@ -74,7 +95,10 @@ describe(ruleName, () => {
           expect(data).not.toHaveErrored()
           expect(data).toHaveWarningsLength(0)
           expect(data.output).toEqual(dedent`
-            .x { border: $border-width $border-style $border-gray-dark; }
+            .a { border: $border-width $border-style $border-gray-dark; }
+            .b { border: $border; }
+            .c { border: $border; }
+            .d { border: $border; }
           `)
         })
     })
