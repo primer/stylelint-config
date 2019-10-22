@@ -13,7 +13,12 @@ module.exports = {
 }
 
 function createVariableRule(ruleName, rules) {
-  const variables = require('@primer/css/dist/variables.json')
+  let variables = {}
+  try {
+    variables = require('@primer/css/dist/variables.json')
+  } catch (error) {
+    console.warn(`Unable to get variables.json from @primer/css. Replacements will need to be specified manually.`)
+  }
 
   return stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
     if (enabled === false) {
