@@ -3,7 +3,7 @@ const {createVariableRule} = require('./lib/variable-rules')
 module.exports = createVariableRule('primer/typography', {
   'font-size': {
     expects: 'a font-size variable',
-    values: ['$h{00,0,1,2,3,4,5,6}-size', '$h{00,0,1,2,3,4,5,6}-size-mobile', '$font-size-*', '1', '1em', 'inherit']
+    values: ['$h{00,0,1,2,3,4,5,6}-size', '$font-size-*', '1', '1em', 'inherit']
   },
   'font-weight': {
     props: 'font-weight',
