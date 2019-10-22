@@ -147,7 +147,7 @@ module.exports = function declarationValidator(rules, options = {}) {
       const {prop, value: compoundValue} = decl
       const parsed = valueParser(compoundValue)
       if (parsed.nodes.length === 1 && matchesCompoundValue(compoundValue)) {
-          return {valid: true, errors: []}
+        return {valid: true, errors: []}
       }
 
       const errors = []
