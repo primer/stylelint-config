@@ -38,7 +38,7 @@ module.exports = createVariableRule('primer/borders', {
   'border width': {
     expects: 'a border width variable',
     props: 'border{,-top,-right,-bottom,-left}-width',
-    values: ['$border-width*', '0', 'none']
+    values: ['$border-width*', '0']
   },
   'border radius': {
     expects: 'a border radius variable',
