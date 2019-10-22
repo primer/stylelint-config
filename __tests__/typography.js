@@ -36,7 +36,6 @@ describe(ruleName, () => {
           code: dedent`
             .h1 { font-size: $h1-size; }
             .h2 { font-size: $h2-size; }
-            .h3-mobile { font-size: $h3-size-mobile; }
             small { font-size: $font-size-small; }
           `,
           config: configWithOptions(true)
