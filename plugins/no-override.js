@@ -1,5 +1,5 @@
 const stylelint = require('stylelint')
-const {requirePrimerFile} = require('../src/primer')
+const {requirePrimerFile} = require('./lib/primer')
 
 const ruleName = 'primer/no-override'
 const CLASS_PATTERN = /(\.[-\w]+)/
