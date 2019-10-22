@@ -60,6 +60,24 @@ describe(ruleName, () => {
       })
   })
 
+  it('allows $border shorthand in border{,-top,-right,-bottom,-left}', () => {
+    return stylelint
+      .lint({
+        code: dedent`
+          .a { border: $border; }
+          .b { border-top: $border; }
+          .c { border-right: $border; }
+          .d { border-bottom: $border; }
+          .e { border-left: $border; }
+        `,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
   describe('autofix', () => {
     it('fixes border variables', () => {
       return stylelint
