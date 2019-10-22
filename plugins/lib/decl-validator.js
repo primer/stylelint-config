@@ -81,7 +81,10 @@ module.exports = function declarationValidator(rules, options = {}) {
           replacement: undefined
         }
       } else if (replacements && replacements.hasOwnProperty(value)) {
-        const replacement = replacements[value]
+        let replacement = value
+        do {
+          replacement = replacements[replacement]
+        } while (replacements[replacement])
         return {
           valid: false,
           errors: [{expects, prop, value, replacement}],
@@ -181,7 +184,9 @@ module.exports = function declarationValidator(rules, options = {}) {
 
       // if a compound replacement exists, suggest *that* instead
       if (replacement && replacements && replacements.hasOwnProperty(replacement)) {
-        replacement = replacements[replacement]
+        do {
+          replacement = replacements[replacement]
+        } while (replacements[replacement])
         return {
           valid: false,
           errors: [{expects, prop, value: compoundValue, replacement}],

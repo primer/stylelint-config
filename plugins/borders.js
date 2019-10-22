@@ -7,6 +7,13 @@ module.exports = createVariableRule('primer/borders', {
     values: ['$border', 'none', '0'],
     components: ['border-width', 'border-style', 'border-color'],
     replacements: {
+      // because shorthand border properties ¯\_(ツ)_/¯
+      '$border-width $border-style $border-gray': '$border',
+      '$border-width $border-gray $border-style': '$border',
+      '$border-style $border-width $border-gray': '$border',
+      '$border-style $border-gray $border-width': '$border',
+      '$border-gray $border-width $border-style': '$border',
+      '$border-gray $border-style $border-width': '$border',
       '$border-width $border-style $border-color': '$border',
       '$border-width $border-color $border-style': '$border',
       '$border-style $border-width $border-color': '$border',
@@ -18,7 +25,10 @@ module.exports = createVariableRule('primer/borders', {
   'border color': {
     expects: 'a border color variable',
     props: 'border{,-top,-right,-bottom,-left}-color',
-    values: ['$border-*', 'transparent', 'currentColor']
+    values: ['$border-*', 'transparent', 'currentColor'],
+    replacements: {
+      '$border-gray': '$border-color'
+    }
   },
   'border style': {
     expects: 'a border style variable',

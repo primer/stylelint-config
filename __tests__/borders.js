@@ -65,7 +65,10 @@ describe(ruleName, () => {
       return stylelint
         .lint({
           code: dedent`
-            .x { border: 1px solid $gray-300; }
+            .a { border: 1px solid $gray-300; }
+            .b { border: 1px solid $gray-200; }
+            .c { border: solid 1px $border-gray; }
+            .d { border: 1px $border-color solid; }
           `,
           config: configWithOptions(true),
           fix: true
@@ -74,7 +77,10 @@ describe(ruleName, () => {
           expect(data).not.toHaveErrored()
           expect(data).toHaveWarningsLength(0)
           expect(data.output).toEqual(dedent`
-            .x { border: $border-width $border-style $border-gray-dark; }
+            .a { border: $border-width $border-style $border-gray-dark; }
+            .b { border: $border; }
+            .c { border: $border; }
+            .d { border: $border; }
           `)
         })
     })
