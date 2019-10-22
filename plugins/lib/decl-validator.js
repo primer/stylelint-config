@@ -15,21 +15,22 @@ module.exports = function declarationValidator(rules, options = {}) {
     }
   }
 
-  const validators = Object.entries(rules).map(([key, rule]) => {
-    if (rule === false) {
-      return false
-    }
-    const {name = key, props = name, expects = `a ${name} value`} = rule
-    const replacements = Object.assign({}, rule.replacements, getVariableReplacements(rule.values))
-    // console.warn(`replacements for "${key}": ${JSON.stringify(replacements)}`)
-    Object.assign(rule, {name, props, expects, replacements})
-    return {
-      rule,
-      matchesProp: anymatch(props),
-      validate: Array.isArray(rule.components) ? componentValidator(rule) : valueValidator(rule)
-    }
-  })
-  .filter(Boolean)
+  const validators = Object.entries(rules)
+    .map(([key, rule]) => {
+      if (rule === false) {
+        return false
+      }
+      const {name = key, props = name, expects = `a ${name} value`} = rule
+      const replacements = Object.assign({}, rule.replacements, getVariableReplacements(rule.values))
+      // console.warn(`replacements for "${key}": ${JSON.stringify(replacements)}`)
+      Object.assign(rule, {name, props, expects, replacements})
+      return {
+        rule,
+        matchesProp: anymatch(props),
+        validate: Array.isArray(rule.components) ? componentValidator(rule) : valueValidator(rule)
+      }
+    })
+    .filter(Boolean)
 
   const validatorsByProp = new TapMap()
   const validatorsByReplacementValue = new Map()
