@@ -17,6 +17,7 @@ function createVariableRule(ruleName, rules) {
   try {
     variables = require('@primer/css/dist/variables.json')
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.warn(`Unable to get variables.json from @primer/css. Replacements will need to be specified manually.`)
   }
 
