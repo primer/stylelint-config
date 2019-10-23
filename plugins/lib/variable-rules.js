@@ -1,4 +1,5 @@
 const stylelint = require('stylelint')
+const {requirePrimerFile} = require('./primer')
 const declarationValidator = require('./decl-validator')
 
 const CSS_IMPORTANT = '!important'
@@ -15,7 +16,7 @@ module.exports = {
 function createVariableRule(ruleName, rules) {
   let variables = {}
   try {
-    variables = require('@primer/css/dist/variables.json')
+    variables = requirePrimerFile('dist/variables.json')
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn(`Unable to get variables.json from @primer/css. Replacements will need to be specified manually.`)
