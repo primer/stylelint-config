@@ -9,7 +9,7 @@ module.exports = createVariableRule('primer/colors', {
   'text color': {
     expects: 'a text color variable',
     props: 'color',
-    values: ['$text-*'],
+    values: ['$text-*', 'inherit'],
     replacements: {
       '#fff': '$text-white',
       white: '$text-white',
