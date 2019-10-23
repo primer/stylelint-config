@@ -4,6 +4,7 @@ module.exports = createVariableRule('primer/box-shadow', {
   'box shadow': {
     expects: 'a box-shadow variable',
     props: 'box-shadow',
-    values: ['$box-shadow*', 'none']
+    values: ['$box-shadow*', '$*-shadow', 'none'],
+    singular: true
   }
 })
