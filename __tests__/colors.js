@@ -73,6 +73,19 @@ describe(ruleName, () => {
       })
   })
 
+  it('does not report non-color values in background:', () => {
+    return stylelint
+      .lint({
+        code: `.x { background: red url(derp.png) top right; }`,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).toHaveErrored()
+        expect(data).toHaveWarningsLength(1)
+        expect(data).toHaveWarnings([`Please use a background color variable instead of "red". (${ruleName})`])
+      })
+  })
+
   describe('autofix', () => {
     it('fixes text colors', () => {
       return stylelint
