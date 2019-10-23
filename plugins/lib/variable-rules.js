@@ -27,7 +27,19 @@ function createVariableRule(ruleName, rules) {
       return noop
     }
 
-    const validate = declarationValidator(Object.assign(rules, options.rules), {variables})
+    let actualRules = rules
+    let overrides = options.rules
+    if (typeof rules === 'function') {
+      actualRules = rules({variables, options, ruleName})
+    }
+    if (typeof overrides === 'function') {
+      delete options.rules
+      overrides = overrides({rules: actualRules, options, ruleName, variables})
+    }
+    if (overrides) {
+      Object.assign(actualRules, overrides)
+    }
+    const validate = declarationValidator(actualRules, {variables})
 
     const messages = stylelint.utils.ruleMessages(ruleName, {
       rejected: message => `${message}.`
