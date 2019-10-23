@@ -35,10 +35,8 @@ module.exports = function declarationValidator(rules, options = {}) {
   const validatorsByProp = new TapMap()
   const validatorsByReplacementValue = new Map()
   for (const validator of validators) {
-    if (validator.rule.replacements instanceof Object) {
-      for (const value of Object.keys(validator.rule.replacements)) {
-        validatorsByReplacementValue.set(value, validator)
-      }
+    for (const value of Object.keys(validator.rule.replacements)) {
+      validatorsByReplacementValue.set(value, validator)
     }
   }
 
@@ -81,7 +79,7 @@ module.exports = function declarationValidator(rules, options = {}) {
           fixable: false,
           replacement: undefined
         }
-      } else if (replacements && replacements.hasOwnProperty(value)) {
+      } else if (replacements[value]) {
         let replacement = value
         do {
           replacement = replacements[replacement]
@@ -141,7 +139,7 @@ module.exports = function declarationValidator(rules, options = {}) {
     }
   }
 
-  function componentValidator({expects, components, values, replacements = {}}) {
+  function componentValidator({expects, components, values, replacements}) {
     const matchesCompoundValue = anymatch(values)
     return decl => {
       const {prop, value: compoundValue} = decl
@@ -189,7 +187,7 @@ module.exports = function declarationValidator(rules, options = {}) {
       let replacement = fixable ? valueParser.stringify(parsed) : undefined
 
       // if a compound replacement exists, suggest *that* instead
-      if (replacement && replacements && replacements.hasOwnProperty(replacement)) {
+      if (replacement && replacements[replacement]) {
         do {
           replacement = replacements[replacement]
         } while (replacements[replacement])
