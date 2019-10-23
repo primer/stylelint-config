@@ -1,6 +1,3 @@
-const postcss = require('postcss')
-const dedent = require('dedent')
-const stylelint = require('stylelint')
 const {createVariableRule} = require('../plugins/lib/variable-rules')
 const {requirePrimerFile} = require('../plugins/lib/primer')
 

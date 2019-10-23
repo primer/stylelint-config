@@ -125,7 +125,9 @@ describe(ruleName, () => {
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
-        expect(data).toHaveWarnings([`Please use a non-negative spacer variable instead of "-$spacer-1". (${ruleName})`])
+        expect(data).toHaveWarnings([
+          `Please use a non-negative spacer variable instead of "-$spacer-1". (${ruleName})`
+        ])
       })
   })
 })
