@@ -71,7 +71,7 @@ module.exports = function declarationValidator(rules, options = {}) {
     return validatorsByProp.tap(prop, () => validators.find(v => v.matchesProp(prop)))
   }
 
-  function valueValidator({expects, values, replacements}) {
+  function valueValidator({expects, values, replacements, singular = false}) {
     const matches = anymatch(values)
     return function validate({prop, value}, nested) {
       if (matches(value)) {
@@ -93,7 +93,7 @@ module.exports = function declarationValidator(rules, options = {}) {
           replacement
         }
       } else {
-        if (nested) {
+        if (nested || singular) {
           return {
             valid: false,
             errors: [{expects, prop, value}],
