@@ -22,7 +22,7 @@ function createVariableRule(ruleName, rules) {
     console.warn(`Unable to get variables.json from @primer/css. Replacements will need to be specified manually.`)
   }
 
-  return stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
+  const plugin = stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
     if (enabled === false) {
       return noop
     }
@@ -65,6 +65,10 @@ function createVariableRule(ruleName, rules) {
       })
     }
   })
+
+  Object.assign(plugin, {rules})
+
+  return plugin
 }
 
 function noop() {}
