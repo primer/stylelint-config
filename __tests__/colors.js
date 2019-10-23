@@ -48,6 +48,22 @@ describe(ruleName, () => {
       })
   })
 
+  it('does not report color properties in at-rules', () => {
+    return stylelint
+      .lint({
+        code: `
+          @mixin foo() {
+            .x { background-color: #123456; }
+          }
+        `,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
   it('reports properties with wrong variable usage', () => {
     return stylelint
       .lint({
