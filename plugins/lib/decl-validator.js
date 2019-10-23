@@ -3,6 +3,7 @@ const valueParser = require('postcss-value-parser')
 const TapMap = require('tap-map')
 
 const SKIP_VALUE_NODE_TYPES = new Set(['space', 'div'])
+const SKIP_AT_RULE_NAMES = new Set(['each', 'for', 'function', 'mixin'])
 
 module.exports = function declarationValidator(rules, options = {}) {
   const {formatMessage = defaultMessageFormatter, variables} = options
@@ -41,6 +42,12 @@ module.exports = function declarationValidator(rules, options = {}) {
   }
 
   return decl => {
+    if (closest(decl, isSkippableAtRule)) {
+      // As a general rule, any rule nested in an at-rule is ignored, since
+      // @for, @each, @mixin, and @function blocks can use whatever variables
+      // they want
+      return {valid: true}
+    }
     const validator = getPropValidator(decl.prop)
     if (validator) {
       const result = validator.validate(decl)
@@ -207,10 +214,21 @@ module.exports = function declarationValidator(rules, options = {}) {
       }
     }
   }
+
+  function isSkippableAtRule(node) {
+    return node.type === 'atrule' && SKIP_AT_RULE_NAMES.has(node.name)
+  }
 }
 
 function defaultMessageFormatter(error) {
   const {expects, value, replacement} = error
   const expected = replacement ? `"${replacement}"` : expects
   return `Please use ${expected} instead of "${value}"`
+}
+
+function closest(node, test) {
+  let ancestor = node
+  do {
+    if (test(ancestor)) return ancestor
+  } while ((ancestor = ancestor.parent))
 }
