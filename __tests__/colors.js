@@ -55,8 +55,15 @@ describe(ruleName, () => {
           @mixin foo() {
             .x { background-color: #123456; }
           }
+
+          @each $color in $colors {
+            @include breakpoint(sm) {
+              .text-#{$color} { color: $color; }
+            }
+          }
         `,
-        config: configWithOptions(true)
+        config: configWithOptions(true),
+        syntax: 'scss'
       })
       .then(data => {
         expect(data).not.toHaveErrored()
