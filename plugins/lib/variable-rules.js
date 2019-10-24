@@ -51,29 +51,31 @@ function createVariableRule(ruleName, rules) {
     const fixEnabled = context && context.fix && !disableFix
 
     return (root, result) => {
-      root.walkDecls(decl => {
-        const validated = validate(decl)
-        const {valid, fixable, replacement, errors} = validated
-        if (valid) {
-          // eslint-disable-next-line no-console
-          if (verbose) console.warn(`  valid!`)
-          return
-        } else if (fixEnabled && fixable) {
-          // eslint-disable-next-line no-console
-          if (verbose) console.warn(`  fixed: ${replacement}`)
-          decl.value = replacement
-        } else {
-          // eslint-disable-next-line no-console
-          if (verbose) console.warn(`  ${errors.length} error(s)`)
-          for (const error of errors) {
-            stylelint.utils.report({
-              message: messages.rejected(error),
-              node: decl,
-              result,
-              ruleName
-            })
+      root.walkRules(rule => {
+        rule.walkDecls(decl => {
+          const validated = validate(decl)
+          const {valid, fixable, replacement, errors} = validated
+          if (valid) {
+            // eslint-disable-next-line no-console
+            if (verbose) console.warn(`  valid!`)
+            return
+          } else if (fixEnabled && fixable) {
+            // eslint-disable-next-line no-console
+            if (verbose) console.warn(`  fixed: ${replacement}`)
+            decl.value = replacement
+          } else {
+            // eslint-disable-next-line no-console
+            if (verbose) console.warn(`  ${errors.length} error(s)`)
+            for (const error of errors) {
+              stylelint.utils.report({
+                message: messages.rejected(error),
+                node: decl,
+                result,
+                ruleName
+              })
+            }
           }
-        }
+        })
       })
     }
   })
