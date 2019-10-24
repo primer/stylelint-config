@@ -35,10 +35,9 @@ describe('variable rules (meta)', () => {
     plugin.rule(false)
     expect(createRule).not.toHaveBeenCalled()
 
-    // enabled = true should
+    // enabled = true should call it
     const options = {hi: true}
     plugin.rule(true, options)
-
     expect(createRule).toHaveBeenCalledWith(
       expect.objectContaining({
         options,
