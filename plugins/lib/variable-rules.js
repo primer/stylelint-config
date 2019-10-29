@@ -31,6 +31,8 @@ function createVariableRule(ruleName, rules) {
     let overrides = options.rules
     if (typeof rules === 'function') {
       actualRules = rules({variables, options, ruleName})
+    } else {
+      actualRules = Object.assign({}, rules)
     }
     if (typeof overrides === 'function') {
       delete options.rules
@@ -49,15 +51,22 @@ function createVariableRule(ruleName, rules) {
     // overrides the "global" context.fix (--fix) linting option.
     const {verbose = false, disableFix} = options
     const fixEnabled = context && context.fix && !disableFix
+    const seen = new WeakMap()
 
     return (root, result) => {
       root.walkRules(rule => {
         rule.walkDecls(decl => {
+          if (seen.has(decl)) {
+            return
+          } else {
+            seen.set(decl, true)
+          }
+
           const validated = validate(decl)
           const {valid, fixable, replacement, errors} = validated
           if (valid) {
             // eslint-disable-next-line no-console
-            if (verbose) console.warn(`  valid!`)
+            if (verbose) console.warn(`valid: "${decl.toString()}" in: "${rule.selector}"`)
             return
           } else if (fixEnabled && fixable) {
             // eslint-disable-next-line no-console

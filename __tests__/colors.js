@@ -5,6 +5,7 @@ const pluginPath = require.resolve('../plugins/colors')
 const ruleName = 'primer/colors'
 const configWithOptions = (...args) => ({
   plugins: [pluginPath],
+  syntax: 'scss',
   rules: {
     [ruleName]: args
   }
@@ -171,6 +172,25 @@ describe(ruleName, () => {
     return stylelint
       .lint({
         code: `.x { color: #f00; }`,
+        config: configWithOptions(true, {verbose: true})
+      })
+      .then(data => {
+        expect(data).toHaveErrored()
+        expect(data).toHaveWarningsLength(1)
+        expect(data).toHaveWarnings([`Please use a text color variable instead of "#f00". (${ruleName})`])
+      })
+  })
+
+  it('only validates nested declarations once', () => {
+    return stylelint
+      .lint({
+        code: `
+          .x {
+            .y {
+              .z { color: #f00; }
+            }
+          }
+        `,
         config: configWithOptions(true, {verbose: true})
       })
       .then(data => {
