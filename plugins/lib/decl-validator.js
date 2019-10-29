@@ -3,6 +3,7 @@ const valueParser = require('postcss-value-parser')
 const TapMap = require('tap-map')
 
 const SKIP_VALUE_NODE_TYPES = new Set(['space', 'div'])
+const SKIP_AT_RULE_NAMES = new Set(['each', 'for', 'function', 'mixin'])
 
 module.exports = function declarationValidator(rules, options = {}) {
   const {formatMessage = defaultMessageFormatter, variables} = options
@@ -35,14 +36,18 @@ module.exports = function declarationValidator(rules, options = {}) {
   const validatorsByProp = new TapMap()
   const validatorsByReplacementValue = new Map()
   for (const validator of validators) {
-    if (validator.rule.replacements instanceof Object) {
-      for (const value of Object.keys(validator.rule.replacements)) {
-        validatorsByReplacementValue.set(value, validator)
-      }
+    for (const value of Object.keys(validator.rule.replacements)) {
+      validatorsByReplacementValue.set(value, validator)
     }
   }
 
   return decl => {
+    if (closest(decl, isSkippableAtRule)) {
+      // As a general rule, any rule nested in an at-rule is ignored, since
+      // @for, @each, @mixin, and @function blocks can use whatever variables
+      // they want
+      return {valid: true}
+    }
     const validator = getPropValidator(decl.prop)
     if (validator) {
       const result = validator.validate(decl)
@@ -71,7 +76,7 @@ module.exports = function declarationValidator(rules, options = {}) {
     return validatorsByProp.tap(prop, () => validators.find(v => v.matchesProp(prop)))
   }
 
-  function valueValidator({expects, values, replacements}) {
+  function valueValidator({expects, values, replacements, singular = false}) {
     const matches = anymatch(values)
     return function validate({prop, value}, nested) {
       if (matches(value)) {
@@ -81,7 +86,7 @@ module.exports = function declarationValidator(rules, options = {}) {
           fixable: false,
           replacement: undefined
         }
-      } else if (replacements && replacements.hasOwnProperty(value)) {
+      } else if (replacements[value]) {
         let replacement = value
         do {
           replacement = replacements[replacement]
@@ -93,7 +98,7 @@ module.exports = function declarationValidator(rules, options = {}) {
           replacement
         }
       } else {
-        if (nested) {
+        if (nested || singular) {
           return {
             valid: false,
             errors: [{expects, prop, value}],
@@ -141,7 +146,7 @@ module.exports = function declarationValidator(rules, options = {}) {
     }
   }
 
-  function componentValidator({expects, components, values, replacements = {}}) {
+  function componentValidator({expects, components, values, replacements}) {
     const matchesCompoundValue = anymatch(values)
     return decl => {
       const {prop, value: compoundValue} = decl
@@ -189,7 +194,7 @@ module.exports = function declarationValidator(rules, options = {}) {
       let replacement = fixable ? valueParser.stringify(parsed) : undefined
 
       // if a compound replacement exists, suggest *that* instead
-      if (replacement && replacements && replacements.hasOwnProperty(replacement)) {
+      if (replacement && replacements[replacement]) {
         do {
           replacement = replacements[replacement]
         } while (replacements[replacement])
@@ -209,10 +214,21 @@ module.exports = function declarationValidator(rules, options = {}) {
       }
     }
   }
+
+  function isSkippableAtRule(node) {
+    return node.type === 'atrule' && SKIP_AT_RULE_NAMES.has(node.name)
+  }
 }
 
 function defaultMessageFormatter(error) {
   const {expects, value, replacement} = error
   const expected = replacement ? `"${replacement}"` : expects
   return `Please use ${expected} instead of "${value}"`
+}
+
+function closest(node, test) {
+  let ancestor = node
+  do {
+    if (test(ancestor)) return ancestor
+  } while ((ancestor = ancestor.parent))
 }

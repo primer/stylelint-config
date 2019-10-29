@@ -1,4 +1,5 @@
 const stylelint = require('stylelint')
+const {requirePrimerFile} = require('./primer')
 const declarationValidator = require('./decl-validator')
 
 const CSS_IMPORTANT = '!important'
@@ -15,18 +16,30 @@ module.exports = {
 function createVariableRule(ruleName, rules) {
   let variables = {}
   try {
-    variables = require('@primer/css/dist/variables.json')
+    variables = requirePrimerFile('dist/variables.json')
   } catch (error) {
     // eslint-disable-next-line no-console
     console.warn(`Unable to get variables.json from @primer/css. Replacements will need to be specified manually.`)
   }
 
-  return stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
+  const plugin = stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
     if (enabled === false) {
       return noop
     }
 
-    const validate = declarationValidator(Object.assign(rules, options.rules), {variables})
+    let actualRules = rules
+    let overrides = options.rules
+    if (typeof rules === 'function') {
+      actualRules = rules({variables, options, ruleName})
+    }
+    if (typeof overrides === 'function') {
+      delete options.rules
+      overrides = overrides({rules: actualRules, options, ruleName, variables})
+    }
+    if (overrides) {
+      Object.assign(actualRules, overrides)
+    }
+    const validate = declarationValidator(actualRules, {variables})
 
     const messages = stylelint.utils.ruleMessages(ruleName, {
       rejected: message => `${message}.`
@@ -38,32 +51,38 @@ function createVariableRule(ruleName, rules) {
     const fixEnabled = context && context.fix && !disableFix
 
     return (root, result) => {
-      root.walkDecls(decl => {
-        const validated = validate(decl)
-        const {valid, fixable, replacement, errors} = validated
-        if (valid) {
-          // eslint-disable-next-line no-console
-          if (verbose) console.warn(`  valid!`)
-          return
-        } else if (fixEnabled && fixable) {
-          // eslint-disable-next-line no-console
-          if (verbose) console.warn(`  fixed: ${replacement}`)
-          decl.value = replacement
-        } else {
-          // eslint-disable-next-line no-console
-          if (verbose) console.warn(`  ${errors.length} error(s)`)
-          for (const error of errors) {
-            stylelint.utils.report({
-              message: messages.rejected(error),
-              node: decl,
-              result,
-              ruleName
-            })
+      root.walkRules(rule => {
+        rule.walkDecls(decl => {
+          const validated = validate(decl)
+          const {valid, fixable, replacement, errors} = validated
+          if (valid) {
+            // eslint-disable-next-line no-console
+            if (verbose) console.warn(`  valid!`)
+            return
+          } else if (fixEnabled && fixable) {
+            // eslint-disable-next-line no-console
+            if (verbose) console.warn(`  fixed: ${replacement}`)
+            decl.value = replacement
+          } else {
+            // eslint-disable-next-line no-console
+            if (verbose) console.warn(`  ${errors.length} error(s)`)
+            for (const error of errors) {
+              stylelint.utils.report({
+                message: messages.rejected(error),
+                node: decl,
+                result,
+                ruleName
+              })
+            }
           }
-        }
+        })
       })
     }
   })
+
+  Object.assign(plugin, {rules})
+
+  return plugin
 }
 
 function noop() {}

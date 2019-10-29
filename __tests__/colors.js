@@ -48,6 +48,29 @@ describe(ruleName, () => {
       })
   })
 
+  it('does not report color properties in at-rules', () => {
+    return stylelint
+      .lint({
+        code: `
+          @mixin foo() {
+            .x { background-color: #123456; }
+          }
+
+          @each $color in $colors {
+            @include breakpoint(sm) {
+              .text-#{$color} { color: $color; }
+            }
+          }
+        `,
+        config: configWithOptions(true),
+        syntax: 'scss'
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
   it('reports properties with wrong variable usage', () => {
     return stylelint
       .lint({
@@ -70,6 +93,19 @@ describe(ruleName, () => {
       .then(data => {
         expect(data).not.toHaveErrored()
         expect(data).toHaveWarningsLength(0)
+      })
+  })
+
+  it('does not report non-color values in background:', () => {
+    return stylelint
+      .lint({
+        code: `.x { background: red url(derp.png) top right; }`,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).toHaveErrored()
+        expect(data).toHaveWarningsLength(1)
+        expect(data).toHaveWarnings([`Please use a background color variable instead of "red". (${ruleName})`])
       })
   })
 
