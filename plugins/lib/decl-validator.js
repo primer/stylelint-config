@@ -44,6 +44,7 @@ module.exports = function declarationValidator(rules, options = {}) {
   return decl => {
     if (closest(decl, isSkippableAtRule)) {
       if (verbose) {
+        // eslint-disable-next-line no-console
         console.warn(`skipping declaration: ${decl.parent.toString()}`)
       }
       // As a general rule, any rule nested in an at-rule is ignored, since
