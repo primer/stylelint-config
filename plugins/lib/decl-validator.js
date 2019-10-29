@@ -6,7 +6,7 @@ const SKIP_VALUE_NODE_TYPES = new Set(['space', 'div'])
 const SKIP_AT_RULE_NAMES = new Set(['each', 'for', 'function', 'mixin'])
 
 module.exports = function declarationValidator(rules, options = {}) {
-  const {formatMessage = defaultMessageFormatter, variables} = options
+  const {formatMessage = defaultMessageFormatter, variables, verbose = false} = options
   const variableReplacements = new TapMap()
   if (variables) {
     for (const [name, {values}] of Object.entries(variables)) {
@@ -43,6 +43,9 @@ module.exports = function declarationValidator(rules, options = {}) {
 
   return decl => {
     if (closest(decl, isSkippableAtRule)) {
+      if (verbose) {
+        console.warn(`skipping declaration: ${decl.parent.toString()}`)
+      }
       // As a general rule, any rule nested in an at-rule is ignored, since
       // @for, @each, @mixin, and @function blocks can use whatever variables
       // they want
