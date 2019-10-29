@@ -36,9 +36,7 @@
     "dedent": "0.7.0",
     "eslint": "4.19.1",
     "eslint-plugin-github": "1.10.0",
-    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jest": "21.15.1",
-    "eslint-rule-documentation": "^1.0.11",
     "jest": "24.8.0",
     "prettier": "1.16.4"
   }
