@@ -49,10 +49,14 @@ function createVariableRule(ruleName, rules) {
     // overrides the "global" context.fix (--fix) linting option.
     const {verbose = false, disableFix} = options
     const fixEnabled = context && context.fix && !disableFix
+    const seen = new WeakMap()
 
     return (root, result) => {
       root.walkRules(rule => {
         rule.walkDecls(decl => {
+          if (seen.has(decl)) return
+          seen.set(decl, true)
+
           const validated = validate(decl)
           const {valid, fixable, replacement, errors} = validated
           if (valid) {
