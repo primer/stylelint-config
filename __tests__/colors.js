@@ -97,7 +97,7 @@ describe(ruleName, () => {
   //     })
   // })
 
-  it('does not report properties with valid background variable', () => {
+  it('does not report properties with valid background color variable (prefix) ', () => {
     return stylelint
       .lint({
         code: `.x { background: var(--color-bg-canvas); }`,
@@ -109,10 +109,58 @@ describe(ruleName, () => {
       })
   })
 
-  it('does not report properties with valid button background variable', () => {
+  it('does not report properties with valid background color variable (infix)', () => {
     return stylelint
       .lint({
         code: `.x { background: var(--color-btn-bg-hover); }`,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
+  it('does not report properties with valid background color variable (suffix', () => {
+    return stylelint
+      .lint({
+        code: `.x { background: var(--color-diff-deletion-bg); }`,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
+  it('does not report properties with valid text color variable (prefix) ', () => {
+    return stylelint
+      .lint({
+        code: `.x { background: var(--color-text-primary); }`,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
+  it('does not report properties with valid text color variable (infix)', () => {
+    return stylelint
+      .lint({
+        code: `.x { background: var(--color-btn-text-hover); }`,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
+  it('does not report properties with valid text color variable (suffix', () => {
+    return stylelint
+      .lint({
+        code: `.x { background: var(--color-diff-deletion-text); }`,
         config: configWithOptions(true)
       })
       .then(data => {

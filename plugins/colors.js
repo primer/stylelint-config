@@ -19,7 +19,13 @@ module.exports = createVariableRule('primer/colors', {
   'text color': {
     expects: 'a text color variable',
     props: 'color',
-    values: ['$text-*', '$tooltip-text-color', 'inherit'],
+    values: [
+      '$text-*',
+      '$tooltip-text-color',
+      'inherit',
+      // Match variables in any of the following formats: --color-text-*, --color-*-text-*, --color-*-text
+      /var\(--color(-text-.*|-.*-text-.*|-.*-text)\)/
+    ],
     replacements: {
       '#fff': '$text-white',
       white: '$text-white',
