@@ -26,6 +26,42 @@ describe(ruleName, () => {
       })
   })
 
+  it('does not report properties with valid shadow variable (prefix) ', () => {
+    return stylelint
+      .lint({
+        code: `.x { box-shadow: var(--color-shadow-canvas); }`,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
+  it('does not report properties with valid shadow variable (infix)', () => {
+    return stylelint
+      .lint({
+        code: `.x { box-shadow: var(--color-btn-shadow-hover); }`,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
+  it('does not report properties with valid shadow variable (suffix)', () => {
+    return stylelint
+      .lint({
+        code: `.x { box-shadow: var(--color-diff-deletion-shadow); }`,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
   describe('autofix', () => {
     it('fixes box shadow variables', () => {
       return stylelint
