@@ -85,10 +85,34 @@ describe(ruleName, () => {
       })
   })
 
-  it('does not report properties with valid variables', () => {
+  // it('does not report properties with valid variables', () => {
+  //   return stylelint
+  //     .lint({
+  //       code: `.x { background-color: $bg-red; }`,
+  //       config: configWithOptions(true)
+  //     })
+  //     .then(data => {
+  //       expect(data).not.toHaveErrored()
+  //       expect(data).toHaveWarningsLength(0)
+  //     })
+  // })
+
+  it('does not report properties with valid background variable', () => {
     return stylelint
       .lint({
-        code: `.x { background-color: $bg-red; }`,
+        code: `.x { background: var(--color-bg-canvas); }`,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
+  it('does not report properties with valid button background variable', () => {
+    return stylelint
+      .lint({
+        code: `.x { background: var(--color-btn-bg-hover); }`,
         config: configWithOptions(true)
       })
       .then(data => {

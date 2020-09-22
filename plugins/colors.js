@@ -1,6 +1,6 @@
 const {createVariableRule} = require('./lib/variable-rules')
 
-const bgVars = ['$bg-*', '$tooltip-background-color', 'var(--color-bg-*']
+const bgVars = ['$bg-*', '$tooltip-background-color', /var\(--color(-bg|-.*-bg)-.*\)/]
 
 module.exports = createVariableRule('primer/colors', {
   'background-color': {
