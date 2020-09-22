@@ -4,7 +4,7 @@ const bgVars = [
   '$bg-*',
   '$tooltip-background-color',
   // Match variables in any of the following formats: --color-bg-*, --color-*-bg-*, --color-*-bg
-  /var\(--color(-bg-.*|-.*-bg-.*|-.*-bg)\)/
+  /var\(--color-(.+-)*bg(-.+)*\)/
 ]
 
 module.exports = createVariableRule('primer/colors', {
@@ -24,7 +24,7 @@ module.exports = createVariableRule('primer/colors', {
       '$tooltip-text-color',
       'inherit',
       // Match variables in any of the following formats: --color-text-*, --color-*-text-*, --color-*-text
-      /var\(--color(-text-.*|-.*-text-.*|-.*-text)\)/
+      /var\(--color-(.+-)*text(-.+)*\)/
     ],
     replacements: {
       '#fff': '$text-white',
