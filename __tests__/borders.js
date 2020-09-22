@@ -78,6 +78,42 @@ describe(ruleName, () => {
       })
   })
 
+  it('does not report properties with valid border color variable (prefix) ', () => {
+    return stylelint
+      .lint({
+        code: `.x { border-color: var(--color-border-primary); }`,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
+  it('does not report properties with valid border color variable (infix)', () => {
+    return stylelint
+      .lint({
+        code: `.x { border-color: var(--color-btn-border-hover); }`,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
+  it('does not report properties with valid border color variable (suffix)', () => {
+    return stylelint
+      .lint({
+        code: `.x { border-color: var(--color-diff-deletion-border); }`,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
   describe('autofix', () => {
     it('fixes border variables', () => {
       return stylelint

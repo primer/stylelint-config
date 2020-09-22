@@ -25,7 +25,13 @@ module.exports = createVariableRule('primer/borders', {
   'border color': {
     expects: 'a border color variable',
     props: 'border{,-top,-right,-bottom,-left}-color',
-    values: ['$border-*', 'transparent', 'currentColor'],
+    values: [
+      '$border-*',
+      'transparent',
+      'currentColor',
+      // Match variables in any of the following formats: --color-text-*, --color-*-text-*, --color-*-text
+      /var\(--color-(.+-)*border(-.+)*\)/
+    ],
     replacements: {
       '$border-gray': '$border-color'
     }
