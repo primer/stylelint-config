@@ -29,7 +29,7 @@ module.exports = createVariableRule('primer/borders', {
       '$border-*',
       'transparent',
       'currentColor',
-      // Match variables in any of the following formats: --color-text-*, --color-*-text-*, --color-*-text
+      // Match variables in any of the following formats: --colorr-borde-*, --color-*-border-*, --color-*-border
       /var\(--color-(.+-)*border(-.+)*\)/
     ],
     replacements: {
