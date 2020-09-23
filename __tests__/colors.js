@@ -97,6 +97,40 @@ describe(ruleName, () => {
       })
   })
 
+  it('does not report properties with valid background color', () => {
+    return stylelint
+      .lint({
+        code: dedent`
+        .x { background-color: var(--color-bg-primary); }
+        .y { background-color: var(--color-btn-bg-hover); }
+        .z { background-color: var(--color-diff-deletion-bg); }
+        .a { background-color: var(--color-bg); }
+      `,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
+  it('does not report properties with valid text color', () => {
+    return stylelint
+      .lint({
+        code: dedent`
+          .x { color: var(--color-text-primary); }
+          .y { color: var(--color-btn-text-hover); }
+          .z { color: var(--color-diff-deletion-text); }
+          .a { color: var(--color-text); }
+        `,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
   it('does not report non-color values in background:', () => {
     return stylelint
       .lint({
