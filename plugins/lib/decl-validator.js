@@ -62,7 +62,6 @@ module.exports = function declarationValidator(rules, options = {}) {
     }
   }
 
-  // TODO: handle replacements with CSS variables
   function getVariableReplacements(values) {
     const replacements = {}
     const varValues = (Array.isArray(values) ? values : [values]).filter(v => typeof v === 'string' && v.includes('$'))
