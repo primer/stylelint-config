@@ -1,3 +1,9 @@
+# 9.1.0
+
+### :rocket: Enhancements
+
+- The `primer/colors`, `primer/borders`, and `primer/shadows` rules now allow CSS color variables with the correct functional names (e.g. `var(--color-text-primary)`). #62
+
 # 9.0.0
 
 ### :boom: Breaking Change
