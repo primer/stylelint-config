@@ -78,34 +78,15 @@ describe(ruleName, () => {
       })
   })
 
-  it('does not report properties with valid border color variable (prefix) ', () => {
+  it('does not report properties with valid border color', () => {
     return stylelint
       .lint({
-        code: `.x { border-color: var(--color-border-primary); }`,
-        config: configWithOptions(true)
-      })
-      .then(data => {
-        expect(data).not.toHaveErrored()
-        expect(data).toHaveWarningsLength(0)
-      })
-  })
-
-  it('does not report properties with valid border color variable (infix)', () => {
-    return stylelint
-      .lint({
-        code: `.x { border-color: var(--color-btn-border-hover); }`,
-        config: configWithOptions(true)
-      })
-      .then(data => {
-        expect(data).not.toHaveErrored()
-        expect(data).toHaveWarningsLength(0)
-      })
-  })
-
-  it('does not report properties with valid border color variable (suffix)', () => {
-    return stylelint
-      .lint({
-        code: `.x { border-color: var(--color-diff-deletion-border); }`,
+        code: dedent`
+          .x { border-color: var(--color-border-primary); }
+          .y { border-color: var(--color-btn-border-hover); }
+          .z { border-color: var(--color-diff-deletion-border); }
+          .a { border-color: var(--color-border); }
+        `,
         config: configWithOptions(true)
       })
       .then(data => {

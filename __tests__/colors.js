@@ -85,22 +85,10 @@ describe(ruleName, () => {
       })
   })
 
-  // it('does not report properties with valid variables', () => {
-  //   return stylelint
-  //     .lint({
-  //       code: `.x { background-color: $bg-red; }`,
-  //       config: configWithOptions(true)
-  //     })
-  //     .then(data => {
-  //       expect(data).not.toHaveErrored()
-  //       expect(data).toHaveWarningsLength(0)
-  //     })
-  // })
-
-  it('does not report properties with valid background color variable (prefix) ', () => {
+  it('does not report properties with valid variables', () => {
     return stylelint
       .lint({
-        code: `.x { background: var(--color-bg-canvas); }`,
+        code: `.x { background-color: $bg-red; }`,
         config: configWithOptions(true)
       })
       .then(data => {
@@ -109,10 +97,15 @@ describe(ruleName, () => {
       })
   })
 
-  it('does not report properties with valid background color variable (infix)', () => {
+  it('does not report properties with valid background color', () => {
     return stylelint
       .lint({
-        code: `.x { background: var(--color-btn-bg-hover); }`,
+        code: dedent`
+        .x { background-color: var(--color-bg-primary); }
+        .y { background-color: var(--color-btn-bg-hover); }
+        .z { background-color: var(--color-diff-deletion-bg); }
+        .a { background-color: var(--color-bg); }
+      `,
         config: configWithOptions(true)
       })
       .then(data => {
@@ -121,46 +114,15 @@ describe(ruleName, () => {
       })
   })
 
-  it('does not report properties with valid background color variable (suffix', () => {
+  it('does not report properties with valid text color', () => {
     return stylelint
       .lint({
-        code: `.x { background: var(--color-diff-deletion-bg); }`,
-        config: configWithOptions(true)
-      })
-      .then(data => {
-        expect(data).not.toHaveErrored()
-        expect(data).toHaveWarningsLength(0)
-      })
-  })
-
-  it('does not report properties with valid text color variable (prefix) ', () => {
-    return stylelint
-      .lint({
-        code: `.x { color: var(--color-text-primary); }`,
-        config: configWithOptions(true)
-      })
-      .then(data => {
-        expect(data).not.toHaveErrored()
-        expect(data).toHaveWarningsLength(0)
-      })
-  })
-
-  it('does not report properties with valid text color variable (infix)', () => {
-    return stylelint
-      .lint({
-        code: `.x { color: var(--color-btn-text-hover); }`,
-        config: configWithOptions(true)
-      })
-      .then(data => {
-        expect(data).not.toHaveErrored()
-        expect(data).toHaveWarningsLength(0)
-      })
-  })
-
-  it('does not report properties with valid text color variable (suffix)', () => {
-    return stylelint
-      .lint({
-        code: `.x { color: var(--color-diff-deletion-text); }`,
+        code: dedent`
+          .x { color: var(--color-text-primary); }
+          .y { color: var(--color-btn-text-hover); }
+          .z { color: var(--color-diff-deletion-text); }
+          .a { color: var(--color-text); }
+        `,
         config: configWithOptions(true)
       })
       .then(data => {

@@ -26,34 +26,15 @@ describe(ruleName, () => {
       })
   })
 
-  it('does not report properties with valid shadow variable (prefix) ', () => {
+  it('does not report properties with valid shadow', () => {
     return stylelint
       .lint({
-        code: `.x { box-shadow: var(--color-shadow-canvas); }`,
-        config: configWithOptions(true)
-      })
-      .then(data => {
-        expect(data).not.toHaveErrored()
-        expect(data).toHaveWarningsLength(0)
-      })
-  })
-
-  it('does not report properties with valid shadow variable (infix)', () => {
-    return stylelint
-      .lint({
-        code: `.x { box-shadow: var(--color-btn-shadow-hover); }`,
-        config: configWithOptions(true)
-      })
-      .then(data => {
-        expect(data).not.toHaveErrored()
-        expect(data).toHaveWarningsLength(0)
-      })
-  })
-
-  it('does not report properties with valid shadow variable (suffix)', () => {
-    return stylelint
-      .lint({
-        code: `.x { box-shadow: var(--color-diff-deletion-shadow); }`,
+        code: dedent`
+          .x { box-shadow: var(--color-shadow-primary); }
+          .y { box-shadow: var(--color-btn-shadow-hover); }
+          .z { box-shadow: var(--color-diff-deletion-shadow); }
+          .a { box-shadow: var(--color-shadow); }
+        `,
         config: configWithOptions(true)
       })
       .then(data => {
