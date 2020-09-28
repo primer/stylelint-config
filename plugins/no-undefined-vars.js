@@ -11,12 +11,22 @@ module.exports = stylelint.createPlugin(ruleName, enabled => {
   }
 
   return (root, result) => {
-    stylelint.utils.report({
-      message: messages.rejected,
-      node: root,
-      result,
-      ruleName
+    root.walkRules(rule => {
+      rule.walkDecls(decl => {
+        // Match CSS variable references (e.g var(--color-text-primary))
+        const varRegex = /var\([^\)]*\)/g
+        for (const varReference of decl.value.match(varRegex)) {
+          console.log(varReference)
+        }
+      })
     })
+
+    // stylelint.utils.report({
+    //   message: messages.rejected,
+    //   node: root,
+    //   result,
+    //   ruleName
+    // })
   }
 })
 
