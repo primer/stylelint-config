@@ -1,4 +1,5 @@
 const stylelint = require('stylelint')
+const matchAll = require('string.prototype.matchall')
 
 const ruleName = 'primer/no-undefined-vars'
 const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -19,7 +20,7 @@ module.exports = stylelint.createPlugin(ruleName, enabled => {
         // Match CSS variable references (e.g var(--color-text-primary))
         // eslint-disable-next-line no-useless-escape
         const varRegex = /var\(([^\)]*)\)/g
-        for (const [, varName] of decl.value.matchAll(varRegex)) {
+        for (const [, varName] of matchAll(decl.value, varRegex)) {
           if (!vars.includes(varName)) {
             stylelint.utils.report({
               message: messages.rejected(varName),
