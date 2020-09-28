@@ -17,6 +17,7 @@ module.exports = stylelint.createPlugin(ruleName, enabled => {
     root.walkRules(rule => {
       rule.walkDecls(decl => {
         // Match CSS variable references (e.g var(--color-text-primary))
+        // eslint-disable-next-line no-useless-escape
         const varRegex = /var\(([^\)]*)\)/g
         for (const [, varName] of decl.value.matchAll(varRegex)) {
           if (!vars.includes(varName)) {
