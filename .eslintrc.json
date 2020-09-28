@@ -1,8 +1,8 @@
 {
-  "extends": [
-    "plugin:github/recommended",
-    "plugin:github/es6"
-  ],
+  "extends": ["plugin:github/recommended", "plugin:github/es6"],
+  "globals": {
+    "testRule": "readonly"
+  },
   "env": {
     "es6": true,
     "node": true
