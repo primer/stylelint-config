@@ -20,9 +20,10 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
     return noop
   }
 
-  const {files = ['**/*.scss', '!node_modules']} = options
-
-  const definedVariables = getDefinedVariables(files)
+  const {files = ['**/*.scss', '!node_modules'], verbose = false} = options
+  // eslint-disable-next-line no-console
+  const log = verbose ? (...args) => console.warn(...args) : noop
+  const definedVariables = getDefinedVariables(files, log)
 
   return (root, result) => {
     root.walkRules(rule => {
@@ -42,12 +43,13 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   }
 })
 
-function getDefinedVariables(files) {
+function getDefinedVariables(files, log) {
   const definedVariables = new Set()
 
   for (const file of globby.sync(files)) {
     const css = fs.readFileSync(file, 'utf-8')
     for (const [, variableName] of matchAll(css, variableDefinitionRegex)) {
+      log(`${variableName} defined in ${file}`)
       definedVariables.add(variableName)
     }
   }
