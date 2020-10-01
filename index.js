@@ -8,6 +8,7 @@ module.exports = {
     'stylelint-scss',
     './plugins/no-override',
     './plugins/no-unused-vars',
+    './plugins/no-undefined-vars',
     './plugins/borders',
     './plugins/box-shadow',
     './plugins/colors',

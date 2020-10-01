@@ -1,3 +1,9 @@
+# 9.2.0
+
+### :rocket: Enhancements
+
+- New `primer/no-undefined-vars` to prohibit usages of undefined CSS variables
+
 # 9.1.0
 
 ### :rocket: Enhancements
