@@ -51,7 +51,7 @@ describe('primer/no-unused-vars', () => {
     }
     return stylelint
       .lint({
-        files: fixture('*.scss'),
+        files: fixture('has-unused-vars.scss'),
         config
       })
       .then(data => {
