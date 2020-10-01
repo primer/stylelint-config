@@ -26,6 +26,23 @@ describe(ruleName, () => {
       })
   })
 
+  it('does not report properties with valid shadow', () => {
+    return stylelint
+      .lint({
+        code: dedent`
+          .x { box-shadow: var(--color-shadow-primary); }
+          .y { box-shadow: var(--color-btn-shadow-hover); }
+          .z { box-shadow: var(--color-diff-deletion-shadow); }
+          .a { box-shadow: var(--color-shadow); }
+        `,
+        config: configWithOptions(true)
+      })
+      .then(data => {
+        expect(data).not.toHaveErrored()
+        expect(data).toHaveWarningsLength(0)
+      })
+  })
+
   describe('autofix', () => {
     it('fixes box shadow variables', () => {
       return stylelint
