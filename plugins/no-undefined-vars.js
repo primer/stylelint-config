@@ -20,7 +20,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
     return noop
   }
 
-  const {files} = options
+  const {files = ['**/*.scss', '!node_modules']} = options
 
   const definedVariables = getDefinedVariables(files)
 
