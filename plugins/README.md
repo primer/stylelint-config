@@ -282,8 +282,8 @@ module.exports = {
   extends: 'stylelint-config-primer',
   rules: {
     'primer/colors': [true /* options here */]
-    /* ↑
-     * false disables the rule */
+    /*                ↑
+     *                false disables the rule */
   }
 }
 ```
