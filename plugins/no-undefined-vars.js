@@ -2,6 +2,7 @@ const fs = require('fs')
 const stylelint = require('stylelint')
 const matchAll = require('string.prototype.matchall')
 const globby = require('globby')
+const TapMap = require('tap-map')
 
 const ruleName = 'primer/no-undefined-vars'
 const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -15,6 +16,9 @@ const variableDefinitionRegex = /(--[\w|-]*):/g
 // eslint-disable-next-line no-useless-escape
 const variableReferenceRegex = /var\(([^\)]*)\)/g
 
+const cwd = process.cwd()
+const cache = new TapMap()
+
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   if (!enabled) {
     return noop
@@ -23,7 +27,8 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   const {files = ['**/*.scss', '!node_modules'], verbose = false} = options
   // eslint-disable-next-line no-console
   const log = verbose ? (...args) => console.warn(...args) : noop
-  const definedVariables = getDefinedVariables(files, log)
+  const cacheOptions = {files, cwd}
+  const definedVariables = getDefinedVariables(cacheOptions, log)
 
   return (root, result) => {
     root.walkRules(rule => {
@@ -43,18 +48,20 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   }
 })
 
-function getDefinedVariables(files, log) {
-  const definedVariables = new Set()
-
-  for (const file of globby.sync(files)) {
-    const css = fs.readFileSync(file, 'utf-8')
-    for (const [, variableName] of matchAll(css, variableDefinitionRegex)) {
-      log(`${variableName} defined in ${file}`)
-      definedVariables.add(variableName)
+function getDefinedVariables(cacheOptions, log) {
+  const cacheKey = JSON.stringify(cacheOptions)
+  return cache.tap(cacheKey, () => {
+    const definedVariables = new Set()
+    for (const file of globby.sync(cacheOptions.files)) {
+      const css = fs.readFileSync(file, 'utf-8')
+      for (const [, variableName] of matchAll(css, variableDefinitionRegex)) {
+        log(`${variableName} defined in ${file}`)
+        definedVariables.add(variableName)
+      }
     }
-  }
 
-  return definedVariables
+    return definedVariables
+  })
 }
 
 function noop() {}
