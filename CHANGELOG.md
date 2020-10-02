@@ -1,3 +1,9 @@
+# 9.2.1
+
+### :bug: Bug fixes
+
+- Fix slow runtime by caching variable definitions in `primer/no-undefined-vars` rule
+
 # 9.2.0
 
 ### :rocket: Enhancements
