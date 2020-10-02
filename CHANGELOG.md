@@ -3,6 +3,7 @@
 ### :bug: Bug fixes
 
 - Fix slow runtime by caching variable definitions in `primer/no-undefined-vars` rule
+- Fix duplicate errors in `primer/no-undefined-vars` rule
 
 # 9.2.0
 
