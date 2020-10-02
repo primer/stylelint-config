@@ -26,9 +26,18 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   const log = verbose ? (...args) => console.warn(...args) : noop
   const definedVariables = getDefinedVariables(files, log)
 
+  // Keep track of declarations we've already seen
+  const seen = new WeakMap()
+
   return (root, result) => {
     root.walkRules(rule => {
       rule.walkDecls(decl => {
+        if (seen.has(decl)) {
+          return
+        } else {
+          seen.set(decl, true)
+        }
+
         for (const [, variableName] of matchAll(decl.value, variableReferenceRegex)) {
           if (!definedVariables.has(variableName)) {
             stylelint.utils.report({
