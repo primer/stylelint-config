@@ -16,9 +16,6 @@ const variableDefinitionRegex = /(--[\w|-]*):/g
 // eslint-disable-next-line no-useless-escape
 const variableReferenceRegex = /var\(([^\)]*)\)/g
 
-const cwd = process.cwd()
-const cache = new TapMap()
-
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   if (!enabled) {
     return noop
@@ -27,8 +24,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   const {files = ['**/*.scss', '!node_modules'], verbose = false} = options
   // eslint-disable-next-line no-console
   const log = verbose ? (...args) => console.warn(...args) : noop
-  const cacheOptions = {files, cwd}
-  const definedVariables = getDefinedVariables(cacheOptions, log)
+  const definedVariables = getDefinedVariables(files, log)
 
   return (root, result) => {
     root.walkRules(rule => {
@@ -48,11 +44,15 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   }
 })
 
-function getDefinedVariables(cacheOptions, log) {
-  const cacheKey = JSON.stringify(cacheOptions)
+const cwd = process.cwd()
+const cache = new TapMap()
+
+function getDefinedVariables(files, log) {
+  const cacheKey = JSON.stringify({files, cwd})
   return cache.tap(cacheKey, () => {
     const definedVariables = new Set()
-    for (const file of globby.sync(cacheOptions.files)) {
+
+    for (const file of globby.sync(files)) {
       const css = fs.readFileSync(file, 'utf-8')
       for (const [, variableName] of matchAll(css, variableDefinitionRegex)) {
         log(`${variableName} defined in ${file}`)
