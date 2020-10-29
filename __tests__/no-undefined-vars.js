@@ -16,6 +16,7 @@ testRule({
 
   accept: [
     {code: '.x { color: var(--color-text-primary); }'},
+    {code: '.x { color: var(--color-text-primary, #000000); }'},
     {code: '.x { background-color: var(--color-counter-bg); }'},
     {code: '.x { margin: var(--spacing-spacer-1); }'}
   ],
