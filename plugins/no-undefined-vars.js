@@ -39,7 +39,6 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
         }
 
         for (const [, variableName] of matchAll(decl.value, variableReferenceRegex)) {
-          log(`looking up ${variableName}`)
           if (!definedVariables.has(variableName)) {
             stylelint.utils.report({
               message: messages.rejected(variableName),
