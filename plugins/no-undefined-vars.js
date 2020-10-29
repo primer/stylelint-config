@@ -14,7 +14,7 @@ const variableDefinitionRegex = /(--[\w|-]*):/g
 
 // Match CSS variable references (e.g var(--color-text-primary))
 // eslint-disable-next-line no-useless-escape
-const variableReferenceRegex = /var\(([^\),]*)\)/g
+const variableReferenceRegex = /var\(([^\),]+)(,.*)?\)/g
 
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   if (!enabled) {
@@ -39,6 +39,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
         }
 
         for (const [, variableName] of matchAll(decl.value, variableReferenceRegex)) {
+          log(`looking up ${variableName}`)
           if (!definedVariables.has(variableName)) {
             stylelint.utils.report({
               message: messages.rejected(variableName),
