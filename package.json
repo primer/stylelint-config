@@ -1,6 +1,6 @@
 {
   "name": "stylelint-config-primer",
-  "version": "9.2.1",
+  "version": "9.2.2",
   "description": "Sharable stylelint config used by GitHub's CSS",
   "homepage": "http://primer.style/css/tools/linting",
   "author": "GitHub, Inc.",
@@ -22,7 +22,7 @@
     "anymatch": "^3.1.1",
     "globby": "^9.2.0",
     "postcss-value-parser": "^4.0.2",
-    "string.prototype.matchall": "^3.0.1",
+    "string.prototype.matchall": "^4.0.2",
     "stylelint-no-unsupported-browser-features": "^1.0.0",
     "stylelint-order": "^2.0.0",
     "stylelint-scss": "^3.10.0",
