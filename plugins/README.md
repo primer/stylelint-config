@@ -7,6 +7,7 @@ This directory contains all of our custom stylelint plugins, each of which provi
 - [`primer/no-override`](#primerno-override)
 - [`primer/no-unused-vars`](#primerno-unused-vars)
 - [`primer/no-undefined-vars`](#primerno-undefined-vars)
+- [`primer/no-scale-colors`](#primerno-scale-colors)
 - [`primer/colors`](#primercolors)
 - [`primer/spacing`](#primerspacing)
 - [`primer/typography`](#primertypography)
@@ -119,6 +120,10 @@ Because there isn't a good way for a stylelint plugin to know what CSS variables
 
 - `files` is a single path, glob, or array of paths and globs, that tells the plugin which files (relative to the current working directory) to scan for CSS variable declarations. The default is `['**/*.scss', '!node_modules']`, which tells [globby] to find all the `.scss` files recursively and ignore the `node_modules` directory.
 - `verbose` is a boolean that enables chatty `console.warn()` messages telling you what the plugin found, which can aid in debugging more complicated project layouts.
+
+## `primer/no-scale-colors`
+
+This rule prohibits the use of non-functional scale CSS variables like `var(--color-scale-blue-1)` without being wrapped in the `color-mode-var` mixin.
 
 ## `primer/colors`
 
