@@ -7,15 +7,13 @@ testRule({
   config: [
     true,
     {
-      files: [
-        path.join(__dirname, '__fixtures__/color-vars.scss')
-      ]
+      files: [path.join(__dirname, '__fixtures__/color-vars.scss')]
     }
   ],
 
   accept: [
     {code: '.x { color: var(--color-text-primary); }'},
-    {code: '@include color-mode-var(my-feature, var(--color-scale-blue-1), var(--color-scale-blue-5))'},
+    {code: '@include color-mode-var(my-feature, var(--color-scale-blue-1), var(--color-scale-blue-5))'}
   ],
 
   reject: [

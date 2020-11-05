@@ -45,7 +45,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
     }
 
     root.walkAtRules(rule => {
-      if (rule.name === "include" && rule.params.startsWith('color-mode-var')) {
+      if (rule.name === 'include' && rule.params.startsWith('color-mode-var')) {
         const innerMatch = rule.params.match(/^color-mode-var\s*\(\s*(.*)\)\s*$/)
         if (innerMatch.length !== 2) {
           return

@@ -22,7 +22,7 @@ testRule({
     {code: '.x { color: var(--color-my-first-feature); }'},
     {code: '.x { color: var(--color-my-second-feature); }'},
     {code: '.x { margin: var(--spacing-spacer-1); }'},
-    {code: '@include color-mode-var("feature", var(--color-scale-blue-1), var(--color-scale-blue-2))'},
+    {code: '@include color-mode-var("feature", var(--color-scale-blue-1), var(--color-scale-blue-2))'}
   ],
 
   reject: [

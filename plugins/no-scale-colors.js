@@ -3,7 +3,8 @@ const matchAll = require('string.prototype.matchall')
 
 const ruleName = 'primer/no-scale-colors'
 const messages = stylelint.utils.ruleMessages(ruleName, {
-  rejected: varName => `${varName} is a non-functional scale color and cannot be used without being wrapped in the color-mode-var mixin`
+  rejected: varName =>
+    `${varName} is a non-functional scale color and cannot be used without being wrapped in the color-mode-var mixin`
 })
 
 // Match CSS variable references (e.g var(--color-text-primary))
