@@ -123,7 +123,17 @@ Because there isn't a good way for a stylelint plugin to know what CSS variables
 
 ## `primer/no-scale-colors`
 
-This rule prohibits the use of non-functional scale CSS variables like `var(--color-scale-blue-1)` without being wrapped in the `color-mode-var` mixin.
+This rule prohibits the use of [non-functional scale CSS variables](https://primer.style/css/support/color-system#color-palette) like `var(--color-scale-blue-1)` in all cases except the `color-mode-var` mixin.
+
+```scss
+// Okay; using scale colors while defining new variables
+@include color-scale-var('new-var-name', var(--color-scale-blue-1), var(--color-scale-blue-2))
+
+// Fail; using scale colors directly as a property value
+.selector {
+  color: var(--color-scale-blue-1)
+}
+```
 
 ## `primer/colors`
 

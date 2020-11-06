@@ -29,6 +29,7 @@ Within your [stylelint config object](http://stylelint.io/user-guide/configurati
 - [primer/no-override](./plugins/#primerno-override): Prohibits custom styles that target Primer CSS selectors.
 - [primer/no-unused-vars](./plugins/#primerno-unused-vars): Warns about SCSS variables that are declared by not used in your local files.
 - [primer/no-undefined-vars](./plugins/#primerno-undefined-vars): Prohibits usage of undefined CSS variables.
+- [primer/no-scale-colors](./plugins/#primerno-scale-colors): Prohibits usage of undefined CSS variables.
 - [primer/colors](./plugins/#primercolors): Enforces the use of certain color variables.
 - [primer/spacing](./plugins/#primerspacing): Enforces the use of spacing variables for margin and padding.
 - [primer/typography](./plugins/#primertypography): Enforces the use of typography variables for certain CSS properties.
