@@ -22,6 +22,12 @@ testRule({
       message: messages.rejected('--color-scale-blue-1'),
       line: 1,
       column: 6
+    },
+    {
+      code: '.x { color: var(--color-auto-blue-1); }',
+      message: messages.rejected('--color-auto-blue-1'),
+      line: 1,
+      column: 6
     }
   ]
 })

@@ -34,7 +34,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 
         for (const [, variableName] of matchAll(decl.value, variableReferenceRegex)) {
           log(`Found variable reference ${variableName}`)
-          if (variableName.startsWith(`--color-scale-`)) {
+          if (variableName.match(/^--color-(scale|auto)-/)) {
             stylelint.utils.report({
               message: messages.rejected(variableName),
               node: decl,
