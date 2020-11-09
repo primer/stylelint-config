@@ -12,6 +12,9 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 // Match CSS variable definitions (e.g. --color-text-primary:)
 const variableDefinitionRegex = /(--[\w|-]*):/g
 
+// Match CSS variables defined with the color-mode-var mixin (e.g. @include color-mode-var(my-feature, ...))
+const colorModeVariableDefinitionRegex = /color-mode-var\s*\(\s*['"]?([^'",]+)['"]?/g
+
 // Match CSS variable references (e.g var(--color-text-primary))
 // eslint-disable-next-line no-useless-escape
 const variableReferenceRegex = /var\(([^\),]+)(,.*)?\)/g
@@ -30,6 +33,35 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   const seen = new WeakMap()
 
   return (root, result) => {
+    function checkVariable(variableName, node) {
+      if (!definedVariables.has(variableName)) {
+        stylelint.utils.report({
+          message: messages.rejected(variableName),
+          node,
+          result,
+          ruleName
+        })
+      }
+    }
+
+    root.walkAtRules(rule => {
+      if (rule.name === 'include' && rule.params.startsWith('color-mode-var')) {
+        const innerMatch = rule.params.match(/^color-mode-var\s*\(\s*(.*)\)\s*$/)
+        if (innerMatch.length !== 2) {
+          return
+        }
+
+        const [, params] = innerMatch
+        const [, lightValue, darkValue] = params.split(',').map(str => str.trim())
+
+        for (const v of [lightValue, darkValue]) {
+          for (const [, variableName] of matchAll(v, variableReferenceRegex)) {
+            checkVariable(variableName, rule)
+          }
+        }
+      }
+    })
+
     root.walkRules(rule => {
       rule.walkDecls(decl => {
         if (seen.has(decl)) {
@@ -39,14 +71,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
         }
 
         for (const [, variableName] of matchAll(decl.value, variableReferenceRegex)) {
-          if (!definedVariables.has(variableName)) {
-            stylelint.utils.report({
-              message: messages.rejected(variableName),
-              node: decl,
-              result,
-              ruleName
-            })
-          }
+          checkVariable(variableName, decl)
         }
       })
     })
@@ -66,6 +91,10 @@ function getDefinedVariables(files, log) {
       for (const [, variableName] of matchAll(css, variableDefinitionRegex)) {
         log(`${variableName} defined in ${file}`)
         definedVariables.add(variableName)
+      }
+      for (const [, variableName] of matchAll(css, colorModeVariableDefinitionRegex)) {
+        log(`--color-${variableName} defined via color-mode-var in ${file}`)
+        definedVariables.add(`--color-${variableName}`)
       }
     }
 

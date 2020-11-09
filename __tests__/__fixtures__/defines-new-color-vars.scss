@@ -1,0 +1,8 @@
+:root {
+  @include color-mode-var('my-first-feature', var(--color-scale-blue-5), var(--color-scale-blue-3));
+  @include color-mode-var(
+    'my-second-feature',
+    var(--color-scale-green-5),
+    var(--color-scale-red-3)
+  );
+}
