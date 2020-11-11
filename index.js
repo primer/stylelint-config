@@ -9,6 +9,7 @@ module.exports = {
     './plugins/no-override',
     './plugins/no-unused-vars',
     './plugins/no-undefined-vars',
+    './plugins/no-scale-colors',
     './plugins/borders',
     './plugins/box-shadow',
     './plugins/colors',
