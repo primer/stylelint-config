@@ -1,20 +1,43 @@
 name: CI
 on: [push]
 jobs:
-  all:
+  ci:
+    name: CI
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
+      - name: Checkout repo
+        uses: actions/checkout@master
+
+      - name: Set up Node.js 12.x
+        uses: actions/setup-node@master
         with:
-          node-version: 11
-      - name: install
+          node-version: 12
+
+      - name: Install dependencies
         run: npm install
-      - name: lint
-        run: npm run lint
-      - name: test
+
+      - name: Test
         run: npm test
-      - uses: primer/publish@v1.1.0
+
+      - name: Create .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Release snapshot
+        run: |
+          yarn changeset version --snapshot
+          yarn changeset publish --tag canary
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Update prerelease version check
+        run: |
+          name=$(jq -r .name package.json)
+          version=$(jq -r .version package.json)
+          npx action-status --context="$name" --state=success --description=$version --url "https://unpkg.com/$name@$version/"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
