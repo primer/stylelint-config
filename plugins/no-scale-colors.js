@@ -16,7 +16,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
     return noop
   }
 
-  const {verbose = true} = options
+  const {verbose = false} = options
   // eslint-disable-next-line no-console
   const log = verbose ? (...args) => console.warn(...args) : noop
 
