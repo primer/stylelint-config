@@ -1,5 +1,11 @@
 name: CI
-on: [push]
+
+on:
+  push:
+    branches-ignore:
+      - master
+      - changeset-release/**
+
 jobs:
   ci:
     name: CI
