@@ -1,29 +1,29 @@
-# 9.2.1
-
 ## 9.3.1
 
 ### Patch Changes
 
 - [`df11e2d`](https://github.com/primer/stylelint-config-primer/commit/df11e2d912913346e0499f7eac901cdfcb83f38c) [#74](https://github.com/primer/stylelint-config-primer/pull/74) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Add primer/no-scale-colors to the list of exported plugins
 
+## 9.2.1
+
 ### :bug: Bug fixes
 
 - Fix slow runtime by caching variable definitions in `primer/no-undefined-vars` rule
 - Fix duplicate errors in `primer/no-undefined-vars` rule
 
-# 9.2.0
+## 9.2.0
 
 ### :rocket: Enhancements
 
 - New `primer/no-undefined-vars` to prohibit usages of undefined CSS variables
 
-# 9.1.0
+## 9.1.0
 
 ### :rocket: Enhancements
 
 - The `primer/colors`, `primer/borders`, and `primer/box-shadow` rules now allow CSS color variables with the correct functional names (e.g. `var(--color-text-primary)`). #62
 
-# 9.0.0
+## 9.0.0
 
 ### :boom: Breaking Change
 
@@ -71,7 +71,7 @@
 - Prohibit negative spacer values in `padding` properties
 - Allow `$h000-size` for marketing 😬
 
-# 2.0.0
+## 2.0.0
 
 :boom: **The following updates are breaking changes**, since code that disables the deprecated rule will now produce linting errors. Please update your `stylelint-disable` statements accordingly.
 
@@ -85,20 +85,20 @@ The rest of the changes should not introduce new linting errors:
 - Removed: `media-feature-no-missing-punctuation`
 - Updated: replaced `rule-nested-empty-line-before` and `rule-non-nested-empty-line-before` with `rule-empty-line-before`
 
-# 1.4.0
+## 1.4.0
 
 - Updated: Development dependencies are any version `*`
 - Removed: `selector-class-pattern` from config. https://github.com/primer/stylelint-config-primer/pull/11
 
-# 1.3.0
+## 1.3.0
 
 - Added: `length-zero-no-unit` to disallow zero values with units eg `0px`
 
-# 1.2.0
+## 1.2.0
 
 - Removed: We don't need `scss/at-extend-no-missing-placeholder` anymore taken care of by `at-rule-blacklist`
 - Added: Adding `selector-no-type` to the rules
 
-# 1.0.0
+## 1.0.0
 
 - Creating a sharable config object
