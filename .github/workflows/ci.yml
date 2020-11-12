@@ -35,6 +35,7 @@ jobs:
 
       - name: Release snapshot
         run: |
+          echo "$( jq '.version = "0.0.0"' package.json )" > package.json
           yarn changeset version --snapshot
           yarn changeset publish --tag canary
         env:
