@@ -1,5 +1,15 @@
 # Changelog
 
+## 9.3.2
+
+### Patch Changes
+
+- [`d18cfbf`](https://github.com/primer/stylelint-config-primer/commit/d18cfbfefc25be6ae38f73132552d2f3c62c4d02) [#79](https://github.com/primer/stylelint-config-primer/pull/79) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Add additinal verbose logging to `no-undefined-vars`
+
+* [`d18cfbf`](https://github.com/primer/stylelint-config-primer/commit/d18cfbfefc25be6ae38f73132552d2f3c62c4d02) [#79](https://github.com/primer/stylelint-config-primer/pull/79) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Fix handling of edge-cases in `no-undefined-vars`
+
+- [`bb07673`](https://github.com/primer/stylelint-config-primer/commit/bb076732aa216fcb56e411b8dd7477efc89f7f8a) [#76](https://github.com/primer/stylelint-config-primer/pull/76) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Set the default verbose option for `no-scale-colors` to false
+
 ## 9.3.1
 
 ### Patch Changes
