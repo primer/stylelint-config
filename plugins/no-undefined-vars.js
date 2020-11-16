@@ -10,10 +10,10 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 })
 
 // Match CSS variable definitions (e.g. --color-text-primary:)
-const variableDefinitionRegex = /(--[\w|-]*):/g
+const variableDefinitionRegex = /^\s*(--[\w|-]+):/gm
 
 // Match CSS variables defined with the color-mode-var mixin (e.g. @include color-mode-var(my-feature, ...))
-const colorModeVariableDefinitionRegex = /color-mode-var\s*\(\s*['"]?([^'",]+)['"]?/g
+const colorModeVariableDefinitionRegex = /^\s*@include\s+color-mode-var\s*\(\s*['"]?([^'",]+)['"]?/gm
 
 // Match CSS variable references (e.g var(--color-text-primary))
 // eslint-disable-next-line no-useless-escape
@@ -46,7 +46,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 
     root.walkAtRules(rule => {
       if (rule.name === 'include' && rule.params.startsWith('color-mode-var')) {
-        const innerMatch = rule.params.match(/^color-mode-var\s*\(\s*(.*)\)\s*$/)
+        const innerMatch = rule.params.match(/^color-mode-var\s*\(\s*(.*)\s*\);?\s*$/)
         if (innerMatch.length !== 2) {
           return
         }
@@ -81,12 +81,15 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 const cwd = process.cwd()
 const cache = new TapMap()
 
-function getDefinedVariables(files, log) {
-  const cacheKey = JSON.stringify({files, cwd})
+function getDefinedVariables(globs, log) {
+  const cacheKey = JSON.stringify({globs, cwd})
   return cache.tap(cacheKey, () => {
     const definedVariables = new Set()
 
-    for (const file of globby.sync(files)) {
+    const files = globby.sync(globs)
+    log(`Scanning ${files.length} SCSS files for CSS variables`)
+    for (const file of files) {
+      log(`==========\nLooking for CSS variable definitions in ${file}`)
       const css = fs.readFileSync(file, 'utf-8')
       for (const [, variableName] of matchAll(css, variableDefinitionRegex)) {
         log(`${variableName} defined in ${file}`)
