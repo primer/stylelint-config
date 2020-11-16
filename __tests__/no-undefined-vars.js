@@ -32,6 +32,26 @@ testRule({
       line: 1,
       column: 6
     },
+    // checks to ensure other declarations with a double-dash
+    // aren't accidentally parsed as CSS variables
+    {
+      code: '.x { color: var(--light); }',
+      message: messages.rejected('--light'),
+      line: 1,
+      column: 6
+    },
+    {
+      code: '.x { color: var(--color-my-commented-color); }',
+      message: messages.rejected('--color-my-commented-color'),
+      line: 1,
+      column: 6
+    },
+    {
+      code: '.x { color: var(--color-my-other-commented-color); }',
+      message: messages.rejected('--color-my-other-commented-color'),
+      line: 1,
+      column: 6
+    },
     {
       code: '.x { color: var(--color-bar, #000000); }',
       message: messages.rejected('--color-bar'),
