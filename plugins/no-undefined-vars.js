@@ -81,12 +81,15 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 const cwd = process.cwd()
 const cache = new TapMap()
 
-function getDefinedVariables(files, log) {
-  const cacheKey = JSON.stringify({files, cwd})
+function getDefinedVariables(globs, log) {
+  const cacheKey = JSON.stringify({globs, cwd})
   return cache.tap(cacheKey, () => {
     const definedVariables = new Set()
 
-    for (const file of globby.sync(files)) {
+    const files = globby.sync(globs)
+    log(`Scanning ${files.length} SCSS files for CSS variables`)
+    for (const file of files) {
+      log(`==========\nLooking for CSS variable definitions in ${file}`)
       const css = fs.readFileSync(file, 'utf-8')
       for (const [, variableName] of matchAll(css, variableDefinitionRegex)) {
         log(`${variableName} defined in ${file}`)
