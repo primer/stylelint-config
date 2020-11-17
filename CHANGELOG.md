@@ -1,5 +1,11 @@
 # Changelog
 
+## 9.3.3
+
+### Patch Changes
+
+- [`a339c69`](https://github.com/primer/stylelint-config-primer/commit/a339c698b9ba7ccd01b8cb773dad7a3a14dd13a1) [#81](https://github.com/primer/stylelint-config-primer/pull/81) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Update globby to v11
+
 ## 9.3.2
 
 ### Patch Changes
