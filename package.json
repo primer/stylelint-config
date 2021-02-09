@@ -26,7 +26,7 @@
     "string.prototype.matchall": "^4.0.2",
     "stylelint-no-unsupported-browser-features": "^4.1.4",
     "stylelint-order": "^2.0.0",
-    "stylelint-scss": "^3.10.0",
+    "stylelint-scss": "^3.19.0",
     "tap-map": "^1.0.0"
   },
   "peerDependencies": {
