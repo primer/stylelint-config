@@ -21,7 +21,9 @@ describe(ruleName, () => {
       })
       .then(data => {
         expect(data).toHaveErrored()
-        expect(data).toHaveWarnings([`Please use "$border-red" instead of "$red". (${ruleName})`])
+        expect(data).toHaveWarnings([
+          `Please use "$border-red" instead of "$red". See https://primer.style/css/utilities/borders. (${ruleName})`
+        ])
       })
   })
 
@@ -36,9 +38,9 @@ describe(ruleName, () => {
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarnings([
-          `Please use "$border-width" instead of "1px". (${ruleName})`,
-          `Please use "$border-style" instead of "solid". (${ruleName})`,
-          `Please use a border color variable instead of "gray". (${ruleName})`
+          `Please use "$border-width" instead of "1px". See https://primer.style/css/utilities/borders. (${ruleName})`,
+          `Please use "$border-style" instead of "solid". See https://primer.style/css/utilities/borders. (${ruleName})`,
+          `Please use a border color variable instead of "gray". See https://primer.style/css/utilities/borders. (${ruleName})`
         ])
       })
   })
@@ -54,8 +56,8 @@ describe(ruleName, () => {
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarnings([
-          `Please use a border width variable instead of "calc($spacer-2 + var(--derp))". (${ruleName})`,
-          `Please use a border color variable instead of "rgba($border-gray-dark, 50%)". (${ruleName})`
+          `Please use a border width variable instead of "calc($spacer-2 + var(--derp))". See https://primer.style/css/utilities/borders. (${ruleName})`,
+          `Please use a border color variable instead of "rgba($border-gray-dark, 50%)". See https://primer.style/css/utilities/borders. (${ruleName})`
         ])
       })
   })
