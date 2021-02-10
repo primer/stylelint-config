@@ -13,7 +13,7 @@ module.exports = {
   CSS_IMPORTANT
 }
 
-function createVariableRule(ruleName, rules) {
+function createVariableRule(ruleName, rules, url) {
   let variables = {}
   try {
     variables = requirePrimerFile('dist/variables.json')
@@ -42,10 +42,6 @@ function createVariableRule(ruleName, rules) {
       Object.assign(actualRules, overrides)
     }
     const validate = declarationValidator(actualRules, {variables})
-
-    const messages = stylelint.utils.ruleMessages(ruleName, {
-      rejected: message => `${message}.`
-    })
 
     // The stylelint docs suggest respecting a "disableFix" rule option that
     // overrides the "global" context.fix (--fix) linting option.
@@ -76,8 +72,19 @@ function createVariableRule(ruleName, rules) {
             // eslint-disable-next-line no-console
             if (verbose) console.warn(`  ${errors.length} error(s)`)
             for (const error of errors) {
+              const message = stylelint.utils
+                .ruleMessages(ruleName, {
+                  rejected: message => {
+                    if (url) {
+                      return `${message}. See ${url}.`
+                    }
+                    return `${message}.`
+                  }
+                })
+                .rejected(error)
+
               stylelint.utils.report({
-                message: messages.rejected(error),
+                message,
                 node: decl,
                 result,
                 ruleName
