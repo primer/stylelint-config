@@ -14,6 +14,11 @@
     "stylelint-config",
     "stylelint"
   ],
+  "files": [
+    "property-order.js",
+    "browsers.js",
+    "plugins/"
+  ],
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
