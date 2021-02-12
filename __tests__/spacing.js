@@ -20,7 +20,9 @@ describe(ruleName, () => {
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
-        expect(data).toHaveWarnings([`Please use "$spacer-1" instead of "4px". (${ruleName})`])
+        expect(data).toHaveWarnings([
+          `Please use "$spacer-1" instead of "4px". See https://primer.style/css/support/spacing. (${ruleName})`
+        ])
       })
   })
 
@@ -126,7 +128,7 @@ describe(ruleName, () => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a non-negative spacer variable instead of "-$spacer-1". (${ruleName})`
+          `Please use a non-negative spacer variable instead of "-$spacer-1". See https://primer.style/css/support/spacing. (${ruleName})`
         ])
       })
   })

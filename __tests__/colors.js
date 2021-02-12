@@ -21,7 +21,9 @@ describe(ruleName, () => {
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
-        expect(data).toHaveWarnings([`Please use a text color variable instead of "#f00". (${ruleName})`])
+        expect(data).toHaveWarnings([
+          `Please use a text color variable instead of "#f00". See https://primer.style/css/utilities/colors. (${ruleName})`
+        ])
       })
   })
 
@@ -81,7 +83,9 @@ describe(ruleName, () => {
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
-        expect(data).toHaveWarnings([`Please use a background color variable instead of "$red". (${ruleName})`])
+        expect(data).toHaveWarnings([
+          `Please use a background color variable instead of "$red". See https://primer.style/css/utilities/colors. (${ruleName})`
+        ])
       })
   })
 
@@ -140,7 +144,9 @@ describe(ruleName, () => {
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
-        expect(data).toHaveWarnings([`Please use a background color variable instead of "red". (${ruleName})`])
+        expect(data).toHaveWarnings([
+          `Please use a background color variable instead of "red". See https://primer.style/css/utilities/colors. (${ruleName})`
+        ])
       })
   })
 
@@ -211,7 +217,9 @@ describe(ruleName, () => {
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
-        expect(data).toHaveWarnings([`Please use a text color variable instead of "#f00". (${ruleName})`])
+        expect(data).toHaveWarnings([
+          `Please use a text color variable instead of "#f00". See https://primer.style/css/utilities/colors. (${ruleName})`
+        ])
       })
   })
 
@@ -230,7 +238,9 @@ describe(ruleName, () => {
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
-        expect(data).toHaveWarnings([`Please use a text color variable instead of "#f00". (${ruleName})`])
+        expect(data).toHaveWarnings([
+          `Please use a text color variable instead of "#f00". See https://primer.style/css/utilities/colors. (${ruleName})`
+        ])
       })
   })
 

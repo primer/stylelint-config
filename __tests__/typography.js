@@ -24,8 +24,8 @@ describe(ruleName, () => {
         .then(data => {
           expect(data).toHaveErrored()
           expect(data).toHaveWarnings([
-            `Please use a font-size variable instead of "11px". (${ruleName})`,
-            `Please use a font-size variable instead of "$spacer-3". (${ruleName})`
+            `Please use a font-size variable instead of "11px". See https://primer.style/css/utilities/typography. (${ruleName})`,
+            `Please use a font-size variable instead of "$spacer-3". See https://primer.style/css/utilities/typography. (${ruleName})`
           ])
         })
     })
