@@ -1,5 +1,17 @@
 # Changelog
 
+## 10.0.0
+
+### Major Changes
+
+- [`23a1f15`](https://github.com/primer/stylelint-config-primer/commit/23a1f1599673f2a4f9f28c39da61f42871c05697) [#85](https://github.com/primer/stylelint-config-primer/pull/85) Thanks [@koddsson](https://github.com/koddsson)! - Replace deprecated "blacklist" rules for "dissallow list" rules.
+
+  See https://stylelint.io/user-guide/rules/at-rule-blacklist and http://stylelint.io/user-guide/rules/declaration-property-value-disallowed-list/
+
+### Patch Changes
+
+- [`40d9bb8`](https://github.com/primer/stylelint-config-primer/commit/40d9bb867194ae4335846953b5d8706dc7dc7d79) [#86](https://github.com/primer/stylelint-config-primer/pull/86) Thanks [@koddsson](https://github.com/koddsson)! - Allow rules to optionally display a URL with their message.
+
 ## 9.3.3
 
 ### Patch Changes
