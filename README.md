@@ -42,7 +42,7 @@ This is a list of the lints turned on in this configuration, and what they do.
 
 #### At-rule
 
-- [at-rule-blacklist](http://stylelint.io/user-guide/rules/at-rule-blacklist/): Specify a blacklist of disallowed at-rules.
+- [at-rule-disallowed-list](http://stylelint.io/user-guide/rules/at-rule-disallowed-list/): Specify a list of disallowed at-rules.
   - `"extend"` Disallow the use of `@extend`.
 - [at-rule-name-case](http://stylelint.io/user-guide/rules/at-rule-name-case/): at rules must be in written lowercase.
 - [at-rule-name-space-after](http://stylelint.io/user-guide/rules/at-rule-name-space-after/): There must always be a single space after at-rule names in single-line declaration blocks.
@@ -90,7 +90,7 @@ This is a list of the lints turned on in this configuration, and what they do.
 
 #### Declaration Property
 
-- [declaration-property-value-blacklist](http://stylelint.io/user-guide/rules/declaration-property-value-blacklist/): Specify a blacklist of disallowed property and value pairs within declarations.
+- [declaration-property-value-disallowed-list](http://stylelint.io/user-guide/rules/declaration-property-value-disallowed-list/): Specify a list of disallowed property and value pairs within declarations.
   - `^transition`: Disallow the use of `all` within transitions.
   - `^background`: Disallow the use of `http:` protocols within background image urls.
   - `^border`: Disallow the use of the word `none` for borders, use `0` instead.
