@@ -75,7 +75,6 @@ module.exports = {
     'function-parentheses-space-inside': 'never-single-line',
     'function-url-quotes': 'always',
     'function-whitespace-after': 'always',
-    indentation: 2,
     'length-zero-no-unit': true,
     'max-empty-lines': 1,
     'max-nesting-depth': 3,
@@ -135,10 +134,8 @@ module.exports = {
     'selector-type-case': 'lower',
     'shorthand-property-no-redundant-values': true,
     'string-no-newline': true,
-    'string-quotes': 'double',
     'unit-case': 'lower',
     'unit-no-unknown': true,
-    'value-list-comma-newline-after': 'always-multi-line',
     'value-list-comma-space-after': 'always-single-line',
     'value-list-comma-space-before': 'never',
     'value-no-vendor-prefix': true
