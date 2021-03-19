@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.0.1
+
+### Patch Changes
+
+- [`aa76171`](https://github.com/primer/stylelint-config-primer/commit/aa76171fc5c9c308fcd9d7f7285c8fbdb2c18a7b) [#90](https://github.com/primer/stylelint-config-primer/pull/90) Thanks [@jonrohan](https://github.com/jonrohan)! - Updating the no-undefined-variables lint for the new color-variables mixin.
+
 ## 10.0.0
 
 ### Major Changes
