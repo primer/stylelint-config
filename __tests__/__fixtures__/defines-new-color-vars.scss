@@ -1,11 +1,11 @@
 :root {
-  // @include color-mode-var('my-commented-color', var(--color-scale-blue-5), var(--color-scale-blue-3));
+  // @include color-variables((('my-commented-color', (light: var(--color-scale-blue-5), dark: var(--color-scale-blue-3)))));
   // --color-my-other-commented-color: #1b1f23;
-  @include color-mode-var('my-first-feature', var(--color-scale-blue-5), var(--color-scale-blue-3));
-  @include color-mode-var(
-    'my-second-feature',
-    var(--color-scale-green-5),
-    var(--color-scale-red-3)
+  @include color-variables(
+    (
+      ('my-first-feature', (light: var(--color-scale-blue-5), dark: var(--color-scale-blue-3))),
+      (my-second-feature, (light: var(--color-scale-green-5), dark: var(--color-scale-red-3)))
+    )
   );
 
   $readme-blue--light: #4f80f9;

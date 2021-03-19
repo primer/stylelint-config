@@ -22,7 +22,7 @@ testRule({
     {code: '.x { color: var(--color-my-first-feature); }'},
     {code: '.x { color: var(--color-my-second-feature); }'},
     {code: '.x { margin: var(--spacing-spacer-1); }'},
-    {code: '@include color-mode-var("feature", var(--color-scale-blue-1), var(--color-scale-blue-2))'}
+    {code: '@include color-variables(\n  (\n    (feature-bg-color, (light: var(--color-scale-blue-1), dark: var(--color-scale-blue-2)))));'}
   ],
 
   reject: [
@@ -59,7 +59,7 @@ testRule({
       column: 6
     },
     {
-      code: '@include color-mode-var(feature, var(--color-scale-blue-1), var(--color-fake-2))',
+      code: '@include color-variables(\n  (\n    (feature-bg-color, (light: var(--color-scale-blue-1), dark: var(--color-fake-2)))));',
       message: messages.rejected('--color-fake-2'),
       line: 1,
       column: 1
