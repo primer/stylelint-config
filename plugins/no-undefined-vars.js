@@ -12,8 +12,8 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 // Match CSS variable definitions (e.g. --color-text-primary:)
 const variableDefinitionRegex = /^\s*(--[\w|-]+):/gm
 
-// Match CSS variables defined with the color-mode-var mixin (e.g. @include color-mode-var(my-feature, ...))
-const colorModeVariableDefinitionRegex = /^\s*@include\s+color-mode-var\s*\(\s*['"]?([^'",]+)['"]?/gm
+// Match CSS variables defined with the color-variables mixin
+const colorModeVariableDefinitionRegex = /^[^\/\n]*\(["']?([^'"\s,]+)["']?,\s*\(light|dark:/gm
 
 // Match CSS variable references (e.g var(--color-text-primary))
 // eslint-disable-next-line no-useless-escape
@@ -45,19 +45,14 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
     }
 
     root.walkAtRules(rule => {
-      if (rule.name === 'include' && rule.params.startsWith('color-mode-var')) {
-        const innerMatch = rule.params.match(/^color-mode-var\s*\(\s*(.*)\s*\);?\s*$/)
-        if (innerMatch.length !== 2) {
+      if (rule.name === 'include' && rule.params.startsWith('color-variables')) {
+        const innerMatch = [...matchAll(rule.params, variableReferenceRegex)]
+        if (!innerMatch.length) {
           return
         }
 
-        const [, params] = innerMatch
-        const [, lightValue, darkValue] = params.split(',').map(str => str.trim())
-
-        for (const v of [lightValue, darkValue]) {
-          for (const [, variableName] of matchAll(v, variableReferenceRegex)) {
-            checkVariable(variableName, rule)
-          }
+        for (const [, variableName] of innerMatch) {
+          checkVariable(variableName, rule)
         }
       }
     })
@@ -96,7 +91,7 @@ function getDefinedVariables(globs, log) {
         definedVariables.add(variableName)
       }
       for (const [, variableName] of matchAll(css, colorModeVariableDefinitionRegex)) {
-        log(`--color-${variableName} defined via color-mode-var in ${file}`)
+        log(`--color-${variableName} defined via color-variables in ${file}`)
         definedVariables.add(`--color-${variableName}`)
       }
     }

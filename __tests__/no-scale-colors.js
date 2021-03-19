@@ -13,7 +13,7 @@ testRule({
 
   accept: [
     {code: '.x { color: var(--color-text-primary); }'},
-    {code: '@include color-mode-var(my-feature, var(--color-scale-blue-1), var(--color-scale-blue-5))'}
+    {code: '@include color-variables(((my-feature, (light: var(--color-scale-blue-1), dark: var(--color-scale-blue-5)))));'}
   ],
 
   reject: [

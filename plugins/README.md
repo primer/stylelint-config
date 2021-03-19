@@ -4,15 +4,20 @@ This directory contains all of our custom stylelint plugins, each of which provi
 
 ### Rules
 
-- [`primer/no-override`](#primerno-override)
-- [`primer/no-unused-vars`](#primerno-unused-vars)
-- [`primer/no-undefined-vars`](#primerno-undefined-vars)
-- [`primer/no-scale-colors`](#primerno-scale-colors)
-- [`primer/colors`](#primercolors)
-- [`primer/spacing`](#primerspacing)
-- [`primer/typography`](#primertypography)
-- [`primer/borders`](#primerborders)
-- [`primer/box-shadow`](#primerbox-shadow)
+- [Primer stylelint plugins](#primer-stylelint-plugins)
+    - [Rules](#rules)
+  - [Usage](#usage)
+  - [`primer/no-override`](#primerno-override)
+  - [`primer/no-unused-vars`](#primerno-unused-vars)
+  - [`primer/no-undefined-vars`](#primerno-undefined-vars)
+  - [`primer/no-scale-colors`](#primerno-scale-colors)
+  - [`primer/colors`](#primercolors)
+  - [`primer/spacing`](#primerspacing)
+  - [`primer/typography`](#primertypography)
+  - [`primer/borders`](#primerborders)
+  - [`primer/box-shadow`](#primerbox-shadow)
+  - [Variable rules](#variable-rules)
+    - [Variable rule options](#variable-rule-options)
 
 These were intended for use with [Primer CSS] and GitHub projects, but you may find them useful elsewhere.
 
@@ -123,7 +128,7 @@ Because there isn't a good way for a stylelint plugin to know what CSS variables
 
 ## `primer/no-scale-colors`
 
-This rule prohibits the use of [non-functional scale CSS variables](https://primer.style/css/support/color-system#color-palette) like `var(--color-scale-blue-1)` in all cases except the `color-mode-var` mixin.
+This rule prohibits the use of [non-functional scale CSS variables](https://primer.style/css/support/color-system#color-palette) like `var(--color-scale-blue-1)` in all cases except the `color-variables` mixin.
 
 ```scss
 // Okay; using scale colors while defining new variables
