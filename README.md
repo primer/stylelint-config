@@ -24,6 +24,7 @@ Within your [stylelint config object](http://stylelint.io/user-guide/configurati
 
 ### Plugins
 
+- [stylelint-order](https://github.com/hudochenkov/stylelint-order): Order-related linting rules for stylelint. Properties must be [sorted according to this list](https://github.com/primer/stylelint-config-primer/blob/main/property-order.js).
 - [stylelint-scss](https://github.com/kristerkari/stylelint-scss): A collection of SCSS specific linting rules for stylelint
   - [scss/selector-no-redundant-nesting-selector](https://github.com/kristerkari/stylelint-scss/blob/master/src/rules/selector-no-redundant-nesting-selector/README.md): Disallow redundant nesting selectors (`&`).
 - [primer/no-override](./plugins/#primerno-override): Prohibits custom styles that target Primer CSS selectors.
@@ -82,7 +83,6 @@ This is a list of the lints turned on in this configuration, and what they do.
 
 - [declaration-block-no-duplicate-properties](http://stylelint.io/user-guide/rules/declaration-block-no-duplicate-properties/): Disallow duplicate properties within declaration blocks. _Ignore_: consecutive duplicated properties.
 - [declaration-block-no-shorthand-property-overrides](http://stylelint.io/user-guide/rules/declaration-block-no-shorthand-property-overrides/): Disallow shorthand properties that override related longhand properties.
-- [declaration-block-properties-order](http://stylelint.io/user-guide/rules/declaration-block-properties-order/): Properties in declaration blocks must be [sorted according to this list](property-order.js).
 - [declaration-block-semicolon-newline-after](http://stylelint.io/user-guide/rules/declaration-block-semicolon-newline-after/): There must always be a newline after the semicolon.
 - [declaration-block-semicolon-space-before](http://stylelint.io/user-guide/rules/declaration-block-semicolon-space-before/): There must never be whitespace before the semicolons.
 - [declaration-block-single-line-max-declarations](http://stylelint.io/user-guide/rules/declaration-block-single-line-max-declarations/): There should never be more than `1` declaration per line.
