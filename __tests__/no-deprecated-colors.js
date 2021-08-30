@@ -13,6 +13,13 @@ testRule({
       message: messages.rejected('--color-text-primary'),
       line: 1,
       column: 6
+    },
+    {
+      code: '.x { border: 1px solid var(--color-text-white); }',
+      unfixable: true,
+      message: messages.rejected('--color-text-white'),
+      line: 1,
+      column: 6
     }
   ]
 })
