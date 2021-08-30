@@ -72,19 +72,19 @@ function createVariableRule(ruleName, rules, url) {
             // eslint-disable-next-line no-console
             if (verbose) console.warn(`  ${errors.length} error(s)`)
             for (const error of errors) {
-              const reportMessage = stylelint.utils
+              const message = stylelint.utils
                 .ruleMessages(ruleName, {
-                  rejected: message => {
+                  rejected: m => {
                     if (url) {
-                      return `${message}. See ${url}.`
+                      return `${m}. See ${url}.`
                     }
-                    return `${message}.`
+                    return `${m}.`
                   }
                 })
                 .rejected(error)
 
               stylelint.utils.report({
-                reportMessage,
+                message,
                 node: decl,
                 result,
                 ruleName
