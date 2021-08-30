@@ -1,5 +1,6 @@
 const {messages, ruleName} = require('../plugins/no-deprecated-colors')
 
+// eslint-disable-next-line no-undef
 testRule({
   plugins: ['./plugins/no-deprecated-colors.js'],
   ruleName,
