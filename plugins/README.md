@@ -9,6 +9,7 @@ This directory contains all of our custom stylelint plugins, each of which provi
   - [Usage](#usage)
   - [`primer/no-override`](#primerno-override)
   - [`primer/no-unused-vars`](#primerno-unused-vars)
+  - [`primer/no-deprecated-colors`](#primerno-deprecated-colors)
   - [`primer/no-undefined-vars`](#primerno-undefined-vars)
   - [`primer/no-scale-colors`](#primerno-scale-colors)
   - [`primer/colors`](#primercolors)
@@ -96,6 +97,24 @@ Because there isn't any good way for a stylelint plugin to know all of the files
 - `variablePattern` is a regular expression that matches a single variable in either a source file string or the `prop` of a postcss Declaration node (`{type: 'decl'}`). The default matches Sass/SCSS variables: `/\$[-\w]/g`. Note that the `g` ("global") flag is _required_ to match multiple variable references on a single line.
 
 - `verbose` is a boolean that enables chatty `console.warn()` messages telling you what the plugin found, which can aid in debugging more complicated project layouts.
+
+## `primer/no-deprecated-colors`
+
+This rule identifies deprecated color variables from [primer/primitives]](https://github.com/primer/primitives) deprecated.json file and suggests replacements.
+
+```scss
+body {
+  color: var(--color-fg-default);
+}
+/**          ↑
+ *           OK: --color-text-primary is defined */
+
+body {
+  color: var(--color-text-primary);
+}
+/**          ↑
+ *           FAIL: --color-text-primary is deprecated. */
+```
 
 ## `primer/no-undefined-vars`
 
