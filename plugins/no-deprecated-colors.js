@@ -1,5 +1,5 @@
 const stylelint = require('stylelint')
-const kebabCase = require('lodash.kebabCase')
+const kebabCase = require('lodash.kebabcase')
 const deprecatedColors = require('@primer/primitives/dist/deprecations/colors_v2.json')
 const matchAll = require('string.prototype.matchall')
 
