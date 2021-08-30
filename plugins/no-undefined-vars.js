@@ -13,7 +13,7 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 const variableDefinitionRegex = /^\s*(--[\w|-]+):/gm
 
 // Match CSS variables defined with the color-variables mixin
-const colorModeVariableDefinitionRegex = /^[^\/\n]*\(["']?([^'"\s,]+)["']?,\s*\(light|dark:/gm
+const colorModeVariableDefinitionRegex = /^[^/\n]*\(["']?([^'"\s,]+)["']?,\s*\(light|dark:/gm
 
 // Match CSS variable references (e.g var(--color-text-primary))
 // eslint-disable-next-line no-useless-escape

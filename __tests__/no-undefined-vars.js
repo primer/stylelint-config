@@ -1,6 +1,7 @@
 const path = require('path')
 const {messages, ruleName} = require('../plugins/no-undefined-vars')
 
+// eslint-disable-next-line no-undef
 testRule({
   plugins: ['./plugins/no-undefined-vars.js'],
   ruleName,
@@ -22,7 +23,9 @@ testRule({
     {code: '.x { color: var(--color-my-first-feature); }'},
     {code: '.x { color: var(--color-my-second-feature); }'},
     {code: '.x { margin: var(--spacing-spacer-1); }'},
-    {code: '@include color-variables(\n  (\n    (feature-bg-color, (light: var(--color-scale-blue-1), dark: var(--color-scale-blue-2)))));'}
+    {
+      code: '@include color-variables(\n  (\n    (feature-bg-color, (light: var(--color-scale-blue-1), dark: var(--color-scale-blue-2)))));'
+    }
   ],
 
   reject: [
