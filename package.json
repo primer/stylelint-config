@@ -46,7 +46,7 @@
     "eslint-plugin-github": "1.10.0",
     "jest": "24.8.0",
     "jest-preset-stylelint": "^4.1.1",
-    "prettier": "1.16.4",
+    "prettier": "2.3.2",
     "stylelint": "^13.9.0"
   }
 }
