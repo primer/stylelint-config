@@ -68,12 +68,12 @@ function getCachedVariables(options, log) {
     }
     log(`Found ${decs.size} declarations, ${pluralize(refs.size, 'reference')}.`)
 
-    for (const [name, files] of decs.entries()) {
+    for (const [name, filesList] of decs.entries()) {
       const fileRefs = refs.get(name)
       if (fileRefs) {
-        log(`variable "${name}" declared in ${pluralize(files.size, 'file')}, ref'd in ${fileRefs.size}`)
+        log(`variable "${name}" declared in ${pluralize(filesList.size, 'file')}, ref'd in ${fileRefs.size}`)
       } else {
-        log(`[!] variable "${name}" declared in ${Array.from(files)[0]} is not referenced`)
+        log(`[!] variable "${name}" declared in ${Array.from(filesList)[0]} is not referenced`)
       }
     }
 

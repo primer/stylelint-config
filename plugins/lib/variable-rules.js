@@ -74,11 +74,11 @@ function createVariableRule(ruleName, rules, url) {
             for (const error of errors) {
               const message = stylelint.utils
                 .ruleMessages(ruleName, {
-                  rejected: message => {
+                  rejected: m => {
                     if (url) {
-                      return `${message}. See ${url}.`
+                      return `${m}. See ${url}.`
                     }
-                    return `${message}.`
+                    return `${m}.`
                   }
                 })
                 .rejected(error)

@@ -40,16 +40,45 @@
     "@primer/primitives": ">= 4.6.2"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.2.7",
-    "@changesets/cli": "^2.11.2",
+    "@changesets/changelog-github": "0.2.7",
+    "@changesets/cli": "2.11.2",
+    "@github/prettier-config": "0.0.4",
     "@primer/css": "^13.2.0",
     "@primer/primitives": "4.6.7",
     "dedent": "0.7.0",
-    "eslint": "4.19.1",
-    "eslint-plugin-github": "1.10.0",
+    "eslint": "7.32.0",
+    "eslint-plugin-github": "4.2.0",
+    "eslint-plugin-jest": "24.4.0",
+    "eslint-plugin-prettier": "3.4.1",
     "jest": "24.8.0",
-    "jest-preset-stylelint": "^3.0.0",
-    "prettier": "1.16.4",
-    "stylelint": "^13.9.0"
+    "jest-preset-stylelint": "4.1.1",
+    "prettier": "2.3.2",
+    "stylelint": "13.9.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:github/internal",
+      "plugin:github/recommended"
+    ],
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2017,
+      "requireConfigFile": false
+    },
+    "rules": {
+      "import/no-commonjs": "off",
+      "github/no-then": "off",
+      "i18n-text/no-en": "off"
+    }
+  },
+  "jest": {
+    "preset": "jest-preset-stylelint",
+    "collectCoverage": true,
+    "collectCoverageFrom": ["src/**/*.js", "plugins/**/*.js"],
+    "setupFilesAfterEnv": ["<rootDir>/__tests__/utils/setup.js"],
+    "testPathIgnorePatterns": ["/node_modules/", "__tests__/utils"]
   }
 }
