@@ -43,6 +43,7 @@
     "@changesets/changelog-github": "^0.2.7",
     "@changesets/cli": "^2.11.2",
     "@primer/css": "^13.2.0",
+    "@primer/primitives": "4.6.7",
     "dedent": "0.7.0",
     "eslint": "4.19.1",
     "eslint-plugin-github": "1.10.0",
