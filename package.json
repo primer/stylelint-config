@@ -27,6 +27,7 @@
   "dependencies": {
     "anymatch": "^3.1.1",
     "globby": "^11.0.1",
+    "lodash.kebabcase": "^4.1.1",
     "postcss-value-parser": "^4.0.2",
     "string.prototype.matchall": "^4.0.2",
     "stylelint-no-unsupported-browser-features": "^4.1.4",
@@ -35,7 +36,8 @@
     "tap-map": "^1.0.0"
   },
   "peerDependencies": {
-    "@primer/css": "*"
+    "@primer/css": "*",
+    "@primer/primitives": ">= 4.6.2"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.2.7",
