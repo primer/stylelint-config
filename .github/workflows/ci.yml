@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: 14
       - run: yarn
-      - name: Jest
+      - name: Running jest tests
         run: yarn test
   lint:
     runs-on: ubuntu-latest
@@ -23,5 +23,5 @@ jobs:
         with:
           node-version: 14
       - run: yarn
-      - name: Jest
+      - name: eslint source files
         run: yarn lint

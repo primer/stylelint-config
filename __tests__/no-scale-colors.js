@@ -1,6 +1,7 @@
 const path = require('path')
 const {messages, ruleName} = require('../plugins/no-scale-colors')
 
+// eslint-disable-next-line no-undef
 testRule({
   plugins: ['./plugins/no-scale-colors.js'],
   ruleName,
@@ -13,7 +14,9 @@ testRule({
 
   accept: [
     {code: '.x { color: var(--color-text-primary); }'},
-    {code: '@include color-variables(((my-feature, (light: var(--color-scale-blue-1), dark: var(--color-scale-blue-5)))));'}
+    {
+      code: '@include color-variables(((my-feature, (light: var(--color-scale-blue-1), dark: var(--color-scale-blue-5)))));'
+    }
   ],
 
   reject: [
