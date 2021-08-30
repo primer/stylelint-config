@@ -7,6 +7,7 @@ module.exports = {
     'stylelint-order',
     'stylelint-scss',
     './plugins/no-override',
+    './plugins/no-deprecated-colors',
     './plugins/no-unused-vars',
     './plugins/no-undefined-vars',
     './plugins/no-scale-colors',
