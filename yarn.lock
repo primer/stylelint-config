@@ -797,7 +797,7 @@
   dependencies:
     object-assign "^4.1.1"
 
-"@primer/primitives@4.6.7":
+"@primer/primitives@^4.6.7":
   version "4.6.7"
   resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-4.6.7.tgz#4909d5267772a98d422ac76abd393676f5bd6e0f"
   integrity sha512-tP9fgLD+M+jtyn8f9EpbMA3qCUrL11iT7R6DKmm6tvqBOSFNRvb0KiQypZdQRwbEvlDrGzj90wr4DSi/2MZVXg==
