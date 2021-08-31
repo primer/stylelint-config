@@ -4,7 +4,19 @@ const matchAll = require('string.prototype.matchall')
 
 const ruleName = 'primer/no-deprecated-colors'
 const messages = stylelint.utils.ruleMessages(ruleName, {
-  rejected: varName => `${varName} is a deprecated color, please use the alternative.`
+  rejected: (varName, replacement) => {
+    if (replacement === null) {
+      return `${varName} is a deprecated color variable. Please consult the primer color docs for a replacement. https://primer.style/primitives`
+    }
+
+    if (Array.isArray(replacement)) {
+      replacement = replacement.map(r => `--color-${kebabCase(r)}`)
+      return `${varName} is a deprecated color variable. Please use one of (${replacement.join(', ')}).`
+    }
+
+    replacement = `--color-${kebabCase(replacement)}`
+    return `${varName} is a deprecated color variable. Please use the replacement ${replacement}.`
+  }
 })
 
 // Match CSS variable references (e.g var(--color-text-primary))
@@ -56,7 +68,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             }
 
             stylelint.utils.report({
-              message: messages.rejected(variableName),
+              message: messages.rejected(variableName, replacement),
               node: decl,
               ruleName,
               result
