@@ -1,0 +1,5 @@
+{
+  "text.primary": "fg.default",
+  "text.secondary": ["fg.one", "fg.two"],
+  "text.white": null
+}

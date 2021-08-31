@@ -7,6 +7,7 @@ module.exports = {
     'stylelint-order',
     'stylelint-scss',
     './plugins/no-override',
+    './plugins/no-deprecated-colors',
     './plugins/no-unused-vars',
     './plugins/no-undefined-vars',
     './plugins/no-scale-colors',
@@ -100,6 +101,7 @@ module.exports = {
       }
     ],
     'primer/no-override': true,
+    'primer/no-deprecated-colors': true,
     // unused vars are not necessarily an error, since they may be referenced
     // in other projects
     'primer/no-unused-vars': [true, {severity: 'warning'}],
