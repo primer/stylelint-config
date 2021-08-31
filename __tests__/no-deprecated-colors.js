@@ -1,10 +1,16 @@
+const path = require('path')
 const {messages, ruleName} = require('../plugins/no-deprecated-colors')
 
 // eslint-disable-next-line no-undef
 testRule({
   plugins: ['./plugins/no-deprecated-colors.js'],
   ruleName,
-  config: [true],
+  config: [
+    true,
+    {
+      deprecatedFile: path.join(__dirname, '__fixtures__/deprecations.json')
+    }
+  ],
   fix: true,
   accept: [{code: '.x { color: var(--color-fg-default, var(--color-text-primary)); }'}],
   reject: [

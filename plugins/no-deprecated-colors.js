@@ -1,6 +1,5 @@
 const stylelint = require('stylelint')
 const kebabCase = require('lodash.kebabcase')
-const deprecatedColors = require('@primer/primitives/dist/deprecations/colors_v2.json')
 const matchAll = require('string.prototype.matchall')
 
 const ruleName = 'primer/no-deprecated-colors'
@@ -23,6 +22,9 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
 
   // Keep track of declarations we've already seen
   const seen = new WeakMap()
+
+  // eslint-disable-next-line import/no-dynamic-require
+  const deprecatedColors = require(options.deprecatedFile || '@primer/primitives/dist/deprecations/colors.json')
 
   const convertedCSSVars = Object.entries(deprecatedColors)
     .map(([k, v]) => {
