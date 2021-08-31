@@ -7,7 +7,7 @@ on:
 jobs:
   release-candidate:
     name: Candidate
-    if: ${{ github.repository == 'primer/primitives' }}
+    if: ${{ github.repository == 'primer/stylelint-config-primer' }}
 
     runs-on: ubuntu-latest
     steps:
