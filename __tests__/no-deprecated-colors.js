@@ -1,5 +1,5 @@
 const path = require('path')
-const {messages, ruleName} = require('../plugins/no-deprecated-colors')
+const {ruleName} = require('../plugins/no-deprecated-colors')
 
 // eslint-disable-next-line no-undef
 testRule({
