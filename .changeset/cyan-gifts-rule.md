@@ -1,5 +1,5 @@
 ---
-"stylelint-config-primer": patch
+"stylelint-config-primer": minor
 ---
 
-Create `no-deprecated-colors` rule
+Create a `no-deprecated-colors` rule that looks for deprecated css color variables from primer/primitives.
