@@ -23,6 +23,9 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 // eslint-disable-next-line no-useless-escape
 const variableReferenceRegex = /var\(([^\),]+)(,.*)?\)/g
 
+const replacedVars = {}
+const newVars = {}
+
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
   if (!enabled) {
     return noop
@@ -47,7 +50,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
       return acc
     }, {})
 
-  return (root, result) => {
+  const lintResult = (root, result) => {
     root.walkRules(rule => {
       rule.walkDecls(decl => {
         if (seen.has(decl)) {
@@ -57,12 +60,13 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
         }
 
         for (const [, variableName] of matchAll(decl.value, variableReferenceRegex)) {
-          log(`Found variable reference ${variableName}`)
           if (variableName in convertedCSSVars) {
             let replacement = convertedCSSVars[variableName]
 
             if (context.fix && replacement !== null && !Array.isArray(replacement)) {
               replacement = `--color-${kebabCase(replacement)}`
+              replacedVars[variableName] = true
+              newVars[replacement] = true
               decl.value = decl.value.replace(variableName, replacement)
               return
             }
@@ -78,6 +82,11 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
       })
     })
   }
+
+  log(
+    `${Object.keys(replacedVars).length} deprecated variables replaced with ${Object.keys(newVars).length} variables.`
+  )
+  return lintResult
 })
 
 function noop() {}
