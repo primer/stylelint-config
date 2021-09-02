@@ -1,5 +1,15 @@
 # Changelog
 
+## 11.1.0
+
+### Minor Changes
+
+- [`e83f61c`](https://github.com/primer/stylelint-config-primer/commit/e83f61cef3bf1df1d9420662594040efdcb86c89) [#99](https://github.com/primer/stylelint-config-primer/pull/99) Thanks [@jonrohan](https://github.com/jonrohan)! - Create a `no-deprecated-colors` rule that looks for deprecated css color variables from primer/primitives.
+
+### Patch Changes
+
+- [`581f40a`](https://github.com/primer/stylelint-config-primer/commit/581f40a4aacb45db5426b82d4a2434e81eb032e2) [#105](https://github.com/primer/stylelint-config-primer/pull/105) Thanks [@jonrohan](https://github.com/jonrohan)! - Adding reporting to the linter to know how many variables are replaced
+
 ## 10.0.1
 
 ### Patch Changes
