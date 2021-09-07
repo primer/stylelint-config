@@ -109,6 +109,7 @@ describe(ruleName, () => {
         .y { background-color: var(--color-btn-bg-hover); }
         .z { background-color: var(--color-diff-deletion-bg); }
         .a { background-color: var(--color-bg); }
+        .a { background-color: var(--color-accent); }
       `,
         config: configWithOptions(true)
       })
@@ -125,7 +126,8 @@ describe(ruleName, () => {
           .x { color: var(--color-text-primary); }
           .y { color: var(--color-btn-text-hover); }
           .z { color: var(--color-diff-deletion-text); }
-          .a { color: var(--color-text); }
+          .a { color: var(--color-fg); }
+          .a { color: var(--color-accent); }
         `,
         config: configWithOptions(true)
       })
