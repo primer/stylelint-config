@@ -32,7 +32,8 @@ module.exports = createVariableRule(
         'transparent',
         'currentColor',
         // Match variables in any of the following formats: --color-border-*, --color-*-border-*, --color-*-border
-        /var\(--color-(.+-)*border(-.+)*\)/
+        /var\(--color-(.+-)*border(-.+)*\)/,
+        /var\(--color-[^)]+\)/
       ],
       replacements: {
         '$border-gray': '$border-color'
