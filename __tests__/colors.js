@@ -22,7 +22,7 @@ describe(ruleName, () => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a text color variable instead of "#f00". See https://primer.style/css/utilities/colors. (${ruleName})`
+          `Please use a text color variable instead of "#f00". See https://primer.style/primitives/colors. (${ruleName})`
         ])
       })
   })
@@ -84,7 +84,7 @@ describe(ruleName, () => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a background color variable instead of "$red". See https://primer.style/css/utilities/colors. (${ruleName})`
+          `Please use a background color variable instead of "$red". See https://primer.style/primitives/colors. (${ruleName})`
         ])
       })
   })
@@ -147,7 +147,7 @@ describe(ruleName, () => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a background color variable instead of "red". See https://primer.style/css/utilities/colors. (${ruleName})`
+          `Please use a background color variable instead of "red". See https://primer.style/primitives/colors. (${ruleName})`
         ])
       })
   })
@@ -220,7 +220,7 @@ describe(ruleName, () => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a text color variable instead of "#f00". See https://primer.style/css/utilities/colors. (${ruleName})`
+          `Please use a text color variable instead of "#f00". See https://primer.style/primitives/colors. (${ruleName})`
         ])
       })
   })
@@ -241,7 +241,7 @@ describe(ruleName, () => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a text color variable instead of "#f00". See https://primer.style/css/utilities/colors. (${ruleName})`
+          `Please use a text color variable instead of "#f00". See https://primer.style/primitives/colors. (${ruleName})`
         ])
       })
   })
