@@ -1,5 +1,11 @@
 # Changelog
 
+## 11.1.1
+
+### Patch Changes
+
+- [`3a4654b`](https://github.com/primer/stylelint-config-primer/commit/3a4654b1b7920d71e1284ff78a3bedff932e66a3) [#111](https://github.com/primer/stylelint-config-primer/pull/111) Thanks [@jonrohan](https://github.com/jonrohan)! - Fixing the primer/colors and primer/borders rules
+
 ## 11.1.0
 
 ### Minor Changes
