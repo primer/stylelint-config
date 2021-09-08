@@ -88,6 +88,7 @@ describe(ruleName, () => {
           .y { border-color: var(--color-btn-border-hover); }
           .z { border-color: var(--color-diff-deletion-border); }
           .a { border-color: var(--color-border); }
+          .a { border-color: var(--color-accent); }
         `,
         config: configWithOptions(true)
       })

@@ -22,7 +22,7 @@ describe(ruleName, () => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a text color variable instead of "#f00". See https://primer.style/css/utilities/colors. (${ruleName})`
+          `Please use a text color variable instead of "#f00". See https://primer.style/primitives/colors. (${ruleName})`
         ])
       })
   })
@@ -84,7 +84,7 @@ describe(ruleName, () => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a background color variable instead of "$red". See https://primer.style/css/utilities/colors. (${ruleName})`
+          `Please use a background color variable instead of "$red". See https://primer.style/primitives/colors. (${ruleName})`
         ])
       })
   })
@@ -109,6 +109,7 @@ describe(ruleName, () => {
         .y { background-color: var(--color-btn-bg-hover); }
         .z { background-color: var(--color-diff-deletion-bg); }
         .a { background-color: var(--color-bg); }
+        .a { background-color: var(--color-accent); }
       `,
         config: configWithOptions(true)
       })
@@ -125,7 +126,8 @@ describe(ruleName, () => {
           .x { color: var(--color-text-primary); }
           .y { color: var(--color-btn-text-hover); }
           .z { color: var(--color-diff-deletion-text); }
-          .a { color: var(--color-text); }
+          .a { color: var(--color-fg); }
+          .a { color: var(--color-accent); }
         `,
         config: configWithOptions(true)
       })
@@ -145,7 +147,7 @@ describe(ruleName, () => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a background color variable instead of "red". See https://primer.style/css/utilities/colors. (${ruleName})`
+          `Please use a background color variable instead of "red". See https://primer.style/primitives/colors. (${ruleName})`
         ])
       })
   })
@@ -218,7 +220,7 @@ describe(ruleName, () => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a text color variable instead of "#f00". See https://primer.style/css/utilities/colors. (${ruleName})`
+          `Please use a text color variable instead of "#f00". See https://primer.style/primitives/colors. (${ruleName})`
         ])
       })
   })
@@ -239,7 +241,7 @@ describe(ruleName, () => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a text color variable instead of "#f00". See https://primer.style/css/utilities/colors. (${ruleName})`
+          `Please use a text color variable instead of "#f00". See https://primer.style/primitives/colors. (${ruleName})`
         ])
       })
   })
