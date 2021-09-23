@@ -793,9 +793,9 @@
     object-assign "^4.1.1"
 
 "@primer/primitives@^4.6.7":
-  version "4.6.7"
-  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-4.6.7.tgz#4909d5267772a98d422ac76abd393676f5bd6e0f"
-  integrity sha512-tP9fgLD+M+jtyn8f9EpbMA3qCUrL11iT7R6DKmm6tvqBOSFNRvb0KiQypZdQRwbEvlDrGzj90wr4DSi/2MZVXg==
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-4.8.0.tgz#674d4958d9b2256cc8226d4e6e328686a84b8564"
+  integrity sha512-et4Kwt5LRy5YskHYHFJBoqWoqTHsdQHAOV5YvqQco2P7fQ3Xnus6tMQDuoD2cR03S86qKAjNYO9E6grDxVJWZA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
