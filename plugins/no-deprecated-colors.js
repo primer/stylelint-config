@@ -39,9 +39,13 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
   const seen = new WeakMap()
 
   // eslint-disable-next-line import/no-dynamic-require
-  const deprecatedColors = require(options.deprecatedFile || '@primer/primitives/dist/deprecations/colors.json')
+  const deprecatedColors = require(options.deprecatedFile || '@primer/primitives/dist/deprecated/colors.json')
+  // eslint-disable-next-line import/no-dynamic-require
+  const removedColors = require(options.removedFile || '@primer/primitives/dist/removed/colors.json')
 
-  const convertedCSSVars = Object.entries(deprecatedColors)
+  const variableChecks = Object.assign(deprecatedColors, removedColors)
+
+  const convertedCSSVars = Object.entries(variableChecks)
     .map(([k, v]) => {
       return [`--color-${kebabCase(k)}`, v]
     })
