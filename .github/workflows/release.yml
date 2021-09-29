@@ -6,7 +6,7 @@ on:
 jobs:
   release:
     name: Final
-    if: ${{ github.repository == 'primer/stylelint-config-primer' }}
+    if: ${{ github.repository == 'primer/stylelint-config' }}
 
     runs-on: ubuntu-latest
     steps:

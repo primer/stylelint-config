@@ -4,7 +4,7 @@ const SAFE_SCSS_EXAMPLE = `
   .Component { color: $gray-500; }
 `
 
-describe('stylelint-config-primer', () => {
+describe('stylelint-config', () => {
   it('stylelint runs with our config', () => {
     return lint('.bold { font-weight: bold; }').then(data => {
       expect(data).not.toHaveErrored()
