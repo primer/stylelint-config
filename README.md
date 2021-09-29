@@ -1,13 +1,13 @@
 # Primer Stylelint Config
 
-[![npm version](https://img.shields.io/npm/v/stylelint-config-primer.svg)](https://www.npmjs.org/package/stylelint-config-primer)
+[![npm version](https://img.shields.io/npm/v/@primer/stylelint-config.svg)](https://www.npmjs.org/package/@primer/stylelint-config)
 
 > A sharable stylelint config object that enforces GitHub's CSS rules
 
 ## Install
 
 ```
-$ npm install --save --dev stylelint-config-primer
+$ npm install --save --dev @primer/stylelint-config
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ Within your [stylelint config object](http://stylelint.io/user-guide/configurati
 
 ```json
 {
-  "extends": "stylelint-config-primer"
+  "extends": "@primer/stylelint-config"
 }
 ```
 
@@ -24,7 +24,7 @@ Within your [stylelint config object](http://stylelint.io/user-guide/configurati
 
 ### Plugins
 
-- [stylelint-order](https://github.com/hudochenkov/stylelint-order): Order-related linting rules for stylelint. Properties must be [sorted according to this list](https://github.com/primer/stylelint-config-primer/blob/main/property-order.js).
+- [stylelint-order](https://github.com/hudochenkov/stylelint-order): Order-related linting rules for stylelint. Properties must be [sorted according to this list](https://github.com/primer/stylelint-config/blob/main/property-order.js).
 - [stylelint-scss](https://github.com/kristerkari/stylelint-scss): A collection of SCSS specific linting rules for stylelint
   - [scss/selector-no-redundant-nesting-selector](https://github.com/kristerkari/stylelint-scss/blob/master/src/rules/selector-no-redundant-nesting-selector/README.md): Disallow redundant nesting selectors (`&`).
 - [primer/no-override](./plugins/#primerno-override): Prohibits custom styles that target Primer CSS selectors.

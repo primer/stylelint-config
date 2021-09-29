@@ -62,7 +62,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
         : '(not an array)'
       result.warn(`The "bundles" option must be an array of valid bundles; got: ${invalidBundles}`, {
         stylelintType: 'invalidOption',
-        stylelintReference: 'https://github.com/primer/stylelint-config-primer#options'
+        stylelintReference: 'https://github.com/primer/stylelint-config#options'
       })
     }
 

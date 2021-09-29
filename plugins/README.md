@@ -24,14 +24,14 @@ These were intended for use with [Primer CSS] and GitHub projects, but you may f
 
 ## Usage
 
-If you're using or extending `stylelint-config-primer` already, then you're using all of these plugins by default. See [`index.js`](../index.js) for the config defaults.
+If you're using or extending `@primer/stylelint-config` already, then you're using all of these plugins by default. See [`index.js`](../index.js) for the config defaults.
 
-If you're _not_ using or extending `stylelint-config-primer`, you can still reference the plugins by referencing their module paths like so:
+If you're _not_ using or extending `@primer/stylelint-config`, you can still reference the plugins by referencing their module paths like so:
 
 ```js
 // stylelint.config.js
 module.exports = {
-  plugins: ['stylelint-config-primer/plugins/no-override', 'stylelint-config-primer/plugins/no-unused-vars']
+  plugins: ['@primer/stylelint-config/plugins/no-override', '@primer/stylelint-config/plugins/no-unused-vars']
 }
 ```
 
@@ -318,7 +318,7 @@ All variable rules respect the following rule options, as in:
 ```js
 // stylelint.config.js
 module.exports = {
-  extends: 'stylelint-config-primer',
+  extends: '@primer/stylelint-config',
   rules: {
     'primer/colors': [true /* options here */]
     /*                ↑

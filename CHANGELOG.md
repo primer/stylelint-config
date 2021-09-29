@@ -4,57 +4,57 @@
 
 ### Patch Changes
 
-- [`3a4654b`](https://github.com/primer/stylelint-config-primer/commit/3a4654b1b7920d71e1284ff78a3bedff932e66a3) [#111](https://github.com/primer/stylelint-config-primer/pull/111) Thanks [@jonrohan](https://github.com/jonrohan)! - Fixing the primer/colors and primer/borders rules
+- [`3a4654b`](https://github.com/primer/stylelint-config/commit/3a4654b1b7920d71e1284ff78a3bedff932e66a3) [#111](https://github.com/primer/stylelint-config/pull/111) Thanks [@jonrohan](https://github.com/jonrohan)! - Fixing the primer/colors and primer/borders rules
 
 ## 11.1.0
 
 ### Minor Changes
 
-- [`e83f61c`](https://github.com/primer/stylelint-config-primer/commit/e83f61cef3bf1df1d9420662594040efdcb86c89) [#99](https://github.com/primer/stylelint-config-primer/pull/99) Thanks [@jonrohan](https://github.com/jonrohan)! - Create a `no-deprecated-colors` rule that looks for deprecated css color variables from primer/primitives.
+- [`e83f61c`](https://github.com/primer/stylelint-config/commit/e83f61cef3bf1df1d9420662594040efdcb86c89) [#99](https://github.com/primer/stylelint-config/pull/99) Thanks [@jonrohan](https://github.com/jonrohan)! - Create a `no-deprecated-colors` rule that looks for deprecated css color variables from primer/primitives.
 
 ### Patch Changes
 
-- [`581f40a`](https://github.com/primer/stylelint-config-primer/commit/581f40a4aacb45db5426b82d4a2434e81eb032e2) [#105](https://github.com/primer/stylelint-config-primer/pull/105) Thanks [@jonrohan](https://github.com/jonrohan)! - Adding reporting to the linter to know how many variables are replaced
+- [`581f40a`](https://github.com/primer/stylelint-config/commit/581f40a4aacb45db5426b82d4a2434e81eb032e2) [#105](https://github.com/primer/stylelint-config/pull/105) Thanks [@jonrohan](https://github.com/jonrohan)! - Adding reporting to the linter to know how many variables are replaced
 
 ## 10.0.1
 
 ### Patch Changes
 
-- [`aa76171`](https://github.com/primer/stylelint-config-primer/commit/aa76171fc5c9c308fcd9d7f7285c8fbdb2c18a7b) [#90](https://github.com/primer/stylelint-config-primer/pull/90) Thanks [@jonrohan](https://github.com/jonrohan)! - Updating the no-undefined-variables lint for the new color-variables mixin.
+- [`aa76171`](https://github.com/primer/stylelint-config/commit/aa76171fc5c9c308fcd9d7f7285c8fbdb2c18a7b) [#90](https://github.com/primer/stylelint-config/pull/90) Thanks [@jonrohan](https://github.com/jonrohan)! - Updating the no-undefined-variables lint for the new color-variables mixin.
 
 ## 10.0.0
 
 ### Major Changes
 
-- [`23a1f15`](https://github.com/primer/stylelint-config-primer/commit/23a1f1599673f2a4f9f28c39da61f42871c05697) [#85](https://github.com/primer/stylelint-config-primer/pull/85) Thanks [@koddsson](https://github.com/koddsson)! - Replace deprecated "blacklist" rules for "dissallow list" rules.
+- [`23a1f15`](https://github.com/primer/stylelint-config/commit/23a1f1599673f2a4f9f28c39da61f42871c05697) [#85](https://github.com/primer/stylelint-config/pull/85) Thanks [@koddsson](https://github.com/koddsson)! - Replace deprecated "blacklist" rules for "dissallow list" rules.
 
   See https://stylelint.io/user-guide/rules/at-rule-blacklist and http://stylelint.io/user-guide/rules/declaration-property-value-disallowed-list/
 
 ### Patch Changes
 
-- [`40d9bb8`](https://github.com/primer/stylelint-config-primer/commit/40d9bb867194ae4335846953b5d8706dc7dc7d79) [#86](https://github.com/primer/stylelint-config-primer/pull/86) Thanks [@koddsson](https://github.com/koddsson)! - Allow rules to optionally display a URL with their message.
+- [`40d9bb8`](https://github.com/primer/stylelint-config/commit/40d9bb867194ae4335846953b5d8706dc7dc7d79) [#86](https://github.com/primer/stylelint-config/pull/86) Thanks [@koddsson](https://github.com/koddsson)! - Allow rules to optionally display a URL with their message.
 
 ## 9.3.3
 
 ### Patch Changes
 
-- [`a339c69`](https://github.com/primer/stylelint-config-primer/commit/a339c698b9ba7ccd01b8cb773dad7a3a14dd13a1) [#81](https://github.com/primer/stylelint-config-primer/pull/81) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Update globby to v11
+- [`a339c69`](https://github.com/primer/stylelint-config/commit/a339c698b9ba7ccd01b8cb773dad7a3a14dd13a1) [#81](https://github.com/primer/stylelint-config/pull/81) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Update globby to v11
 
 ## 9.3.2
 
 ### Patch Changes
 
-- [`d18cfbf`](https://github.com/primer/stylelint-config-primer/commit/d18cfbfefc25be6ae38f73132552d2f3c62c4d02) [#79](https://github.com/primer/stylelint-config-primer/pull/79) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Add additinal verbose logging to `no-undefined-vars`
+- [`d18cfbf`](https://github.com/primer/stylelint-config/commit/d18cfbfefc25be6ae38f73132552d2f3c62c4d02) [#79](https://github.com/primer/stylelint-config/pull/79) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Add additinal verbose logging to `no-undefined-vars`
 
-* [`d18cfbf`](https://github.com/primer/stylelint-config-primer/commit/d18cfbfefc25be6ae38f73132552d2f3c62c4d02) [#79](https://github.com/primer/stylelint-config-primer/pull/79) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Fix handling of edge-cases in `no-undefined-vars`
+* [`d18cfbf`](https://github.com/primer/stylelint-config/commit/d18cfbfefc25be6ae38f73132552d2f3c62c4d02) [#79](https://github.com/primer/stylelint-config/pull/79) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Fix handling of edge-cases in `no-undefined-vars`
 
-- [`bb07673`](https://github.com/primer/stylelint-config-primer/commit/bb076732aa216fcb56e411b8dd7477efc89f7f8a) [#76](https://github.com/primer/stylelint-config-primer/pull/76) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Set the default verbose option for `no-scale-colors` to false
+- [`bb07673`](https://github.com/primer/stylelint-config/commit/bb076732aa216fcb56e411b8dd7477efc89f7f8a) [#76](https://github.com/primer/stylelint-config/pull/76) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Set the default verbose option for `no-scale-colors` to false
 
 ## 9.3.1
 
 ### Patch Changes
 
-- [`df11e2d`](https://github.com/primer/stylelint-config-primer/commit/df11e2d912913346e0499f7eac901cdfcb83f38c) [#74](https://github.com/primer/stylelint-config-primer/pull/74) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Add primer/no-scale-colors to the list of exported plugins
+- [`df11e2d`](https://github.com/primer/stylelint-config/commit/df11e2d912913346e0499f7eac901cdfcb83f38c) [#74](https://github.com/primer/stylelint-config/pull/74) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Add primer/no-scale-colors to the list of exported plugins
 
 ## 9.2.1
 
@@ -98,7 +98,7 @@
 - It's also now possible to provide rule _overrides_ in local stylelint configs as functions:
   ```js
   module.exports = {
-    extends: 'stylelint-config-primer',
+    extends: '@primer/stylelint-config',
     rules: {
       'primer/colors': [true, {
         rules: ({variables, rules}) => {
@@ -140,7 +140,7 @@ The rest of the changes should not introduce new linting errors:
 ## 1.4.0
 
 - Updated: Development dependencies are any version `*`
-- Removed: `selector-class-pattern` from config. https://github.com/primer/stylelint-config-primer/pull/11
+- Removed: `selector-class-pattern` from config. https://github.com/primer/stylelint-config/pull/11
 
 ## 1.3.0
 
