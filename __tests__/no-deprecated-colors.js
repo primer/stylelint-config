@@ -8,7 +8,8 @@ testRule({
   config: [
     true,
     {
-      deprecatedFile: path.join(__dirname, '__fixtures__/deprecations.json')
+      deprecatedFile: path.join(__dirname, '__fixtures__/deprecations.json'),
+      removedFile: path.join(__dirname, '__fixtures__/removed.json')
     }
   ],
   fix: true,
@@ -18,6 +19,13 @@ testRule({
       code: '.x { border: 1px solid var(--color-text-primary); }',
       fixed: '.x { border: 1px solid var(--color-fg-default); }',
       message: `--color-text-primary is a deprecated color variable. Please use the replacement --color-fg-default. (primer/no-deprecated-colors)`,
+      line: 1,
+      column: 6
+    },
+    {
+      code: '.x { background-color: var(--color-bg-canvas); }',
+      fixed: '.x { background-color: var(--color-canvas-default); }',
+      message: `--color-bg-canvas is a deprecated color variable. Please use the replacement --color-canvas-default. (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
     },
