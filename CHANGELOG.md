@@ -1,5 +1,15 @@
 # Changelog
 
+## 12.0.0
+
+### Major Changes
+
+- [#129](https://github.com/primer/stylelint-config/pull/129) [`653d596`](https://github.com/primer/stylelint-config/commit/653d596072b897b265b093aac4cd5c143e61410e) Thanks [@jonrohan](https://github.com/jonrohan)! - Renaming the package to use org scope. This is a breaking change, you'll need to uninstall `stylelint-config-primer` and reinstall `@primer/stylelint-config`.
+
+### Patch Changes
+
+- [#130](https://github.com/primer/stylelint-config/pull/130) [`f495a56`](https://github.com/primer/stylelint-config/commit/f495a563a9e809252630466088eb94177e6c0be4) Thanks [@jonrohan](https://github.com/jonrohan)! - Updating @primer/primitives to 5.0 release candidate
+
 ## 11.1.1
 
 ### Patch Changes
