@@ -55,35 +55,45 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
     }, {})
 
   const lintResult = (root, result) => {
-    root.walkRules(rule => {
-      rule.walkDecls(decl => {
-        if (seen.has(decl)) {
-          return
-        } else {
-          seen.set(decl, true)
-        }
+    // Walk all declarartions
+    root.walk(node => {
+      if (seen.has(node)) {
+        return
+      } else {
+        seen.set(node, true)
+      }
+      // walk these nodes
+      if (!(node.type === 'decl' || node.type === 'atrule')) {
+        return
+      }
 
-        for (const [, variableName] of matchAll(decl.value, variableReferenceRegex)) {
-          if (variableName in convertedCSSVars) {
-            let replacement = convertedCSSVars[variableName]
+      for (const [, variableName] of matchAll(
+        node.type === 'atrule' ? node.params : node.value,
+        variableReferenceRegex
+      )) {
+        if (variableName in convertedCSSVars) {
+          let replacement = convertedCSSVars[variableName]
 
-            if (context.fix && replacement !== null && !Array.isArray(replacement)) {
-              replacement = `--color-${kebabCase(replacement)}`
-              replacedVars[variableName] = true
-              newVars[replacement] = true
-              decl.value = decl.value.replace(variableName, replacement)
-              return
+          if (context.fix && replacement !== null && !Array.isArray(replacement)) {
+            replacement = `--color-${kebabCase(replacement)}`
+            replacedVars[variableName] = true
+            newVars[replacement] = true
+            if (node.type === 'atrule') {
+              node.params = node.params.replace(variableName, replacement)
+            } else {
+              node.value = node.value.replace(variableName, replacement)
             }
-
-            stylelint.utils.report({
-              message: messages.rejected(variableName, replacement),
-              node: decl,
-              ruleName,
-              result
-            })
+            continue
           }
+
+          stylelint.utils.report({
+            message: messages.rejected(variableName, replacement),
+            node,
+            ruleName,
+            result
+          })
         }
-      })
+      }
     })
   }
 
