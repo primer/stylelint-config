@@ -79,9 +79,9 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             replacedVars[variableName] = true
             newVars[replacement] = true
             if (node.type === 'atrule') {
-              node.params = node.params.replaceAll(variableName, replacement)
+              node.params = node.params.replace(variableName, replacement)
             } else {
-              node.value = node.value.replaceAll(variableName, replacement)
+              node.value = node.value.replace(variableName, replacement)
             }
             continue
           }
