@@ -23,6 +23,38 @@ testRule({
       column: 6
     },
     {
+      code: '.x { border: 1px solid var(--color-text-primary); .foo { color: var(--color-text-primary); } }',
+      fixed: '.x { border: 1px solid var(--color-fg-default); .foo { color: var(--color-fg-default); } }',
+      warnings: [
+        {
+          message:
+            '--color-text-primary is a deprecated color variable. Please use the replacement --color-fg-default. (primer/no-deprecated-colors)',
+          line: 1,
+          column: 6
+        },
+        {
+          message:
+            '--color-text-primary is a deprecated color variable. Please use the replacement --color-fg-default. (primer/no-deprecated-colors)',
+          line: 1,
+          column: 58
+        }
+      ]
+    },
+    {
+      code: '$border: $border-width $border-style var(--color-border-primary) !default;',
+      fixed: '$border: $border-width $border-style var(--color-border-default) !default;',
+      message: `--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)`,
+      line: 1,
+      column: 1
+    },
+    {
+      code: '.x { border: $border-width $border-style var(--color-border-primary); }',
+      fixed: '.x { border: $border-width $border-style var(--color-border-default); }',
+      message: `--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)`,
+      line: 1,
+      column: 6
+    },
+    {
       code: '.x { background-color: var(--color-bg-canvas); }',
       fixed: '.x { background-color: var(--color-canvas-default); }',
       message: `--color-bg-canvas is a deprecated color variable. Please use the replacement --color-canvas-default. (primer/no-deprecated-colors)`,
