@@ -55,14 +55,22 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
     }, {})
 
   const lintResult = (root, result) => {
-    root.walkDecls(decl => {
-      if (seen.has(decl)) {
+    // Walk all declarartions
+    root.walk(node => {
+      if (seen.has(node)) {
         return
       } else {
-        seen.set(decl, true)
+        seen.set(node, true)
+      }
+      // walk these nodes
+      if (!(node.type === 'decl' || node.type === 'atrule')) {
+        return
       }
 
-      for (const [, variableName] of matchAll(decl.value, variableReferenceRegex)) {
+      for (const [, variableName] of matchAll(
+        node.type === 'atrule' ? node.params : node.value,
+        variableReferenceRegex
+      )) {
         if (variableName in convertedCSSVars) {
           let replacement = convertedCSSVars[variableName]
 
@@ -70,13 +78,17 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             replacement = `--color-${kebabCase(replacement)}`
             replacedVars[variableName] = true
             newVars[replacement] = true
-            decl.value = decl.value.replaceAll(variableName, replacement)
+            if (node.type === 'atrule') {
+              node.params = node.params.replaceAll(variableName, replacement)
+            } else {
+              node.value = node.value.replaceAll(variableName, replacement)
+            }
             continue
           }
 
           stylelint.utils.report({
             message: messages.rejected(variableName, replacement),
-            node: decl,
+            node,
             ruleName,
             result
           })

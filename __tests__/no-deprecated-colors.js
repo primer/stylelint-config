@@ -23,6 +23,20 @@ testRule({
       column: 6
     },
     {
+      code: '@mixin double-caret($border: var(--color-border-primary)) { }',
+      fixed: '@mixin double-caret($border: var(--color-border-default)) { }',
+      message: `--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)`,
+      line: 1,
+      column: 1
+    },
+    {
+      code: '@mixin double-caret() { border-color: var(--color-border-primary); }',
+      fixed: '@mixin double-caret() { border-color: var(--color-border-default); }',
+      message: `--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)`,
+      line: 1,
+      column: 25
+    },
+    {
       code: '.x { border: 1px solid var(--color-text-primary); .foo { color: var(--color-text-primary); } }',
       fixed: '.x { border: 1px solid var(--color-fg-default); .foo { color: var(--color-fg-default); } }',
       warnings: [
