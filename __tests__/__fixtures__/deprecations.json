@@ -2,5 +2,6 @@
   "text.primary": "fg.default",
   "text.secondary": ["fg.one", "fg.two"],
   "text.white": null,
-  "border.primary": "border.default"
+  "border.primary": "border.default",
+  "border.secondary": "border.subtle"
 }

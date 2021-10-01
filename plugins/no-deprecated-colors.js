@@ -70,8 +70,8 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             replacement = `--color-${kebabCase(replacement)}`
             replacedVars[variableName] = true
             newVars[replacement] = true
-            decl.value = decl.value.replace(variableName, replacement)
-            return
+            decl.value = decl.value.replaceAll(variableName, replacement)
+            continue
           }
 
           stylelint.utils.report({

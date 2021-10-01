@@ -41,6 +41,42 @@ testRule({
       ]
     },
     {
+      code: '.x { border-color: var(--color-border-primary) var(--color-border-primary); }',
+      fixed: '.x { border-color: var(--color-border-default) var(--color-border-default); }',
+      warnings: [
+        {
+          message:
+            '--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)',
+          line: 1,
+          column: 6
+        },
+        {
+          message:
+            '--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)',
+          line: 1,
+          column: 6
+        }
+      ]
+    },
+    {
+      code: '.x { border-color: var(--color-border-primary) var(--color-border-secondary); }',
+      fixed: '.x { border-color: var(--color-border-default) var(--color-border-subtle); }',
+      warnings: [
+        {
+          message:
+            '--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)',
+          line: 1,
+          column: 6
+        },
+        {
+          message:
+            '--color-border-secondary is a deprecated color variable. Please use the replacement --color-border-subtle. (primer/no-deprecated-colors)',
+          line: 1,
+          column: 6
+        }
+      ]
+    },
+    {
       code: '$border: $border-width $border-style var(--color-border-primary) !default;',
       fixed: '$border: $border-width $border-style var(--color-border-default) !default;',
       message: `--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)`,
