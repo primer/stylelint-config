@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.0.1
+
+### Patch Changes
+
+- [#132](https://github.com/primer/stylelint-config/pull/132) [`b672367`](https://github.com/primer/stylelint-config/commit/b6723679606bb8d39e75025ae17ace9f1c3e2631) Thanks [@jonrohan](https://github.com/jonrohan)! - Updating no-deprecated-colors plugin for edge cases
+
 ## 12.0.0
 
 ### Major Changes
