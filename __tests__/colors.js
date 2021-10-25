@@ -1,11 +1,12 @@
 const dedent = require('dedent')
 const stylelint = require('stylelint')
 const pluginPath = require.resolve('../plugins/colors')
+const scss = require('postcss-scss')
 
 const ruleName = 'primer/colors'
 const configWithOptions = (...args) => ({
   plugins: [pluginPath],
-  syntax: 'scss',
+  customSyntax: scss,
   rules: {
     [ruleName]: args
   }
@@ -66,7 +67,7 @@ describe(ruleName, () => {
           }
         `,
         config: configWithOptions(true),
-        syntax: 'scss'
+        customSyntax: scss
       })
       .then(data => {
         expect(data).not.toHaveErrored()
