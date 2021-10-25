@@ -1,4 +1,5 @@
 module.exports = [
+  'all',
   'position',
   'top',
   'right',
