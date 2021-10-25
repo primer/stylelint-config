@@ -21,83 +21,9 @@ describe(ruleName, () => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use "$spacer-1" instead of "4px". See https://primer.style/css/support/spacing. (${ruleName})`
+          `Please use a spacer variable instead of "4px". See https://primer.style/css/support/spacing. (${ruleName})`
         ])
       })
-  })
-
-  describe('autofix', () => {
-    it('fixes padding', () => {
-      return stylelint
-        .lint({
-          code: dedent`
-            .x { padding: 4px 8px 0; }
-          `,
-          config: configWithOptions(true, {verbose: true}),
-          fix: true
-        })
-        .then(data => {
-          expect(data).not.toHaveErrored()
-          expect(data).toHaveWarningsLength(0)
-          expect(data.output).toEqual(dedent`
-            .x { padding: $spacer-1 $spacer-2 0; }
-          `)
-        })
-    })
-
-    it('fixes margin', () => {
-      return stylelint
-        .lint({
-          code: dedent`
-            .x { margin-top: 4px; margin-right: 8px; }
-          `,
-          config: configWithOptions(true, {verbose: true}),
-          fix: true
-        })
-        .then(data => {
-          expect(data).not.toHaveErrored()
-          expect(data).toHaveWarningsLength(0)
-          expect(data.output).toEqual(dedent`
-            .x { margin-top: $spacer-1; margin-right: $spacer-2; }
-          `)
-        })
-    })
-
-    it('preserves !important', () => {
-      return stylelint
-        .lint({
-          code: dedent`
-            .x { margin: 8px !important; }
-          `,
-          config: configWithOptions(true, {verbose: true}),
-          fix: true
-        })
-        .then(data => {
-          expect(data).not.toHaveErrored()
-          expect(data).toHaveWarningsLength(0)
-          expect(data.output).toEqual(dedent`
-            .x { margin: $spacer-2 !important; }
-          `)
-        })
-    })
-
-    it('fixes negative margin values', () => {
-      return stylelint
-        .lint({
-          code: dedent`
-            .x { margin-top: -8px; }
-          `,
-          config: configWithOptions(true, {verbose: true}),
-          fix: true
-        })
-        .then(data => {
-          expect(data).not.toHaveErrored()
-          expect(data).toHaveWarningsLength(0)
-          expect(data.output).toEqual(dedent`
-            .x { margin-top: -$spacer-2; }
-          `)
-        })
-    })
   })
 
   it('validates negative margin values', () => {

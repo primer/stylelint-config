@@ -7,18 +7,18 @@ describe('primer/no-override', () => {
         'primer/no-override': false
       }
     })
-    return lint(`.text-gray { color: #111; }`, config).then(data => {
+    return lint(`.ml-1 { color: #111; }`, config).then(data => {
       expect(data).not.toHaveErrored()
       expect(data).toHaveWarningsLength(0)
     })
   })
 
   it('reports instances of utility classes', () => {
-    return lint('.text-gray { color: #111; }').then(data => {
+    return lint('.ml-1 { color: #111; }').then(data => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
       expect(data).toHaveWarnings([
-        `".text-gray" should not be overridden (defined in @primer/css/utilities). (primer/no-override)`
+        `".ml-1" should not be overridden (defined in @primer/css/utilities). (primer/no-override)`
       ])
     })
   })

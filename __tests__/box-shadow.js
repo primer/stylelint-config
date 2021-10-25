@@ -11,21 +11,6 @@ const configWithOptions = args => ({
 })
 
 describe(ruleName, () => {
-  it('works', () => {
-    return stylelint
-      .lint({
-        code: `.x { box-shadow: 0 1px 1px rgba($black, 0.1); }`,
-        config: configWithOptions(true)
-      })
-      .then(data => {
-        expect(data).toHaveErrored()
-        expect(data).toHaveWarningsLength(1)
-        expect(data).toHaveWarnings([
-          `Please use "$box-shadow" instead of "0 1px 1px rgba($black, 0.1)". See https://primer.style/css/utilities/box-shadow. (${ruleName})`
-        ])
-      })
-  })
-
   it('does not report properties with valid shadow', () => {
     return stylelint
       .lint({
@@ -41,25 +26,5 @@ describe(ruleName, () => {
         expect(data).not.toHaveErrored()
         expect(data).toHaveWarningsLength(0)
       })
-  })
-
-  describe('autofix', () => {
-    it('fixes box shadow variables', () => {
-      return stylelint
-        .lint({
-          code: dedent`
-            .x { box-shadow: 0 1px 1px rgba($black, 0.1); }
-          `,
-          config: configWithOptions(true),
-          fix: true
-        })
-        .then(data => {
-          expect(data).not.toHaveErrored()
-          expect(data).toHaveWarningsLength(0)
-          expect(data.output).toEqual(dedent`
-            .x { box-shadow: $box-shadow; }
-          `)
-        })
-    })
   })
 })
