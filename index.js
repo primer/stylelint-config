@@ -136,6 +136,7 @@ module.exports = {
     'selector-type-case': 'lower',
     'shorthand-property-no-redundant-values': true,
     'string-no-newline': true,
+    'string-quotes': 'single',
     'unit-case': 'lower',
     'unit-no-unknown': true,
     'value-list-comma-space-after': 'always-single-line',
