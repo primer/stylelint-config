@@ -31,8 +31,8 @@
     "postcss-value-parser": "^4.0.2",
     "string.prototype.matchall": "^4.0.2",
     "stylelint-no-unsupported-browser-features": "^5.0.1",
-    "stylelint-order": "^4.1.0",
-    "stylelint-scss": "^3.19.0",
+    "stylelint-order": "^5.0.0",
+    "stylelint-scss": "^4.0.0",
     "tap-map": "^1.0.0"
   },
   "peerDependencies": {
@@ -52,8 +52,9 @@
     "eslint-plugin-prettier": "4.0.0",
     "jest": "27.3.1",
     "jest-preset-stylelint": "4.1.1",
+    "postcss-scss": "4.0.1",
     "prettier": "2.4.1",
-    "stylelint": "13.13.1"
+    "stylelint": "14.0.0"
   },
   "eslintConfig": {
     "extends": [
