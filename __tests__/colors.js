@@ -153,64 +153,6 @@ describe(ruleName, () => {
       })
   })
 
-  describe('autofix', () => {
-    it('fixes text colors', () => {
-      return stylelint
-        .lint({
-          code: dedent`
-            .x { color: $red-600; }
-            .y { color: $purple; }
-          `,
-          config: configWithOptions(true),
-          fix: true
-        })
-        .then(data => {
-          expect(data).not.toHaveErrored()
-          expect(data).toHaveWarningsLength(0)
-          expect(data.output).toEqual(dedent`
-            .x { color: $text-red; }
-            .y { color: $text-purple; }
-          `)
-        })
-    })
-
-    it('fixes background colors', () => {
-      return stylelint
-        .lint({
-          code: dedent`
-            .x { background-color: $red-500; }
-          `,
-          config: configWithOptions(true, {verbose: true}),
-          fix: true
-        })
-        .then(data => {
-          expect(data).not.toHaveErrored()
-          expect(data).toHaveWarningsLength(0)
-          expect(data.output).toEqual(dedent`
-            .x { background-color: $bg-red; }
-          `)
-        })
-    })
-
-    it('does not fix other properties', () => {
-      return stylelint
-        .lint({
-          code: dedent`
-            .x { border-color: $red-500; }
-          `,
-          config: configWithOptions(true, {verbose: true}),
-          fix: true
-        })
-        .then(data => {
-          expect(data).not.toHaveErrored()
-          expect(data).toHaveWarningsLength(0)
-          expect(data.output).toEqual(dedent`
-            .x { border-color: $red-500; }
-          `)
-        })
-    })
-  })
-
   it('gets chatty with {verbose: true}', () => {
     return stylelint
       .lint({

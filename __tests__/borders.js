@@ -11,22 +11,6 @@ const configWithOptions = args => ({
 })
 
 describe(ruleName, () => {
-  it('reports compound border properties', () => {
-    return stylelint
-      .lint({
-        code: `
-          .foo { border: $red; }
-        `,
-        config: configWithOptions(true)
-      })
-      .then(data => {
-        expect(data).toHaveErrored()
-        expect(data).toHaveWarnings([
-          `Please use "$border-red" instead of "$red". See https://primer.style/css/utilities/borders. (${ruleName})`
-        ])
-      })
-  })
-
   it('reports multiple border properties', () => {
     return stylelint
       .lint({
@@ -96,57 +80,5 @@ describe(ruleName, () => {
         expect(data).not.toHaveErrored()
         expect(data).toHaveWarningsLength(0)
       })
-  })
-
-  describe('autofix', () => {
-    it('fixes border variables', () => {
-      return stylelint
-        .lint({
-          code: dedent`
-            .a { border: 1px solid $gray-300; }
-            .b { border: 1px solid $gray-200; }
-            .c { border: solid 1px $border-gray; }
-            .d { border: 1px $border-color solid; }
-          `,
-          config: configWithOptions(true),
-          fix: true
-        })
-        .then(data => {
-          expect(data).not.toHaveErrored()
-          expect(data).toHaveWarningsLength(0)
-          expect(data.output).toEqual(dedent`
-            .a { border: $border-width $border-style $border-gray-dark; }
-            .b { border: $border; }
-            .c { border: $border; }
-            .d { border: $border; }
-          `)
-        })
-    })
-
-    it('fixes border radius', () => {
-      return stylelint
-        .lint({
-          code: dedent`
-            .x { border-radius: 3px; }
-            .y {
-              border-top-left-radius: 3px;
-              border-bottom-left-radius: 3px;
-            }
-          `,
-          config: configWithOptions(true),
-          fix: true
-        })
-        .then(data => {
-          expect(data).not.toHaveErrored()
-          expect(data).toHaveWarningsLength(0)
-          expect(data.output).toEqual(dedent`
-            .x { border-radius: $border-radius; }
-            .y {
-              border-top-left-radius: $border-radius;
-              border-bottom-left-radius: $border-radius;
-            }
-          `)
-        })
-    })
   })
 })
