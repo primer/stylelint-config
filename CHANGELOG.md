@@ -1,5 +1,17 @@
 # Changelog
 
+## 12.1.0
+
+### Minor Changes
+
+- [#150](https://github.com/primer/stylelint-config/pull/150) [`4af1647`](https://github.com/primer/stylelint-config/commit/4af16474148d96fba5567068280a9ffe6e7a80ba) Thanks [@jonrohan](https://github.com/jonrohan)! - Making all be first in property order
+
+* [#151](https://github.com/primer/stylelint-config/pull/151) [`d7c8b2b`](https://github.com/primer/stylelint-config/commit/d7c8b2b908b113fa14c7637dfced34610a3bcfac) Thanks [@jonrohan](https://github.com/jonrohan)! - Adding [string-quotes](https://stylelint.io/user-guide/rules/list/string-quotes) rule to config
+
+### Patch Changes
+
+- [#146](https://github.com/primer/stylelint-config/pull/146) [`214362c`](https://github.com/primer/stylelint-config/commit/214362c0e3c9449a5ff7d3bd047018493043d3c0) Thanks [@dependabot](https://github.com/apps/dependabot)! - Bump @primer/css from 13.2.0 to 16.3.0
+
 ## 12.0.1
 
 ### Patch Changes

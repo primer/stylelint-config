@@ -1,6 +1,6 @@
 {
   "name": "@primer/stylelint-config",
-  "version": "12.0.1",
+  "version": "12.1.0",
   "description": "Sharable stylelint config used by GitHub's CSS",
   "homepage": "http://primer.style/css/tools/linting",
   "author": "GitHub, Inc.",
