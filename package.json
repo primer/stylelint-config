@@ -54,7 +54,7 @@
     "jest-preset-stylelint": "4.1.1",
     "postcss-scss": "4.0.1",
     "prettier": "2.4.1",
-    "stylelint": "14.0.0"
+    "stylelint": "14.0.1"
   },
   "eslintConfig": {
     "extends": [
