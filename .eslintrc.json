@@ -1,0 +1,20 @@
+{
+  "root": true,
+  "plugins": ["github"],
+  "extends": [
+    "plugin:github/internal",
+    "plugin:github/recommended"
+  ],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "rules": {
+    "import/no-commonjs": "off",
+    "github/no-then": "off",
+    "i18n-text/no-en": "off"
+  }
+}

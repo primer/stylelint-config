@@ -46,8 +46,9 @@
     "@primer/css": "^16.3.0",
     "@primer/primitives": "^6.0.0",
     "dedent": "0.7.0",
-    "eslint": "7.32.0",
+    "eslint": "8.0.1",
     "eslint-plugin-github": "4.3.3",
+    "eslint-plugin-import": "2.25.2",
     "eslint-plugin-jest": "25.2.4",
     "eslint-plugin-prettier": "4.0.0",
     "jest": "27.3.1",
@@ -55,25 +56,6 @@
     "postcss-scss": "4.0.2",
     "prettier": "2.4.1",
     "stylelint": "14.0.1"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:github/internal",
-      "plugin:github/recommended"
-    ],
-    "env": {
-      "es6": true,
-      "node": true
-    },
-    "parserOptions": {
-      "ecmaVersion": 2017,
-      "requireConfigFile": false
-    },
-    "rules": {
-      "import/no-commonjs": "off",
-      "github/no-then": "off",
-      "i18n-text/no-en": "off"
-    }
   },
   "jest": {
     "preset": "jest-preset-stylelint",
