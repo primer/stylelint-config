@@ -51,10 +51,10 @@
     "eslint-plugin-jest": "25.2.4",
     "eslint-plugin-prettier": "4.0.0",
     "jest": "27.3.1",
-    "jest-preset-stylelint": "4.1.1",
+    "jest-preset-stylelint": "4.2.0",
     "postcss-scss": "4.0.2",
     "prettier": "2.4.1",
-    "stylelint": "14.0.1"
+    "stylelint": "14.1.0"
   },
   "jest": {
     "preset": "jest-preset-stylelint",
