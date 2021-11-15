@@ -37,14 +37,14 @@
   },
   "peerDependencies": {
     "@primer/css": "*",
-    "@primer/primitives": "^6.0.0"
+    "@primer/primitives": "^7.0.1"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.1",
     "@changesets/cli": "2.18.0",
     "@github/prettier-config": "0.0.4",
     "@primer/css": "^16.3.0",
-    "@primer/primitives": "^6.0.0",
+    "@primer/primitives": "^7.0.1",
     "dedent": "0.7.0",
     "eslint": "8.0.1",
     "eslint-plugin-github": "4.3.4",
