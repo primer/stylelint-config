@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.1.1
+
+### Patch Changes
+
+- [#161](https://github.com/primer/stylelint-config/pull/161) [`48c4afc`](https://github.com/primer/stylelint-config/commit/48c4afc1913863136d62967653697323f8da57b7) Thanks [@dependabot](https://github.com/apps/dependabot)! - Bump @primer/primitives from 6.1.0 to 7.0.1
+
 ## 12.1.0
 
 ### Minor Changes
