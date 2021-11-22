@@ -793,9 +793,9 @@
   integrity sha512-sI0Bw/PMCZ1kfPX1MRwoNYD6RWdvU0sGk9YYD8euYASwrr4E6aNH9dutMmHTRVe/N3/coBN7QUkV79GMt0UKyQ==
 
 "@primer/primitives@^7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.0.1.tgz#bb867672214a561a910f11eabf7babf72c5994ec"
-  integrity sha512-Ddmi5Fuck3nsHt1+uvZiVzLwtjNrBloWq8FfQz74Qd9TXKxvHxrGxQuEJ21T3PxJMMwwEsKo7fk18oy1rTmFiA==
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.1.0.tgz#944151afb8b0e8ffd33c1cfdc4f873b5dd46cbe5"
+  integrity sha512-XVM535ieY+ohh82oMCZZwlebsnNtJORR5vpiUk/OLT1KX7pr2aRiSbitFwZ3umo0dw/L5tr6ebSJjRCXLu8UJg==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
