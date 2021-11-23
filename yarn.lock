@@ -772,27 +772,14 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@primer/css@^16.3.0":
-  version "16.3.0"
-  resolved "https://registry.yarnpkg.com/@primer/css/-/css-16.3.0.tgz#1dca32ff75e6bf23fbe8c27c014b35dfe1294ac0"
-  integrity sha512-nfgvRLPVGS1cdEh/Y1cak17gwEVI8HtQpbGQHvBcWrVQ78sbS3EHvdRUGpFM/Lyi/WKVZInAAwIXG9RWKukOag==
+"@primer/css@^19.0.0":
+  version "19.0.0"
+  resolved "https://registry.yarnpkg.com/@primer/css/-/css-19.0.0.tgz#c03e9d9365e37074f3555a98bdea0e705e1f5bf3"
+  integrity sha512-w3/DoQlWBjyyo0scneGkcVHyaIBFjODbmWZoJ1qYHe+eLufPOKNc5Tf/OlxqiYQxGCF8vVb3f/i30z4KfzJzzA==
   dependencies:
-    "@primer/octicons" "13.0.0"
-    "@primer/primitives" "4.2.1"
+    "@primer/primitives" "^7.1.0"
 
-"@primer/octicons@13.0.0":
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/@primer/octicons/-/octicons-13.0.0.tgz#dab1f156ac601d2cb7c83eab9242a1739429cf2e"
-  integrity sha512-kMNu3Ny3eocOTl2hxRC0YX0na7zJwpSIQNiZqmyqbLMKp2YwNAwk5Tan4RLGe35f30st+EbNq15dEjiMzslAcw==
-  dependencies:
-    object-assign "^4.1.1"
-
-"@primer/primitives@4.2.1":
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-4.2.1.tgz#e8fac9b4b78eb81d81384ce5fcfe32bbb4115861"
-  integrity sha512-sI0Bw/PMCZ1kfPX1MRwoNYD6RWdvU0sGk9YYD8euYASwrr4E6aNH9dutMmHTRVe/N3/coBN7QUkV79GMt0UKyQ==
-
-"@primer/primitives@^7.0.1":
+"@primer/primitives@^7.0.1", "@primer/primitives@^7.1.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.1.0.tgz#944151afb8b0e8ffd33c1cfdc4f873b5dd46cbe5"
   integrity sha512-XVM535ieY+ohh82oMCZZwlebsnNtJORR5vpiUk/OLT1KX7pr2aRiSbitFwZ3umo0dw/L5tr6ebSJjRCXLu8UJg==
@@ -3769,11 +3756,6 @@ nwsapi@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.0.tgz#204879a9e3d068ff2a55139c2c772780681a38b7"
   integrity sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==
-
-object-assign@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
-  integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
 
 object-inspect@^1.11.0, object-inspect@^1.9.0:
   version "1.11.0"
