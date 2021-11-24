@@ -19,18 +19,17 @@ module.exports = {
     './plugins/typography'
   ],
   rules: {
+    'alpha-value-notation': 'number',
     'at-rule-disallowed-list': ['extend'],
+    'at-rule-no-unknown': null,
     'block-no-empty': true,
+    'color-function-notation': null,
     'color-named': 'never',
     'color-no-invalid-hex': true,
-    'declaration-block-no-duplicate-properties': [
-      true,
-      {
-        ignore: ['consecutive-duplicates']
-      }
-    ],
+    'custom-property-pattern': null,
+    'declaration-block-no-duplicate-properties': [true, {ignore: ['consecutive-duplicates']}],
+    'declaration-block-no-redundant-longhand-properties': null,
     'declaration-block-no-shorthand-property-overrides': true,
-    'order/properties-order': propertyOrder,
     'declaration-block-semicolon-newline-after': 'always',
     'declaration-property-value-disallowed-list': {
       '/^transition/': ['/all/'],
@@ -40,22 +39,23 @@ module.exports = {
     },
     'function-calc-no-unspaced-operator': true,
     'function-linear-gradient-no-nonstandard-direction': true,
+    'keyframes-name-pattern': null,
+    'max-line-length': null,
     'max-nesting-depth': 3,
+    'media-feature-name-no-unknown': null,
+    'media-feature-name-no-vendor-prefix': null,
+    'no-descending-specificity': null,
     'no-duplicate-selectors': true,
     'no-extra-semicolons': true,
-    'plugin/no-unsupported-browser-features': [
-      true,
-      {
-        severity: 'warning',
-        browsers
-      }
-    ],
-    'primer/no-override': true,
+    'number-max-precision': null,
+    'order/properties-order': propertyOrder,
+    'plugin/no-unsupported-browser-features': [true, {severity: 'warning', browsers}],
     'primer/no-deprecated-colors': true,
-    // unused vars are not necessarily an error, since they may be referenced
-    // in other projects
+    'primer/no-override': true,
     'primer/no-unused-vars': [true, {severity: 'warning'}],
+    'scss/at-rule-no-unknown': true,
     'scss/selector-no-redundant-nesting-selector': true,
+    'selector-class-pattern': null,
     'selector-max-compound-selectors': 3,
     'selector-max-id': 0,
     'selector-max-specificity': '0,4,0',
@@ -64,6 +64,7 @@ module.exports = {
     'selector-pseudo-element-no-unknown': true,
     'string-no-newline': true,
     'string-quotes': 'single',
-    'unit-no-unknown': true
+    'unit-no-unknown': true,
+    'value-keyword-case': null
   }
 }
