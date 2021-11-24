@@ -7,14 +7,14 @@ describe('primer/no-override', () => {
         'primer/no-override': false
       }
     })
-    return lint(`.ml-1 { color: #111; }`, config).then(data => {
+    return lint(`.ml-1 { width: 10px; }`, config).then(data => {
       expect(data).not.toHaveErrored()
       expect(data).toHaveWarningsLength(0)
     })
   })
 
   it('reports instances of utility classes', () => {
-    return lint('.ml-1 { color: #111; }').then(data => {
+    return lint('.ml-1 { width: 10px; }').then(data => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
       expect(data).toHaveWarnings([
@@ -25,7 +25,7 @@ describe('primer/no-override', () => {
 
   it('reports instances of complete utility selectors', () => {
     const selector = '.show-on-focus:focus'
-    return lint(`${selector} { color: #f00; }`).then(data => {
+    return lint(`${selector} { width: 10px; }`).then(data => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
       expect(data).toHaveWarnings([
@@ -36,7 +36,7 @@ describe('primer/no-override', () => {
 
   it('reports instances of partial utility selectors', () => {
     const selector = '.show-on-focus'
-    return lint(`.foo ${selector}:focus { color: #f00; }`).then(data => {
+    return lint(`.foo ${selector}:focus { width: 10px; }`).then(data => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
       expect(data).toHaveWarnings([
@@ -52,7 +52,7 @@ describe('primer/no-override', () => {
         'primer/no-override': [true, {bundles: ['base']}]
       }
     }
-    return lint(`body { color: #f00; }`, config).then(data => {
+    return lint(`body { width: 10px; }`, config).then(data => {
       expect(data).not.toHaveErrored()
       expect(data).toHaveWarningsLength(0)
     })
@@ -71,7 +71,7 @@ describe('primer/no-override', () => {
           ]
         }
       })
-      return lint(`.px-4 { margin: 0 4px !important; }`, config).then(data => {
+      return lint(`.px-4 { margin: 0 $spacer-1 !important; }`, config).then(data => {
         expect(data).not.toHaveErrored()
         expect(data).toHaveWarningsLength(0)
       })
@@ -89,7 +89,7 @@ describe('primer/no-override', () => {
           ]
         }
       })
-      return lint(`.px-4 { margin: 0 4px !important; }`, config).then(data => {
+      return lint(`.px-4 { margin: 0 $spacer-1 !important; }`, config).then(data => {
         expect(data).not.toHaveErrored()
         expect(data).toHaveWarningsLength(0)
       })
@@ -107,7 +107,7 @@ describe('primer/no-override', () => {
           ]
         }
       })
-      return lint(`.px-4 { margin: 0 4px !important; }`, config).then(data => {
+      return lint(`.px-4 { margin: 0 $spacer-1 !important; }`, config).then(data => {
         expect(data).not.toHaveErrored()
         expect(data).toHaveWarningsLength(0)
       })
@@ -121,7 +121,7 @@ describe('primer/no-override', () => {
           'primer/no-override': [true, {bundles: 'derp'}]
         }
       })
-      return lint('.foo { color: #f00; }', config).then(data => {
+      return lint('.foo { width: 10px; }', config).then(data => {
         expect(data).not.toHaveErrored()
         expect(data.results[0].invalidOptionWarnings).toEqual([
           {
@@ -137,7 +137,7 @@ describe('primer/no-override', () => {
           'primer/no-override': [true, {bundles: ['asdf']}]
         }
       })
-      return lint('.foo { color: #f00; }', config).then(data => {
+      return lint('.foo { width: 10px; }', config).then(data => {
         expect(data).not.toHaveErrored()
         expect(data.results[0].invalidOptionWarnings).toEqual([
           {

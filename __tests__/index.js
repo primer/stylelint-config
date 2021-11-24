@@ -1,12 +1,12 @@
 const {lint} = require('./utils')
 
 const SAFE_SCSS_EXAMPLE = `
-  .Component { color: $gray-500; }
+  .Component { float: left; }
 `
 
 describe('stylelint-config', () => {
   it('stylelint runs with our config', () => {
-    return lint('.bold { font-weight: bold; }').then(data => {
+    return lint('.uppercase { text-transform: uppercase; }').then(data => {
       expect(data).not.toHaveErrored()
       expect(data).toHaveResultsLength(1)
     })
@@ -24,17 +24,17 @@ describe('stylelint-config', () => {
     })
   })
 
-  it('generates one warning with invalid css', () => {
+  it('generates two warnings with invalid css', () => {
     return lint(`
         .foo {
-          color: #fff;
+          width: 10px;
           top: .2em;
         }
       `).then(data => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(2)
       expect(data).toHaveWarnings([
-        'Expected "top" to come before "color" (order/properties-order)',
+        'Expected "top" to come before "width" (order/properties-order)',
         'Expected a leading zero (number-leading-zero)'
       ])
     })
