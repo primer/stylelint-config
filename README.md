@@ -22,6 +22,8 @@ Within your [stylelint config object](http://stylelint.io/user-guide/configurati
 
 ## Documentation
 
+Primer Stylelint Config extends the [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard) configuration supplied by Stylelint, and makes modifications in `/index.js`.
+
 ### Plugins
 
 - [stylelint-order](https://github.com/hudochenkov/stylelint-order): Order-related linting rules for stylelint. Properties must be [sorted according to this list](https://github.com/primer/stylelint-config/blob/main/property-order.js).
