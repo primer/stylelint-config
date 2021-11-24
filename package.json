@@ -28,6 +28,7 @@
     "anymatch": "^3.1.1",
     "globby": "^11.0.1",
     "lodash.kebabcase": "^4.1.1",
+    "postcss-scss": "^4.0.2",
     "postcss-value-parser": "^4.0.2",
     "string.prototype.matchall": "^4.0.2",
     "stylelint-config-standard": "24.0.0",
@@ -37,8 +38,8 @@
     "tap-map": "^1.0.0"
   },
   "peerDependencies": {
-    "@primer/css": "*",
-    "@primer/primitives": "^7.0.1"
+    "@primer/css": ">= 18.0.0",
+    "@primer/primitives": ">= 6.0.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.1",
@@ -53,7 +54,6 @@
     "eslint-plugin-prettier": "4.0.0",
     "jest": "27.3.1",
     "jest-preset-stylelint": "4.2.0",
-    "postcss-scss": "4.0.2",
     "prettier": "2.4.1",
     "stylelint": "14.1.0"
   },
