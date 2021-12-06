@@ -49,7 +49,7 @@
     "@primer/css": "^19.0.0",
     "@primer/primitives": "^7.0.1",
     "dedent": "0.7.0",
-    "eslint": "8.3.0",
+    "eslint": "8.4.0",
     "eslint-plugin-github": "4.3.5",
     "eslint-plugin-jest": "25.2.4",
     "eslint-plugin-prettier": "4.0.0",
