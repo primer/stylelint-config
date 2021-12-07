@@ -16,7 +16,8 @@ Within your [stylelint config object](http://stylelint.io/user-guide/configurati
 
 ```json
 {
-  "extends": "@primer/stylelint-config"
+  "extends": ["@primer/stylelint-config"],
+  "rules": { }
 }
 ```
 
