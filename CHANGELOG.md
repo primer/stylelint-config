@@ -1,5 +1,19 @@
 # Changelog
 
+## 12.2.0
+
+### Minor Changes
+
+- [#170](https://github.com/primer/stylelint-config/pull/170) [`b56fcd1`](https://github.com/primer/stylelint-config/commit/b56fcd1bce90d2e3e1621ef7af7545c52c935579) Thanks [@jonrohan](https://github.com/jonrohan)! - Moving config from primer/css's [stylelint.config.cjs](https://github.com/primer/css/blob/c65be7f0c8b0fb6e1ba406b5d35c6073df161a33/stylelint.config.cjs) file to this package.
+
+* [#168](https://github.com/primer/stylelint-config/pull/168) [`d6ff2b9`](https://github.com/primer/stylelint-config/commit/d6ff2b94ff0d309c1b79e783e6ee1b2f87a375ff) Thanks [@jonrohan](https://github.com/jonrohan)! - Extending stylelint-config-standard and removing defaults
+
+- [#170](https://github.com/primer/stylelint-config/pull/170) [`b56fcd1`](https://github.com/primer/stylelint-config/commit/b56fcd1bce90d2e3e1621ef7af7545c52c935579) Thanks [@jonrohan](https://github.com/jonrohan)! - Adding config from the [stylelint-scss recommended config](https://github.com/stylelint-scss/stylelint-config-recommended-scss/blob/82d51c399ddaa2f9d282e419399dd2028f47830c/index.js).
+
+### Patch Changes
+
+- [#181](https://github.com/primer/stylelint-config/pull/181) [`23e438a`](https://github.com/primer/stylelint-config/commit/23e438a7a9062550baa696cafbb186dc78b723f5) Thanks [@jonrohan](https://github.com/jonrohan)! - Truning off scss/dollar-variable-default
+
 ## 12.1.1
 
 ### Patch Changes
