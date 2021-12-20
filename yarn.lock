@@ -773,9 +773,9 @@
     fastq "^1.6.0"
 
 "@primer/css@^19.0.0":
-  version "19.1.0"
-  resolved "https://registry.yarnpkg.com/@primer/css/-/css-19.1.0.tgz#c7505eadf6dc205ca780504362ca574b5b47c8f7"
-  integrity sha512-5RS69qGWZP2s6yVev+gRYhNLm0Nx4uQn07y+ON/IuGfsKkm0Mjtv8Buk1Rmo1ArnS7mjWn3F/oMsmY6VdvY0NQ==
+  version "19.1.1"
+  resolved "https://registry.yarnpkg.com/@primer/css/-/css-19.1.1.tgz#c05a2fc5e5f6950472b4ff3bdd70cda6fe1c13f1"
+  integrity sha512-QVwdNOJsLxOD6eTR5LDIdLWg2SIy+eZWMK4ywlLd8qZXJCngtJyTNO5PtSzgs0D9jlMS+dzxvlOOV6GcfLu1hw==
   dependencies:
     "@primer/primitives" "^7.2.0"
 
