@@ -44,6 +44,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
     root.walkDecls(/^(padding|margin)/, decl => {
       const problems = []
       let containsMath = false
+      let conatinsVariable = false
       const parsedValue = valueParser(decl.value).walk(declValue => {
         // Only check word types. https://github.com/TrySound/postcss-value-parser#word
         if (!['word', 'function'].includes(declValue.type)) {
@@ -58,7 +59,12 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
         const cleanDeclValue = declValue.value.replace(/^-/g, '')
 
         // If the a variable is found in the value, skip it.
-        if (Object.keys(spacerValues).some(variable => cleanDeclValue === variable)) {
+        if (
+          Object.keys(spacerValues).some(variable =>
+            new RegExp(`${variable.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(cleanDeclValue)
+          )
+        ) {
+          conatinsVariable = true
           return false
         }
 
@@ -78,7 +84,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
               message: messages.rejected(spacerValues[valueMatch], valueMatch)
             })
           }
-        } else if (declValue.value !== '' && declValue.type !== 'function') {
+        } else if (declValue.value !== '' && declValue.type !== 'function' && !containsMath) {
           problems.push({
             index: declarationValueIndex(decl) + declValue.sourceIndex,
             message: messages.rejected(declValue.value, null)
@@ -90,7 +96,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
         decl.value = parsedValue.toString()
       }
 
-      if (containsMath) {
+      if (containsMath && conatinsVariable) {
         return false
       }
 

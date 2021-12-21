@@ -12,11 +12,26 @@ testRule({
       code: '.x { padding: $spacer-4; }',
       description: 'One variable is valid.'
     },
-    {code: '.x { padding: $spacer-4 $spacer-3; }', description: 'Two variables are valid.'},
-    {code: '.x { padding: 0 0; }', description: 'Ignore zero values.'},
-    {code: '.x { margin: auto; }', description: 'Ignore auto values.'},
-    {code: '.x { padding: calc($spacer-4 * 2); }'},
-    {code: '.x { padding: calc(#{$spacer-4} * 2); }'}
+    {
+      code: '.x { padding: $spacer-4 $spacer-3; }',
+      description: 'Two variables are valid.'
+    },
+    {
+      code: '.x { padding: 0 0; }',
+      description: 'Ignore zero values.'
+    },
+    {
+      code: '.x { margin: auto; }',
+      description: 'Ignore auto values.'
+    },
+    {
+      code: '.x { padding: calc($spacer-4 * 2); }',
+      description: 'Finds variable calc values.'
+    },
+    {
+      code: '.x { padding: calc(#{$spacer-4} * 2); }',
+      description: 'Finds interpolated calc values.'
+    }
   ],
   reject: [
     {
@@ -34,6 +49,14 @@ testRule({
       line: 1,
       column: 15,
       description: "Replaces '-4px' with '-$spacer-1'."
+    },
+    {
+      code: '.x { padding: calc(8px * 2); }',
+      fixed: '.x { padding: calc($spacer-2 * 2); }',
+      description: 'Replaces "8px" with "$spacer-2" inside calc.',
+      message: `Please replace 8px with spacing variable '$spacer-2'. (primer/spacing)`,
+      line: 1,
+      column: 20
     },
     {
       code: '.x { padding: 3px 4px; }',
