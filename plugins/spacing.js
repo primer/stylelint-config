@@ -34,6 +34,7 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
   }
 })
 
+// eslint-disable-next-line no-unused-vars
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
   if (!enabled) {
     return noop
@@ -77,7 +78,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
               message: messages.rejected(spacerValues[valueMatch], valueMatch)
             })
           }
-        } else if (declValue.value !== '') {
+        } else if (declValue.value !== '' && declValue.type !== 'function') {
           problems.push({
             index: declarationValueIndex(decl) + declValue.sourceIndex,
             message: messages.rejected(declValue.value, null)
