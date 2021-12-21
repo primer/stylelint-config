@@ -11,7 +11,6 @@ module.exports = {
     'stylelint-scss',
     './plugins/no-override',
     './plugins/no-deprecated-colors',
-    './plugins/no-unused-vars',
     './plugins/no-undefined-vars',
     './plugins/no-scale-colors',
     './plugins/borders',
@@ -63,7 +62,6 @@ module.exports = {
       true,
       {severity: 'warning', files: 'node_modules/@primer/primitives/dist/scss/colors*/*.scss'}
     ],
-    'primer/no-unused-vars': [true, {severity: 'warning'}],
     'primer/spacing': true,
     'primer/typography': true,
     'scss/at-extend-no-missing-placeholder': true,

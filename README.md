@@ -31,7 +31,6 @@ Primer Stylelint Config extends the [stylelint-config-standard](https://github.c
 - [stylelint-scss](https://github.com/kristerkari/stylelint-scss): A collection of SCSS specific linting rules for stylelint
   - [scss/selector-no-redundant-nesting-selector](https://github.com/kristerkari/stylelint-scss/blob/master/src/rules/selector-no-redundant-nesting-selector/README.md): Disallow redundant nesting selectors (`&`).
 - [primer/no-override](./plugins/#primerno-override): Prohibits custom styles that target Primer CSS selectors.
-- [primer/no-unused-vars](./plugins/#primerno-unused-vars): Warns about SCSS variables that are declared by not used in your local files.
 - [primer/no-undefined-vars](./plugins/#primerno-undefined-vars): Prohibits usage of undefined CSS variables.
 - [primer/no-scale-colors](./plugins/#primerno-scale-colors): Prohibits the use of [non-functional scale CSS variables](https://primer.style/css/support/color-system#color-palette)
 - [primer/colors](./plugins/#primercolors): Enforces the use of certain color variables.
