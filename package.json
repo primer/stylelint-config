@@ -38,7 +38,6 @@
     "tap-map": "^1.0.0"
   },
   "peerDependencies": {
-    "@primer/css": ">= 18.0.0",
     "@primer/primitives": ">= 6.0.0",
     "stylelint": ">= 14.0.0"
   },
@@ -46,7 +45,6 @@
     "@changesets/changelog-github": "0.4.2",
     "@changesets/cli": "2.19.0",
     "@github/prettier-config": "0.0.4",
-    "@primer/css": "^19.0.0",
     "@primer/primitives": "^7.0.1",
     "dedent": "0.7.0",
     "eslint": "8.5.0",
@@ -55,6 +53,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "jest": "27.4.5",
     "jest-preset-stylelint": "4.2.0",
+    "postcss": "8.4.5",
     "prettier": "2.5.1",
     "stylelint": "14.2.0"
   },
