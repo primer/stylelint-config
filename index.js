@@ -38,7 +38,8 @@ module.exports = {
       '/^transition/': ['/all/'],
       '/^background/': ['http:', 'https:'],
       '/^border/': ['none'],
-      '/.+/': ['initial']
+      '/.+/': ['initial'],
+      '/^outline/': ['0', 'none']
     },
     'function-calc-no-unspaced-operator': true,
     'function-linear-gradient-no-nonstandard-direction': true,
