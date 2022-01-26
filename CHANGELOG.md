@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.3.0
+
+### Minor Changes
+
+- [#191](https://github.com/primer/stylelint-config/pull/191) [`71c7985`](https://github.com/primer/stylelint-config/commit/71c79853b679b674c1d27686f8d2168660b24a45) Thanks [@jonrohan](https://github.com/jonrohan)! - Refactoring the primer/spacing plugin to better match results
+
 ## 12.2.0
 
 ### Minor Changes
