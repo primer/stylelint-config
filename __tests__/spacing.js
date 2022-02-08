@@ -112,21 +112,24 @@ testRule({
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message: "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)"
+          message:
+            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)"
         },
         {
           column: 34,
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message: "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)"
+          message:
+            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)"
         },
         {
           column: 53,
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message: "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)"
+          message:
+            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)"
         }
       ]
     }
