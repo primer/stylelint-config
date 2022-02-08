@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.3.1
+
+### Patch Changes
+
+- [#213](https://github.com/primer/stylelint-config/pull/213) [`2a27f86`](https://github.com/primer/stylelint-config/commit/2a27f86868b1f4717100a1f0897cdaefb1dd6be7) Thanks [@jonrohan](https://github.com/jonrohan)! - Fixing an issue where the new spacing plugin isn't traversing child sectors.
+
 ## 12.3.0
 
 ### Minor Changes
