@@ -41,7 +41,11 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
   }
 
   const lintResult = (root, result) => {
-    root.walkDecls(/^(padding|margin)/, decl => {
+    root.walk(decl => {
+      if (decl.type !== 'decl' || !decl.prop.match(/^(padding|margin)/)) {
+        return noop
+      }
+
       const problems = []
       let containsMath = false
       let conatinsVariable = false
@@ -53,7 +57,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
 
         // Ignore values that are not numbers.
         if (['0', 'auto', 'inherit', 'initial'].includes(declValue.value)) {
-          return false
+          return noop
         }
         // Remove leading negative sign, if any.
         const cleanDeclValue = declValue.value.replace(/^-/g, '')
@@ -65,13 +69,13 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
           )
         ) {
           conatinsVariable = true
-          return false
+          return noop
         }
 
         // For now we're going to ignore math.
         if (['*', '+', '-', '/'].includes(declValue.value)) {
           containsMath = true
-          return false
+          return noop
         }
 
         let valueMatch = null
@@ -97,7 +101,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
       }
 
       if (containsMath && conatinsVariable) {
-        return false
+        return noop
       }
 
       if (problems.length) {

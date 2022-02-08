@@ -31,6 +31,10 @@ testRule({
     {
       code: '.x { padding: calc(#{$spacer-4} * 2); }',
       description: 'Finds interpolated calc values.'
+    },
+    {
+      code: '.x { padding: $spacer-1; .y { padding: $spacer-1; } }',
+      description: 'Nested css works.'
     }
   ],
   reject: [
@@ -97,6 +101,34 @@ testRule({
       line: 1,
       column: 21,
       description: 'Errors on non-primer spacer in parens.'
+    },
+    {
+      code: '.x { padding: 3px; .y { padding: 3px; .z { padding: 3px; } } }',
+      unfixable: true,
+      description: 'Rejects nested CSS.',
+      warnings: [
+        {
+          column: 15,
+          line: 1,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message: "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)"
+        },
+        {
+          column: 34,
+          line: 1,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message: "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)"
+        },
+        {
+          column: 53,
+          line: 1,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message: "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)"
+        }
+      ]
     }
   ]
 })
