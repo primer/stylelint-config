@@ -2,6 +2,7 @@ const stylelint = require('stylelint')
 const declarationValueIndex = require('stylelint/lib/utils/declarationValueIndex')
 const valueParser = require('postcss-value-parser')
 
+// TODO: Pull this in from primer/primitives
 const spacerValues = {
   '$spacer-1': '4px',
   '$spacer-2': '8px',
@@ -34,6 +35,17 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
   }
 })
 
+const walkGroups = (root, validate) => {
+  for (let node of root.nodes) {
+    if (node.type === 'function') {
+      node = walkGroups(node, validate)
+    } else {
+      node = validate(node)
+    }
+  }
+  return root
+}
+
 // eslint-disable-next-line no-unused-vars
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
   if (!enabled) {
@@ -47,61 +59,53 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
       }
 
       const problems = []
-      let containsMath = false
-      let conatinsVariable = false
-      const parsedValue = valueParser(decl.value).walk(declValue => {
+
+      const parsedValue = walkGroups(valueParser(decl.value), node => {
+        // Remove leading negative sign, if any.
+        const cleanValue = node.value.replace(/^-/g, '')
+
         // Only check word types. https://github.com/TrySound/postcss-value-parser#word
-        if (!['word', 'function'].includes(declValue.type)) {
-          return false
+        if (node.type !== 'word') {
+          return node
         }
 
-        // Ignore values that are not numbers.
-        if (['0', 'auto', 'inherit', 'initial'].includes(declValue.value)) {
-          return noop
+        // Exact values to ignore.
+        if (['*', '+', '-', '/', '0', 'auto', 'inherit', 'initial'].includes(node.value)) {
+          return node
         }
-        // Remove leading negative sign, if any.
-        const cleanDeclValue = declValue.value.replace(/^-/g, '')
+
+        const valueUnit = valueParser.unit(cleanValue)
+
+        if (valueUnit && (valueUnit.unit === '' || !/^[0-9]+$/.test(valueUnit.number))) {
+          return node
+        }
 
         // If the a variable is found in the value, skip it.
         if (
           Object.keys(spacerValues).some(variable =>
-            new RegExp(`${variable.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(cleanDeclValue)
+            new RegExp(`${variable.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(cleanValue)
           )
         ) {
-          conatinsVariable = true
-          return noop
+          return node
         }
 
-        // For now we're going to ignore math.
-        if (['*', '+', '-', '/'].includes(declValue.value)) {
-          containsMath = true
-          return noop
-        }
+        const replacement = Object.keys(spacerValues).find(spacer => spacerValues[spacer] === cleanValue) || null
+        const valueMatch = replacement ? spacerValues[replacement] : node.value
 
-        let valueMatch = null
-        if ((valueMatch = Object.keys(spacerValues).find(spacer => spacerValues[spacer] === cleanDeclValue))) {
-          if (context.fix) {
-            declValue.value = declValue.value.replace(spacerValues[valueMatch], valueMatch)
-          } else {
-            problems.push({
-              index: declarationValueIndex(decl) + declValue.sourceIndex,
-              message: messages.rejected(spacerValues[valueMatch], valueMatch)
-            })
-          }
-        } else if (declValue.value !== '' && declValue.type !== 'function' && !containsMath) {
+        if (replacement && context.fix) {
+          node.value = node.value.replace(valueMatch, replacement)
+        } else {
           problems.push({
-            index: declarationValueIndex(decl) + declValue.sourceIndex,
-            message: messages.rejected(declValue.value, null)
+            index: declarationValueIndex(decl) + node.sourceIndex,
+            message: messages.rejected(valueMatch, replacement)
           })
         }
+
+        return node
       })
 
       if (context.fix) {
         decl.value = parsedValue.toString()
-      }
-
-      if (containsMath && conatinsVariable) {
-        return noop
       }
 
       if (problems.length) {

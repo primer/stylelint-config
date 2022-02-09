@@ -20,7 +20,7 @@
     "plugins/"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage false",
     "lint": "eslint .",
     "release": "changeset publish"
   },

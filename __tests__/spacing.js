@@ -63,6 +63,33 @@ testRule({
       column: 20
     },
     {
+      code: `
+      .x {
+        padding: 6px ($spacer-3 + 12px + $spacer-2);
+      }
+      `,
+      unfixable: true,
+      description: 'Complex calc expression.',
+      warnings: [
+        {
+          column: 18,
+          line: 3,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message:
+            "Please use a primer spacer variable instead of '6px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)"
+        },
+        {
+          column: 35,
+          line: 3,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message:
+            "Please use a primer spacer variable instead of '12px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)"
+        }
+      ]
+    },
+    {
       code: '.x { padding: 3px 4px; }',
       fixed: '.x { padding: 3px $spacer-1; }',
       description: "Replaces '4px' with '$spacer-1' and errors on '3px'.",
