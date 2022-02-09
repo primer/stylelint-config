@@ -63,25 +63,21 @@ testRule({
       column: 20
     },
     {
-      code: `
-      .x {
-        padding: 6px ($spacer-3 + 12px + $spacer-2);
-      }
-      `,
+      code: '.x { padding: 6px ($spacer-3 + 12px + $spacer-2); }',
       unfixable: true,
       description: 'Complex calc expression.',
       warnings: [
         {
-          column: 18,
-          line: 3,
+          column: 15,
+          line: 1,
           rule: 'primer/spacing',
           severity: 'error',
           message:
             "Please use a primer spacer variable instead of '6px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)"
         },
         {
-          column: 35,
-          line: 3,
+          column: 32,
+          line: 1,
           rule: 'primer/spacing',
           severity: 'error',
           message:
