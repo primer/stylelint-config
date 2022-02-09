@@ -36,11 +36,11 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 })
 
 const walkGroups = (root, validate) => {
-  for (let node of root.nodes) {
+  for (const node of root.nodes) {
     if (node.type === 'function') {
-      node = walkGroups(node, validate)
+      walkGroups(node, validate)
     } else {
-      node = validate(node)
+      validate(node)
     }
   }
   return root
@@ -66,18 +66,18 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
 
         // Only check word types. https://github.com/TrySound/postcss-value-parser#word
         if (node.type !== 'word') {
-          return node
+          return
         }
 
         // Exact values to ignore.
         if (['*', '+', '-', '/', '0', 'auto', 'inherit', 'initial'].includes(node.value)) {
-          return node
+          return
         }
 
         const valueUnit = valueParser.unit(cleanValue)
 
         if (valueUnit && (valueUnit.unit === '' || !/^[0-9]+$/.test(valueUnit.number))) {
-          return node
+          return
         }
 
         // If the a variable is found in the value, skip it.
@@ -86,7 +86,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             new RegExp(`${variable.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(cleanValue)
           )
         ) {
-          return node
+          return
         }
 
         const replacement = Object.keys(spacerValues).find(spacer => spacerValues[spacer] === cleanValue) || null
@@ -101,7 +101,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
           })
         }
 
-        return node
+        return
       })
 
       if (context.fix) {
