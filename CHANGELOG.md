@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.3.2
+
+### Patch Changes
+
+- [#215](https://github.com/primer/stylelint-config/pull/215) [`66b16ae`](https://github.com/primer/stylelint-config/commit/66b16ae2edd81f8c8949f83c96d7011e5d395cc0) Thanks [@jonrohan](https://github.com/jonrohan)! - Making linter pick up separate function groups
+
 ## 12.3.1
 
 ### Patch Changes
