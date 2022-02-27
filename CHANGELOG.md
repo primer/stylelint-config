@@ -30,7 +30,7 @@
 
 ### Patch Changes
 
-- [#181](https://github.com/primer/stylelint-config/pull/181) [`23e438a`](https://github.com/primer/stylelint-config/commit/23e438a7a9062550baa696cafbb186dc78b723f5) Thanks [@jonrohan](https://github.com/jonrohan)! - Truning off scss/dollar-variable-default
+- [#181](https://github.com/primer/stylelint-config/pull/181) [`23e438a`](https://github.com/primer/stylelint-config/commit/23e438a7a9062550baa696cafbb186dc78b723f5) Thanks [@jonrohan](https://github.com/jonrohan)! - Turning off scss/dollar-variable-default
 
 ## 12.1.1
 
