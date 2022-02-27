@@ -110,7 +110,7 @@
 
 ### Patch Changes
 
-- [`d18cfbf`](https://github.com/primer/stylelint-config/commit/d18cfbfefc25be6ae38f73132552d2f3c62c4d02) [#79](https://github.com/primer/stylelint-config/pull/79) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Add additinal verbose logging to `no-undefined-vars`
+- [`d18cfbf`](https://github.com/primer/stylelint-config/commit/d18cfbfefc25be6ae38f73132552d2f3c62c4d02) [#79](https://github.com/primer/stylelint-config/pull/79) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Add additional verbose logging to `no-undefined-vars`
 
 * [`d18cfbf`](https://github.com/primer/stylelint-config/commit/d18cfbfefc25be6ae38f73132552d2f3c62c4d02) [#79](https://github.com/primer/stylelint-config/pull/79) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Fix handling of edge-cases in `no-undefined-vars`
 
