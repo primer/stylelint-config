@@ -92,7 +92,7 @@
 
 ### Major Changes
 
-- [`23a1f15`](https://github.com/primer/stylelint-config/commit/23a1f1599673f2a4f9f28c39da61f42871c05697) [#85](https://github.com/primer/stylelint-config/pull/85) Thanks [@koddsson](https://github.com/koddsson)! - Replace deprecated "blacklist" rules for "dissallow list" rules.
+- [`23a1f15`](https://github.com/primer/stylelint-config/commit/23a1f1599673f2a4f9f28c39da61f42871c05697) [#85](https://github.com/primer/stylelint-config/pull/85) Thanks [@koddsson](https://github.com/koddsson)! - Replace deprecated "blacklist" rules for "disallow list" rules.
 
   See https://stylelint.io/user-guide/rules/at-rule-blacklist and http://stylelint.io/user-guide/rules/declaration-property-value-disallowed-list/
 
