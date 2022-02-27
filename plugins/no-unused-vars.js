@@ -50,7 +50,7 @@ function getCachedVariables(options, log) {
   const key = JSON.stringify(options)
   return cache.tap(key, () => {
     const {files, variablePattern} = options
-    const decs = new TapMap()
+    const decls = new TapMap()
     const refs = new TapMap()
 
     log(`Looking for variables in ${files} ...`)
@@ -60,15 +60,15 @@ function getCachedVariables(options, log) {
         const after = css.substr(match.index + match[0].length)
         const name = match[0]
         if (after.startsWith(COLON)) {
-          decs.tap(name, set).add(file)
+          decls.tap(name, set).add(file)
         } else {
           refs.tap(name, set).add(file)
         }
       }
     }
-    log(`Found ${decs.size} declarations, ${pluralize(refs.size, 'reference')}.`)
+    log(`Found ${decls.size} declarations, ${pluralize(refs.size, 'reference')}.`)
 
-    for (const [name, filesList] of decs.entries()) {
+    for (const [name, filesList] of decls.entries()) {
       const fileRefs = refs.get(name)
       if (fileRefs) {
         log(`variable "${name}" declared in ${pluralize(filesList.size, 'file')}, ref'd in ${fileRefs.size}`)
@@ -77,7 +77,7 @@ function getCachedVariables(options, log) {
       }
     }
 
-    return {decs, refs}
+    return {decls, refs}
   })
 }
 
