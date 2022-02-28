@@ -76,7 +76,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
 
         const valueUnit = valueParser.unit(cleanValue)
 
-        if (valueUnit && (valueUnit.unit === '' || !/^[0-9]+$/.test(valueUnit.number))) {
+        if (valueUnit && (valueUnit.unit === '' || !/^[0-9.]+$/.test(valueUnit.number))) {
           return
         }
 
