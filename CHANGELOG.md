@@ -30,7 +30,7 @@
 
 ### Patch Changes
 
-- [#181](https://github.com/primer/stylelint-config/pull/181) [`23e438a`](https://github.com/primer/stylelint-config/commit/23e438a7a9062550baa696cafbb186dc78b723f5) Thanks [@jonrohan](https://github.com/jonrohan)! - Truning off scss/dollar-variable-default
+- [#181](https://github.com/primer/stylelint-config/pull/181) [`23e438a`](https://github.com/primer/stylelint-config/commit/23e438a7a9062550baa696cafbb186dc78b723f5) Thanks [@jonrohan](https://github.com/jonrohan)! - Turning off scss/dollar-variable-default
 
 ## 12.1.1
 
@@ -92,7 +92,7 @@
 
 ### Major Changes
 
-- [`23a1f15`](https://github.com/primer/stylelint-config/commit/23a1f1599673f2a4f9f28c39da61f42871c05697) [#85](https://github.com/primer/stylelint-config/pull/85) Thanks [@koddsson](https://github.com/koddsson)! - Replace deprecated "blacklist" rules for "dissallow list" rules.
+- [`23a1f15`](https://github.com/primer/stylelint-config/commit/23a1f1599673f2a4f9f28c39da61f42871c05697) [#85](https://github.com/primer/stylelint-config/pull/85) Thanks [@koddsson](https://github.com/koddsson)! - Replace deprecated "blacklist" rules for "disallow list" rules.
 
   See https://stylelint.io/user-guide/rules/at-rule-blacklist and http://stylelint.io/user-guide/rules/declaration-property-value-disallowed-list/
 
@@ -110,7 +110,7 @@
 
 ### Patch Changes
 
-- [`d18cfbf`](https://github.com/primer/stylelint-config/commit/d18cfbfefc25be6ae38f73132552d2f3c62c4d02) [#79](https://github.com/primer/stylelint-config/pull/79) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Add additinal verbose logging to `no-undefined-vars`
+- [`d18cfbf`](https://github.com/primer/stylelint-config/commit/d18cfbfefc25be6ae38f73132552d2f3c62c4d02) [#79](https://github.com/primer/stylelint-config/pull/79) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Add additional verbose logging to `no-undefined-vars`
 
 * [`d18cfbf`](https://github.com/primer/stylelint-config/commit/d18cfbfefc25be6ae38f73132552d2f3c62c4d02) [#79](https://github.com/primer/stylelint-config/pull/79) Thanks [@BinaryMuse](https://github.com/BinaryMuse)! - Fix handling of edge-cases in `no-undefined-vars`
 

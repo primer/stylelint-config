@@ -55,7 +55,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
     }, {})
 
   const lintResult = (root, result) => {
-    // Walk all declarartions
+    // Walk all declarations
     root.walk(node => {
       if (seen.has(node)) {
         return
