@@ -39,12 +39,29 @@ testRule({
   ],
   reject: [
     {
+      code: '.x { padding-bottom: 0.3em; }',
+      unfixable: true,
+      message:
+        "Please use a primer spacer variable instead of '0.3em'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)",
+      line: 1,
+      column: 22,
+      description: 'Errors on non-spacer em values.'
+    },
+    {
       code: '.x { padding: 4px; }',
       fixed: '.x { padding: $spacer-1; }',
       message: `Please replace 4px with spacing variable '$spacer-1'. (primer/spacing)`,
       line: 1,
       column: 15,
       description: "Replaces '4px' with '$spacer-1'."
+    },
+    {
+      code: '.x { padding: 0.5em; }',
+      fixed: '.x { padding: $em-spacer-5; }',
+      message: `Please replace 0.5em with spacing variable '$em-spacer-5'. (primer/spacing)`,
+      line: 1,
+      column: 15,
+      description: "Replaces '0.5em' with '$em-spacer-5'."
     },
     {
       code: '.x { padding: -4px; }',
