@@ -1,5 +1,13 @@
 # Changelog
 
+## 12.3.3
+
+### Patch Changes
+
+- [#218](https://github.com/primer/stylelint-config/pull/218) [`c03be7d`](https://github.com/primer/stylelint-config/commit/c03be7da1126123c079d86e00a2158a913e015f8) Thanks [@jonrohan](https://github.com/jonrohan)! - [Bug fix] Catching values with dots in them
+
+* [#217](https://github.com/primer/stylelint-config/pull/217) [`5bb2834`](https://github.com/primer/stylelint-config/commit/5bb28342a6194dfdd4fbf5197682367ea54792b7) Thanks [@jsoref](https://github.com/jsoref)! - Spelling fixes
+
 ## 12.3.2
 
 ### Patch Changes
