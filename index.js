@@ -17,6 +17,7 @@ module.exports = {
     './plugins/borders',
     './plugins/box-shadow',
     './plugins/colors',
+    './plugins/responsive-widths',
     './plugins/spacing',
     './plugins/typography'
   ],
@@ -64,6 +65,7 @@ module.exports = {
       {severity: 'warning', files: 'node_modules/@primer/primitives/dist/scss/colors*/*.scss'}
     ],
     'primer/no-unused-vars': [true, {severity: 'warning'}],
+    'primer/responsive-widths': true,
     'primer/spacing': true,
     'primer/typography': true,
     'scss/at-extend-no-missing-placeholder': true,
