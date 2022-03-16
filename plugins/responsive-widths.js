@@ -31,6 +31,11 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
 
   const lintResult = (root, result) => {
     root.walk(decl => {
+      // Ignore things inside of breakpoints
+      if (decl.type === 'atrule' && decl.name === 'include' && decl.params.includes('breakpoint')) {
+        return false
+      }
+
       if (decl.type !== 'decl' || !decl.prop.match(/^(min-width|width)/)) {
         return noop
       }
@@ -59,7 +64,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
               })
             }
             break
-          case '%':
+          case 'vw':
             if (parseInt(valueUnit.number) > 100) {
               problems.push({
                 index: declarationValueIndex(decl) + node.sourceIndex,

@@ -12,8 +12,8 @@ testRule({
       description: 'Width is less than small viewport.'
     },
     {
-      code: '.x { width: 100%; }',
-      description: 'Width is 100% or less.'
+      code: '.x { width: 100vw; }',
+      description: 'Width is 100vw or less.'
     },
     {
       code: '.x { min-width: 319px; }',
@@ -26,6 +26,10 @@ testRule({
     {
       code: '.x { width: calc(10px + 10px); }',
       description: 'Max-width larger than small viewport.'
+    },
+    {
+      code: '.x { @include breakpoint(md) { width: 500px; } }',
+      description: 'Ignore widths inside breakpoint.'
     }
   ],
   reject: [
@@ -46,12 +50,12 @@ testRule({
       description: 'Errors on min-width greater than minimum size.'
     },
     {
-      code: '.x { width: 300%; }',
+      code: '.x { width: 300vw; }',
       message:
-        'A value larger than the smallest viewport could break responsive pages. Use a width value smaller than 300%. https://primer.style/css/support/breakpoints (primer/responsive-widths)',
+        'A value larger than the smallest viewport could break responsive pages. Use a width value smaller than 300vw. https://primer.style/css/support/breakpoints (primer/responsive-widths)',
       line: 1,
       column: 13,
-      description: 'Errors on percentage width greater than 100%.'
+      description: 'Errors on viewport width greater than 100.'
     }
   ]
 })
