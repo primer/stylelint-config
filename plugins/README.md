@@ -17,6 +17,7 @@ This directory contains all of our custom stylelint plugins, each of which provi
   - [`primer/typography`](#primertypography)
   - [`primer/borders`](#primerborders)
   - [`primer/box-shadow`](#primerbox-shadow)
+  - [`primer/responsive-widths`](#primerresponsive-widths)
   - [Variable rules](#variable-rules)
     - [Variable rule options](#variable-rule-options)
 
@@ -206,6 +207,10 @@ This [variable rule](#variable-rules) enforces the use of border-specific variab
 ## `primer/box-shadow`
 
 This [variable rule](#variable-rules) enforces the use of `$box-shadow*` variables for the `box-shadow` CSS property. See [the configuration](./box-shadow.js) for more info.
+
+## `primer/responsive-widths`
+
+This plugin checks for `width` and `min-width` declarations that use a value less than the minimum browser size. `320px`
 
 ## Variable rules
 
