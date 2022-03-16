@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.3",
-    "@changesets/cli": "2.20.0",
+    "@changesets/cli": "2.21.1",
     "@github/prettier-config": "0.0.4",
     "@primer/css": "^19.0.0",
     "@primer/primitives": "^7.0.1",
