@@ -55,7 +55,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "jest": "27.5.1",
     "jest-preset-stylelint": "5.0.1",
-    "prettier": "2.5.1",
+    "prettier": "2.6.0",
     "stylelint": "14.5.3"
   },
   "jest": {
