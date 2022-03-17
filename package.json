@@ -31,7 +31,7 @@
     "postcss-scss": "^4.0.2",
     "postcss-value-parser": "^4.0.2",
     "string.prototype.matchall": "^4.0.2",
-    "stylelint-config-standard": "24.0.0",
+    "stylelint-config-standard": "25.0.0",
     "stylelint-no-unsupported-browser-features": "^5.0.1",
     "stylelint-order": "^5.0.0",
     "stylelint-scss": "^4.0.0",
@@ -43,20 +43,20 @@
     "stylelint": ">= 14.0.0"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "0.4.2",
-    "@changesets/cli": "2.20.0",
+    "@changesets/changelog-github": "0.4.3",
+    "@changesets/cli": "2.21.1",
     "@github/prettier-config": "0.0.4",
     "@primer/css": "^19.0.0",
     "@primer/primitives": "^7.0.1",
     "dedent": "0.7.0",
-    "eslint": "8.8.0",
+    "eslint": "8.11.0",
     "eslint-plugin-github": "4.3.5",
-    "eslint-plugin-jest": "26.0.0",
+    "eslint-plugin-jest": "26.1.1",
     "eslint-plugin-prettier": "4.0.0",
-    "jest": "27.4.7",
-    "jest-preset-stylelint": "4.2.0",
-    "prettier": "2.5.1",
-    "stylelint": "14.3.0"
+    "jest": "27.5.1",
+    "jest-preset-stylelint": "5.0.1",
+    "prettier": "2.6.0",
+    "stylelint": "14.6.0"
   },
   "jest": {
     "preset": "jest-preset-stylelint",

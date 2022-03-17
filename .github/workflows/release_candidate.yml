@@ -18,9 +18,9 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 16
 
       - name: Install dependencies
         run: yarn
@@ -42,7 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Output candidate version number
-        uses: actions/github-script@v4.1
+        uses: actions/github-script@v6
         with:
           script: |
             const package = require(`${process.env.GITHUB_WORKSPACE}/package.json`)
