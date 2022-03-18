@@ -39,6 +39,7 @@ Primer Stylelint Config extends the [stylelint-config-standard](https://github.c
 - [primer/typography](./plugins/#primertypography): Enforces the use of typography variables for certain CSS properties.
 - [primer/borders](./plugins/#primerborders): Enforces the use of certain variables for border properties.
 - [primer/box-shadow](./plugins/#primerbox-shadow): Enforces the use of certain variables for `box-shadow`.
+- [primer/responsive-widths](./plugins/#primerresponsive-widths): Errors on `width` and `min-width` that is larger than the minimum browser size supported. `320px`
 
 ## License
 
