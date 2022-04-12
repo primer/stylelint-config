@@ -1,0 +1,66 @@
+{
+  "tokens/base/size/size.json": [
+    {
+      "value": "0.25rem",
+      "filePath": "tokens/base/size/size.json",
+      "isSource": true,
+      "original": {
+        "value": "4px"
+      },
+      "name": "base-size-4",
+      "attributes": {},
+      "path": [
+        "base",
+        "size",
+        "4"
+      ]
+    },
+    {
+      "value": "0.25rem",
+      "filePath": "tokens/base/size/size.json",
+      "isSource": true,
+      "original": {
+        "value": "8px"
+      },
+      "name": "base-size-8",
+      "attributes": {},
+      "path": [
+        "base",
+        "size",
+        "8"
+      ]
+    }
+  ],
+  "tokens/base/size/spacing.json": [
+    {
+      "value": "0.25rem",
+      "filePath": "tokens/base/size/size.json",
+      "isSource": true,
+      "original": {
+        "value": "4px"
+      },
+      "name": "base-size-4",
+      "attributes": {},
+      "path": [
+        "base",
+        "size",
+        "4"
+      ]
+    },
+    {
+      "value": "0.25rem",
+      "filePath": "tokens/base/size/size.json",
+      "isSource": true,
+      "original": {
+        "value": "8px"
+      },
+      "name": "base-size-8",
+      "attributes": {},
+      "path": [
+        "base",
+        "size",
+        "8"
+      ]
+    }
+  ]
+}

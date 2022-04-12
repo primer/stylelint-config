@@ -11,6 +11,7 @@ module.exports = {
     'stylelint-scss',
     './plugins/no-override',
     './plugins/no-deprecated-colors',
+    './plugins/no-experimental-vars',
     './plugins/no-unused-vars',
     './plugins/no-undefined-vars',
     './plugins/no-scale-colors',
@@ -59,6 +60,12 @@ module.exports = {
     'primer/box-shadow': true,
     'primer/colors': true,
     'primer/no-deprecated-colors': true,
+    'primer/no-experimental-vars': [
+      true,
+      {
+        designTokens: './path/to/primitives/tokens/design-tokens.json'
+      }
+    ],
     'primer/no-override': true,
     'primer/no-undefined-vars': [
       true,
