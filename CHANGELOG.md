@@ -1,5 +1,13 @@
 # Changelog
 
+## 12.4.0
+
+### Minor Changes
+
+- [#232](https://github.com/primer/stylelint-config/pull/232) [`27ddfc9`](https://github.com/primer/stylelint-config/commit/27ddfc98f93ed898552bb62aa0926d35497dda72) Thanks [@jonrohan](https://github.com/jonrohan)! - Creating a responsive-widths plugin to keep fixed widths smaller than the minimum viewport size
+
+* [#253](https://github.com/primer/stylelint-config/pull/253) [`0edeee0`](https://github.com/primer/stylelint-config/commit/0edeee07b1e7ef51bcd0942c65d98131ac384887) Thanks [@jonrohan](https://github.com/jonrohan)! - Changing this peerDependency to be any
+
 ## 12.3.3
 
 ### Patch Changes
