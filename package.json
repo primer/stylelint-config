@@ -39,8 +39,7 @@
   },
   "peerDependencies": {
     "@primer/css": "*",
-    "@primer/primitives": "*",
-    "stylelint": ">= 14.0.0"
+    "@primer/primitives": "*"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.3",
