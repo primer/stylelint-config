@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.4.1
+
+### Patch Changes
+
+- [#256](https://github.com/primer/stylelint-config/pull/256) [`37eb1cb`](https://github.com/primer/stylelint-config/commit/37eb1cbd342590f4c43e37779f657a4b19594eca) Thanks [@jonrohan](https://github.com/jonrohan)! - Remove stylelint peer
+
 ## 12.4.0
 
 ### Minor Changes
