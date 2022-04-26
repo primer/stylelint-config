@@ -977,9 +977,9 @@
     "@primer/primitives" "^7.5.1"
 
 "@primer/primitives@^7.0.1", "@primer/primitives@^7.5.1":
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.5.1.tgz#18aa8a0f3a3f7fd49fcad31a7efb86688bffb9de"
-  integrity sha512-1pFKR+FcYRPXJ+zK/qtidrCJB7WmTaAX4sG7zE5LvGWjS5latue4pzZrK0FxxGGBdAU3HpoabANsGjv7T7sRRg==
+  version "7.8.1"
+  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.8.1.tgz#cac2605d0f4afc537f335210882202f9a2255f14"
+  integrity sha512-ELUzAylcxIFtAdNCWbgbvVTaXbeLJOHuDyzzjcfQvpDwAXXZ8K9FsYXLcZk93euhLn22wXVs0+gmU5V78vj+LA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
