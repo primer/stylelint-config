@@ -977,9 +977,9 @@
     "@primer/primitives" "^7.5.1"
 
 "@primer/primitives@^7.0.1", "@primer/primitives@^7.5.1":
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.5.1.tgz#18aa8a0f3a3f7fd49fcad31a7efb86688bffb9de"
-  integrity sha512-1pFKR+FcYRPXJ+zK/qtidrCJB7WmTaAX4sG7zE5LvGWjS5latue4pzZrK0FxxGGBdAU3HpoabANsGjv7T7sRRg==
+  version "7.8.2"
+  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.8.2.tgz#b6e6d49b1ec6968293de092ede2b54de8d0e69cf"
+  integrity sha512-rM9rkG9J9B3xVU3sCiAE5LL6xj3Y6Bgg4jnZIkZ4yE506yXDb2lPnCqCH5aJ1k64oP4GZWOC9aDSksvX5CRwqA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
@@ -3309,10 +3309,10 @@ jest-pnp-resolver@^1.2.2:
   resolved "https://registry.yarnpkg.com/jest-pnp-resolver/-/jest-pnp-resolver-1.2.2.tgz#b704ac0ae028a89108a4d040b3f919dfddc8e33c"
   integrity sha512-olV41bKSMm8BdnuMsewT4jqlZ8+3TCARAXjZGT9jcoSnrfUnRCqnMoF9XEeoWjbzObpqF9dRhHQj0Xb9QdF6/w==
 
-jest-preset-stylelint@5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/jest-preset-stylelint/-/jest-preset-stylelint-5.0.1.tgz#a70328dd9b9de53e965700aa5bdeb38f1aae27e7"
-  integrity sha512-WhXeaUv2L4uZLSMXBwrf2aHwmR0Hd/OLPRNP0ibOGtbDW+p694l3nLLlAqnrVjPOhl2s4dGByqbMgYWhZacb9A==
+jest-preset-stylelint@5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/jest-preset-stylelint/-/jest-preset-stylelint-5.0.2.tgz#77020a1c3bab8443a1a469632ec9ddafc3298adb"
+  integrity sha512-mihO6TmIzmKlY4Ao721SyNivnzG+bFH72R26db0nookOGGLSeR5tem6gjnPh14QVRdR3hodw1NQQGeycEHi/WQ==
 
 jest-regex-util@^27.5.1:
   version "27.5.1"
