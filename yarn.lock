@@ -977,9 +977,9 @@
     "@primer/primitives" "^7.5.1"
 
 "@primer/primitives@^7.0.1", "@primer/primitives@^7.5.1":
-  version "7.5.1"
-  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.5.1.tgz#18aa8a0f3a3f7fd49fcad31a7efb86688bffb9de"
-  integrity sha512-1pFKR+FcYRPXJ+zK/qtidrCJB7WmTaAX4sG7zE5LvGWjS5latue4pzZrK0FxxGGBdAU3HpoabANsGjv7T7sRRg==
+  version "7.8.2"
+  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.8.2.tgz#b6e6d49b1ec6968293de092ede2b54de8d0e69cf"
+  integrity sha512-rM9rkG9J9B3xVU3sCiAE5LL6xj3Y6Bgg4jnZIkZ4yE506yXDb2lPnCqCH5aJ1k64oP4GZWOC9aDSksvX5CRwqA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
@@ -2213,10 +2213,10 @@ eslint-plugin-import@^2.25.2:
     resolve "^1.20.0"
     tsconfig-paths "^3.11.0"
 
-eslint-plugin-jest@26.1.3:
-  version "26.1.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-26.1.3.tgz#e722e5efeea18aa9dec7c7349987b641db19feb7"
-  integrity sha512-Pju+T7MFpo5VFhFlwrkK/9jRUu18r2iugvgyrWOnnGRaVTFFmFXp+xFJpHyqmjjLmGJPKLeEFLVTAxezkApcpQ==
+eslint-plugin-jest@26.1.5:
+  version "26.1.5"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-26.1.5.tgz#6cfca264818d6d6aa120b019dab4d62b6aa8e775"
+  integrity sha512-su89aDuljL9bTjEufTXmKUMSFe2kZUL9bi7+woq+C2ukHZordhtfPm4Vg+tdioHBaKf8v3/FXW9uV0ksqhYGFw==
   dependencies:
     "@typescript-eslint/utils" "^5.10.0"
 
