@@ -14,6 +14,10 @@ testRule({
     {
       code: '.x { padding: $spacer-1 12px; }',
       description: 'Padding is multiple values.'
+    },
+    {
+      code: '.x:hover { padding: $spacer-4; }',
+      description: 'Selector is a pseudo selector.'
     }
   ],
   reject: [
