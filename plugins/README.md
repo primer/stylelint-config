@@ -18,6 +18,7 @@ This directory contains all of our custom stylelint plugins, each of which provi
   - [`primer/borders`](#primerborders)
   - [`primer/box-shadow`](#primerbox-shadow)
   - [`primer/responsive-widths`](#primerresponsive-widths)
+  - [`primer/utilities`](#primerutilities)
   - [Variable rules](#variable-rules)
     - [Variable rule options](#variable-rule-options)
 
@@ -211,6 +212,31 @@ This [variable rule](#variable-rules) enforces the use of `$box-shadow*` variabl
 ## `primer/responsive-widths`
 
 This plugin checks for `width` and `min-width` declarations that use a value less than the minimum browser size. `320px`
+
+## `primer/utilities`
+
+Checks for selectors with single declarations that can be replaced with [primer/css utilities](https://primer.style/css/utilities/).
+
+```scss
+.foo {
+  color: var(--color-fg-default);
+}
+/**          ↑
+ *           FAIL: --color-fg-default can be replaced with .color-fg-default */
+
+.foo {
+  color: #custom;
+}
+/**          ↑
+ *           OK: Color value doesn't match a utility. */
+
+.foo {
+  color: var(--color-fg-default);
+  padding: 0;
+}
+/**          ↑
+ *           OK: Has more than one declaration, not considered */
+```
 
 ## Variable rules
 
