@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.5.0
+
+### Minor Changes
+
+- [#262](https://github.com/primer/stylelint-config/pull/262) [`28a4086`](https://github.com/primer/stylelint-config/commit/28a4086e8c781f76494c7e77b9437046a6f686a6) Thanks [@jonrohan](https://github.com/jonrohan)! - Writing a primer/utilities plugin to look for code that duplicates utilities
+
 ## 12.4.2
 
 ### Patch Changes
