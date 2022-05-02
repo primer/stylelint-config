@@ -43,6 +43,7 @@ module.exports = {
     },
     'function-calc-no-unspaced-operator': true,
     'function-linear-gradient-no-nonstandard-direction': true,
+    'function-no-unknown': null,
     'keyframes-name-pattern': null,
     'max-line-length': null,
     'max-nesting-depth': 3,

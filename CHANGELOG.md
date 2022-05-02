@@ -1,5 +1,13 @@
 # Changelog
 
+## 12.4.2
+
+### Patch Changes
+
+- [#258](https://github.com/primer/stylelint-config/pull/258) [`fa48eed`](https://github.com/primer/stylelint-config/commit/fa48eed1af84474fa49bdb7ec861d2c6a3210239) Thanks [@jonrohan](https://github.com/jonrohan)! - Fixing dependencies
+
+* [#260](https://github.com/primer/stylelint-config/pull/260) [`4f42328`](https://github.com/primer/stylelint-config/commit/4f4232826cd3055e0e9dc49ff16925c47db21863) Thanks [@jonrohan](https://github.com/jonrohan)! - Turning off 'function-no-unknown': null,
+
 ## 12.4.1
 
 ### Patch Changes
