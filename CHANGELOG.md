@@ -1,5 +1,33 @@
 # Changelog
 
+## 12.5.0
+
+### Minor Changes
+
+- [#262](https://github.com/primer/stylelint-config/pull/262) [`28a4086`](https://github.com/primer/stylelint-config/commit/28a4086e8c781f76494c7e77b9437046a6f686a6) Thanks [@jonrohan](https://github.com/jonrohan)! - Writing a primer/utilities plugin to look for code that duplicates utilities
+
+## 12.4.2
+
+### Patch Changes
+
+- [#258](https://github.com/primer/stylelint-config/pull/258) [`fa48eed`](https://github.com/primer/stylelint-config/commit/fa48eed1af84474fa49bdb7ec861d2c6a3210239) Thanks [@jonrohan](https://github.com/jonrohan)! - Fixing dependencies
+
+* [#260](https://github.com/primer/stylelint-config/pull/260) [`4f42328`](https://github.com/primer/stylelint-config/commit/4f4232826cd3055e0e9dc49ff16925c47db21863) Thanks [@jonrohan](https://github.com/jonrohan)! - Turning off 'function-no-unknown': null,
+
+## 12.4.1
+
+### Patch Changes
+
+- [#256](https://github.com/primer/stylelint-config/pull/256) [`37eb1cb`](https://github.com/primer/stylelint-config/commit/37eb1cbd342590f4c43e37779f657a4b19594eca) Thanks [@jonrohan](https://github.com/jonrohan)! - Remove stylelint peer
+
+## 12.4.0
+
+### Minor Changes
+
+- [#232](https://github.com/primer/stylelint-config/pull/232) [`27ddfc9`](https://github.com/primer/stylelint-config/commit/27ddfc98f93ed898552bb62aa0926d35497dda72) Thanks [@jonrohan](https://github.com/jonrohan)! - Creating a responsive-widths plugin to keep fixed widths smaller than the minimum viewport size
+
+* [#253](https://github.com/primer/stylelint-config/pull/253) [`0edeee0`](https://github.com/primer/stylelint-config/commit/0edeee07b1e7ef51bcd0942c65d98131ac384887) Thanks [@jonrohan](https://github.com/jonrohan)! - Changing this peerDependency to be any
+
 ## 12.3.3
 
 ### Patch Changes
