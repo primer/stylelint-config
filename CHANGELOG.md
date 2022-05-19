@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.6.0
+
+### Minor Changes
+
+- [#272](https://github.com/primer/stylelint-config/pull/272) [`9104062`](https://github.com/primer/stylelint-config/commit/91040626d2195cbb63f1e302ae53acdd4ba5b361) Thanks [@langermank](https://github.com/langermank)! - Add no-experimental-vars plugin
+
 ## 12.5.0
 
 ### Minor Changes
