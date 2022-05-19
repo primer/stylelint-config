@@ -63,7 +63,7 @@ module.exports = {
     'primer/no-experimental-vars': [
       true,
       {
-        designTokens: './path/to/primitives/tokens/design-tokens.json'
+        designTokens: 'node_modules/@primer/primitives/tokens-v2-private/docs/docValues.json'
       }
     ],
     'primer/no-override': true,
