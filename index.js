@@ -13,6 +13,7 @@ module.exports = {
     './plugins/box-shadow',
     './plugins/colors',
     './plugins/no-deprecated-colors',
+    './plugins/no-experimental-vars',
     './plugins/no-override',
     './plugins/no-scale-colors',
     './plugins/no-undefined-vars',
@@ -61,6 +62,12 @@ module.exports = {
     'primer/box-shadow': true,
     'primer/colors': true,
     'primer/no-deprecated-colors': true,
+    'primer/no-experimental-vars': [
+      true,
+      {
+        designTokens: '@primer/primitives/tokens-v2-private/docs/docValues.json'
+      }
+    ],
     'primer/no-override': true,
     'primer/no-undefined-vars': [
       true,
