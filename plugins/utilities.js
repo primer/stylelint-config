@@ -27,7 +27,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
   const lintResult = (root, result) => {
     root.walkRules(rule => {
       if (!/^\.[\w\-_]+$/.exec(rule.selector)) {
-        return false
+        return
       }
       const decls = rule.nodes.filter(decl => decl.type === 'decl')
 

@@ -30,6 +30,14 @@ testRule({
       description: 'Errors on spacer utility.'
     },
     {
+      code: '.x { padding: 1px; &:hover { padding:2px; } } .x { padding: $spacer-4; }',
+      message:
+        "Consider using the Primer utility '.p-4' instead of the selector '.x' in your html. https://primer.style/css/utilities (primer/utilities)",
+      line: 1,
+      column: 47,
+      description: 'Errors on spacer utility with hover ampersand.'
+    },
+    {
       code: '.x { padding: $spacer-4 !important; }',
       message:
         "Consider using the Primer utility '.p-4' instead of the selector '.x' in your html. https://primer.style/css/utilities (primer/utilities)",
