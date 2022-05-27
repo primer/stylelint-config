@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.6.1
+
+### Patch Changes
+
+- [#274](https://github.com/primer/stylelint-config/pull/274) [`4ba7018`](https://github.com/primer/stylelint-config/commit/4ba701887351664d8b937483d3d761fa5022f16c) Thanks [@jonrohan](https://github.com/jonrohan)! - Fixing issue in utilities plugin that missed certain classes
+
 ## 12.6.0
 
 ### Minor Changes
