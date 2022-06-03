@@ -68,6 +68,12 @@ module.exports = {
         designTokens: '@primer/primitives/tokens-v2-private/docs/docValues.json'
       }
     ],
+    'primer/no-unused-css-vars': [
+      true,
+      {
+        designTokens: '@primer/css/dist/color-modes.css'
+      }
+    ],
     'primer/no-override': true,
     'primer/no-undefined-vars': [
       true,
