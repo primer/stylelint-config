@@ -71,7 +71,7 @@ testRule({
           color: var(--color-bar);
         }
       `
-    },
+    }
   ],
 
   reject: [

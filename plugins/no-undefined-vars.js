@@ -77,7 +77,11 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
         }
 
         for (const [, variableName] of matchAll(decl.value, variableReferenceRegex)) {
-          checkVariable(variableName, decl, new Set([...globalDefinedVariables, ...fileDefinedVariables, ...scopeDefinedVaribles]))
+          checkVariable(
+            variableName,
+            decl,
+            new Set([...globalDefinedVariables, ...fileDefinedVariables, ...scopeDefinedVaribles])
+          )
         }
       })
     })
