@@ -27,14 +27,15 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   const {files = ['**/*.scss', '!node_modules'], verbose = false} = options
   // eslint-disable-next-line no-console
   const log = verbose ? (...args) => console.warn(...args) : noop
-  const definedVariables = getDefinedVariables(files, log)
-
+  const globalDefinedVariables = getDefinedVariables(files, log)
   // Keep track of declarations we've already seen
   const seen = new WeakMap()
 
   return (root, result) => {
-    function checkVariable(variableName, node) {
-      if (!definedVariables.has(variableName)) {
+    const fileDefinedVariables = new Set()
+
+    function checkVariable(variableName, node, allowed) {
+      if (!allowed.has(variableName)) {
         stylelint.utils.report({
           message: messages.rejected(variableName),
           node,
@@ -52,13 +53,23 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
         }
 
         for (const [, variableName] of innerMatch) {
-          checkVariable(variableName, rule)
+          checkVariable(variableName, rule, new Set([...globalDefinedVariables, ...fileDefinedVariables]))
         }
       }
     })
 
     root.walkRules(rule => {
+      const scopeDefinedVaribles = new Set()
+
       rule.walkDecls(decl => {
+        // Add CSS variable declarations within the source text to the list of allowed variables
+        if (decl.prop.startsWith('--')) {
+          scopeDefinedVaribles.add(decl.prop)
+          if (decl.parent.selector === ':root' || decl.parent.selector === ':host') {
+            fileDefinedVariables.add(decl.prop)
+          }
+        }
+
         if (seen.has(decl)) {
           return
         } else {
@@ -66,7 +77,11 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
         }
 
         for (const [, variableName] of matchAll(decl.value, variableReferenceRegex)) {
-          checkVariable(variableName, decl)
+          checkVariable(
+            variableName,
+            decl,
+            new Set([...globalDefinedVariables, ...fileDefinedVariables, ...scopeDefinedVaribles])
+          )
         }
       })
     })

@@ -25,6 +25,52 @@ testRule({
     {code: '.x { margin: var(--spacing-spacer-1); }'},
     {
       code: '@include color-variables(\n  (\n    (feature-bg-color, (light: var(--color-scale-blue-1), dark: var(--color-scale-blue-2)))));'
+    },
+    {
+      code: `
+        .x {
+          --color-foo: #ffeeee;
+        }
+      `
+    },
+    {
+      code: `
+        .x {
+          --color-foo: #ffeeee;
+          color: var(--color-foo);
+        }
+      `
+    },
+    {
+      code: `
+        :root {
+          --color-foo: #ffeeee;
+        }
+        .x {
+          color: var(--color-foo);
+        }
+      `
+    },
+    {
+      code: `
+        :host {
+          --color-foo: #ffeeee;
+        }
+        .x {
+          color: var(--color-foo);
+        }
+      `
+    },
+    {
+      code: `
+        :root {
+          --color-foo: #ffeeee;
+        }
+        .x {
+          --color-bar: var(--color-foo);
+          color: var(--color-bar);
+        }
+      `
     }
   ],
 
@@ -60,6 +106,30 @@ testRule({
       message: messages.rejected('--color-bar'),
       line: 1,
       column: 6
+    },
+    {
+      code: '.x { --color-bar: #000000; } .y { color: var(--color-bar); }',
+      message: messages.rejected('--color-bar'),
+      line: 1,
+      column: 35
+    },
+    {
+      code: '.x { --color-foo: #000000; color: var(--color-bar); }',
+      message: messages.rejected('--color-bar'),
+      line: 1,
+      column: 28
+    },
+    {
+      code: ':root { --color-foo: #000000 } .x { color: var(--color-bar); }',
+      message: messages.rejected('--color-bar'),
+      line: 1,
+      column: 37
+    },
+    {
+      code: ':host { --color-foo: #000000 } .x { color: var(--color-bar); }',
+      message: messages.rejected('--color-bar'),
+      line: 1,
+      column: 37
     },
     {
       code: '@include color-variables(\n  (\n    (feature-bg-color, (light: var(--color-scale-blue-1), dark: var(--color-fake-2)))));',
