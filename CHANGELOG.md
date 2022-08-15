@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.7.0
+
+### Minor Changes
+
+- [#294](https://github.com/primer/stylelint-config/pull/294) [`8bdb1d0`](https://github.com/primer/stylelint-config/commit/8bdb1d0a679c32a1782e33feb74bd8993aba5d80) Thanks [@keithamus](https://github.com/keithamus)! - allow for vars defined in scope, or within :root/:host selectors in file
+
 ## 12.6.1
 
 ### Patch Changes
