@@ -1041,16 +1041,16 @@
     fastq "^1.6.0"
 
 "@primer/css@^20.0.0":
-  version "20.2.4"
-  resolved "https://registry.yarnpkg.com/@primer/css/-/css-20.2.4.tgz#a900a7dcd630aed117c0364508902ac5a19783ce"
-  integrity sha512-KuOEwLXsRaZkACAxkjyFIxqmHVJDMKx+jsc0kBKRwZI2nFyH2Ji4B909ErcmlkTM9r+S383jisGBqaZJIUm14g==
+  version "20.5.1"
+  resolved "https://registry.yarnpkg.com/@primer/css/-/css-20.5.1.tgz#85e30ceb629e469f164f03549a2313f9fdd7a2a4"
+  integrity sha512-kMjlYzXqE0k6xIKC0BCZEDlngYZUcvbTgDWqUVbOk9IM19EYTMgHxME5i8wHpVGH22fQb8jnMbShdIq03uCWJw==
   dependencies:
-    "@primer/primitives" "^7.8.4"
+    "@primer/primitives" "^7.9.0"
 
-"@primer/primitives@^7.8.3", "@primer/primitives@^7.8.4":
-  version "7.8.4"
-  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.8.4.tgz#484486ee47050f18b2e82c33e9df247a5886c82a"
-  integrity sha512-cXmnhKBvrwbP3FYR9oxNYx3s8y2svsQLbDNZuoGcsZJLQ6RD3HfQ9ZtXgbyTbTYTyfPvkyd0pkQLI7tRJSc5kg==
+"@primer/primitives@^7.8.3", "@primer/primitives@^7.9.0":
+  version "7.10.0"
+  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.10.0.tgz#de0d9648d484184442583564f02d6600b872fa5f"
+  integrity sha512-DdLHq21e93R9qDHyRuRpytBLY0Up9IwNWMOUgPNW6lRSng4N4+IdUlLS3Ekbasmxfs8Z8vKS8aezeYovQ5qsxQ==
 
 "@sinclair/typebox@^0.23.3":
   version "0.23.5"
