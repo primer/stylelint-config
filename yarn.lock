@@ -1041,9 +1041,9 @@
     fastq "^1.6.0"
 
 "@primer/css@^20.0.0":
-  version "20.5.1"
-  resolved "https://registry.yarnpkg.com/@primer/css/-/css-20.5.1.tgz#85e30ceb629e469f164f03549a2313f9fdd7a2a4"
-  integrity sha512-kMjlYzXqE0k6xIKC0BCZEDlngYZUcvbTgDWqUVbOk9IM19EYTMgHxME5i8wHpVGH22fQb8jnMbShdIq03uCWJw==
+  version "20.7.1"
+  resolved "https://registry.yarnpkg.com/@primer/css/-/css-20.7.1.tgz#67b8e6bf9063aec71a1888eed704005a5ef5b0c1"
+  integrity sha512-NcTKs6PZtT7btF8GlYvoRMq8XBJ8TWGA8VBPG+dAYHm/38gx8JwKSiZG0Dt2Ue1AYoV/75Slp/mUPDnFCmbOOQ==
   dependencies:
     "@primer/primitives" "^7.9.0"
 
