@@ -9,12 +9,12 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
       return `${varName} is a deprecated color variable. Please consult the primer color docs for a replacement. https://primer.style/primitives`
     }
 
-    if (Array.isArray(replacement)) {
-      replacement = replacement.map(r => `--color-${kebabCase(r)}`)
+    if (typeof replacement === Object) {
+      replacement = replacement.map(r => `--${kebabCase(r)}`)
       return `${varName} is a deprecated color variable. Please use one of (${replacement.join(', ')}).`
     }
 
-    replacement = `--color-${kebabCase(replacement)}`
+    replacement = `--${replacement}`
     return `${varName} is a deprecated color variable. Please use the replacement ${replacement}.`
   }
 })
@@ -39,20 +39,29 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
   const seen = new WeakMap()
 
   // eslint-disable-next-line import/no-dynamic-require
-  const deprecatedColors = require(options.deprecatedFile || '@primer/primitives/dist/deprecated/colors.json')
+  const deprecatedColors = {
+    "--color-done-emphasis": {
+      "background": "--bgColor-done-emphasis",
+      "border": "--borderColor-done-emphasis"
+    },
+  }
+
+  //require(options.deprecatedFile || '@primer/primitives/dist/deprecated/colors.json')
   // eslint-disable-next-line import/no-dynamic-require
-  const removedColors = require(options.removedFile || '@primer/primitives/dist/removed/colors.json')
+  const removedColors = {} //require(options.removedFile || '@primer/primitives/dist/removed/colors.json')
 
   const variableChecks = Object.assign(deprecatedColors, removedColors)
 
   const convertedCSSVars = Object.entries(variableChecks)
-    .map(([k, v]) => {
-      return [`--color-${kebabCase(k)}`, v]
-    })
-    .reduce((acc, [key, value]) => {
-      acc[key] = value
-      return acc
-    }, {})
+  .map(([k, v]) => {
+    return [`--${k}`, v]
+  })
+  .reduce((acc, [key, value]) => {
+    acc[key] = value
+    return acc
+  }, {})
+
+  console.log(convertedCSSVars)
 
   const lintResult = (root, result) => {
     // Walk all declarations
@@ -62,6 +71,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
       } else {
         seen.set(node, true)
       }
+
       // walk these nodes
       if (!(node.type === 'decl' || node.type === 'atrule')) {
         return
@@ -74,8 +84,18 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
         if (variableName in convertedCSSVars) {
           let replacement = convertedCSSVars[variableName]
 
-          if (context.fix && replacement !== null && !Array.isArray(replacement)) {
-            replacement = `--color-${kebabCase(replacement)}`
+          if(typeof(replacement) === 'object') {
+            for(const property of Object.keys(replacement)) {
+              console.log(node.prop)
+              if(node.prop.includes(property)) {
+                replacement = replacement[property]
+                break
+              }
+            }
+          }
+
+          if (context.fix && replacement !== null) {
+            replacement = `--${replacement}, var(${variableName})`
             replacedVars[variableName] = true
             newVars[replacement] = true
             if (node.type === 'atrule') {
