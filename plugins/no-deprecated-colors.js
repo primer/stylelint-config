@@ -1,3 +1,4 @@
+import primitivesV8 from '../__tests__/__fixtures__/primitives-v8.json'
 const stylelint = require('stylelint')
 const kebabCase = require('lodash.kebabcase')
 const matchAll = require('string.prototype.matchall')
@@ -39,18 +40,18 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
   const seen = new WeakMap()
 
   // eslint-disable-next-line import/no-dynamic-require
-  const deprecatedColors = {
-    "--color-done-emphasis": {
-      "background": "--bgColor-done-emphasis",
-      "border": "--borderColor-done-emphasis"
-    },
-  }
+  // const deprecatedColors = {
+  //   "--color-done-emphasis": {
+  //     "background": "--bgColor-done-emphasis",
+  //     "border": "--borderColor-done-emphasis"
+  //   },
+  // }
 
   //require(options.deprecatedFile || '@primer/primitives/dist/deprecated/colors.json')
   // eslint-disable-next-line import/no-dynamic-require
   const removedColors = {} //require(options.removedFile || '@primer/primitives/dist/removed/colors.json')
 
-  const variableChecks = Object.assign(deprecatedColors, removedColors)
+  const variableChecks = Object.assign(primitivesV8, removedColors)
 
   const convertedCSSVars = Object.entries(variableChecks)
   .map(([k, v]) => {
