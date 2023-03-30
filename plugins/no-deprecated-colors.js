@@ -1,5 +1,4 @@
 const stylelint = require('stylelint')
-const kebabCase = require('lodash.kebabcase')
 const matchAll = require('string.prototype.matchall')
 
 const ruleName = 'primer/no-deprecated-colors'
@@ -7,11 +6,6 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: (varName, replacement) => {
     if (replacement === null) {
       return `${varName} is a deprecated color variable. Please consult the primer color docs for a replacement. https://primer.style/primitives/storybook/?path=/story/migration-tables`
-    }
-
-    if (typeof replacement === Object) {
-      replacement = replacement.map(r => `--${kebabCase(r)}`)
-      return `${varName} is a deprecated color variable. Please use one of (${replacement.join(', ')}).`
     }
 
     return `${varName} is a deprecated color variable. Please use the replacement ${replacement}.`
