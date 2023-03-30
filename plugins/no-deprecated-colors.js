@@ -32,11 +32,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
   const seen = new WeakMap()
 
   // eslint-disable-next-line import/no-dynamic-require
-  const primitivesV8 = require(options.deprecatedFile || '../__tests__/__fixtures__/primitives-v8.json')
-  // eslint-disable-next-line import/no-dynamic-require
-  const removedColors = {} //require(options.removedFile || '@primer/primitives/dist/removed/colors.json')
-
-  const variableChecks = Object.assign(primitivesV8, removedColors)
+  const variableChecks = require(options.deprecatedFile || '../__tests__/__fixtures__/primitives-v8.json')
 
   const lintResult = (root, result) => {
     // Walk all declarations

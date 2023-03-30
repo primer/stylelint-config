@@ -8,8 +8,7 @@ testRule({
   config: [
     true,
     {
-      deprecatedFile: path.join(__dirname, '__fixtures__/primitives-v8.json'),
-      removedFile: path.join(__dirname, '__fixtures__/removed.json')
+      deprecatedFile: path.join(__dirname, '__fixtures__/primitives-v8.json')
     }
   ],
   fix: true,
