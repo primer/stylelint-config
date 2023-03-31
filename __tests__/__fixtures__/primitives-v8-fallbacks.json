@@ -1,0 +1,56 @@
+{
+  "bgColor": {
+    "default": {
+      "value": "#ffffff",
+      "$type": "color",
+      "filePath": "src/tokens/functional/color/light/primitives-light.json5",
+      "isSource": true,
+      "original": {
+        "value": "{base.color.white}",
+        "$type": "color"
+      },
+      "name": "bgColor-default",
+      "attributes": {},
+      "path": ["bgColor", "default"]
+    },
+    "muted": {
+      "value": "#f6f8fa",
+      "$type": "color",
+      "filePath": "src/tokens/functional/color/light/primitives-light.json5",
+      "isSource": true,
+      "original": {
+        "value": "{base.color.gray.0}",
+        "$type": "color"
+      },
+      "name": "bgColor-muted",
+      "attributes": {},
+      "path": ["bgColor", "muted"]
+    },
+    "emphasis": {
+      "value": "#24292f",
+      "$type": "color",
+      "filePath": "src/tokens/functional/color/light/primitives-light.json5",
+      "isSource": true,
+      "original": {
+        "value": "{base.color.gray.9}",
+        "$type": "color"
+      },
+      "name": "bgColor-emphasis",
+      "attributes": {},
+      "path": ["bgColor", "emphasis"]
+    },
+    "disabled": {
+      "value": "#f6f8fa",
+      "$type": "color",
+      "filePath": "src/tokens/functional/color/light/primitives-light.json5",
+      "isSource": true,
+      "original": {
+        "value": "{base.color.gray.0}",
+        "$type": "color"
+      },
+      "name": "bgColor-disabled",
+      "attributes": {},
+      "path": ["bgColor", "disabled"]
+    }
+  }
+}

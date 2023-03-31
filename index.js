@@ -21,7 +21,8 @@ module.exports = {
     './plugins/responsive-widths',
     './plugins/spacing',
     './plugins/typography',
-    './plugins/utilities'
+    './plugins/utilities',
+    './plugins/primitives-v8-fallback',
   ],
   rules: {
     'alpha-value-notation': 'number',
@@ -66,6 +67,12 @@ module.exports = {
       true,
       {
         designTokens: '@primer/primitives/tokens-v2-private/docs/docValues.json'
+      }
+    ],
+    'primer/primitives-v8-fallback': [
+      true,
+      {
+        designTokens: '@primer/primitives/tokens-next-private/docs/functional/themes/light.json'
       }
     ],
     'primer/no-override': true,
