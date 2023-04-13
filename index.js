@@ -22,7 +22,7 @@ module.exports = {
     './plugins/spacing',
     './plugins/typography',
     './plugins/utilities',
-    './plugins/primitives-v8-fallback',
+    './plugins/primitives-v8-fallback'
   ],
   rules: {
     'alpha-value-notation': 'number',
