@@ -362,9 +362,7 @@
   "--color-switch-track-checked-disabled-fg": {
     "color": "--control-checked-fgColor-disabled"
   },
-  "--color-switch-track-checked-border": {
-    "border": "--transparent"
-  },
+  "--color-switch-track-checked-border": {},
   "--color-switch-knob-bg": {
     "background": "--controlKnob-bgColor-rest"
   },
