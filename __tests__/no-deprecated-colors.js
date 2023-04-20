@@ -8,122 +8,58 @@ testRule({
   config: [
     true,
     {
-      deprecatedFile: path.join(__dirname, '__fixtures__/deprecations.json'),
-      removedFile: path.join(__dirname, '__fixtures__/removed.json')
+      deprecatedFile: path.join(__dirname, '__fixtures__/primitives-v8.json')
     }
   ],
   fix: true,
-  accept: [{code: '.x { color: var(--color-fg-default, var(--color-text-primary)); }'}],
+  accept: [{code: '.x { color: var(--fgColor-default, var(--color-fg-default)); }'}],
   reject: [
     {
-      code: '.x { border: 1px solid var(--color-text-primary); }',
-      fixed: '.x { border: 1px solid var(--color-fg-default); }',
-      message: `--color-text-primary is a deprecated color variable. Please use the replacement --color-fg-default. (primer/no-deprecated-colors)`,
+      code: '.x { color: var(--color-fg-default); }',
+      fixed: '.x { color: var(--fgColor-default, var(--color-fg-default)); }',
+      message: `--color-fg-default is a deprecated color variable. Please use the replacement --fgColor-default. (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
     },
     {
-      code: '@mixin double-caret($border: var(--color-border-primary)) { }',
-      fixed: '@mixin double-caret($border: var(--color-border-default)) { }',
-      message: `--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)`,
-      line: 1,
-      column: 1
-    },
-    {
-      code: '@mixin double-caret() { border-color: var(--color-border-primary); }',
-      fixed: '@mixin double-caret() { border-color: var(--color-border-default); }',
-      message: `--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)`,
-      line: 1,
-      column: 25
-    },
-    {
-      code: '.x { border: 1px solid var(--color-text-primary); .foo { color: var(--color-text-primary); } }',
-      fixed: '.x { border: 1px solid var(--color-fg-default); .foo { color: var(--color-fg-default); } }',
-      warnings: [
-        {
-          message:
-            '--color-text-primary is a deprecated color variable. Please use the replacement --color-fg-default. (primer/no-deprecated-colors)',
-          line: 1,
-          column: 6
-        },
-        {
-          message:
-            '--color-text-primary is a deprecated color variable. Please use the replacement --color-fg-default. (primer/no-deprecated-colors)',
-          line: 1,
-          column: 58
-        }
-      ]
-    },
-    {
-      code: '.x { border-color: var(--color-border-primary) var(--color-border-primary); }',
-      fixed: '.x { border-color: var(--color-border-default) var(--color-border-default); }',
-      warnings: [
-        {
-          message:
-            '--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)',
-          line: 1,
-          column: 6
-        },
-        {
-          message:
-            '--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)',
-          line: 1,
-          column: 6
-        }
-      ]
-    },
-    {
-      code: '.x { border-color: var(--color-border-primary) var(--color-border-secondary); }',
-      fixed: '.x { border-color: var(--color-border-default) var(--color-border-subtle); }',
-      warnings: [
-        {
-          message:
-            '--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)',
-          line: 1,
-          column: 6
-        },
-        {
-          message:
-            '--color-border-secondary is a deprecated color variable. Please use the replacement --color-border-subtle. (primer/no-deprecated-colors)',
-          line: 1,
-          column: 6
-        }
-      ]
-    },
-    {
-      code: '$border: $border-width $border-style var(--color-border-primary) !default;',
-      fixed: '$border: $border-width $border-style var(--color-border-default) !default;',
-      message: `--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)`,
-      line: 1,
-      column: 1
-    },
-    {
-      code: '.x { border: $border-width $border-style var(--color-border-primary); }',
-      fixed: '.x { border: $border-width $border-style var(--color-border-default); }',
-      message: `--color-border-primary is a deprecated color variable. Please use the replacement --color-border-default. (primer/no-deprecated-colors)`,
+      code: '.x { border-color: var(--color-primer-border-contrast); }',
+      fixed: '.x { border-color: var(--borderColor-muted, var(--color-primer-border-contrast)); }',
+      message: `--color-primer-border-contrast is a deprecated color variable. Please use the replacement --borderColor-muted. (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
     },
     {
-      code: '.x { background-color: var(--color-bg-canvas); }',
-      fixed: '.x { background-color: var(--color-canvas-default); }',
-      message: `--color-bg-canvas is a deprecated color variable. Please use the replacement --color-canvas-default. (primer/no-deprecated-colors)`,
-      line: 1,
-      column: 6
-    },
-    {
-      code: '.x { border: 1px solid var(--color-text-secondary); }',
+      code: '.x { fill: var(--color-fg-default); }',
       unfixable: true,
-      message: `--color-text-secondary is a deprecated color variable. Please use one of (--color-fg-one, --color-fg-two). (primer/no-deprecated-colors)`,
+      message: `--color-fg-default is a deprecated color variable. Please consult the primer color docs for a replacement. https://primer.style/primitives/storybook/?path=/story/migration-tables (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
     },
     {
-      code: '.x { border: 1px solid var(--color-text-white); }',
+      code: '.x { background-color: var(--color-canvas-default-transparent); }',
       unfixable: true,
-      message: `--color-text-white is a deprecated color variable. Please consult the primer color docs for a replacement. https://primer.style/primitives (primer/no-deprecated-colors)`,
+      message: `--color-canvas-default-transparent is a deprecated color variable. Please consult the primer color docs for a replacement. https://primer.style/primitives/storybook/?path=/story/migration-tables (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
+    },
+    {
+      code: '.x { border: 1px solid var(--color-neutral-emphasis); .foo { background-color: var(--color-neutral-emphasis); } }',
+      fixed:
+        '.x { border: 1px solid var(--borderColor-neutral-emphasis, var(--color-neutral-emphasis)); .foo { background-color: var(--bgColor-neutral-emphasis, var(--color-neutral-emphasis)); } }',
+      warnings: [
+        {
+          message:
+            '--color-neutral-emphasis is a deprecated color variable. Please use the replacement --borderColor-neutral-emphasis. (primer/no-deprecated-colors)',
+          line: 1,
+          column: 6
+        },
+        {
+          message:
+            '--color-neutral-emphasis is a deprecated color variable. Please use the replacement --bgColor-neutral-emphasis. (primer/no-deprecated-colors)',
+          line: 1,
+          column: 62
+        }
+      ]
     }
   ]
 })
