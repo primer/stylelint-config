@@ -1,5 +1,6 @@
 const stylelint = require('stylelint')
 const matchAll = require('string.prototype.matchall')
+const path = require('path')
 
 const ruleName = 'primer/no-deprecated-colors'
 const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -32,7 +33,8 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
   const seen = new WeakMap()
 
   // eslint-disable-next-line import/no-dynamic-require
-  const variableChecks = require(options.deprecatedFile || '../__tests__/__fixtures__/primitives-v8.json')
+  const variableChecks = require(options.deprecatedFile ||
+    path.join(__dirname, '__tests__/__fixtures__/primitives-v8.json'))
 
   const lintResult = (root, result) => {
     // Walk all declarations
