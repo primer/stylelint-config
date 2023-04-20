@@ -56,7 +56,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
           let replacement = variableChecks[variableName]
           if (typeof replacement === 'object') {
             for (const property of Object.keys(replacement)) {
-              if (node.prop.includes(property)) {
+              if (node.prop && node.prop.includes(property)) {
                 replacement = replacement[property]
                 break
               }
