@@ -1141,12 +1141,7 @@
     "@primer/primitives" "^7.9.0"
     "@primer/view-components" "^0.0.117"
 
-"@primer/primitives@^7.11.3":
-  version "7.11.3"
-  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.11.3.tgz#ec41816368cd827a5902a5a933b1535204b47194"
-  integrity sha512-od+rjE04X5sAtGncn9v7/ehZS2O9/tBpQpRsNirU5d4EuOwWMXTt3c6zMBkke136jbmJ0VbGhU+DrLwhj0AM9w==
-
-"@primer/primitives@^7.9.0":
+"@primer/primitives@^7.8.3", "@primer/primitives@^7.9.0":
   version "7.10.0"
   resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.10.0.tgz#de0d9648d484184442583564f02d6600b872fa5f"
   integrity sha512-DdLHq21e93R9qDHyRuRpytBLY0Up9IwNWMOUgPNW6lRSng4N4+IdUlLS3Ekbasmxfs8Z8vKS8aezeYovQ5qsxQ==
