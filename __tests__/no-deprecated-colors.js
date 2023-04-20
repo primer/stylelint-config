@@ -12,7 +12,12 @@ testRule({
     }
   ],
   fix: true,
-  accept: [{code: '.x { color: var(--fgColor-default, var(--color-fg-default)); }'}],
+  accept: [
+    {code: '.x { color: var(--fgColor-default, var(--color-fg-default)); }'},
+    {
+      code: '@include focusOutline(2px, var(--focus-outlineColor, var(--color-accent-fg));'
+    }
+  ],
   reject: [
     {
       code: '.x { color: var(--color-fg-default); }',
