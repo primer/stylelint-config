@@ -521,7 +521,7 @@
   "--color-btn-danger-hover-border": [
     {
       "props": ["border", "background"],
-      "replacement": "--button-outline-borderColor-hover"
+      "replacement": "--button-danger-borderColor-hover"
     }
   ],
   "--color-btn-danger-hover-counter-bg": [
