@@ -3,12 +3,12 @@ const matchAll = require('string.prototype.matchall')
 
 const ruleName = 'primer/no-deprecated-colors'
 const messages = stylelint.utils.ruleMessages(ruleName, {
-  rejected: (varName, replacement) => {
+  rejected: (varName, replacement, property) => {
     if (replacement === null) {
-      return `${varName} is a deprecated color variable. Please consult the primer color docs for a replacement. https://primer.style/primitives/storybook/?path=/story/migration-tables`
+      return `Variable ${varName} is deprecated for property ${property}. Please consult the primer color docs for a replacement. https://primer.style/primitives/storybook/?path=/story/migration-tables`
     }
 
-    return `${varName} is a deprecated color variable. Please use the replacement ${replacement}.`
+    return `Variable ${varName} is deprecated for property ${property}. Please use the replacement ${replacement}.`
   }
 })
 
@@ -56,9 +56,10 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
           let replacement = variableChecks[variableName]
           if (typeof replacement === 'object') {
             if (node.prop) {
-              for (const prop in replacement) {
-                if (prop['props'].includes(node.prop)) {
-                  replacement = prop[prop]
+              for (const prop of replacement) {
+                // Check if node.prop starts with one of the props array elements
+                if (prop['props'].some(p => node.prop.startsWith(p))) {
+                  replacement = prop['replacement']
                   break
                 }
               }
@@ -81,7 +82,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
           }
 
           stylelint.utils.report({
-            message: messages.rejected(variableName, replacement),
+            message: messages.rejected(variableName, replacement, node.prop),
             node,
             ruleName,
             result
