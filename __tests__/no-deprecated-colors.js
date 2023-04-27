@@ -8,37 +8,42 @@ testRule({
   config: [
     true,
     {
-      deprecatedFile: path.join(__dirname, '__fixtures__/primitives-v8.json')
+      deprecatedFile: path.join(__dirname, '../plugins/lib/primitives-v8.json')
     }
   ],
   fix: true,
-  accept: [{code: '.x { color: var(--fgColor-default, var(--color-fg-default)); }'}],
+  accept: [
+    {code: '.x { color: var(--fgColor-default, var(--color-fg-default)); }'},
+    {
+      code: '@include focusOutline(2px, var(--focus-outlineColor, var(--color-accent-fg));'
+    }
+  ],
   reject: [
     {
       code: '.x { color: var(--color-fg-default); }',
       fixed: '.x { color: var(--fgColor-default, var(--color-fg-default)); }',
-      message: `--color-fg-default is a deprecated color variable. Please use the replacement --fgColor-default. (primer/no-deprecated-colors)`,
+      message: `Variable --color-fg-default is deprecated for property color. Please use the replacement --fgColor-default. (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
     },
     {
       code: '.x { border-color: var(--color-primer-border-contrast); }',
       fixed: '.x { border-color: var(--borderColor-muted, var(--color-primer-border-contrast)); }',
-      message: `--color-primer-border-contrast is a deprecated color variable. Please use the replacement --borderColor-muted. (primer/no-deprecated-colors)`,
+      message: `Variable --color-primer-border-contrast is deprecated for property border-color. Please use the replacement --borderColor-muted. (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
     },
     {
-      code: '.x { fill: var(--color-fg-default); }',
+      code: '.x { box-shadow: var(--color-fg-default); }',
       unfixable: true,
-      message: `--color-fg-default is a deprecated color variable. Please consult the primer color docs for a replacement. https://primer.style/primitives/storybook/?path=/story/migration-tables (primer/no-deprecated-colors)`,
+      message: `Variable --color-fg-default is deprecated for property box-shadow. Please consult the primer color docs for a replacement. https://primer.style/primitives/storybook/?path=/story/migration-tables (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
     },
     {
       code: '.x { background-color: var(--color-canvas-default-transparent); }',
       unfixable: true,
-      message: `--color-canvas-default-transparent is a deprecated color variable. Please consult the primer color docs for a replacement. https://primer.style/primitives/storybook/?path=/story/migration-tables (primer/no-deprecated-colors)`,
+      message: `Variable --color-canvas-default-transparent is deprecated for property background-color. Please consult the primer color docs for a replacement. https://primer.style/primitives/storybook/?path=/story/migration-tables (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
     },
@@ -49,13 +54,13 @@ testRule({
       warnings: [
         {
           message:
-            '--color-neutral-emphasis is a deprecated color variable. Please use the replacement --borderColor-neutral-emphasis. (primer/no-deprecated-colors)',
+            'Variable --color-neutral-emphasis is deprecated for property border. Please use the replacement --borderColor-neutral-emphasis. (primer/no-deprecated-colors)',
           line: 1,
           column: 6
         },
         {
           message:
-            '--color-neutral-emphasis is a deprecated color variable. Please use the replacement --bgColor-neutral-emphasis. (primer/no-deprecated-colors)',
+            'Variable --color-neutral-emphasis is deprecated for property background-color. Please use the replacement --bgColor-neutral-emphasis. (primer/no-deprecated-colors)',
           line: 1,
           column: 62
         }
