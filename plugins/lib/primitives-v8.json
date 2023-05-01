@@ -283,7 +283,12 @@
       "replacement": "--selectMenu-borderColor"
     }
   ],
-  "--color-select-menu-tap-highlight": [],
+  "--color-select-menu-tap-highlight": [
+    {
+      "props": ["background"],
+      "replacement": "--control-bgColor-active"
+    }
+  ],
   "--color-select-menu-tap-focus-bg": [
     {
       "props": ["background"],
@@ -352,7 +357,7 @@
   ],
   "--color-btn-selected-bg": [
     {
-      "props": ["color", "fill"],
+      "props": ["background"],
       "replacement": "--button-default-bgColor-selected"
     }
   ],
@@ -556,7 +561,7 @@
   ],
   "--color-btn-danger-disabled-bg": [
     {
-      "props": ["color", "fill"],
+      "props": ["background"],
       "replacement": "--button-danger-bgColor-disabled"
     }
   ],
@@ -852,7 +857,7 @@
   ],
   "--color-border-default": [
     {
-      "props": ["border", "background"],
+      "props": ["border", "background", "box-shadow"],
       "replacement": "--borderColor-default"
     }
   ],
@@ -870,7 +875,7 @@
   ],
   "--color-neutral-emphasis-plus": [
     {
-      "props": ["background"],
+      "props": ["background", "border", "color"],
       "replacement": "--bgColor-emphasis"
     }
   ],
@@ -888,6 +893,10 @@
     {
       "props": ["border"],
       "replacement": "--borderColor-neutral-muted"
+    },
+    {
+      "props": ["background"],
+      "replacement": "--bgColor-neutral-muted"
     }
   ],
   "--color-neutral-subtle": [
@@ -900,6 +909,10 @@
     {
       "props": ["color", "fill"],
       "replacement": "--fgColor-accent"
+    },
+    {
+      "props": ["border"],
+      "replacement": "--borderColor-accent-emphasis"
     }
   ],
   "--color-accent-emphasis": [
@@ -910,6 +923,10 @@
     {
       "props": ["border"],
       "replacement": "--borderColor-accent-emphasis"
+    },
+    {
+      "props": ["color", "fill"],
+      "replacement": "--fgColor-accent"
     }
   ],
   "--color-accent-muted": [
