@@ -15,7 +15,10 @@ testRule({
   accept: [
     {code: '.x { color: var(--fgColor-default, var(--color-fg-default)); }'},
     {
-      code: '@include focusOutline(2px, var(--focus-outlineColor, var(--color-accent-fg));'
+      code: '@include focusOutline(2px, var(--focus-outlineColor, var(--color-accent-fg)));'
+    },
+    {
+      code: '@include focusOutline(2px, var(--color-accent-fg));'
     }
   ],
   reject: [
@@ -23,6 +26,13 @@ testRule({
       code: '.x { color: var(--color-fg-default); }',
       fixed: '.x { color: var(--fgColor-default, var(--color-fg-default)); }',
       message: `Variable --color-fg-default is deprecated for property color. Please use the replacement --fgColor-default. (primer/no-deprecated-colors)`,
+      line: 1,
+      column: 6
+    },
+    {
+      code: '.x { border-right: $border-width $border-style var(--color-border-muted); }',
+      fixed: '.x { border-right: $border-width $border-style var(--borderColor-muted, var(--color-border-muted)); }',
+      message: `Variable --color-border-muted is deprecated for property border-right. Please use the replacement --borderColor-muted. (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
     },
@@ -42,8 +52,8 @@ testRule({
     },
     {
       code: '.x { background-color: var(--color-canvas-default-transparent); }',
-      unfixable: true,
-      message: `Variable --color-canvas-default-transparent is deprecated for property background-color. Please consult the primer color docs for a replacement. https://primer.style/primitives/storybook/?path=/story/migration-tables (primer/no-deprecated-colors)`,
+      fixed: '.x { background-color: var(transparent, var(--color-canvas-default-transparent)); }',
+      message: `Variable --color-canvas-default-transparent is deprecated for property background-color. Please use the replacement transparent. (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
     },

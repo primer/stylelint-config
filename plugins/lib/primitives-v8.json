@@ -727,7 +727,12 @@
       "replacement": "--control-checked-fgColor-disabled"
     }
   ],
-  "--color-switch-track-checked-border": [],
+  "--color-switch-track-checked-border": [
+    {
+      "props": ["border"],
+      "replacement": "transparent"
+    }
+  ],
   "--color-switch-knob-bg": [
     {
       "props": ["background"],
@@ -806,7 +811,12 @@
       "replacement": "--treeViewItem-leadingVisual-bgColor-rest"
     }
   ],
-  "--color-canvas-default-transparent": [],
+  "--color-canvas-default-transparent": [
+    {
+      "props": ["background"],
+      "replacement": "transparent"
+    }
+  ],
   "--color-fg-default": [
     {
       "props": ["color", "fill"],
@@ -821,17 +831,25 @@
     {
       "props": ["color", "fill"],
       "replacement": "--fgColor-muted"
+    },
+    {
+      "props": ["background"],
+      "replacement": "--bgColor-neutral-emphasis"
     }
   ],
   "--color-fg-subtle": [
     {
       "props": ["color", "fill"],
       "replacement": "--fgColor-muted"
+    },
+    {
+      "props": ["border"],
+      "replacement": "--borderColor-neutral-emphasis"
     }
   ],
   "--color-fg-on-emphasis": [
     {
-      "props": ["color", "fill"],
+      "props": ["color", "fill", "border"],
       "replacement": "--fgColor-onEmphasis"
     }
   ],
