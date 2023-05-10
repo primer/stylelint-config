@@ -44,14 +44,11 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
       }
 
       // walk these nodes
-      if (!(node.type === 'decl' || node.type === 'atrule')) {
+      if (node.type !== 'decl') {
         return
       }
 
-      for (const [, variableName] of matchAll(
-        node.type === 'atrule' ? node.params : node.value,
-        variableReferenceRegex
-      )) {
+      for (const [, variableName] of matchAll(node.value, variableReferenceRegex)) {
         if (variableName in variableChecks) {
           let replacement = variableChecks[variableName]
           if (typeof replacement === 'object') {
