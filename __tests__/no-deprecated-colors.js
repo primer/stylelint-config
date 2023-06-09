@@ -13,32 +13,29 @@ testRule({
   ],
   fix: true,
   accept: [
-    {code: '.x { color: var(--fgColor-default, var(--color-fg-default)); }'},
+    {code: '.x { color: var(--fgColor-default); }'},
     {
-      code: '@include focusOutline(2px, var(--focus-outlineColor, var(--color-accent-fg)));'
-    },
-    {
-      code: '@include focusOutline(2px, var(--color-accent-fg));'
+      code: '@include focusOutline(2px, var(--focus-outlineColor));'
     }
   ],
   reject: [
     {
       code: '.x { color: var(--color-fg-default); }',
-      fixed: '.x { color: var(--fgColor-default, var(--color-fg-default)); }',
+      fixed: '.x { color: var(--fgColor-default); }',
       message: `Variable --color-fg-default is deprecated for property color. Please use the replacement --fgColor-default. (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
     },
     {
       code: '.x { border-right: $border-width $border-style var(--color-border-muted); }',
-      fixed: '.x { border-right: $border-width $border-style var(--borderColor-muted, var(--color-border-muted)); }',
+      fixed: '.x { border-right: $border-width $border-style var(--borderColor-muted); }',
       message: `Variable --color-border-muted is deprecated for property border-right. Please use the replacement --borderColor-muted. (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
     },
     {
       code: '.x { border-color: var(--color-primer-border-contrast); }',
-      fixed: '.x { border-color: var(--borderColor-muted, var(--color-primer-border-contrast)); }',
+      fixed: '.x { border-color: var(--borderColor-muted); }',
       message: `Variable --color-primer-border-contrast is deprecated for property border-color. Please use the replacement --borderColor-muted. (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
@@ -52,15 +49,22 @@ testRule({
     },
     {
       code: '.x { background-color: var(--color-canvas-default-transparent); }',
-      fixed: '.x { background-color: var(transparent, var(--color-canvas-default-transparent)); }',
-      message: `Variable --color-canvas-default-transparent is deprecated for property background-color. Please use the replacement transparent. (primer/no-deprecated-colors)`,
+      fixed: '.x { background-color: var(--bgColor-transparent); }',
+      message: `Variable --color-canvas-default-transparent is deprecated for property background-color. Please use the replacement --bgColor-transparent. (primer/no-deprecated-colors)`,
+      line: 1,
+      column: 6
+    },
+    {
+      code: '.x { border-color: var(--color-canvas-default-transparent); }',
+      fixed: '.x { border-color: var(--borderColor-transparent); }',
+      message: `Variable --color-canvas-default-transparent is deprecated for property border-color. Please use the replacement --borderColor-transparent. (primer/no-deprecated-colors)`,
       line: 1,
       column: 6
     },
     {
       code: '.x { border: 1px solid var(--color-neutral-emphasis); .foo { background-color: var(--color-neutral-emphasis); } }',
       fixed:
-        '.x { border: 1px solid var(--borderColor-neutral-emphasis, var(--color-neutral-emphasis)); .foo { background-color: var(--bgColor-neutral-emphasis, var(--color-neutral-emphasis)); } }',
+        '.x { border: 1px solid var(--borderColor-neutral-emphasis); .foo { background-color: var(--bgColor-neutral-emphasis); } }',
       warnings: [
         {
           message:

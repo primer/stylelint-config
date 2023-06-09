@@ -67,7 +67,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
           }
 
           if (context.fix && replacement !== null) {
-            replacement = `${replacement}, var(${variableName})`
+            replacement = `${replacement}`
             replacedVars[variableName] = true
             newVars[replacement] = true
             if (node.type === 'atrule') {
