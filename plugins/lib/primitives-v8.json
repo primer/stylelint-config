@@ -893,7 +893,7 @@
   ],
   "--color-border-muted": [
     {
-      "props": ["border", "background", "outline"],
+      "props": ["border", "background", "outline", "box-shadow"],
       "replacement": "--borderColor-muted"
     }
   ],
