@@ -730,7 +730,7 @@
   "--color-switch-track-checked-border": [
     {
       "props": ["border"],
-      "replacement": "transparent"
+      "replacement": "--borderColor-transparent"
     }
   ],
   "--color-switch-knob-bg": [
@@ -814,7 +814,11 @@
   "--color-canvas-default-transparent": [
     {
       "props": ["background"],
-      "replacement": "transparent"
+      "replacement": "--bgColor-transparent"
+    },
+    {
+      "props": ["border"],
+      "replacement": "--borderColor-transparent"
     }
   ],
   "--color-fg-default": [
@@ -889,7 +893,7 @@
   ],
   "--color-border-muted": [
     {
-      "props": ["border", "background", "outline"],
+      "props": ["border", "background", "outline", "box-shadow"],
       "replacement": "--borderColor-muted"
     }
   ],
