@@ -249,7 +249,7 @@
   ],
   "--color-avatar-border": [
     {
-      "props": ["border", "background"],
+      "props": ["border", "background", "box-shadow"],
       "replacement": "--avatar-borderColor"
     }
   ],
@@ -859,11 +859,7 @@
   ],
   "--color-canvas-default": [
     {
-      "props": ["background"],
-      "replacement": "--bgColor-default"
-    },
-    {
-      "props": ["border", "box-shadow"],
+      "props": ["background", "border", "box-shadow", "fill"],
       "replacement": "--bgColor-default"
     }
   ],
@@ -887,7 +883,7 @@
   ],
   "--color-border-default": [
     {
-      "props": ["border", "background", "box-shadow"],
+      "props": ["border", "background", "box-shadow", "stroke"],
       "replacement": "--borderColor-default"
     }
   ],

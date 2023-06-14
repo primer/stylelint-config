@@ -55,6 +55,13 @@ testRule({
       column: 6
     },
     {
+      code: '.x { border: var(--borderWidth-thin) solid var(--color-border-default); }',
+      fixed: '.x { border: var(--borderWidth-thin) solid var(--borderColor-default); }',
+      message: `Variable --color-border-default is deprecated for property border. Please use the replacement --borderColor-default. (primer/no-deprecated-colors)`,
+      line: 1,
+      column: 6
+    },
+    {
       code: '.x { border-color: var(--color-canvas-default-transparent); }',
       fixed: '.x { border-color: var(--borderColor-transparent); }',
       message: `Variable --color-canvas-default-transparent is deprecated for property border-color. Please use the replacement --borderColor-transparent. (primer/no-deprecated-colors)`,
