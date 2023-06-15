@@ -10,7 +10,7 @@ module.exports = createVariableRule(
         '$box-shadow*',
         '$*-shadow',
         'none',
-        // Match variables in any of the following formats: --color-shadow-*, --color-*-shadow-*, --color-*-shadow, --shadow-*
+        // Match variables in any of the following formats: --color-shadow-*, --color-*-shadow-*, --color-*-shadow, --shadow-*, *shadow*
         /var\(--color-(.+-)*shadow(-.+)*\)/,
         /var\(--shadow(-.+)*\)/,
         /var\((.+-)*shadow(-.+)*\)/
