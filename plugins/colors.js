@@ -8,7 +8,8 @@ const bgVars = [
   /var\(--color-[^)]+\)/,
   /var\((.+-)*bgColor(-.+)*\)/,
   /var\((.+-)*fgColor(-.+)*\)/,
-  /var\((.+-)*borderColor(-.+)*\)/
+  /var\((.+-)*borderColor(-.+)*\)/,
+  /var\((.+-)*iconColor(-.+)*\)/
 ]
 
 module.exports = createVariableRule(
@@ -33,7 +34,8 @@ module.exports = createVariableRule(
         /var\(--color-(.+-)*text(-.+)*\)/,
         /var\(--color-(.+-)*fg(-.+)*\)/,
         /var\(--color-[^)]+\)/,
-        /var\((.+-)*fgColor(-.+)*\)/
+        /var\((.+-)*fgColor(-.+)*\)/,
+        /var\((.+-)*iconColor(-.+)*\)/
       ]
     }
   },
