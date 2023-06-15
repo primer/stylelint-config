@@ -1329,7 +1329,7 @@
       "replacement": "--avatar-shadow"
     }
   ],
-  "color-btn-text": [
+  "--color-btn-text": [
     {
       "props": ["color"],
       "replacement": "--button-default-fgColor-rest"
