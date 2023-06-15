@@ -32,7 +32,8 @@ module.exports = createVariableRule(
         // Match variables in any of the following formats: --color-text-*, --color-*-text-*, --color-*-text
         /var\(--color-(.+-)*text(-.+)*\)/,
         /var\(--color-(.+-)*fg(-.+)*\)/,
-        /var\(--color-[^)]+\)/
+        /var\(--color-[^)]+\)/,
+        /var\((.+-)*fgColor(-.+)*\)/
       ]
     }
   },
