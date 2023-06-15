@@ -5,7 +5,10 @@ const bgVars = [
   '$tooltip-background-color',
   // Match variables in any of the following formats: --color-bg-*, --color-*-bg-*, --color-*-bg
   /var\(--color-(.+-)*bg(-.+)*\)/,
-  /var\(--color-[^)]+\)/
+  /var\(--color-[^)]+\)/,
+  /var\((.+-)*bgColor(-.+)*\)/,
+  /var\((.+-)*fgColor(-.+)*\)/,
+  /var\((.+-)*borderColor(-.+)*\)/
 ]
 
 module.exports = createVariableRule(
