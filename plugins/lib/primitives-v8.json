@@ -219,7 +219,7 @@
   ],
   "--color-header-divider": [
     {
-      "props": ["border", "background"],
+      "props": ["border", "background", "color"],
       "replacement": "--header-borderColor-divider"
     }
   ],
@@ -231,7 +231,7 @@
   ],
   "--color-header-search-bg": [
     {
-      "props": ["background"],
+      "props": ["background", "background-color"],
       "replacement": "--headerSearch-bgColor"
     }
   ],
@@ -249,7 +249,7 @@
   ],
   "--color-avatar-border": [
     {
-      "props": ["border", "background"],
+      "props": ["border", "background", "box-shadow"],
       "replacement": "--avatar-borderColor"
     }
   ],
@@ -813,7 +813,7 @@
   ],
   "--color-canvas-default-transparent": [
     {
-      "props": ["background"],
+      "props": ["background", "color"],
       "replacement": "--bgColor-transparent"
     },
     {
@@ -839,6 +839,10 @@
     {
       "props": ["background"],
       "replacement": "--bgColor-neutral-emphasis"
+    },
+    {
+      "props": ["border"],
+      "replacement": "--borderColor-neutral-emphasis"
     }
   ],
   "--color-fg-subtle": [
@@ -859,11 +863,7 @@
   ],
   "--color-canvas-default": [
     {
-      "props": ["background"],
-      "replacement": "--bgColor-default"
-    },
-    {
-      "props": ["border", "box-shadow"],
+      "props": ["background", "border", "box-shadow", "fill", "stroke"],
       "replacement": "--bgColor-default"
     }
   ],
@@ -881,19 +881,19 @@
   ],
   "--color-canvas-subtle": [
     {
-      "props": ["background"],
+      "props": ["background", "fill", "border"],
       "replacement": "--bgColor-muted"
     }
   ],
   "--color-border-default": [
     {
-      "props": ["border", "background", "box-shadow"],
+      "props": ["border", "background", "box-shadow", "stroke", "outline", "fill"],
       "replacement": "--borderColor-default"
     }
   ],
   "--color-border-muted": [
     {
-      "props": ["border", "background", "outline", "box-shadow"],
+      "props": ["border", "background", "outline", "box-shadow", "stroke"],
       "replacement": "--borderColor-muted"
     }
   ],
@@ -905,7 +905,7 @@
   ],
   "--color-neutral-emphasis-plus": [
     {
-      "props": ["background", "border", "color"],
+      "props": ["background", "border", "color", "stroke"],
       "replacement": "--bgColor-emphasis"
     }
   ],
@@ -919,7 +919,7 @@
       "replacement": "--borderColor-neutral-emphasis"
     },
     {
-      "props": ["color"],
+      "props": ["color", "fill"],
       "replacement": "--fgColor-neutral"
     }
   ],
@@ -937,11 +937,15 @@
     {
       "props": ["background"],
       "replacement": "--bgColor-neutral-muted"
+    },
+    {
+      "props": ["border", "box-shadow"],
+      "replacement": "--borderColor-neutral-muted"
     }
   ],
   "--color-accent-fg": [
     {
-      "props": ["color", "fill"],
+      "props": ["color", "fill", "stroke"],
       "replacement": "--fgColor-accent"
     },
     {
@@ -951,6 +955,10 @@
     {
       "props": ["background"],
       "replacement": "--bgColor-accent-emphasis"
+    },
+    {
+      "props": ["outline"],
+      "replacement": "--focus-outlineColor"
     }
   ],
   "--color-accent-emphasis": [
@@ -963,8 +971,12 @@
       "replacement": "--borderColor-accent-emphasis"
     },
     {
-      "props": ["color", "fill"],
+      "props": ["color", "fill", "stroke"],
       "replacement": "--fgColor-accent"
+    },
+    {
+      "props": ["outline"],
+      "replacement": "--focus-outlineColor"
     }
   ],
   "--color-accent-muted": [
@@ -981,11 +993,15 @@
     {
       "props": ["background"],
       "replacement": "--bgColor-accent-muted"
+    },
+    {
+      "props": ["border", "box-shadow"],
+      "replacement": "--borderColor-accent-muted"
     }
   ],
   "--color-success-fg": [
     {
-      "props": ["color", "fill"],
+      "props": ["color", "fill", "stroke"],
       "replacement": "--fgColor-success"
     },
     {
@@ -1011,6 +1027,10 @@
     {
       "props": ["border", "box-shadow"],
       "replacement": "--borderColor-success-muted"
+    },
+    {
+      "props": ["background"],
+      "replacement": "--bgColor-success-muted"
     }
   ],
   "--color-success-subtle": [
@@ -1039,7 +1059,7 @@
       "replacement": "--borderColor-attention-emphasis"
     },
     {
-      "props": ["color"],
+      "props": ["color", "fill"],
       "replacement": "--fgColor-attention"
     }
   ],
@@ -1075,7 +1095,7 @@
       "replacement": "--borderColor-severe-emphasis"
     },
     {
-      "props": ["color"],
+      "props": ["color", "fill", "stroke"],
       "replacement": "--fgColor-severe"
     }
   ],
@@ -1107,11 +1127,11 @@
       "replacement": "--bgColor-danger-emphasis"
     },
     {
-      "props": ["border", "box-shadow"],
+      "props": ["border", "box-shadow", "outline"],
       "replacement": "--borderColor-danger-emphasis"
     },
     {
-      "props": ["color"],
+      "props": ["color", "fill"],
       "replacement": "--fgColor-danger"
     }
   ],
@@ -1119,6 +1139,10 @@
     {
       "props": ["border", "box-shadow"],
       "replacement": "--borderColor-danger-muted"
+    },
+    {
+      "props": ["background"],
+      "replacement": "--bgColor-danger-muted"
     }
   ],
   "--color-danger-subtle": [
@@ -1219,7 +1243,7 @@
       "replacement": "--borderColor-done-emphasis"
     },
     {
-      "props": ["color"],
+      "props": ["color", "fill", "stroke"],
       "replacement": "--fgColor-done"
     }
   ],
@@ -1227,6 +1251,10 @@
     {
       "props": ["border", "box-shadow"],
       "replacement": "--borderColor-done-muted"
+    },
+    {
+      "props": ["background"],
+      "replacement": "--bgColor-done-muted"
     }
   ],
   "--color-done-subtle": [
@@ -1301,7 +1329,7 @@
       "replacement": "--avatar-shadow"
     }
   ],
-  "color-btn-text": [
+  "--color-btn-text": [
     {
       "props": ["color"],
       "replacement": "--button-default-fgColor-rest"
