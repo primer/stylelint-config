@@ -12,7 +12,8 @@ module.exports = createVariableRule(
         'none',
         // Match variables in any of the following formats: --color-shadow-*, --color-*-shadow-*, --color-*-shadow, --shadow-*
         /var\(--color-(.+-)*shadow(-.+)*\)/,
-        /var\(--shadow(-.+)*\)/
+        /var\(--shadow(-.+)*\)/,
+        /var\((.+-)*shadow(-.+)*\)/
       ],
       singular: true
     }
