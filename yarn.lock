@@ -1159,7 +1159,12 @@
     "@primer/primitives" "^7.9.0"
     "@primer/view-components" "^0.0.117"
 
-"@primer/primitives@^7.8.3", "@primer/primitives@^7.9.0":
+"@primer/primitives@^7.11.11":
+  version "7.11.12"
+  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.11.12.tgz#1a36354e789f8cc3c178b66b2d100b64d4fb209d"
+  integrity sha512-AvTiuLHvvby2KPZbwwJ7GrtRJYgWyepF6XAOMw7G7Kc2iP3E32OHmaFukwh3gY+OqwcxY7st2tHWll2brk1vfQ==
+
+"@primer/primitives@^7.9.0":
   version "7.10.0"
   resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.10.0.tgz#de0d9648d484184442583564f02d6600b872fa5f"
   integrity sha512-DdLHq21e93R9qDHyRuRpytBLY0Up9IwNWMOUgPNW6lRSng4N4+IdUlLS3Ekbasmxfs8Z8vKS8aezeYovQ5qsxQ==
@@ -4175,15 +4180,10 @@ prettier-linter-helpers@^1.0.0:
   dependencies:
     fast-diff "^1.1.2"
 
-prettier@2.8.1, prettier@^2.2.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.1.tgz#4e1fd11c34e2421bc1da9aea9bd8127cd0a35efc"
-  integrity sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==
-
-prettier@^2.7.1:
-  version "2.8.7"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.7.tgz#bb79fc8729308549d28fe3a98fce73d2c0656450"
-  integrity sha512-yPngTo3aXUUmyuTjeTUT75txrf+aMh9FiD7q9ZE/i6r0bPb22g4FsE6Y338PQX1bmfy08i9QQCB7/rcUAVntfw==
+prettier@2.8.8, prettier@^2.2.1, prettier@^2.7.1:
+  version "2.8.8"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
+  integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
 
 pretty-format@^29.4.3:
   version "29.4.3"
