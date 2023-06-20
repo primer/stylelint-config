@@ -68,10 +68,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             }
           }
 
-          console.log('inlineFallback', inlineFallback)
-
           if (context.fix && replacement !== null) {
-            // replacement = `${replacement}`
             replacement = `${replacement}${inlineFallback ? `, var(${variableName})` : ''}`
             replacedVars[variableName] = true
             newVars[replacement] = true
