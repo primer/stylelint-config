@@ -20,6 +20,8 @@ const replacedVars = {}
 const newVars = {}
 
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
+  const {inlineFallback = false} = options
+
   if (!enabled) {
     return noop
   }
@@ -66,8 +68,11 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             }
           }
 
+          console.log('inlineFallback', inlineFallback)
+
           if (context.fix && replacement !== null) {
-            replacement = `${replacement}`
+            // replacement = `${replacement}`
+            replacement = `${replacement}${inlineFallback ? `, var(${variableName})` : ''}`
             replacedVars[variableName] = true
             newVars[replacement] = true
             if (node.type === 'atrule') {

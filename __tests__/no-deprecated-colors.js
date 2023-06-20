@@ -9,6 +9,7 @@ testRule({
     true,
     {
       deprecatedFile: path.join(__dirname, '../plugins/lib/primitives-v8.json')
+      // inlineFallback: true
     }
   ],
   fix: true,
@@ -72,6 +73,13 @@ testRule({
       code: '.x { border: 1px solid var(--color-neutral-emphasis); .foo { background-color: var(--color-neutral-emphasis); } }',
       fixed:
         '.x { border: 1px solid var(--borderColor-neutral-emphasis); .foo { background-color: var(--bgColor-neutral-emphasis); } }',
+      config: [
+        true,
+        {
+          deprecatedFile: path.join(__dirname, '../plugins/lib/primitives-v8.json'),
+          inlineFallback: false
+        }
+      ],
       warnings: [
         {
           message:
