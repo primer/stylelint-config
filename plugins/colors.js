@@ -3,9 +3,13 @@ const {createVariableRule} = require('./lib/variable-rules')
 const bgVars = [
   '$bg-*',
   '$tooltip-background-color',
-  // Match variables in any of the following formats: --color-bg-*, --color-*-bg-*, --color-*-bg
+  // Match variables in any of the following formats: --color-bg-*, --color-*-bg-*, --color-*-bg, *bgColor*, *fgColor*, *borderColor*, *iconColor*
   /var\(--color-(.+-)*bg(-.+)*\)/,
-  /var\(--color-[^)]+\)/
+  /var\(--color-[^)]+\)/,
+  /var\((.+-)*bgColor(-.+)*\)/,
+  /var\((.+-)*fgColor(-.+)*\)/,
+  /var\((.+-)*borderColor(-.+)*\)/,
+  /var\((.+-)*iconColor(-.+)*\)/
 ]
 
 module.exports = createVariableRule(
@@ -26,10 +30,12 @@ module.exports = createVariableRule(
         '$text-*',
         '$tooltip-text-color',
         'inherit',
-        // Match variables in any of the following formats: --color-text-*, --color-*-text-*, --color-*-text
+        // Match variables in any of the following formats: --color-text-*, --color-*-text-*, --color-*-text, *fgColor*, *iconColor*
         /var\(--color-(.+-)*text(-.+)*\)/,
         /var\(--color-(.+-)*fg(-.+)*\)/,
-        /var\(--color-[^)]+\)/
+        /var\(--color-[^)]+\)/,
+        /var\((.+-)*fgColor(-.+)*\)/,
+        /var\((.+-)*iconColor(-.+)*\)/
       ]
     }
   },
