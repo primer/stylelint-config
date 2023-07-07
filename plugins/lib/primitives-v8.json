@@ -1442,5 +1442,41 @@
       "props": ["box-shadow"],
       "replacement": "--shadow-floating-xlarge"
     }
+  ],
+  "--color-btn-danger-disabled-counter-fg": [
+    {
+      "props": ["color"],
+      "replacement": "--buttonCounter-danger-fgColor-disabled"
+    }
+  ],
+  "--color-btn-danger-hover-counter-fg": [
+    {
+      "props": ["color"],
+      "replacement": "--buttonCounter-danger-fgColor-hover"
+    }
+  ],
+  "--color-btn-danger-counter-fg": [
+    {
+      "props": ["color"],
+      "replacement": "--buttonCounter-danger-fgColor-rest"
+    }
+  ],
+  "--color-btn-outline-disabled-counter-fg": [
+    {
+      "props": ["color"],
+      "replacement": "--buttonCounter-outline-fgColor-disabled"
+    }
+  ],
+  "--color-btn-outline-hover-counter-fg": [
+    {
+      "props": ["color"],
+      "replacement": "--buttonCounter-outline-fgColor-hover"
+    }
+  ],
+  "--color-btn-outline-counter-fg": [
+    {
+      "props": ["color"],
+      "replacement": "--buttonCounter-outline-fgColor-rest"
+    }
   ]
 }
