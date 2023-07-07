@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.7.2
+
+### Patch Changes
+
+- [#343](https://github.com/primer/stylelint-config/pull/343) [`5b975fc`](https://github.com/primer/stylelint-config/commit/5b975fcd45383ecd1dd9145d868a227e4fe3e27a) Thanks [@langermank](https://github.com/langermank)! - Add missing counter btn tokens to no-deprecated-colors
+
 ## 12.7.1
 
 ### Patch Changes
