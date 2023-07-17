@@ -6,7 +6,7 @@ const ruleName = 'primer/utilities'
 const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: (selector, utilityClass) => {
     return `Consider using the Primer utility '.${utilityClass}' instead of the selector '${selector}' in your html. https://primer.style/css/utilities`
-  }
+  },
 })
 
 // eslint-disable-next-line no-unused-vars
@@ -39,7 +39,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             message: messages.rejected(rule.selector, replacement.utilityClass),
             node: rule,
             result,
-            ruleName
+            ruleName,
           })
         }
       }

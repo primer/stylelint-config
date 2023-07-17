@@ -21,8 +21,8 @@ module.exports = createVariableRule(
         '$border-style $border-width $border-color': '$border',
         '$border-style $border-color $border-width': '$border',
         '$border-color $border-width $border-style': '$border',
-        '$border-color $border-style $border-width': '$border'
-      }
+        '$border-color $border-style $border-width': '$border',
+      },
     },
     'border color': {
       expects: 'a border color variable',
@@ -35,30 +35,30 @@ module.exports = createVariableRule(
         /var\(--color-(.+-)*border(-.+)*\)/,
         /var\(--color-[^)]+\)/,
         /var\(--borderColor-[^)]+\)/,
-        /var\((.+-)*borderColor(-.+)*\)/
+        /var\((.+-)*borderColor(-.+)*\)/,
       ],
       replacements: {
-        '$border-gray': '$border-color'
-      }
+        '$border-gray': '$border-color',
+      },
     },
     'border style': {
       expects: 'a border style variable',
       props: 'border{,-top,-right,-bottom,-left}-style',
-      values: ['$border-style', 'none']
+      values: ['$border-style', 'none'],
     },
     'border width': {
       expects: 'a border width variable',
       props: 'border{,-top,-right,-bottom,-left}-width',
-      values: ['$border-width*', '0']
+      values: ['$border-width*', '0'],
     },
     'border radius': {
       expects: 'a border radius variable',
       props: 'border{,-{top,bottom}-{left,right}}-radius',
       values: ['$border-radius', '0', '50%', 'inherit'],
       replacements: {
-        '100%': '50%'
-      }
-    }
+        '100%': '50%',
+      },
+    },
   },
-  'https://primer.style/css/utilities/borders'
+  'https://primer.style/css/utilities/borders',
 )

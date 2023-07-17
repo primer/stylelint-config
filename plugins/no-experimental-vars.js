@@ -5,7 +5,7 @@ const ruleName = 'primer/no-experimental-vars'
 const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: value => {
     return `Do not use experimental variable \`var(--${value})\`. Experimental variables are undergoing testing, see https://github.com/github/primer/issues/889 for more details.`
-  }
+  },
 })
 
 // eslint-disable-next-line no-unused-vars
@@ -31,7 +31,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             message: messages.rejected(expVar),
             node: decl,
             result,
-            ruleName
+            ruleName,
           })
         }
       }

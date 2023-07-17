@@ -8,8 +8,8 @@ const configWithOptions = (...args) => ({
   plugins: [pluginPath],
   customSyntax: scss,
   rules: {
-    [ruleName]: args
-  }
+    [ruleName]: args,
+  },
 })
 
 describe(ruleName, () => {
@@ -17,13 +17,13 @@ describe(ruleName, () => {
     return stylelint
       .lint({
         code: `.x { color: #f00; }`,
-        config: configWithOptions(true)
+        config: configWithOptions(true),
       })
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a text color variable instead of "#f00". See https://primer.style/primitives/colors. (${ruleName})`
+          `Please use a text color variable instead of "#f00". See https://primer.style/primitives/colors. (${ruleName})`,
         ])
       })
   })
@@ -32,7 +32,7 @@ describe(ruleName, () => {
     return stylelint
       .lint({
         code: `.x { color: #f00; }`,
-        config: configWithOptions(false)
+        config: configWithOptions(false),
       })
       .then(data => {
         expect(data).not.toHaveErrored()
@@ -44,7 +44,7 @@ describe(ruleName, () => {
     return stylelint
       .lint({
         code: `.x { background-color: transparent; }`,
-        config: configWithOptions(true)
+        config: configWithOptions(true),
       })
       .then(data => {
         expect(data).not.toHaveErrored()
@@ -67,7 +67,7 @@ describe(ruleName, () => {
           }
         `,
         config: configWithOptions(true),
-        customSyntax: scss
+        customSyntax: scss,
       })
       .then(data => {
         expect(data).not.toHaveErrored()
@@ -79,13 +79,13 @@ describe(ruleName, () => {
     return stylelint
       .lint({
         code: `.x { background-color: $red; }`,
-        config: configWithOptions(true)
+        config: configWithOptions(true),
       })
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a background color variable instead of "$red". See https://primer.style/primitives/colors. (${ruleName})`
+          `Please use a background color variable instead of "$red". See https://primer.style/primitives/colors. (${ruleName})`,
         ])
       })
   })
@@ -94,7 +94,7 @@ describe(ruleName, () => {
     return stylelint
       .lint({
         code: `.x { background-color: $bg-red; }`,
-        config: configWithOptions(true)
+        config: configWithOptions(true),
       })
       .then(data => {
         expect(data).not.toHaveErrored()
@@ -112,7 +112,7 @@ describe(ruleName, () => {
         .a { background-color: var(--color-bg); }
         .a { background-color: var(--color-accent); }
       `,
-        config: configWithOptions(true)
+        config: configWithOptions(true),
       })
       .then(data => {
         expect(data).not.toHaveErrored()
@@ -130,7 +130,7 @@ describe(ruleName, () => {
           .a { color: var(--color-fg); }
           .a { color: var(--color-accent); }
         `,
-        config: configWithOptions(true)
+        config: configWithOptions(true),
       })
       .then(data => {
         expect(data).not.toHaveErrored()
@@ -142,13 +142,13 @@ describe(ruleName, () => {
     return stylelint
       .lint({
         code: `.x { background: red url(derp.png) top right; }`,
-        config: configWithOptions(true)
+        config: configWithOptions(true),
       })
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a background color variable instead of "red". See https://primer.style/primitives/colors. (${ruleName})`
+          `Please use a background color variable instead of "red". See https://primer.style/primitives/colors. (${ruleName})`,
         ])
       })
   })
@@ -157,13 +157,13 @@ describe(ruleName, () => {
     return stylelint
       .lint({
         code: `.x { color: #f00; }`,
-        config: configWithOptions(true, {verbose: true})
+        config: configWithOptions(true, {verbose: true}),
       })
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a text color variable instead of "#f00". See https://primer.style/primitives/colors. (${ruleName})`
+          `Please use a text color variable instead of "#f00". See https://primer.style/primitives/colors. (${ruleName})`,
         ])
       })
   })
@@ -178,13 +178,13 @@ describe(ruleName, () => {
             }
           }
         `,
-        config: configWithOptions(true, {verbose: true})
+        config: configWithOptions(true, {verbose: true}),
       })
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarningsLength(1)
         expect(data).toHaveWarnings([
-          `Please use a text color variable instead of "#f00". See https://primer.style/primitives/colors. (${ruleName})`
+          `Please use a text color variable instead of "#f00". See https://primer.style/primitives/colors. (${ruleName})`,
         ])
       })
   })
@@ -195,9 +195,9 @@ describe(ruleName, () => {
         code: `.x { color: #f00; }`,
         config: configWithOptions(true, {
           rules: {
-            'text color': false
-          }
-        })
+            'text color': false,
+          },
+        }),
       })
       .then(data => {
         expect(data).not.toHaveErrored()

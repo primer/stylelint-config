@@ -7,7 +7,7 @@ const ruleName = 'primer/responsive-widths'
 const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: value => {
     return `A value larger than the smallest viewport could break responsive pages. Use a width value smaller than ${value}. https://primer.style/css/support/breakpoints`
-  }
+  },
 })
 
 // 320px is the smallest viewport size that we support
@@ -60,7 +60,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             if (parseInt(valueUnit.number) > 320) {
               problems.push({
                 index: declarationValueIndex(decl) + node.sourceIndex,
-                message: messages.rejected(node.value)
+                message: messages.rejected(node.value),
               })
             }
             break
@@ -68,7 +68,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             if (parseInt(valueUnit.number) > 100) {
               problems.push({
                 index: declarationValueIndex(decl) + node.sourceIndex,
-                message: messages.rejected(node.value)
+                message: messages.rejected(node.value),
               })
             }
             break
@@ -82,7 +82,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             message: err.message,
             node: decl,
             result,
-            ruleName
+            ruleName,
           })
         }
       }

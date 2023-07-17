@@ -7,23 +7,23 @@ const mockVariables = {
   '$yellow-900': {
     computed: '#ff0',
     values: ['#ff0'],
-    refs: []
-  }
+    refs: [],
+  },
 }
 
 requirePrimerFile.mockImplementation(
   name =>
     ({
-      'dist/variables.json': mockVariables
-    }[name])
+      'dist/variables.json': mockVariables,
+    }[name]),
 )
 
 describe('variable rules (meta)', () => {
   it('rules can be specified as functions', () => {
     const createRule = jest.fn(() => ({
       width: {
-        values: '*'
-      }
+        values: '*',
+      },
     }))
 
     const plugin = createVariableRule('primer/derp', createRule)
@@ -42,16 +42,16 @@ describe('variable rules (meta)', () => {
       expect.objectContaining({
         options,
         ruleName: 'primer/derp',
-        variables: mockVariables
-      })
+        variables: mockVariables,
+      }),
     )
   })
 
   it('rules can be overridden with functions', () => {
     const createRule = jest.fn(() => ({
       width: {
-        values: '*'
-      }
+        values: '*',
+      },
     }))
 
     const plugin = createVariableRule('primer/derp', createRule)
@@ -62,8 +62,8 @@ describe('variable rules (meta)', () => {
 
     const getRules = jest.fn(() => ({
       width: {
-        values: '1px'
-      }
+        values: '1px',
+      },
     }))
 
     plugin.rule(true, {rules: getRules})
@@ -72,11 +72,11 @@ describe('variable rules (meta)', () => {
       expect.objectContaining({
         options: {},
         rules: {
-          width: expect.objectContaining({values: '1px'})
+          width: expect.objectContaining({values: '1px'}),
         },
         ruleName: 'primer/derp',
-        variables: mockVariables
-      })
+        variables: mockVariables,
+      }),
     )
   })
 })

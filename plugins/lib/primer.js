@@ -3,7 +3,7 @@ const {join} = require('path')
 
 module.exports = {
   getPrimerModuleDir,
-  requirePrimerFile
+  requirePrimerFile,
 }
 
 function getPrimerModuleDir() {

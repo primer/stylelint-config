@@ -11,9 +11,9 @@ testRule({
       files: [
         path.join(__dirname, '__fixtures__/color-vars.scss'),
         path.join(__dirname, '__fixtures__/defines-new-color-vars.scss'),
-        path.join(__dirname, '__fixtures__/spacing-vars.scss')
-      ]
-    }
+        path.join(__dirname, '__fixtures__/spacing-vars.scss'),
+      ],
+    },
   ],
 
   accept: [
@@ -24,14 +24,14 @@ testRule({
     {code: '.x { color: var(--color-my-second-feature); }'},
     {code: '.x { margin: var(--spacing-spacer-1); }'},
     {
-      code: '@include color-variables(\n  (\n    (feature-bg-color, (light: var(--color-scale-blue-1), dark: var(--color-scale-blue-2)))));'
+      code: '@include color-variables(\n  (\n    (feature-bg-color, (light: var(--color-scale-blue-1), dark: var(--color-scale-blue-2)))));',
     },
     {
       code: `
         .x {
           --color-foo: #ffeeee;
         }
-      `
+      `,
     },
     {
       code: `
@@ -39,7 +39,7 @@ testRule({
           --color-foo: #ffeeee;
           color: var(--color-foo);
         }
-      `
+      `,
     },
     {
       code: `
@@ -49,7 +49,7 @@ testRule({
         .x {
           color: var(--color-foo);
         }
-      `
+      `,
     },
     {
       code: `
@@ -59,7 +59,7 @@ testRule({
         .x {
           color: var(--color-foo);
         }
-      `
+      `,
     },
     {
       code: `
@@ -70,8 +70,8 @@ testRule({
           --color-bar: var(--color-foo);
           color: var(--color-bar);
         }
-      `
-    }
+      `,
+    },
   ],
 
   reject: [
@@ -79,7 +79,7 @@ testRule({
       code: '.x { color: var(--color-foo); }',
       message: messages.rejected('--color-foo'),
       line: 1,
-      column: 6
+      column: 6,
     },
     // checks to ensure other declarations with a double-dash
     // aren't accidentally parsed as CSS variables
@@ -87,55 +87,55 @@ testRule({
       code: '.x { color: var(--light); }',
       message: messages.rejected('--light'),
       line: 1,
-      column: 6
+      column: 6,
     },
     {
       code: '.x { color: var(--color-my-commented-color); }',
       message: messages.rejected('--color-my-commented-color'),
       line: 1,
-      column: 6
+      column: 6,
     },
     {
       code: '.x { color: var(--color-my-other-commented-color); }',
       message: messages.rejected('--color-my-other-commented-color'),
       line: 1,
-      column: 6
+      column: 6,
     },
     {
       code: '.x { color: var(--color-bar, #000000); }',
       message: messages.rejected('--color-bar'),
       line: 1,
-      column: 6
+      column: 6,
     },
     {
       code: '.x { --color-bar: #000000; } .y { color: var(--color-bar); }',
       message: messages.rejected('--color-bar'),
       line: 1,
-      column: 35
+      column: 35,
     },
     {
       code: '.x { --color-foo: #000000; color: var(--color-bar); }',
       message: messages.rejected('--color-bar'),
       line: 1,
-      column: 28
+      column: 28,
     },
     {
       code: ':root { --color-foo: #000000 } .x { color: var(--color-bar); }',
       message: messages.rejected('--color-bar'),
       line: 1,
-      column: 37
+      column: 37,
     },
     {
       code: ':host { --color-foo: #000000 } .x { color: var(--color-bar); }',
       message: messages.rejected('--color-bar'),
       line: 1,
-      column: 37
+      column: 37,
     },
     {
       code: '@include color-variables(\n  (\n    (feature-bg-color, (light: var(--color-scale-blue-1), dark: var(--color-fake-2)))));',
       message: messages.rejected('--color-fake-2'),
       line: 1,
-      column: 1
-    }
-  ]
+      column: 1,
+    },
+  ],
 })

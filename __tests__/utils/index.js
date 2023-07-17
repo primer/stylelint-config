@@ -6,15 +6,15 @@ const defaultConfig = require('../..')
 module.exports = {
   lint,
   defaultConfig,
-  extendDefaultConfig
+  extendDefaultConfig,
 }
 
 function extendDefaultConfig(config) {
   return Object.assign(
     {
-      extends: join(__dirname, '../..')
+      extends: join(__dirname, '../..'),
     },
-    config
+    config,
   )
 }
 
@@ -22,7 +22,7 @@ function lint(code, config = defaultConfig, options = {}) {
   return stylelint.lint(
     Object.assign(options, {
       code: `${dedent(code).trim()}\n`,
-      config
-    })
+      config,
+    }),
   )
 }

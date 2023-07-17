@@ -9,7 +9,7 @@ const bgVars = [
   /var\((.+-)*bgColor(-.+)*\)/,
   /var\((.+-)*fgColor(-.+)*\)/,
   /var\((.+-)*borderColor(-.+)*\)/,
-  /var\((.+-)*iconColor(-.+)*\)/
+  /var\((.+-)*iconColor(-.+)*\)/,
 ]
 
 module.exports = createVariableRule(
@@ -17,11 +17,11 @@ module.exports = createVariableRule(
   {
     'background-color': {
       expects: 'a background color variable',
-      values: bgVars.concat('none', 'transparent')
+      values: bgVars.concat('none', 'transparent'),
     },
     background: {
       expects: 'a background color variable',
-      values: bgVars.concat('none', 'transparent', 'top', 'right', 'bottom', 'left', 'center', '*px', 'url(*)')
+      values: bgVars.concat('none', 'transparent', 'top', 'right', 'bottom', 'left', 'center', '*px', 'url(*)'),
     },
     'text color': {
       expects: 'a text color variable',
@@ -35,9 +35,9 @@ module.exports = createVariableRule(
         /var\(--color-(.+-)*fg(-.+)*\)/,
         /var\(--color-[^)]+\)/,
         /var\((.+-)*fgColor(-.+)*\)/,
-        /var\((.+-)*iconColor(-.+)*\)/
-      ]
-    }
+        /var\((.+-)*iconColor(-.+)*\)/,
+      ],
+    },
   },
-  'https://primer.style/primitives/colors'
+  'https://primer.style/primitives/colors',
 )

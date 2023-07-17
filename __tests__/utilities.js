@@ -9,16 +9,16 @@ testRule({
   accept: [
     {
       code: '.x { padding: 1px; }',
-      description: 'Padding is a custom value.'
+      description: 'Padding is a custom value.',
     },
     {
       code: '.x { padding: $spacer-1 12px; }',
-      description: 'Padding is multiple values.'
+      description: 'Padding is multiple values.',
     },
     {
       code: '.x:hover { padding: $spacer-4; }',
-      description: 'Selector is a pseudo selector.'
-    }
+      description: 'Selector is a pseudo selector.',
+    },
   ],
   reject: [
     {
@@ -27,7 +27,7 @@ testRule({
         "Consider using the Primer utility '.p-4' instead of the selector '.x' in your html. https://primer.style/css/utilities (primer/utilities)",
       line: 1,
       column: 1,
-      description: 'Errors on spacer utility.'
+      description: 'Errors on spacer utility.',
     },
     {
       code: '.x { padding: 1px; &:hover { padding:2px; } } .x { padding: $spacer-4; }',
@@ -35,7 +35,7 @@ testRule({
         "Consider using the Primer utility '.p-4' instead of the selector '.x' in your html. https://primer.style/css/utilities (primer/utilities)",
       line: 1,
       column: 47,
-      description: 'Errors on spacer utility with hover ampersand.'
+      description: 'Errors on spacer utility with hover ampersand.',
     },
     {
       code: '.x { padding: $spacer-4 !important; }',
@@ -43,7 +43,7 @@ testRule({
         "Consider using the Primer utility '.p-4' instead of the selector '.x' in your html. https://primer.style/css/utilities (primer/utilities)",
       line: 1,
       column: 1,
-      description: 'Errors on spacer utility with !important.'
-    }
-  ]
+      description: 'Errors on spacer utility with !important.',
+    },
+  ],
 })

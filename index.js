@@ -21,7 +21,7 @@ module.exports = {
     './plugins/responsive-widths',
     './plugins/spacing',
     './plugins/typography',
-    './plugins/utilities'
+    './plugins/utilities',
   ],
   rules: {
     'alpha-value-notation': 'number',
@@ -41,7 +41,7 @@ module.exports = {
       '/^transition/': ['/all/'],
       '/^background/': ['http:', 'https:'],
       '/^border/': ['none'],
-      '/.+/': ['initial']
+      '/.+/': ['initial'],
     },
     'function-calc-no-unspaced-operator': true,
     'function-linear-gradient-no-nonstandard-direction': true,
@@ -65,13 +65,13 @@ module.exports = {
     'primer/no-experimental-vars': [
       true,
       {
-        designTokens: '@primer/primitives/tokens-v2-private/docs/docValues.json'
-      }
+        designTokens: '@primer/primitives/tokens-v2-private/docs/docValues.json',
+      },
     ],
     'primer/no-override': true,
     'primer/no-undefined-vars': [
       true,
-      {severity: 'warning', files: 'node_modules/@primer/primitives/dist/scss/colors*/*.scss'}
+      {severity: 'warning', files: 'node_modules/@primer/primitives/dist/scss/colors*/*.scss'},
     ],
     'primer/no-unused-vars': [true, {severity: 'warning'}],
     'primer/responsive-widths': true,
@@ -96,6 +96,6 @@ module.exports = {
     'string-no-newline': true,
     'string-quotes': 'single',
     'unit-no-unknown': true,
-    'value-keyword-case': null
-  }
+    'value-keyword-case': null,
+  },
 }

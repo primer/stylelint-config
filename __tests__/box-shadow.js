@@ -6,8 +6,8 @@ const ruleName = 'primer/box-shadow'
 const configWithOptions = args => ({
   plugins: [pluginPath],
   rules: {
-    [ruleName]: args
-  }
+    [ruleName]: args,
+  },
 })
 
 describe(ruleName, () => {
@@ -20,7 +20,7 @@ describe(ruleName, () => {
           .z { box-shadow: var(--color-diff-deletion-shadow); }
           .a { box-shadow: var(--color-shadow); }
         `,
-        config: configWithOptions(true)
+        config: configWithOptions(true),
       })
       .then(data => {
         expect(data).not.toHaveErrored()

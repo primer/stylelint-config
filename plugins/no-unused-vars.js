@@ -11,7 +11,7 @@ const COLON = ':'
 const SCSS_VARIABLE_PATTERN = /(\$[-\w]+)/g
 
 const messages = stylelint.utils.ruleMessages(ruleName, {
-  rejected: name => `The variable "${name}" is not referenced.`
+  rejected: name => `The variable "${name}" is not referenced.`,
 })
 
 const cache = new TapMap()
@@ -35,7 +35,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
             message: messages.rejected(name),
             node: decl,
             result,
-            ruleName
+            ruleName,
           })
         } else {
           const path = stripCwd(decl.source.input.file)
