@@ -6,8 +6,8 @@ const ruleName = 'primer/borders'
 const configWithOptions = args => ({
   plugins: [pluginPath],
   rules: {
-    [ruleName]: args
-  }
+    [ruleName]: args,
+  },
 })
 
 describe(ruleName, () => {
@@ -17,14 +17,14 @@ describe(ruleName, () => {
         code: `
           .foo { border: 1px solid gray; }
         `,
-        config: configWithOptions(true)
+        config: configWithOptions(true),
       })
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarnings([
           `Please use "$border-width" instead of "1px". See https://primer.style/css/utilities/borders. (${ruleName})`,
           `Please use "$border-style" instead of "solid". See https://primer.style/css/utilities/borders. (${ruleName})`,
-          `Please use a border color variable instead of "gray". See https://primer.style/css/utilities/borders. (${ruleName})`
+          `Please use a border color variable instead of "gray". See https://primer.style/css/utilities/borders. (${ruleName})`,
         ])
       })
   })
@@ -35,13 +35,13 @@ describe(ruleName, () => {
         code: `
           .foo { border: calc($spacer-2 + var(--derp)) $border-style rgba($border-gray-dark, 50%); }
         `,
-        config: configWithOptions(true)
+        config: configWithOptions(true),
       })
       .then(data => {
         expect(data).toHaveErrored()
         expect(data).toHaveWarnings([
           `Please use a border width variable instead of "calc($spacer-2 + var(--derp))". See https://primer.style/css/utilities/borders. (${ruleName})`,
-          `Please use a border color variable instead of "rgba($border-gray-dark, 50%)". See https://primer.style/css/utilities/borders. (${ruleName})`
+          `Please use a border color variable instead of "rgba($border-gray-dark, 50%)". See https://primer.style/css/utilities/borders. (${ruleName})`,
         ])
       })
   })
@@ -56,7 +56,7 @@ describe(ruleName, () => {
           .d { border-bottom: $border; }
           .e { border-left: $border; }
         `,
-        config: configWithOptions(true)
+        config: configWithOptions(true),
       })
       .then(data => {
         expect(data).not.toHaveErrored()
@@ -74,7 +74,7 @@ describe(ruleName, () => {
           .a { border-color: var(--color-border); }
           .a { border-color: var(--color-accent); }
         `,
-        config: configWithOptions(true)
+        config: configWithOptions(true),
       })
       .then(data => {
         expect(data).not.toHaveErrored()
