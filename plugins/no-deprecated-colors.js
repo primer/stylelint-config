@@ -1,21 +1,14 @@
 const stylelint = require('stylelint')
-const kebabCase = require('lodash.kebabcase')
 const matchAll = require('string.prototype.matchall')
 
 const ruleName = 'primer/no-deprecated-colors'
 const messages = stylelint.utils.ruleMessages(ruleName, {
-  rejected: (varName, replacement) => {
+  rejected: (varName, replacement, property) => {
     if (replacement === null) {
-      return `${varName} is a deprecated color variable. Please consult the primer color docs for a replacement. https://primer.style/primitives`
+      return `Variable ${varName} is deprecated for property ${property}. Please consult the primer color docs for a replacement. https://primer.style/primitives/storybook/?path=/story/migration-tables`
     }
 
-    if (Array.isArray(replacement)) {
-      replacement = replacement.map(r => `--color-${kebabCase(r)}`)
-      return `${varName} is a deprecated color variable. Please use one of (${replacement.join(', ')}).`
-    }
-
-    replacement = `--color-${kebabCase(replacement)}`
-    return `${varName} is a deprecated color variable. Please use the replacement ${replacement}.`
+    return `Variable ${varName} is deprecated for property ${property}. Please use the replacement ${replacement}.`
   }
 })
 
@@ -27,6 +20,8 @@ const replacedVars = {}
 const newVars = {}
 
 module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
+  const {inlineFallback = false} = options
+
   if (!enabled) {
     return noop
   }
@@ -39,20 +34,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
   const seen = new WeakMap()
 
   // eslint-disable-next-line import/no-dynamic-require
-  const deprecatedColors = require(options.deprecatedFile || '@primer/primitives/dist/deprecated/colors.json')
-  // eslint-disable-next-line import/no-dynamic-require
-  const removedColors = require(options.removedFile || '@primer/primitives/dist/removed/colors.json')
-
-  const variableChecks = Object.assign(deprecatedColors, removedColors)
-
-  const convertedCSSVars = Object.entries(variableChecks)
-    .map(([k, v]) => {
-      return [`--color-${kebabCase(k)}`, v]
-    })
-    .reduce((acc, [key, value]) => {
-      acc[key] = value
-      return acc
-    }, {})
+  const variableChecks = require(options.deprecatedFile || './lib/primitives-v8.json')
 
   const lintResult = (root, result) => {
     // Walk all declarations
@@ -62,20 +44,32 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
       } else {
         seen.set(node, true)
       }
+
       // walk these nodes
-      if (!(node.type === 'decl' || node.type === 'atrule')) {
+      if (node.type !== 'decl') {
         return
       }
 
-      for (const [, variableName] of matchAll(
-        node.type === 'atrule' ? node.params : node.value,
-        variableReferenceRegex
-      )) {
-        if (variableName in convertedCSSVars) {
-          let replacement = convertedCSSVars[variableName]
+      for (const [, variableName] of matchAll(node.value, variableReferenceRegex)) {
+        if (variableName in variableChecks) {
+          let replacement = variableChecks[variableName]
+          if (typeof replacement === 'object') {
+            if (node.prop) {
+              for (const prop of replacement) {
+                // Check if node.prop starts with one of the props array elements
+                if (prop['props'].some(p => node.prop.startsWith(p))) {
+                  replacement = prop['replacement']
+                  break
+                }
+              }
+            }
+            if (typeof replacement === 'object') {
+              replacement = null
+            }
+          }
 
-          if (context.fix && replacement !== null && !Array.isArray(replacement)) {
-            replacement = `--color-${kebabCase(replacement)}`
+          if (context.fix && replacement !== null) {
+            replacement = `${replacement}${inlineFallback ? `, var(${variableName})` : ''}`
             replacedVars[variableName] = true
             newVars[replacement] = true
             if (node.type === 'atrule') {
@@ -87,7 +81,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
           }
 
           stylelint.utils.report({
-            message: messages.rejected(variableName, replacement),
+            message: messages.rejected(variableName, replacement, node.prop),
             node,
             ruleName,
             result

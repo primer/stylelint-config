@@ -1,5 +1,33 @@
 # Changelog
 
+## 12.7.2
+
+### Patch Changes
+
+- [#343](https://github.com/primer/stylelint-config/pull/343) [`5b975fc`](https://github.com/primer/stylelint-config/commit/5b975fcd45383ecd1dd9145d868a227e4fe3e27a) Thanks [@langermank](https://github.com/langermank)! - Add missing counter btn tokens to no-deprecated-colors
+
+## 12.7.1
+
+### Patch Changes
+
+- [#338](https://github.com/primer/stylelint-config/pull/338) [`7cc4c08`](https://github.com/primer/stylelint-config/commit/7cc4c08f6465f495df89fc0609d3cdf012480dec) Thanks [@langermank](https://github.com/langermank)! - Add more tests to `no-deprecated-colors`
+
+- [#328](https://github.com/primer/stylelint-config/pull/328) [`5ae7400`](https://github.com/primer/stylelint-config/commit/5ae7400340afc2cd21006093ce7b33206a00372e) Thanks [@langermank](https://github.com/langermank)! - Fix failing tests in no-deprecated-colors
+
+- [#337](https://github.com/primer/stylelint-config/pull/337) [`6bf0fd6`](https://github.com/primer/stylelint-config/commit/6bf0fd624a69b21e48803ba62a5b2b9dc21b8d8c) Thanks [@langermank](https://github.com/langermank)! - Remove inline fallback var for no-deprecated-colors
+
+- [#332](https://github.com/primer/stylelint-config/pull/332) [`6485cf0`](https://github.com/primer/stylelint-config/commit/6485cf053f502d71a8ce8c407ad01a939038959c) Thanks [@langermank](https://github.com/langermank)! - Updated deprecated json color file
+
+- [#333](https://github.com/primer/stylelint-config/pull/333) [`485ce04`](https://github.com/primer/stylelint-config/commit/485ce047d75a635134919678a776ea808604cf4a) Thanks [@langermank](https://github.com/langermank)! - Adding more color replacements for deprecated colors
+
+- [#340](https://github.com/primer/stylelint-config/pull/340) [`4688bb4`](https://github.com/primer/stylelint-config/commit/4688bb4c0ea7975672b76af8706b80278f00f1a4) Thanks [@langermank](https://github.com/langermank)! - add inlineFallback prop to no-deprecated-colors
+
+- [#322](https://github.com/primer/stylelint-config/pull/322) [`726d7d1`](https://github.com/primer/stylelint-config/commit/726d7d1bf4eac82a032c448cb0be32d5bf66b29a) Thanks [@jonrohan](https://github.com/jonrohan)! - Updating no-deprecated-colors for primitives v8
+
+- [#334](https://github.com/primer/stylelint-config/pull/334) [`b14c154`](https://github.com/primer/stylelint-config/commit/b14c154174ddd7190e62fe1d26698fc9cfe75c17) Thanks [@langermank](https://github.com/langermank)! - More tests for `no-deprecated-colors`
+
+- [#339](https://github.com/primer/stylelint-config/pull/339) [`36fade4`](https://github.com/primer/stylelint-config/commit/36fade45bdc431d223165f5d7226c10cf6591d83) Thanks [@langermank](https://github.com/langermank)! - Update plugins to support Primitives v8
+
 ## 12.7.0
 
 ### Minor Changes
