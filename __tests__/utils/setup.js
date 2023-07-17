@@ -3,14 +3,14 @@ expect.extend({
     return {
       pass: data.errored,
       message: () => `Expected "errored" === ${!data.errored}, but got ${data.errored}:
-- ${data.results[0].warnings.map(warning => warning.text).join('\n- ')}`
+- ${data.results[0].warnings.map(warning => warning.text).join('\n- ')}`,
     }
   },
 
   toHaveResultsLength(data, length) {
     return {
       pass: data.results.length === length,
-      message: () => `Expected results.length === ${length}, but got ${data.results.length}`
+      message: () => `Expected results.length === ${length}, but got ${data.results.length}`,
     }
   },
 
@@ -19,7 +19,7 @@ expect.extend({
     return {
       pass: warnings.length === length,
       message: () => `Expected results[0].warnings.length === ${length}, but got ${warnings.length}:
-- ${warnings.map(warning => warning.text).join('\n- ')}`
+- ${warnings.map(warning => warning.text).join('\n- ')}`,
     }
   },
 
@@ -32,7 +32,7 @@ expect.extend({
 
 But got instead:
 - ${data.results[0].warnings.map(warning => warning.text).join('\n- ')}
-`
+`,
     }
   },
 
@@ -40,7 +40,7 @@ But got instead:
     const {deprecations} = data.results[0]
     return {
       pass: deprecations.length === length,
-      message: () => `Expected ${length} deprecations, but got ${deprecations.length}`
+      message: () => `Expected ${length} deprecations, but got ${deprecations.length}`,
     }
-  }
+  },
 })

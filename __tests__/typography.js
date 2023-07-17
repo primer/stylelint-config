@@ -6,8 +6,8 @@ const ruleName = 'primer/typography'
 const configWithOptions = args => ({
   plugins: [pluginPath],
   rules: {
-    [ruleName]: args
-  }
+    [ruleName]: args,
+  },
 })
 
 describe(ruleName, () => {
@@ -19,13 +19,13 @@ describe(ruleName, () => {
             .x { font-size: 11px; }
             .y { font-size: $spacer-3; }
           `,
-          config: configWithOptions(true)
+          config: configWithOptions(true),
         })
         .then(data => {
           expect(data).toHaveErrored()
           expect(data).toHaveWarnings([
             `Please use a font-size variable instead of "11px". See https://primer.style/css/utilities/typography. (${ruleName})`,
-            `Please use a font-size variable instead of "$spacer-3". See https://primer.style/css/utilities/typography. (${ruleName})`
+            `Please use a font-size variable instead of "$spacer-3". See https://primer.style/css/utilities/typography. (${ruleName})`,
           ])
         })
     })
@@ -38,7 +38,7 @@ describe(ruleName, () => {
             .h2 { font-size: $h2-size; }
             small { font-size: $font-size-small; }
           `,
-          config: configWithOptions(true)
+          config: configWithOptions(true),
         })
         .then(data => {
           expect(data).not.toHaveErrored()
@@ -53,7 +53,7 @@ describe(ruleName, () => {
             .x { font-size: 32px; }
           `,
           config: configWithOptions(true, {verbose: true}),
-          fix: true
+          fix: true,
         })
         .then(data => {
           expect(data).not.toHaveErrored()

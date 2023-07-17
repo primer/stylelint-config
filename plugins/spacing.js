@@ -21,7 +21,7 @@ const spacerValues = {
   '$em-spacer-3': '0.25em',
   '$em-spacer-4': '0.375em',
   '$em-spacer-5': '0.5em',
-  '$em-spacer-6': '0.75em'
+  '$em-spacer-6': '0.75em',
 }
 
 const ruleName = 'primer/spacing'
@@ -32,7 +32,7 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
     }
 
     return `Please replace ${value} with spacing variable '${replacement}'.`
-  }
+  },
 })
 
 const walkGroups = (root, validate) => {
@@ -83,7 +83,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
         // If the a variable is found in the value, skip it.
         if (
           Object.keys(spacerValues).some(variable =>
-            new RegExp(`${variable.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(cleanValue)
+            new RegExp(`${variable.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(cleanValue),
           )
         ) {
           return
@@ -97,7 +97,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
         } else {
           problems.push({
             index: declarationValueIndex(decl) + node.sourceIndex,
-            message: messages.rejected(valueMatch, replacement)
+            message: messages.rejected(valueMatch, replacement),
           })
         }
 
@@ -115,7 +115,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             message: err.message,
             node: decl,
             result,
-            ruleName
+            ruleName,
           })
         }
       }

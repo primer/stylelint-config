@@ -9,18 +9,18 @@ testRule({
   config: [
     true,
     {
-      designTokens: path.join(__dirname, '__fixtures__/design-tokens.json')
-    }
+      designTokens: path.join(__dirname, '__fixtures__/design-tokens.json'),
+    },
   ],
   accept: [
     {
       code: '.x { padding: 4px; }',
-      description: 'Does not error on 4px.'
+      description: 'Does not error on 4px.',
     },
     {
       code: '.x { padding: var(--base-size-4-foo); }',
-      description: 'Does not error custom naming.'
-    }
+      description: 'Does not error custom naming.',
+    },
   ],
   reject: [
     {
@@ -29,7 +29,7 @@ testRule({
         'Do not use experimental variable `var(--base-size-4)`. Experimental variables are undergoing testing, see https://github.com/github/primer/issues/889 for more details. (primer/no-experimental-vars)',
       line: 1,
       column: 15,
-      description: 'Errors on experimental var.'
+      description: 'Errors on experimental var.',
     },
     {
       code: '.x { padding: calc(var(--base-size-4) + 1); }',
@@ -37,7 +37,7 @@ testRule({
         'Do not use experimental variable `var(--base-size-4)`. Experimental variables are undergoing testing, see https://github.com/github/primer/issues/889 for more details. (primer/no-experimental-vars)',
       line: 1,
       column: 15,
-      description: 'Errors on variables inside calc.'
+      description: 'Errors on variables inside calc.',
     },
     {
       code: '.x { padding: 4px; .y { padding: calc(var(--base-size-4) + 1); } }',
@@ -45,7 +45,7 @@ testRule({
         'Do not use experimental variable `var(--base-size-4)`. Experimental variables are undergoing testing, see https://github.com/github/primer/issues/889 for more details. (primer/no-experimental-vars)',
       line: 1,
       column: 34,
-      description: 'Errors on nested declaration.'
+      description: 'Errors on nested declaration.',
     },
     {
       code: '.x { padding: var(--base-size-4) var(--base-size-8); }',
@@ -57,7 +57,7 @@ testRule({
           rule: 'primer/no-experimental-vars',
           severity: 'error',
           message:
-            'Do not use experimental variable `var(--base-size-4)`. Experimental variables are undergoing testing, see https://github.com/github/primer/issues/889 for more details. (primer/no-experimental-vars)'
+            'Do not use experimental variable `var(--base-size-4)`. Experimental variables are undergoing testing, see https://github.com/github/primer/issues/889 for more details. (primer/no-experimental-vars)',
         },
         {
           column: 15,
@@ -65,9 +65,9 @@ testRule({
           rule: 'primer/no-experimental-vars',
           severity: 'error',
           message:
-            'Do not use experimental variable `var(--base-size-8)`. Experimental variables are undergoing testing, see https://github.com/github/primer/issues/889 for more details. (primer/no-experimental-vars)'
-        }
-      ]
-    }
-  ]
+            'Do not use experimental variable `var(--base-size-8)`. Experimental variables are undergoing testing, see https://github.com/github/primer/issues/889 for more details. (primer/no-experimental-vars)',
+        },
+      ],
+    },
+  ],
 })

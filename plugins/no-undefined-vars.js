@@ -6,7 +6,7 @@ const TapMap = require('tap-map')
 
 const ruleName = 'primer/no-undefined-vars'
 const messages = stylelint.utils.ruleMessages(ruleName, {
-  rejected: varName => `${varName} is not defined`
+  rejected: varName => `${varName} is not defined`,
 })
 
 // Match CSS variable definitions (e.g. --color-text-primary:)
@@ -40,7 +40,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
           message: messages.rejected(variableName),
           node,
           result,
-          ruleName
+          ruleName,
         })
       }
     }
@@ -80,7 +80,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
           checkVariable(
             variableName,
             decl,
-            new Set([...globalDefinedVariables, ...fileDefinedVariables, ...scopeDefinedVaribles])
+            new Set([...globalDefinedVariables, ...fileDefinedVariables, ...scopeDefinedVaribles]),
           )
         }
       })

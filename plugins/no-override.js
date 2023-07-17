@@ -52,7 +52,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
       const ruleSelector = collapseWhitespace(rule.selector)
       const context = selector === rule.selector ? '' : ` in "${ruleSelector}"`
       return `"${collapseWhitespace(selector)}" should not be overridden${context}${definedIn}.`
-    }
+    },
   })
 
   return (root, result) => {
@@ -62,7 +62,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
         : '(not an array)'
       result.warn(`The "bundles" option must be an array of valid bundles; got: ${invalidBundles}`, {
         stylelintType: 'invalidOption',
-        stylelintReference: 'https://github.com/primer/stylelint-config#options'
+        stylelintReference: 'https://github.com/primer/stylelint-config#options',
       })
     }
 
@@ -71,7 +71,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
         message: messages.rejected(subject),
         node: subject.rule,
         result,
-        ruleName
+        ruleName,
       })
 
     root.walkRules(rule => {
@@ -82,7 +82,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
             return report({
               rule,
               bundle: immutableSelectors.get(selector),
-              selector
+              selector,
             })
           }
         } else {
@@ -95,7 +95,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
             return report({
               rule,
               bundle: immutableClassSelectors.get(classSelector),
-              selector: classSelector
+              selector: classSelector,
             })
           }
         }

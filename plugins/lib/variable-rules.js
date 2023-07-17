@@ -10,7 +10,7 @@ module.exports = {
   createVariableRule,
   CSS_DIRECTIONS,
   CSS_CORNERS,
-  CSS_IMPORTANT
+  CSS_IMPORTANT,
 }
 
 function createVariableRule(ruleName, rules, url) {
@@ -79,7 +79,7 @@ function createVariableRule(ruleName, rules, url) {
                       return `${m}. See ${url}.`
                     }
                     return `${m}.`
-                  }
+                  },
                 })
                 .rejected(error)
 
@@ -87,7 +87,7 @@ function createVariableRule(ruleName, rules, url) {
                 message,
                 node: decl,
                 result,
-                ruleName
+                ruleName,
               })
             }
           }

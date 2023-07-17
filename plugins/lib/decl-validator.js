@@ -28,7 +28,7 @@ module.exports = function declarationValidator(rules, options = {}) {
       return {
         rule,
         matchesProp: anymatch(props),
-        validate: Array.isArray(rule.components) ? componentValidator(rule) : valueValidator(rule)
+        validate: Array.isArray(rule.components) ? componentValidator(rule) : valueValidator(rule),
       }
     })
     .filter(Boolean)
@@ -88,7 +88,7 @@ module.exports = function declarationValidator(rules, options = {}) {
           valid: true,
           errors: [],
           fixable: false,
-          replacement: undefined
+          replacement: undefined,
         }
       } else if (replacements[value]) {
         let replacement = value
@@ -99,7 +99,7 @@ module.exports = function declarationValidator(rules, options = {}) {
           valid: false,
           errors: [{expects, prop, value, replacement}],
           fixable: true,
-          replacement
+          replacement,
         }
       } else {
         if (nested || singular) {
@@ -107,7 +107,7 @@ module.exports = function declarationValidator(rules, options = {}) {
             valid: false,
             errors: [{expects, prop, value}],
             fixable: false,
-            replacement: undefined
+            replacement: undefined,
           }
         }
 
@@ -144,7 +144,7 @@ module.exports = function declarationValidator(rules, options = {}) {
           valid,
           fixable,
           errors,
-          replacement
+          replacement,
         }
       }
     }
@@ -183,7 +183,7 @@ module.exports = function declarationValidator(rules, options = {}) {
           if (result.replacement) {
             parsed.nodes[index] = {
               type: 'word',
-              value: result.replacement
+              value: result.replacement,
             }
             fixable = true
           }
@@ -206,7 +206,7 @@ module.exports = function declarationValidator(rules, options = {}) {
           valid: false,
           errors: [{expects, prop, value: compoundValue, replacement}],
           fixable: true,
-          replacement
+          replacement,
         }
       }
 
@@ -214,7 +214,7 @@ module.exports = function declarationValidator(rules, options = {}) {
         valid: errors.length === 0,
         errors,
         fixable,
-        replacement
+        replacement,
       }
     }
   }

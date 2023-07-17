@@ -13,10 +13,10 @@ module.exports = createVariableRule(
         // Match variables in any of the following formats: --color-shadow-*, --color-*-shadow-*, --color-*-shadow, --shadow-*, *shadow*
         /var\(--color-(.+-)*shadow(-.+)*\)/,
         /var\(--shadow(-.+)*\)/,
-        /var\((.+-)*shadow(-.+)*\)/
+        /var\((.+-)*shadow(-.+)*\)/,
       ],
-      singular: true
-    }
+      singular: true,
+    },
   },
-  'https://primer.style/css/utilities/box-shadow'
+  'https://primer.style/css/utilities/box-shadow',
 )

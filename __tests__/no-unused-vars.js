@@ -10,13 +10,13 @@ describe('primer/no-unused-vars', () => {
     const config = {
       plugins: [pluginPath],
       rules: {
-        [ruleName]: [true, {files: fixture('*.scss')}]
-      }
+        [ruleName]: [true, {files: fixture('*.scss')}],
+      },
     }
     return stylelint
       .lint({
         files: fixture('has-unused-vars.scss'),
-        config
+        config,
       })
       .then(data => {
         expect(data).toHaveErrored()
@@ -28,13 +28,13 @@ describe('primer/no-unused-vars', () => {
     const config = {
       plugins: [pluginPath],
       rules: {
-        [ruleName]: false
-      }
+        [ruleName]: false,
+      },
     }
     return stylelint
       .lint({
         files: fixture('has-unused-vars.scss'),
-        config
+        config,
       })
       .then(data => {
         expect(data).not.toHaveErrored()
@@ -46,13 +46,13 @@ describe('primer/no-unused-vars', () => {
     const config = {
       plugins: [pluginPath],
       rules: {
-        [ruleName]: [true, {files: fixture('*.scss'), verbose: true}]
-      }
+        [ruleName]: [true, {files: fixture('*.scss'), verbose: true}],
+      },
     }
     return stylelint
       .lint({
         files: fixture('has-unused-vars.scss'),
-        config
+        config,
       })
       .then(data => {
         expect(data).toHaveErrored()

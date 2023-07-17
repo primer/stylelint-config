@@ -35,7 +35,7 @@ describe('stylelint-config', () => {
       expect(data).toHaveWarningsLength(2)
       expect(data).toHaveWarnings([
         'Expected "top" to come before "width" (order/properties-order)',
-        'Expected a leading zero (number-leading-zero)'
+        'Expected a leading zero (number-leading-zero)',
       ])
     })
   })
