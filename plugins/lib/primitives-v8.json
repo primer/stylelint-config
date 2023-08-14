@@ -876,7 +876,7 @@
   "--color-canvas-inset": [
     {
       "props": ["background"],
-      "replacement": "--bgColor-muted"
+      "replacement": "--bgColor-inset"
     }
   ],
   "--color-canvas-subtle": [
