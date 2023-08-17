@@ -93,5 +93,11 @@ module.exports = {
     'string-no-newline': true,
     'unit-no-unknown': true,
     'value-keyword-case': null,
+    'selector-not-notation': null,
+    'import-notation': ['string'],
+    'annotation-no-unknown': null,
+    'keyframe-selector-notation': ['percentage-unless-within-keyword-only-block'],
+    'media-query-no-invalid': null,
+    'media-feature-range-notation': ['prefix'],
   },
 }
