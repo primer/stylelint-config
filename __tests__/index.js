@@ -36,7 +36,7 @@ describe('stylelint-config', () => {
       expect(data).toHaveWarningsLength(2)
       expect(data).toHaveWarnings([
         'Expected "top" to come before "width" (order/properties-order)',
-        'Unexpected value "initial" for property "max-width" (declaration-property-value-disallowed-list)'
+        'Unexpected value "initial" for property "max-width" (declaration-property-value-disallowed-list)',
       ])
     })
   })
