@@ -29,13 +29,14 @@ describe('stylelint-config', () => {
         .foo {
           width: 10px;
           top: .2em;
+          max-width: initial;
         }
       `).then(data => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(2)
       expect(data).toHaveWarnings([
         'Expected "top" to come before "width" (order/properties-order)',
-        'Expected a leading zero (number-leading-zero)',
+        'Unexpected value "initial" for property "max-width" (declaration-property-value-disallowed-list)'
       ])
     })
   })
