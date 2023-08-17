@@ -1,5 +1,15 @@
 # Changelog
 
+## 12.8.0
+
+### Minor Changes
+
+- [#356](https://github.com/primer/stylelint-config/pull/356) [`fdf5660`](https://github.com/primer/stylelint-config/commit/fdf566018fea555b6b6b0d2cfe1c6e88d8746a07) Thanks [@jonrohan](https://github.com/jonrohan)! - Upgrading to stylelint 15.10.2
+
+### Patch Changes
+
+- [#353](https://github.com/primer/stylelint-config/pull/353) [`cdb7ca9`](https://github.com/primer/stylelint-config/commit/cdb7ca90d4c38e429f24db92bf07578ad44d4032) Thanks [@langermank](https://github.com/langermank)! - Add `bgColor-inset` fallback for Primitives v8
+
 ## 12.7.2
 
 ### Patch Changes
