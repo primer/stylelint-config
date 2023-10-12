@@ -7,7 +7,6 @@ module.exports = {
   plugins: [
     'stylelint-no-unsupported-browser-features',
     'stylelint-order',
-    './plugins/borders',
     './plugins/box-shadow',
     './plugins/colors',
     './plugins/no-deprecated-colors',
@@ -17,8 +16,6 @@ module.exports = {
     './plugins/no-undefined-vars',
     './plugins/no-unused-vars',
     './plugins/responsive-widths',
-    './plugins/spacing',
-    './plugins/typography',
     './plugins/utilities',
   ],
   rules: {
@@ -53,7 +50,6 @@ module.exports = {
     'number-max-precision': null,
     'order/properties-order': propertyOrder,
     'plugin/no-unsupported-browser-features': [true, {severity: 'warning', browsers}],
-    'primer/borders': true,
     'primer/box-shadow': true,
     'primer/colors': true,
     'primer/no-deprecated-colors': true,
@@ -70,8 +66,6 @@ module.exports = {
     ],
     'primer/no-unused-vars': [true, {severity: 'warning'}],
     'primer/responsive-widths': true,
-    'primer/spacing': true,
-    'primer/typography': true,
     'primer/utilities': null,
     'selector-class-pattern': null,
     'selector-max-compound-selectors': 3,
@@ -94,7 +88,7 @@ module.exports = {
     {
       files: ['*.scss', '**/*.scss'],
       customSyntax: require('postcss-scss'),
-      plugins: ['stylelint-scss'],
+      plugins: ['stylelint-scss', './plugins/borders', './plugins/typography', './plugins/spacing'],
       rules: {
         'scss/at-extend-no-missing-placeholder': true,
         'scss/at-rule-no-unknown': true,
@@ -104,6 +98,9 @@ module.exports = {
         'scss/function-unquote-no-unquoted-strings-inside': true,
         'scss/no-duplicate-mixins': true,
         'scss/selector-no-redundant-nesting-selector': true,
+        'primer/borders': true,
+        'primer/spacing': true,
+        'primer/typography': true
       },
     },
     {
