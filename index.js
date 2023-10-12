@@ -3,12 +3,10 @@ const propertyOrder = require('./property-order')
 
 module.exports = {
   extends: ['stylelint-config-standard'],
-  customSyntax: require('postcss-scss'),
   ignoreFiles: ['**/*.js', '**/*.cjs'],
   plugins: [
     'stylelint-no-unsupported-browser-features',
     'stylelint-order',
-    'stylelint-scss',
     './plugins/borders',
     './plugins/box-shadow',
     './plugins/colors',
@@ -75,14 +73,6 @@ module.exports = {
     'primer/spacing': true,
     'primer/typography': true,
     'primer/utilities': null,
-    'scss/at-extend-no-missing-placeholder': true,
-    'scss/at-rule-no-unknown': true,
-    'scss/declaration-nested-properties-no-divided-groups': true,
-    'scss/dollar-variable-no-missing-interpolation': true,
-    'scss/function-quote-no-quoted-strings-inside': true,
-    'scss/function-unquote-no-unquoted-strings-inside': true,
-    'scss/no-duplicate-mixins': true,
-    'scss/selector-no-redundant-nesting-selector': true,
     'selector-class-pattern': null,
     'selector-max-compound-selectors': 3,
     'selector-max-id': 0,
@@ -100,4 +90,78 @@ module.exports = {
     'media-query-no-invalid': null,
     'media-feature-range-notation': ['prefix'],
   },
+  overrides: [
+    {
+      files: ['*.scss', '**/*.scss'],
+      customSyntax: require('postcss-scss'),
+      plugins: ['stylelint-scss'],
+      rules: {
+        'scss/at-extend-no-missing-placeholder': true,
+        'scss/at-rule-no-unknown': true,
+        'scss/declaration-nested-properties-no-divided-groups': true,
+        'scss/dollar-variable-no-missing-interpolation': true,
+        'scss/function-quote-no-quoted-strings-inside': true,
+        'scss/function-unquote-no-unquoted-strings-inside': true,
+        'scss/no-duplicate-mixins': true,
+        'scss/selector-no-redundant-nesting-selector': true,
+      },
+    },
+    {
+      files: ['*.tsx', '**/*.tsx'],
+      rules: {
+        'order/properties-order': null,
+        'rule-empty-line-before': null,
+        'declaration-empty-line-before': null,
+        'comment-empty-line-before': null,
+        'length-zero-no-unit': null,
+        'scss/selector-no-redundant-nesting-selector': null,
+        'selector-max-type': null,
+        'primer/spacing': null,
+        'primer/colors': null,
+        'primer/borders': null,
+        'primer/typography': null,
+        'primer/box-shadow': null,
+        'primer/no-deprecated-colors': [
+          true,
+          {
+            inlineFallback: true,
+          },
+        ],
+        'primer/no-scale-colors': null,
+        'primer/utilities': null,
+        'property-no-unknown': [
+          true,
+          {
+            ignoreProperties: ['@container', 'container-type'],
+          },
+        ],
+        'scss/at-rule-no-unknown': [
+          true,
+          {
+            ignoreAtRules: ['container', 'container-type'],
+          },
+        ],
+        'primer/no-override': null,
+      },
+    },
+    {
+      files: ['*.pcss', '**/*.pcss'],
+      rules: {
+        'custom-property-pattern': null,
+        'selector-class-pattern': null,
+        'keyframes-name-pattern': null,
+        'no-descending-specificity': null,
+        'declaration-block-no-redundant-longhand-properties': null,
+        'color-function-notation': 'legacy',
+        'selector-nested-pattern': '^&\\s?\\W',
+        'at-rule-no-unknown': [
+          true,
+          {
+            ignoreAtRules: ['mixin', 'define-mixin'],
+          },
+        ],
+        'primer/no-deprecated-colors': true,
+      },
+    },
+  ],
 }
