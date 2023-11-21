@@ -9,7 +9,7 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
     }
 
     return `Variable ${varName} is deprecated for property ${property}. Please use the replacement ${replacement}.`
-  },
+  }
 })
 
 // Match CSS variable references (e.g var(--color-text-primary))
@@ -63,6 +63,15 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
                 }
               }
             }
+            if (inlineFallback && !replacement.includes(',')) {
+              // report error if inlineFallback is true and replacement does not have a fallback
+              stylelint.utils.report({
+                message: messages.rejected(variableName, replacement, node.prop),
+                node,
+                ruleName,
+                result
+              })
+            }
             if (typeof replacement === 'object') {
               replacement = null
             }
@@ -84,7 +93,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
             message: messages.rejected(variableName, replacement, node.prop),
             node,
             ruleName,
-            result,
+            result
           })
         }
       }
@@ -92,7 +101,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
   }
 
   log(
-    `${Object.keys(replacedVars).length} deprecated variables replaced with ${Object.keys(newVars).length} variables.`,
+    `${Object.keys(replacedVars).length} deprecated variables replaced with ${Object.keys(newVars).length} variables.`
   )
   return lintResult
 })
