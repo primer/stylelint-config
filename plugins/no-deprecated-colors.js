@@ -71,6 +71,7 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
                 ruleName,
                 result
               })
+              continue
             }
             if (typeof replacement === 'object') {
               replacement = null
