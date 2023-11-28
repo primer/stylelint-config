@@ -75,6 +75,7 @@ module.exports = {
     'primer/spacing': true,
     'primer/typography': true,
     'primer/utilities': null,
+    'primer/new-color-vars-have-fallback': true,
     'scss/at-extend-no-missing-placeholder': true,
     'scss/at-rule-no-unknown': true,
     'scss/declaration-nested-properties-no-divided-groups': true,
