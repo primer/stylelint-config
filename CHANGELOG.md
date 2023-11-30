@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.9.0
+
+### Minor Changes
+
+- [#376](https://github.com/primer/stylelint-config/pull/376) [`a31e0d3`](https://github.com/primer/stylelint-config/commit/a31e0d392cf73c623ae8a8cf957796ede4386e00) Thanks [@langermank](https://github.com/langermank)! - Adds new plugin: `new-color-vars-have-fallback` to check that if new Primitive v8 colors are used, they have a fallback value.
+
 ## 12.8.0
 
 ### Minor Changes
