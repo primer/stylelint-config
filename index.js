@@ -22,6 +22,7 @@ module.exports = {
     './plugins/spacing',
     './plugins/typography',
     './plugins/utilities',
+    './plugins/new-color-vars-have-fallback',
   ],
   rules: {
     'alpha-value-notation': 'number',
@@ -75,6 +76,7 @@ module.exports = {
     'primer/spacing': true,
     'primer/typography': true,
     'primer/utilities': null,
+    'primer/new-color-vars-have-fallback': [true, {severity: 'error'}],
     'scss/at-extend-no-missing-placeholder': true,
     'scss/at-rule-no-unknown': true,
     'scss/declaration-nested-properties-no-divided-groups': true,
