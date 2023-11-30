@@ -22,6 +22,7 @@ module.exports = {
     './plugins/spacing',
     './plugins/typography',
     './plugins/utilities',
+    './plugins/new-color-vars-have-fallback',
   ],
   rules: {
     'alpha-value-notation': 'number',
