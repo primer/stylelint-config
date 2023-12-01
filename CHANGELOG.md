@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.9.1
+
+### Patch Changes
+
+- [#382](https://github.com/primer/stylelint-config/pull/382) [`2cbe3be`](https://github.com/primer/stylelint-config/commit/2cbe3be3cecb4d7e0a9d0ad2be32ebcaceb063a5) Thanks [@langermank](https://github.com/langermank)! - Update `new-color-css-vars` to exclude scale colors
+
 ## 12.9.0
 
 ### Minor Changes
