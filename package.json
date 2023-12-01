@@ -44,7 +44,7 @@
     "@primer/css": "^21.0.8",
     "@primer/primitives": "^7.11.11",
     "dedent": "1.5.1",
-    "eslint": "8.39.0",
+    "eslint": "8.55.0",
     "eslint-plugin-github": "4.8.0",
     "eslint-plugin-jest": "27.2.3",
     "eslint-plugin-prettier": "4.2.1",
