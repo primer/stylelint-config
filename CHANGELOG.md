@@ -1,5 +1,11 @@
 # Changelog
 
+## 12.9.2
+
+### Patch Changes
+
+- [#388](https://github.com/primer/stylelint-config/pull/388) [`43b1066`](https://github.com/primer/stylelint-config/commit/43b10662c9f48837069690751f42eed1359c7372) Thanks [@langermank](https://github.com/langermank)! - New rule: safegaurd alpha `display` color tokens
+
 ## 12.9.1
 
 ### Patch Changes
