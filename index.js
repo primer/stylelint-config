@@ -23,6 +23,7 @@ module.exports = {
     './plugins/typography',
     './plugins/utilities',
     './plugins/new-color-vars-have-fallback',
+    './plugins/no-display-colors',
   ],
   rules: {
     'alpha-value-notation': 'number',
