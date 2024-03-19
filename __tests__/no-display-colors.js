@@ -12,7 +12,10 @@ testRule({
     },
   ],
 
-  accept: [{code: '.x { color: var(--fgColor-accent); }'}],
+  accept: [
+    {code: '.x { color: var(--fgColor-accent); }'},
+    {code: '.x { line-height: var(--text-display-lineHeight); }'},
+  ],
 
   reject: [
     {
