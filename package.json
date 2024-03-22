@@ -19,52 +19,38 @@
     "browsers.js",
     "plugins/"
   ],
+  "type": "module",
   "scripts": {
-    "test": "jest --coverage false",
+    "test": "node --test",
     "lint": "eslint .",
     "release": "changeset publish"
   },
   "dependencies": {
+    "@primer/primitives": "^7.15.14",
     "anymatch": "^3.1.1",
     "globby": "^11.0.1",
     "postcss-scss": "^4.0.2",
     "postcss-value-parser": "^4.0.2",
     "string.prototype.matchall": "^4.0.2",
-    "stylelint": "^15.10.2",
-    "stylelint-config-standard": "^34.0.0",
-    "stylelint-no-unsupported-browser-features": "^7.0.0",
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-no-unsupported-browser-features": "^8.0.0",
     "stylelint-order": "^6.0.3",
-    "stylelint-scss": "^5.1.0",
+    "stylelint-scss": "^6.2.0",
     "tap-map": "^1.0.0"
   },
   "devDependencies": {
+    "stylelint-test-rule-node": "^0.2.1",
     "@changesets/changelog-github": "0.4.7",
     "@changesets/cli": "2.26.1",
     "@github/prettier-config": "0.0.6",
-    "@primer/css": "^21.0.8",
-    "@primer/primitives": "^7.11.11",
+    "@primer/css": "^21.2.2",
     "dedent": "1.5.1",
-    "eslint": "8.39.0",
-    "eslint-plugin-github": "4.8.0",
-    "eslint-plugin-jest": "27.2.3",
-    "eslint-plugin-prettier": "4.2.1",
-    "jest": "29.4.3",
-    "jest-preset-stylelint": "6.1.0",
-    "prettier": "2.8.1"
+    "eslint": "^8.39.0",
+    "eslint-plugin-github": "^4.10.2",
+    "eslint-plugin-jest": "^27.2.3",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.0"
   },
-  "jest": {
-    "preset": "jest-preset-stylelint",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.js",
-      "plugins/**/*.js"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/__tests__/utils/setup.js"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "__tests__/utils"
-    ]
-  }
+  "module": "index.js"
 }

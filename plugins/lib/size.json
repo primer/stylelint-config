@@ -1,0 +1,71 @@
+{
+  "base-size-4": {
+    "values": [
+      "0.25rem",
+      "4px"
+    ]
+  },
+  "base-size-8": {
+    "values": [ "0.5rem", "8px"]
+  },
+  "base-size-12": {
+    "values": ["0.75rem", "12px"]
+  },
+  "base-size-16": {
+    "values": ["1rem", "16px"]
+  },
+  "base-size-20": {
+    "values": ["1.25rem", "20px"]
+  },
+  "base-size-24": {
+    "values": ["1.5rem", "24px"]
+  },
+  "base-size-28": {
+    "values": ["1.75rem", "28px"]
+  },
+  "base-size-32": {
+    "values": ["2rem", "32px"]
+  },
+  "base-size-36": {
+    "values": ["2.25rem","36px"]
+  },
+  "base-size-40": {
+    "values": ["2.5rem","40px"]
+  },
+  "base-size-44": {
+    "values": ["2.75rem","44px"]
+  },
+  "base-size-48": {
+    "values": ["3rem","48px"]
+  },
+  "base-size-64": {
+    "values": [
+      "4rem",
+      "64px"
+    ]
+  },
+  "base-size-80": {
+    "values": [
+      "5rem",
+      "80px"
+    ]
+  },
+  "base-size-96": {
+    "values": [
+      "6rem",
+      "96px"
+    ]
+  },
+  "base-size-112": {
+    "values": [
+      "7rem",
+      "112px"
+    ]
+  },
+  "base-size-128": {
+    "values": [
+      "128px",
+      "8rem"
+    ]
+  }
+}
