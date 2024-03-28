@@ -28,7 +28,7 @@ const ruleName = 'primer/spacing'
 const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: (value, replacement) => {
     if (replacement === null) {
-      return `Please use a primer spacer variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing`
+      return `Please use a primer spacer variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs`
     }
 
     return `Please replace ${value} with spacing variable '${replacement}'.`
