@@ -42,7 +42,7 @@ testRule({
       code: '.x { padding-bottom: 0.3em; }',
       unfixable: true,
       message:
-        "Please use a primer spacer variable instead of '0.3em'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)",
+        "Please use a primer spacer variable instead of '0.3em'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
       line: 1,
       column: 22,
       description: 'Errors on non-spacer em values.',
@@ -90,7 +90,7 @@ testRule({
           rule: 'primer/spacing',
           severity: 'error',
           message:
-            "Please use a primer spacer variable instead of '6px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)",
+            "Please use a primer spacer variable instead of '6px'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
         },
         {
           column: 32,
@@ -98,7 +98,7 @@ testRule({
           rule: 'primer/spacing',
           severity: 'error',
           message:
-            "Please use a primer spacer variable instead of '12px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)",
+            "Please use a primer spacer variable instead of '12px'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
         },
       ],
     },
@@ -113,7 +113,7 @@ testRule({
           rule: 'primer/spacing',
           severity: 'error',
           message:
-            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)",
+            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
         },
         {
           column: 19,
@@ -128,7 +128,7 @@ testRule({
       code: '.x { padding: $spacer-100; }',
       unfixable: true,
       message:
-        "Please use a primer spacer variable instead of '$spacer-100'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)",
+        "Please use a primer spacer variable instead of '$spacer-100'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
       line: 1,
       column: 15,
       description: 'Errors on non-primer spacer.',
@@ -137,7 +137,7 @@ testRule({
       code: '.x { margin-right: (-$spacing-task-item-1); }',
       unfixable: true,
       message:
-        "Please use a primer spacer variable instead of '-$spacing-task-item-1'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)",
+        "Please use a primer spacer variable instead of '-$spacing-task-item-1'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
       line: 1,
       column: 21,
       description: 'Errors on non-primer spacer in parens.',
@@ -153,7 +153,7 @@ testRule({
           rule: 'primer/spacing',
           severity: 'error',
           message:
-            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)",
+            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
         },
         {
           column: 34,
@@ -161,7 +161,7 @@ testRule({
           rule: 'primer/spacing',
           severity: 'error',
           message:
-            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)",
+            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
         },
         {
           column: 53,
@@ -169,7 +169,7 @@ testRule({
           rule: 'primer/spacing',
           severity: 'error',
           message:
-            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/support/spacing (primer/spacing)",
+            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
         },
       ],
     },
