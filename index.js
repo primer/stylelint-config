@@ -1,9 +1,11 @@
-const browsers = require('./browsers')
-const propertyOrder = require('./property-order')
+import browsers from './browsers'
+import propertyOrder from './property-order'
+import scssSyntax from 'postcss-scss'
 
-module.exports = {
+/** @type {import('stylelint').Config} */
+export default {
   extends: ['stylelint-config-standard'],
-  customSyntax: require('postcss-scss'),
+  customSyntax: scssSyntax,
   ignoreFiles: ['**/*.js', '**/*.cjs'],
   plugins: [
     'stylelint-no-unsupported-browser-features',

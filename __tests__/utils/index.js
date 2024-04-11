@@ -1,15 +1,16 @@
-const dedent = require('dedent')
-const stylelint = require('stylelint')
-const {join} = require('path')
-const defaultConfig = require('../..')
+import dedent from 'dedent'
+import stylelint from 'stylelint'
+import {join} from 'path'
+import defaultConfig from '../..'
+import {fileURLToPath} from 'url'
 
-module.exports = {
-  lint,
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
+
+export default {
   defaultConfig,
-  extendDefaultConfig,
 }
 
-function extendDefaultConfig(config) {
+export function extendDefaultConfig(config) {
   return Object.assign(
     {
       extends: join(__dirname, '../..'),
@@ -18,7 +19,7 @@ function extendDefaultConfig(config) {
   )
 }
 
-function lint(code, config = defaultConfig, options = {}) {
+export function lint(code, config = defaultConfig, options = {}) {
   return stylelint.lint(
     Object.assign(options, {
       code: `${dedent(code).trim()}\n`,

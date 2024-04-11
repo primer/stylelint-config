@@ -6,6 +6,7 @@
   "author": "GitHub, Inc.",
   "license": "MIT",
   "main": "index.js",
+  "type": "module",
   "repository": "primer/stylelint-config",
   "keywords": [
     "github",
@@ -20,7 +21,7 @@
     "plugins/"
   ],
   "scripts": {
-    "test": "jest --coverage false",
+    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest --coverage false",
     "lint": "eslint .",
     "release": "changeset publish"
   },
@@ -30,11 +31,11 @@
     "postcss-scss": "^4.0.2",
     "postcss-value-parser": "^4.0.2",
     "string.prototype.matchall": "^4.0.2",
-    "stylelint": "^15.10.2",
-    "stylelint-config-standard": "^34.0.0",
-    "stylelint-no-unsupported-browser-features": "^7.0.0",
-    "stylelint-order": "^6.0.3",
-    "stylelint-scss": "^5.1.0",
+    "stylelint": "^16.3.1",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-no-unsupported-browser-features": "^8.0.0",
+    "stylelint-order": "^6.0.4",
+    "stylelint-scss": "^6.2.0",
     "tap-map": "^1.0.0"
   },
   "devDependencies": {
@@ -48,16 +49,22 @@
     "eslint-plugin-github": "4.8.0",
     "eslint-plugin-jest": "27.2.3",
     "eslint-plugin-prettier": "4.2.1",
-    "jest": "29.4.3",
-    "jest-preset-stylelint": "6.1.0",
+    "jest": "^29.7.0",
+    "jest-preset-stylelint": "^7.0.0",
     "prettier": "2.8.1"
   },
   "jest": {
+    "transform": {},
+    "testMatch": [
+      "**/__tests__/**/*.[jt]s?(x)",
+      "**/__tests__/**/*.cjs",
+      "**/?(*.)+(spec|test).[tj]s?(x)"
+    ],
     "preset": "jest-preset-stylelint",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/**/*.js",
-      "plugins/**/*.js"
+      "src/**/*.[c]js",
+      "plugins/**/*.[c]js"
     ],
     "setupFilesAfterEnv": [
       "<rootDir>/__tests__/utils/setup.js"

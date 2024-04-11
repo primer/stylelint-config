@@ -1,19 +1,12 @@
-const stylelint = require('stylelint')
-const {requirePrimerFile} = require('./primer')
-const declarationValidator = require('./decl-validator')
+import stylelint from 'stylelint'
+import {requirePrimerFile} from './primer'
+import declarationValidator from './decl-validator'
 
-const CSS_IMPORTANT = '!important'
-const CSS_DIRECTIONS = ['top', 'right', 'bottom', 'left']
-const CSS_CORNERS = ['top-right', 'bottom-right', 'bottom-left', 'top-left']
+export const CSS_IMPORTANT = '!important'
+export const CSS_DIRECTIONS = ['top', 'right', 'bottom', 'left']
+export const CSS_CORNERS = ['top-right', 'bottom-right', 'bottom-left', 'top-left']
 
-module.exports = {
-  createVariableRule,
-  CSS_DIRECTIONS,
-  CSS_CORNERS,
-  CSS_IMPORTANT,
-}
-
-function createVariableRule(ruleName, rules, url) {
+export function createVariableRule(ruleName, rules, url) {
   let variables = {}
   try {
     variables = requirePrimerFile('dist/variables.json')

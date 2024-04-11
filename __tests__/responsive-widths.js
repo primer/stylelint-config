@@ -1,8 +1,8 @@
-const {ruleName} = require('../plugins/responsive-widths')
+import {ruleName} from '../plugins/responsive-widths'
 
 // eslint-disable-next-line no-undef
 testRule({
-  plugins: ['./plugins/responsive-widths.js'],
+  plugins: ['./plugins/responsive-widths'],
   customSyntax: 'postcss-scss',
   ruleName,
   config: [true],

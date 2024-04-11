@@ -1,9 +1,12 @@
-const path = require('path')
-const {ruleName} = require('../plugins/no-experimental-vars')
+import path from 'path'
+import {ruleName} from '../plugins/no-experimental-vars'
+import {fileURLToPath} from 'url'
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 // eslint-disable-next-line no-undef
 testRule({
-  plugins: ['./plugins/no-experimental-vars.js'],
+  plugins: ['./plugins/no-experimental-vars'],
   customSyntax: 'postcss-scss',
   ruleName,
   config: [

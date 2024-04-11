@@ -1,9 +1,12 @@
-const {join} = require('path')
-const stylelint = require('stylelint')
+import {join} from 'path'
+import stylelint from 'stylelint'
+import {fileURLToPath} from 'url'
+import pluginPath from '../plugins/no-unused-vars'
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 const fixture = (...path) => join(__dirname, '__fixtures__', ...path)
 const ruleName = 'primer/no-unused-vars'
-const pluginPath = require.resolve('../plugins/no-unused-vars')
 
 describe('primer/no-unused-vars', () => {
   it('finds unused vars', () => {

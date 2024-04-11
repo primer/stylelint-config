@@ -1,12 +1,14 @@
-const stylelint = require('stylelint')
+import stylelint from 'stylelint'
+import {createRequire} from 'module'
 
-const ruleName = 'primer/new-color-vars-have-fallback'
-const messages = stylelint.utils.ruleMessages(ruleName, {
+export const ruleName = 'primer/new-color-vars-have-fallback'
+export const messages = stylelint.utils.ruleMessages(ruleName, {
   expectedFallback: variable =>
-    `Expected a fallback value for CSS variable ${variable}. New color variables fallbacks, check primer.style/primitives to find the correct value`,
+  `Expected a fallback value for CSS variable ${variable}. New color variables fallbacks, check primer.style/primitives to find the correct value`,
 })
 
-module.exports = stylelint.createPlugin(ruleName, enabled => {
+export default stylelint.createPlugin(ruleName, enabled => {
+  const require = createRequire(import.meta.url)
   const variables = require('./lib/new-color-css-vars-map.json')
 
   if (!enabled) {
@@ -34,6 +36,3 @@ module.exports = stylelint.createPlugin(ruleName, enabled => {
 })
 
 function noop() {}
-
-module.exports.ruleName = ruleName
-module.exports.messages = messages

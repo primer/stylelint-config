@@ -1,4 +1,4 @@
-const {createVariableRule} = require('./lib/variable-rules')
+import {createVariableRule} from './lib/variable-rules'
 
 const bgVars = [
   '$bg-*',
@@ -12,7 +12,7 @@ const bgVars = [
   /var\((.+-)*iconColor(-.+)*\)/,
 ]
 
-module.exports = createVariableRule(
+export default createVariableRule(
   'primer/colors',
   {
     'background-color': {

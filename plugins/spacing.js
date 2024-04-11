@@ -1,6 +1,6 @@
-const stylelint = require('stylelint')
-const declarationValueIndex = require('stylelint/lib/utils/declarationValueIndex')
-const valueParser = require('postcss-value-parser')
+import stylelint from 'stylelint'
+import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.cjs'
+import valueParser from 'postcss-value-parser'
 
 // TODO: Pull this in from primer/primitives
 const spacerValues = {
@@ -24,8 +24,8 @@ const spacerValues = {
   '$em-spacer-6': '0.75em',
 }
 
-const ruleName = 'primer/spacing'
-const messages = stylelint.utils.ruleMessages(ruleName, {
+export const ruleName = 'primer/spacing'
+export const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: (value, replacement) => {
     if (replacement === null) {
       return `Please use a primer spacer variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs`
@@ -47,7 +47,7 @@ const walkGroups = (root, validate) => {
 }
 
 // eslint-disable-next-line no-unused-vars
-module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
+export default stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
   if (!enabled) {
     return noop
   }
@@ -126,6 +126,3 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
 })
 
 function noop() {}
-
-module.exports.ruleName = ruleName
-module.exports.messages = messages

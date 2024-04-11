@@ -1,12 +1,9 @@
-const {existsSync} = require('fs')
-const {join} = require('path')
+import {existsSync} from 'fs'
+import {join} from 'path'
+import {createRequire} from 'module'
 
-module.exports = {
-  getPrimerModuleDir,
-  requirePrimerFile,
-}
-
-function getPrimerModuleDir() {
+export function getPrimerModuleDir() {
+  const require = createRequire(import.meta.url)
   const cwd = process.cwd()
   const localPackageJson = join(cwd, 'package.json')
   if (existsSync(localPackageJson)) {
@@ -19,7 +16,8 @@ function getPrimerModuleDir() {
   return '@primer/css'
 }
 
-function requirePrimerFile(path) {
+export function requirePrimerFile(path) {
+  const require = createRequire(import.meta.url)
   const fullPath = join(getPrimerModuleDir(), path)
   // eslint-disable-next-line import/no-dynamic-require
   return require(fullPath)

@@ -1,22 +1,5 @@
-const {createVariableRule} = require('../plugins/lib/variable-rules')
-const {requirePrimerFile} = require('../plugins/lib/primer')
-
-jest.mock('../plugins/lib/primer')
-
-const mockVariables = {
-  '$yellow-900': {
-    computed: '#ff0',
-    values: ['#ff0'],
-    refs: [],
-  },
-}
-
-requirePrimerFile.mockImplementation(
-  name =>
-    ({
-      'dist/variables.json': mockVariables,
-    }[name]),
-)
+import {createVariableRule} from '../plugins/lib/variable-rules'
+import {jest} from '@jest/globals'
 
 describe('variable rules (meta)', () => {
   it('rules can be specified as functions', () => {
@@ -41,8 +24,7 @@ describe('variable rules (meta)', () => {
     expect(createRule).toHaveBeenCalledWith(
       expect.objectContaining({
         options,
-        ruleName: 'primer/derp',
-        variables: mockVariables,
+        ruleName: 'primer/derp'
       }),
     )
   })
@@ -74,8 +56,7 @@ describe('variable rules (meta)', () => {
         rules: {
           width: expect.objectContaining({values: '1px'}),
         },
-        ruleName: 'primer/derp',
-        variables: mockVariables,
+        ruleName: 'primer/derp'
       }),
     )
   })

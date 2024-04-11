@@ -1,4 +1,5 @@
-const {lint, extendDefaultConfig} = require('./utils')
+import {lint, extendDefaultConfig} from './utils'
+import noOverride from '../plugins/no-override'
 
 describe('primer/no-override', () => {
   it(`doesn't run when disabled`, () => {
@@ -47,7 +48,7 @@ describe('primer/no-override', () => {
 
   it('only reports class selectors', () => {
     const config = {
-      plugins: [require.resolve('../plugins/no-override')],
+      plugins: [noOverride],
       rules: {
         'primer/no-override': [true, {bundles: ['base']}],
       },

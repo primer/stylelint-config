@@ -1,4 +1,4 @@
-const {lint} = require('./utils')
+import {lint} from './utils'
 
 const SAFE_SCSS_EXAMPLE = `
   .Component { float: left; }

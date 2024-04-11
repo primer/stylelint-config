@@ -1,9 +1,12 @@
-const path = require('path')
-const {messages, ruleName} = require('../plugins/no-display-colors')
+import path from 'path'
+import {messages, ruleName} from '../plugins/no-display-colors'
+import {fileURLToPath} from 'url'
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 // eslint-disable-next-line no-undef
 testRule({
-  plugins: ['./plugins/no-display-colors.js'],
+  plugins: ['./plugins/no-display-colors'],
   ruleName,
   config: [
     true,

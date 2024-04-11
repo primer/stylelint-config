@@ -1,6 +1,6 @@
-const {createVariableRule} = require('./lib/variable-rules')
+import {createVariableRule} from './lib/variable-rules'
 
-module.exports = createVariableRule(
+export default createVariableRule(
   'primer/borders',
   {
     border: {

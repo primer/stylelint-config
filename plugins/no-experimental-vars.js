@@ -1,18 +1,20 @@
-const stylelint = require('stylelint')
-const declarationValueIndex = require('stylelint/lib/utils/declarationValueIndex')
+import stylelint from 'stylelint'
+import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex'
+import {createRequire} from 'module'
 
-const ruleName = 'primer/no-experimental-vars'
-const messages = stylelint.utils.ruleMessages(ruleName, {
+export const ruleName = 'primer/no-experimental-vars'
+export const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: value => {
     return `Do not use experimental variable \`var(--${value})\`. Experimental variables are undergoing testing, see https://github.com/github/primer/issues/889 for more details.`
   },
 })
 
 // eslint-disable-next-line no-unused-vars
-module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
+export default stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
   if (!enabled) {
     return noop
   }
+  const require = createRequire(import.meta.url)
 
   // eslint-disable-next-line import/no-dynamic-require
   const designTokens = require(options.designTokens)
@@ -42,6 +44,3 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
 })
 
 function noop() {}
-
-module.exports.ruleName = ruleName
-module.exports.messages = messages

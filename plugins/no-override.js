@@ -1,12 +1,12 @@
-const stylelint = require('stylelint')
-const {requirePrimerFile} = require('./lib/primer')
+import stylelint from 'stylelint'
+import {requirePrimerFile} from './lib/primer'
 
 const ruleName = 'primer/no-override'
 const CLASS_PATTERN = /(\.[-\w]+)/
 const CLASS_PATTERN_ALL = new RegExp(CLASS_PATTERN, 'g')
 const CLASS_PATTERN_ONLY = /^\.[-\w]+(:{1,2}[-\w]+)?$/
 
-module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
+export default stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   if (!enabled) {
     return noop
   }

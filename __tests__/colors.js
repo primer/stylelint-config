@@ -1,7 +1,7 @@
-const dedent = require('dedent')
-const stylelint = require('stylelint')
-const pluginPath = require.resolve('../plugins/colors')
-const scss = require('postcss-scss')
+import dedent from 'dedent'
+import stylelint from 'stylelint'
+import pluginPath from '../plugins/colors'
+import scss from 'postcss-scss'
 
 const ruleName = 'primer/colors'
 const configWithOptions = (...args) => ({

@@ -1,10 +1,10 @@
-const stylelint = require('stylelint')
-const declarationValueIndex = require('stylelint/lib/utils/declarationValueIndex')
-const valueParser = require('postcss-value-parser')
+import stylelint from 'stylelint'
+import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.cjs'
+import valueParser from 'postcss-value-parser'
 
-const ruleName = 'primer/responsive-widths'
+export const ruleName = 'primer/responsive-widths'
 
-const messages = stylelint.utils.ruleMessages(ruleName, {
+export const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: value => {
     return `A value larger than the smallest viewport could break responsive pages. Use a width value smaller than ${value}. https://primer.style/css/support/breakpoints`
   },
@@ -24,7 +24,7 @@ const walkGroups = (root, validate) => {
 }
 
 // eslint-disable-next-line no-unused-vars
-module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
+export default stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
   if (!enabled) {
     return noop
   }
@@ -93,6 +93,3 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
 })
 
 function noop() {}
-
-module.exports.ruleName = ruleName
-module.exports.messages = messages

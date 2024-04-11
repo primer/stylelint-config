@@ -1,9 +1,12 @@
-const path = require('path')
-const {messages, ruleName} = require('../plugins/no-undefined-vars')
+import path from 'path'
+import {messages, ruleName} from '../plugins/no-undefined-vars'
+import {fileURLToPath} from 'url'
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 // eslint-disable-next-line no-undef
 testRule({
-  plugins: ['./plugins/no-undefined-vars.js'],
+  plugins: ['./plugins/no-undefined-vars'],
   ruleName,
   config: [
     true,

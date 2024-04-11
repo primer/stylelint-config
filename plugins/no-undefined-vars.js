@@ -1,11 +1,11 @@
-const fs = require('fs')
-const stylelint = require('stylelint')
-const matchAll = require('string.prototype.matchall')
-const globby = require('globby')
-const TapMap = require('tap-map')
+import fs from 'fs'
+import stylelint from 'stylelint'
+import matchAll from 'string.prototype.matchall'
+import globby from 'globby'
+import TapMap from 'tap-map'
 
-const ruleName = 'primer/no-undefined-vars'
-const messages = stylelint.utils.ruleMessages(ruleName, {
+export const ruleName = 'primer/no-undefined-vars'
+export const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: varName => `${varName} is not defined`,
 })
 
@@ -19,7 +19,7 @@ const colorModeVariableDefinitionRegex = /^[^/\n]*\(["']?([^'"\s,]+)["']?,\s*\(l
 // eslint-disable-next-line no-useless-escape
 const variableReferenceRegex = /var\(([^\),]+)(,.*)?\)/g
 
-module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
+export default stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   if (!enabled) {
     return noop
   }
@@ -116,6 +116,3 @@ function getDefinedVariables(globs, log) {
 }
 
 function noop() {}
-
-module.exports.ruleName = ruleName
-module.exports.messages = messages
