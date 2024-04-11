@@ -1,4 +1,4 @@
-import {ruleName}  from '../plugins/utilities'
+import {ruleName} from '../plugins/utilities'
 
 // eslint-disable-next-line no-undef
 testRule({

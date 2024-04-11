@@ -4,7 +4,7 @@ import {createRequire} from 'module'
 export const ruleName = 'primer/new-color-vars-have-fallback'
 export const messages = stylelint.utils.ruleMessages(ruleName, {
   expectedFallback: variable =>
-  `Expected a fallback value for CSS variable ${variable}. New color variables fallbacks, check primer.style/primitives to find the correct value`,
+    `Expected a fallback value for CSS variable ${variable}. New color variables fallbacks, check primer.style/primitives to find the correct value`,
 })
 
 export default stylelint.createPlugin(ruleName, enabled => {

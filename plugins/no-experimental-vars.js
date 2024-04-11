@@ -1,5 +1,5 @@
 import stylelint from 'stylelint'
-import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex'
+import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.mjs'
 import {createRequire} from 'module'
 
 export const ruleName = 'primer/no-experimental-vars'

@@ -24,7 +24,7 @@ describe('variable rules (meta)', () => {
     expect(createRule).toHaveBeenCalledWith(
       expect.objectContaining({
         options,
-        ruleName: 'primer/derp'
+        ruleName: 'primer/derp',
       }),
     )
   })
@@ -56,7 +56,7 @@ describe('variable rules (meta)', () => {
         rules: {
           width: expect.objectContaining({values: '1px'}),
         },
-        ruleName: 'primer/derp'
+        ruleName: 'primer/derp',
       }),
     )
   })
