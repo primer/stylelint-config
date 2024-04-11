@@ -55,16 +55,11 @@
   },
   "jest": {
     "transform": {},
-    "testMatch": [
-      "**/__tests__/**/*.[jt]s?(x)",
-      "**/__tests__/**/*.cjs",
-      "**/?(*.)+(spec|test).[tj]s?(x)"
-    ],
     "preset": "jest-preset-stylelint",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/**/*.[c]js",
-      "plugins/**/*.[c]js"
+      "src/**/*.js",
+      "plugins/**/*.js"
     ],
     "setupFilesAfterEnv": [
       "<rootDir>/__tests__/utils/setup.js"
