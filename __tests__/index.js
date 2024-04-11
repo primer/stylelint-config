@@ -1,4 +1,4 @@
-import {lint} from './utils'
+import {lint} from './utils/index.js'
 
 const SAFE_SCSS_EXAMPLE = `
   .Component { float: left; }

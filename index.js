@@ -1,5 +1,5 @@
-import browsers from './browsers'
-import propertyOrder from './property-order'
+import browsers from '@github/browserslist-config'
+import propertyOrder from './property-order.js'
 import scssSyntax from 'postcss-scss'
 
 /** @type {import('stylelint').Config} */

@@ -1,5 +1,5 @@
 import path from 'path'
-import {messages, ruleName} from '../plugins/no-display-colors'
+import {messages, ruleName} from '../plugins/no-display-colors.js'
 import {fileURLToPath} from 'url'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))

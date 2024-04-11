@@ -2,12 +2,15 @@
   "name": "@primer/stylelint-config",
   "version": "12.9.2",
   "description": "Sharable stylelint config used by GitHub's CSS",
-  "homepage": "http://primer.style/css/tools/linting",
   "author": "GitHub, Inc.",
   "license": "MIT",
-  "main": "index.js",
+  "main": "./index.js",
   "type": "module",
-  "repository": "primer/stylelint-config",
+  "browserslist": "extends @github/browserslist-config",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/primer/stylelint-config.git"
+  },
   "keywords": [
     "github",
     "primer",
@@ -17,15 +20,19 @@
   ],
   "files": [
     "property-order.js",
-    "browsers.js",
     "plugins/"
   ],
+  "engines": {
+    "node": ">16.0.0"
+  },
   "scripts": {
     "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest --coverage false",
+    "test:stylelint": "stylelint __tests__/__fixtures__/uses-vars.scss",
     "lint": "eslint .",
     "release": "changeset publish"
   },
   "dependencies": {
+    "@github/browserslist-config": "^1.0.0",
     "anymatch": "^3.1.1",
     "globby": "^11.0.1",
     "postcss-scss": "^4.0.2",
@@ -38,6 +45,7 @@
     "stylelint-scss": "^6.2.0",
     "tap-map": "^1.0.0"
   },
+  "prettier": "@github/prettier-config",
   "devDependencies": {
     "@changesets/changelog-github": "0.4.7",
     "@changesets/cli": "2.26.1",

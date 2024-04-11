@@ -1,6 +1,6 @@
 import stylelint from 'stylelint'
-import {requirePrimerFile} from './primer'
-import declarationValidator from './decl-validator'
+import {requirePrimerFile} from './primer.js'
+import declarationValidator from './decl-validator.js'
 
 export const CSS_IMPORTANT = '!important'
 export const CSS_DIRECTIONS = ['top', 'right', 'bottom', 'left']

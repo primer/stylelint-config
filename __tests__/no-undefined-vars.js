@@ -1,5 +1,5 @@
 import path from 'path'
-import {messages, ruleName} from '../plugins/no-undefined-vars'
+import {messages, ruleName} from '../plugins/no-undefined-vars.js'
 import {fileURLToPath} from 'url'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))

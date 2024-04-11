@@ -1,5 +1,5 @@
 import path from 'path'
-import {ruleName} from '../plugins/no-deprecated-colors'
+import {ruleName} from '../plugins/no-deprecated-colors.js'
 import {fileURLToPath} from 'url'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))

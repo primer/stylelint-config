@@ -1,6 +1,6 @@
 import dedent from 'dedent'
 import stylelint from 'stylelint'
-import pluginPath from '../plugins/colors'
+import pluginPath from '../plugins/colors.js'
 import scss from 'postcss-scss'
 
 const ruleName = 'primer/colors'

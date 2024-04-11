@@ -1,5 +1,5 @@
 import path from 'path'
-import {ruleName} from '../plugins/no-experimental-vars'
+import {ruleName} from '../plugins/no-experimental-vars.js'
 import {fileURLToPath} from 'url'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))

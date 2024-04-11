@@ -1,5 +1,5 @@
-import {lint, extendDefaultConfig} from './utils'
-import noOverride from '../plugins/no-override'
+import {lint, extendDefaultConfig} from './utils/index.js'
+import noOverride from '../plugins/no-override.js'
 
 describe('primer/no-override', () => {
   it(`doesn't run when disabled`, () => {

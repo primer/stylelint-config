@@ -1,6 +1,6 @@
 import dedent from 'dedent'
 import stylelint from 'stylelint'
-import borders from '../plugins/borders'
+import borders from '../plugins/borders.js'
 
 const ruleName = 'primer/borders'
 const configWithOptions = args => ({

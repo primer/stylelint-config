@@ -1,5 +1,5 @@
 import path from 'path'
-import {messages, ruleName} from '../plugins/no-scale-colors'
+import {messages, ruleName} from '../plugins/no-scale-colors.js'
 import {fileURLToPath} from 'url'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))

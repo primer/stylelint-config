@@ -1,7 +1,7 @@
 import {join} from 'path'
 import stylelint from 'stylelint'
 import {fileURLToPath} from 'url'
-import pluginPath from '../plugins/no-unused-vars'
+import pluginPath from '../plugins/no-unused-vars.js'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 

@@ -1,4 +1,4 @@
-import declarationValidator from '../plugins/lib/decl-validator'
+import declarationValidator from '../plugins/lib/decl-validator.js'
 
 describe('declarationValidator()', () => {
   it('validates values', () => {

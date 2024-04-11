@@ -1,4 +1,4 @@
-import {ruleName} from '../plugins/new-color-vars-have-fallback'
+import {ruleName} from '../plugins/new-color-vars-have-fallback.js'
 
 // eslint-disable-next-line no-undef
 testRule({

@@ -1,4 +1,4 @@
-import {createVariableRule} from './lib/variable-rules'
+import {createVariableRule} from './lib/variable-rules.js'
 
 export default createVariableRule(
   'primer/typography',

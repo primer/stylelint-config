@@ -12,6 +12,7 @@ jobs:
       - uses: actions/setup-node@v3
       - run: npm ci
       - run: npm run test
+      - run: npm run test:stylelint
   lint:
     runs-on: ubuntu-latest
     steps:

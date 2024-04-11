@@ -1,5 +1,5 @@
 import stylelint from 'stylelint'
-import utilities from './lib/primer-utilities'
+import utilities from './lib/primer-utilities.js'
 
 export const ruleName = 'primer/utilities'
 

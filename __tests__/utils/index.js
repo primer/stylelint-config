@@ -1,7 +1,7 @@
 import dedent from 'dedent'
 import stylelint from 'stylelint'
 import {join} from 'path'
-import defaultConfig from '../..'
+import defaultConfig from '../../index.js'
 import {fileURLToPath} from 'url'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))

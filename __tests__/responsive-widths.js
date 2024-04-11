@@ -1,4 +1,4 @@
-import {ruleName} from '../plugins/responsive-widths'
+import {ruleName} from '../plugins/responsive-widths.js'
 
 // eslint-disable-next-line no-undef
 testRule({
