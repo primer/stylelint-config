@@ -41,6 +41,8 @@
   },
   "dependencies": {
     "@github/browserslist-config": "^1.0.0",
+    "@primer/css": "^21.0.8",
+    "@primer/primitives": "^7.16.0",
     "anymatch": "^3.1.1",
     "globby": "^11.0.1",
     "postcss-scss": "^4.0.2",
@@ -60,8 +62,6 @@
     "@changesets/changelog-github": "0.4.7",
     "@changesets/cli": "2.26.1",
     "@github/prettier-config": "^0.0.6",
-    "@primer/css": "^21.0.8",
-    "@primer/primitives": "^7.16.0",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
