@@ -15,7 +15,7 @@ export default stylelint.createPlugin(ruleName, (enabled, options = {}, context)
     return noop
   }
 
-  let experimentalVars = new Set()
+  const experimentalVars = new Set()
   for (const tokenType of Object.keys(designTokens)) {
     for (const token of designTokens[tokenType].map(t => t['name'])) {
       experimentalVars.add(token)
