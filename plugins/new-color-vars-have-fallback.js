@@ -1,5 +1,5 @@
 import stylelint from 'stylelint'
-import {createRequire} from 'module'
+import variables from './lib/new-color-css-vars-map.json' assert {type: 'json'}
 
 export const ruleName = 'primer/new-color-vars-have-fallback'
 export const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -8,9 +8,6 @@ export const messages = stylelint.utils.ruleMessages(ruleName, {
 })
 
 export default stylelint.createPlugin(ruleName, enabled => {
-  const require = createRequire(import.meta.url)
-  const variables = require('./lib/new-color-css-vars-map.json')
-
   if (!enabled) {
     return noop
   }
