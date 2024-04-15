@@ -25,7 +25,6 @@ export default stylelint.createPlugin(ruleName, (enabled, options = {}, context)
   const lintResult = (root, result) => {
     root.walkDecls(decl => {
       for (const expVar of experimentalVars) {
-        // console.log(expVar, decl.value.includes(`var(--${expVar})`))
         if (decl.value.includes(`var(--${expVar})`)) {
           stylelint.utils.report({
             index: declarationValueIndex(decl),
