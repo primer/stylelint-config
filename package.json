@@ -24,6 +24,7 @@
     "stylelint"
   ],
   "files": [
+    "dist/",
     "property-order.js",
     "plugins/"
   ],
