@@ -4,6 +4,9 @@ import {ruleName} from '../plugins/no-deprecated-colors.js'
 testRule({
   plugins: ['./plugins/no-deprecated-colors'],
   ruleName,
+  config: [
+    true,
+  ],
   fix: true,
   accept: [
     {code: '.x { color: var(--fgColor-default); }'},
@@ -65,6 +68,12 @@ testRule({
       code: '.x { border: 1px solid var(--color-neutral-emphasis); .foo { background-color: var(--color-neutral-emphasis); } }',
       fixed:
         '.x { border: 1px solid var(--borderColor-neutral-emphasis); .foo { background-color: var(--bgColor-neutral-emphasis); } }',
+      config: [
+        true,
+        {
+          inlineFallback: false,
+        },
+      ],
       warnings: [
         {
           message:

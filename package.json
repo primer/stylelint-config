@@ -61,7 +61,7 @@
     "@changesets/cli": "2.26.1",
     "@github/prettier-config": "^0.0.6",
     "@primer/css": "^21.0.8",
-    "@primer/primitives": "^7.11.11",
+    "@primer/primitives": "^7.16.0",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",

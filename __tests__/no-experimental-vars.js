@@ -5,6 +5,9 @@ testRule({
   plugins: ['./plugins/no-experimental-vars'],
   customSyntax: 'postcss-scss',
   ruleName,
+  config: [
+    true
+  ],
   accept: [
     {
       code: '.x { padding: 4px; }',

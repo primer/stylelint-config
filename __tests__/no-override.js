@@ -50,7 +50,7 @@ describe('primer/no-override', () => {
     const config = {
       plugins: [noOverride],
       rules: {
-        'primer/no-override': [true, {bundles: ['base']}],
+        'primer/no-override': [true],
       },
     }
     return lint(`body { width: 10px; }`, config).then(data => {
@@ -66,7 +66,6 @@ describe('primer/no-override', () => {
           'primer/no-override': [
             true,
             {
-              bundles: ['utilities'],
               ignoreSelectors: ['.px-4'],
             },
           ],
@@ -84,7 +83,6 @@ describe('primer/no-override', () => {
           'primer/no-override': [
             true,
             {
-              bundles: ['utilities'],
               ignoreSelectors: [/\.px-[0-9]/],
             },
           ],
@@ -102,7 +100,6 @@ describe('primer/no-override', () => {
           'primer/no-override': [
             true,
             {
-              bundles: ['utilities'],
               ignoreSelectors: selector => selector === '.px-4',
             },
           ],
@@ -111,40 +108,6 @@ describe('primer/no-override', () => {
       return lint(`.px-4 { margin: 0 $spacer-1 !important; }`, config).then(data => {
         expect(data).not.toHaveErrored()
         expect(data).toHaveWarningsLength(0)
-      })
-    })
-  })
-
-  describe('invalid options', () => {
-    it('warns when you bundles is not an array', () => {
-      const config = extendDefaultConfig({
-        rules: {
-          'primer/no-override': [true, {bundles: 'derp'}],
-        },
-      })
-      return lint('.foo { width: 10px; }', config).then(data => {
-        expect(data).not.toHaveErrored()
-        expect(data.results[0].invalidOptionWarnings).toEqual([
-          {
-            text: `The "bundles" option must be an array of valid bundles; got: (not an array)`,
-          },
-        ])
-      })
-    })
-
-    it('warns when you pass an invalid bundle name', () => {
-      const config = extendDefaultConfig({
-        rules: {
-          'primer/no-override': [true, {bundles: ['asdf']}],
-        },
-      })
-      return lint('.foo { width: 10px; }', config).then(data => {
-        expect(data).not.toHaveErrored()
-        expect(data.results[0].invalidOptionWarnings).toEqual([
-          {
-            text: `The "bundles" option must be an array of valid bundles; got: "asdf"`,
-          },
-        ])
       })
     })
   })

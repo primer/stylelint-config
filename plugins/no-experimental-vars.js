@@ -15,14 +15,17 @@ export default stylelint.createPlugin(ruleName, (enabled, options = {}, context)
     return noop
   }
 
-  let experimentalVars = null
+  let experimentalVars = new Set()
   for (const tokenType of Object.keys(designTokens)) {
-    experimentalVars = new Set(designTokens[tokenType].map(t => t['name']))
+    for (const token of designTokens[tokenType].map(t => t['name'])) {
+      experimentalVars.add(token)
+    }
   }
 
   const lintResult = (root, result) => {
     root.walkDecls(decl => {
       for (const expVar of experimentalVars) {
+        // console.log(expVar, decl.value.includes(`var(--${expVar})`))
         if (decl.value.includes(`var(--${expVar})`)) {
           stylelint.utils.report({
             index: declarationValueIndex(decl),
