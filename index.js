@@ -79,12 +79,7 @@ export default {
     'primer/box-shadow': true,
     'primer/colors': true,
     'primer/no-deprecated-colors': true,
-    'primer/no-experimental-vars': [
-      true,
-      {
-        designTokens: '@primer/primitives/tokens-v2-private/docs/docValues.json',
-      },
-    ],
+    'primer/no-experimental-vars': true,
     'primer/no-override': true,
     'primer/no-undefined-vars': [
       true,

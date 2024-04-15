@@ -1,6 +1,6 @@
 import stylelint from 'stylelint'
 import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.mjs'
-import {createRequire} from 'module'
+import designTokens from '@primer/primitives/tokens-v2-private/docs/docValues.json' assert {type: 'json'}
 
 export const ruleName = 'primer/no-experimental-vars'
 export const messages = stylelint.utils.ruleMessages(ruleName, {
@@ -14,10 +14,6 @@ export default stylelint.createPlugin(ruleName, (enabled, options = {}, context)
   if (!enabled) {
     return noop
   }
-  const require = createRequire(import.meta.url)
-
-  // eslint-disable-next-line import/no-dynamic-require
-  const designTokens = require(options.designTokens)
 
   let experimentalVars = null
   for (const tokenType of Object.keys(designTokens)) {

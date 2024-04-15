@@ -1,2 +1,5 @@
 coverage/
 node_modules/
+dist/
+__tests__/
+rollup.config.js

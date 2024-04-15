@@ -1,20 +1,10 @@
-import path from 'path'
 import {ruleName} from '../plugins/no-experimental-vars.js'
-import {fileURLToPath} from 'url'
-
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 // eslint-disable-next-line no-undef
 testRule({
   plugins: ['./plugins/no-experimental-vars'],
   customSyntax: 'postcss-scss',
   ruleName,
-  config: [
-    true,
-    {
-      designTokens: path.join(__dirname, '__fixtures__/design-tokens.json'),
-    },
-  ],
   accept: [
     {
       code: '.x { padding: 4px; }',

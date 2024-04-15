@@ -1,7 +1,6 @@
 import stylelint from 'stylelint'
 import matchAll from 'string.prototype.matchall'
-import {createRequire} from 'module'
-
+import variableChecks from './lib/primitives-v8.json' assert {type: 'json'}
 export const ruleName = 'primer/no-deprecated-colors'
 export const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: (varName, replacement, property) => {
@@ -21,8 +20,6 @@ const replacedVars = {}
 const newVars = {}
 
 export default stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
-  const require = createRequire(import.meta.url)
-
   const {inlineFallback = false} = options
 
   if (!enabled) {
@@ -35,9 +32,6 @@ export default stylelint.createPlugin(ruleName, (enabled, options = {}, context)
 
   // Keep track of declarations we've already seen
   const seen = new WeakMap()
-
-  // eslint-disable-next-line import/no-dynamic-require
-  const variableChecks = require(options.deprecatedFile || './lib/primitives-v8.json')
 
   const lintResult = (root, result) => {
     // Walk all declarations

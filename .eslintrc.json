@@ -1,4 +1,5 @@
 {
+  "parser": "@babel/eslint-parser",
   "root": true,
   "plugins": ["github"],
   "extends": [
@@ -8,7 +9,13 @@
     "node": true
   },
   "parserOptions": {
-    "ecmaVersion": 2020
+    "ecmaVersion": 2020,
+    "requireConfigFile": false,
+    "babelOptions": {
+      "plugins": [
+        "@babel/plugin-syntax-import-assertions"
+      ]
+    }
   },
   "rules": {
     "import/no-commonjs": "off",

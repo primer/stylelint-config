@@ -1,19 +1,9 @@
-import path from 'path'
 import {ruleName} from '../plugins/no-deprecated-colors.js'
-import {fileURLToPath} from 'url'
-
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 // eslint-disable-next-line no-undef
 testRule({
   plugins: ['./plugins/no-deprecated-colors'],
   ruleName,
-  config: [
-    true,
-    {
-      deprecatedFile: path.join(__dirname, '../plugins/lib/primitives-v8.json'),
-    },
-  ],
   fix: true,
   accept: [
     {code: '.x { color: var(--fgColor-default); }'},
@@ -75,13 +65,6 @@ testRule({
       code: '.x { border: 1px solid var(--color-neutral-emphasis); .foo { background-color: var(--color-neutral-emphasis); } }',
       fixed:
         '.x { border: 1px solid var(--borderColor-neutral-emphasis); .foo { background-color: var(--bgColor-neutral-emphasis); } }',
-      config: [
-        true,
-        {
-          deprecatedFile: path.join(__dirname, '../plugins/lib/primitives-v8.json'),
-          inlineFallback: false,
-        },
-      ],
       warnings: [
         {
           message:
@@ -106,7 +89,6 @@ testRule({
   config: [
     true,
     {
-      deprecatedFile: path.join(__dirname, '../plugins/lib/primitives-v8.json'),
       inlineFallback: true,
     },
   ],
@@ -167,7 +149,6 @@ testRule({
       config: [
         true,
         {
-          deprecatedFile: path.join(__dirname, '../plugins/lib/primitives-v8.json'),
           inlineFallback: false,
         },
       ],
