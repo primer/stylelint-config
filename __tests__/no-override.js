@@ -19,7 +19,7 @@ describe('primer/no-override', () => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
       expect(data).toHaveWarnings([
-        `".ml-1" should not be overridden (defined in @primer/css/utilities). (primer/no-override)`,
+        `Primer CSS class ".ml-1" should not be overridden. (primer/no-override)`,
       ])
     })
   })
@@ -30,7 +30,7 @@ describe('primer/no-override', () => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
       expect(data).toHaveWarnings([
-        `"${selector}" should not be overridden (defined in @primer/css/utilities). (primer/no-override)`,
+        `Primer CSS class "${selector}" should not be overridden. (primer/no-override)`,
       ])
     })
   })
@@ -41,7 +41,7 @@ describe('primer/no-override', () => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
       expect(data).toHaveWarnings([
-        `"${selector}" should not be overridden in ".foo ${selector}:focus" (defined in @primer/css/utilities). (primer/no-override)`,
+        `Primer CSS class "${selector}" should not be overridden in ".foo ${selector}:focus". (primer/no-override)`,
       ])
     })
   })

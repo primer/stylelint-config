@@ -1,5 +1,5 @@
 import stylelint from 'stylelint'
-import primerUtilitiesJson from '@primer/css/dist/stats/utilities.json' assert {type: 'json'}
+import primerJson from '@primer/css/dist/stats/primer.json' assert {type: 'json'}
 
 const ruleName = 'primer/no-override'
 const CLASS_PATTERN = /(\.[-\w]+)/
@@ -26,23 +26,22 @@ export default stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   // If there's no entry for a given selector, it means that it's not defined
   // in one of the *specified* bundles, since we're iterating over the list of
   // bundle names in the options.
-  const immutableSelectors = new Map()
-  const immutableClassSelectors = new Map()
+  const immutableSelectors = new Set()
+  const immutableClassSelectors = new Set()
 
-  const selectors = primerUtilitiesJson.selectors.values
+  const selectors = primerJson.selectors.values
   for (const selector of selectors) {
-    immutableSelectors.set(selector, 'utilities')
+    immutableSelectors.add(selector)
     for (const classSelector of getClassSelectors(selector)) {
-      immutableClassSelectors.set(classSelector, 'utilities')
+      immutableClassSelectors.add(classSelector)
     }
   }
 
   const messages = stylelint.utils.ruleMessages(ruleName, {
     rejected: ({rule, selector}) => {
-      const definedIn = ` (defined in @primer/css/utilities)`
       const ruleSelector = collapseWhitespace(rule.selector)
       const context = selector === rule.selector ? '' : ` in "${ruleSelector}"`
-      return `"${collapseWhitespace(selector)}" should not be overridden${context}${definedIn}.`
+      return `Primer CSS class "${collapseWhitespace(selector)}" should not be overridden${context}.`
     },
   })
 
