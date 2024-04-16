@@ -1,5 +1,5 @@
 import stylelint from 'stylelint'
-import variables from './lib/new-color-css-vars-map.json' assert {type: 'json'}
+import variables from './lib/new-color-css-vars-map.json' with {type: 'json'}
 
 export const ruleName = 'primer/new-color-vars-have-fallback'
 export const messages = stylelint.utils.ruleMessages(ruleName, {

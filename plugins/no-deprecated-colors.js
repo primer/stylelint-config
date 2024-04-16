@@ -1,6 +1,6 @@
 import stylelint from 'stylelint'
 import matchAll from 'string.prototype.matchall'
-import variableChecks from './lib/primitives-v8.json' assert {type: 'json'}
+import variableChecks from './lib/primitives-v8.json' with {type: 'json'}
 export const ruleName = 'primer/no-deprecated-colors'
 export const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: (varName, replacement, property) => {

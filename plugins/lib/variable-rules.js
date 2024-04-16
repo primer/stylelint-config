@@ -1,6 +1,6 @@
 import stylelint from 'stylelint'
 import declarationValidator from './decl-validator.js'
-import variables from '@primer/css/dist/variables.json' assert {type: 'json'}
+import variables from '@primer/css/dist/variables.json' with {type: 'json'}
 
 export const CSS_IMPORTANT = '!important'
 export const CSS_DIRECTIONS = ['top', 'right', 'bottom', 'left']

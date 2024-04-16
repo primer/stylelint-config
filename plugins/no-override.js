@@ -1,5 +1,5 @@
 import stylelint from 'stylelint'
-import primerJson from '@primer/css/dist/stats/primer.json' assert {type: 'json'}
+import primerJson from '@primer/css/dist/stats/primer.json' with {type: 'json'}
 
 const ruleName = 'primer/no-override'
 const CLASS_PATTERN = /(\.[-\w]+)/

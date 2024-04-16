@@ -1,7 +1,7 @@
 import {nodeResolve} from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import pluginJson from '@rollup/plugin-json'
-import packageJson from './package.json' assert {type: 'json'}
+import packageJson from './package.json' with {type: 'json'}
 
 const external = ['dependencies', 'devDependencies', 'peerDependencies'].flatMap(type => {
   if (packageJson[type]) {

@@ -1,5 +1,5 @@
 {
-  "parser": "@babel/eslint-parser",
+  "parser": "@typescript-eslint/parser",
   "root": true,
   "plugins": ["github"],
   "extends": [
@@ -9,13 +9,8 @@
     "node": true
   },
   "parserOptions": {
-    "ecmaVersion": 2020,
-    "requireConfigFile": false,
-    "babelOptions": {
-      "plugins": [
-        "@babel/plugin-syntax-import-assertions"
-      ]
-    }
+    "ecmaVersion": 2023,
+    "requireConfigFile": false
   },
   "rules": {
     "import/no-commonjs": "off",
