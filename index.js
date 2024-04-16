@@ -1,6 +1,5 @@
 import browsers from '@github/browserslist-config'
 import propertyOrder from './property-order.js'
-import scssSyntax from 'postcss-scss'
 
 import borders from './plugins/borders.js'
 import boxShadow from './plugins/box-shadow.js'
@@ -24,7 +23,6 @@ export default {
   plugins: [
     'stylelint-no-unsupported-browser-features',
     'stylelint-order',
-    'stylelint-scss',
     borders,
     boxShadow,
     colors,
@@ -72,6 +70,7 @@ export default {
     'number-max-precision': null,
     'order/properties-order': propertyOrder,
     'plugin/no-unsupported-browser-features': [true, {severity: 'warning', browsers}],
+    'primer/borders': true,
     'primer/box-shadow': true,
     'primer/colors': true,
     'primer/no-deprecated-colors': true,
@@ -82,6 +81,8 @@ export default {
     ],
     'primer/no-unused-vars': [true, {severity: 'warning'}],
     'primer/responsive-widths': true,
+    'primer/spacing': true,
+    'primer/typography': true,
     'primer/utilities': null,
     'selector-class-pattern': null,
     'selector-max-compound-selectors': 3,
@@ -103,8 +104,8 @@ export default {
   overrides: [
     {
       files: ['*.scss', '**/*.scss'],
-      customSyntax: scssSyntax,
-      plugins: ['stylelint-scss', './plugins/borders', './plugins/typography', './plugins/spacing'],
+      customSyntax: 'postcss-scss',
+      plugins: ['stylelint-scss'],
       rules: {
         'scss/at-extend-no-missing-placeholder': true,
         'scss/at-rule-no-unknown': true,
