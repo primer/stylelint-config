@@ -6,7 +6,6 @@ import borders from './plugins/borders.js'
 import boxShadow from './plugins/box-shadow.js'
 import colors from './plugins/colors.js'
 import noDeprecatedColors from './plugins/no-deprecated-colors.js'
-import noExperimentalVars from './plugins/no-experimental-vars.js'
 import noOverride from './plugins/no-override.js'
 import noScaleColors from './plugins/no-scale-colors.js'
 import noUndefinedVars from './plugins/no-undefined-vars.js'
@@ -31,7 +30,6 @@ export default {
     boxShadow,
     colors,
     noDeprecatedColors,
-    noExperimentalVars,
     noOverride,
     noScaleColors,
     noUndefinedVars,
@@ -79,7 +77,6 @@ export default {
     'primer/box-shadow': true,
     'primer/colors': true,
     'primer/no-deprecated-colors': true,
-    'primer/no-experimental-vars': true,
     'primer/no-override': true,
     'primer/no-undefined-vars': [
       true,
