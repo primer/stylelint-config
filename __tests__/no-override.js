@@ -1,4 +1,5 @@
-const {lint, extendDefaultConfig} = require('./utils')
+import {lint, extendDefaultConfig} from './utils/index.js'
+import noOverride from '../plugins/no-override.js'
 
 describe('primer/no-override', () => {
   it(`doesn't run when disabled`, () => {
@@ -18,7 +19,7 @@ describe('primer/no-override', () => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
       expect(data).toHaveWarnings([
-        `".ml-1" should not be overridden (defined in @primer/css/utilities). (primer/no-override)`,
+        `Primer CSS class ".ml-1" should not be overridden. (primer/no-override)`,
       ])
     })
   })
@@ -29,7 +30,7 @@ describe('primer/no-override', () => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
       expect(data).toHaveWarnings([
-        `"${selector}" should not be overridden (defined in @primer/css/utilities). (primer/no-override)`,
+        `Primer CSS class "${selector}" should not be overridden. (primer/no-override)`,
       ])
     })
   })
@@ -40,16 +41,16 @@ describe('primer/no-override', () => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
       expect(data).toHaveWarnings([
-        `"${selector}" should not be overridden in ".foo ${selector}:focus" (defined in @primer/css/utilities). (primer/no-override)`,
+        `Primer CSS class "${selector}" should not be overridden in ".foo ${selector}:focus". (primer/no-override)`,
       ])
     })
   })
 
   it('only reports class selectors', () => {
     const config = {
-      plugins: [require.resolve('../plugins/no-override')],
+      plugins: [noOverride],
       rules: {
-        'primer/no-override': [true, {bundles: ['base']}],
+        'primer/no-override': [true],
       },
     }
     return lint(`body { width: 10px; }`, config).then(data => {
@@ -65,7 +66,6 @@ describe('primer/no-override', () => {
           'primer/no-override': [
             true,
             {
-              bundles: ['utilities'],
               ignoreSelectors: ['.px-4'],
             },
           ],
@@ -83,7 +83,6 @@ describe('primer/no-override', () => {
           'primer/no-override': [
             true,
             {
-              bundles: ['utilities'],
               ignoreSelectors: [/\.px-[0-9]/],
             },
           ],
@@ -101,7 +100,6 @@ describe('primer/no-override', () => {
           'primer/no-override': [
             true,
             {
-              bundles: ['utilities'],
               ignoreSelectors: selector => selector === '.px-4',
             },
           ],
@@ -110,40 +108,6 @@ describe('primer/no-override', () => {
       return lint(`.px-4 { margin: 0 $spacer-1 !important; }`, config).then(data => {
         expect(data).not.toHaveErrored()
         expect(data).toHaveWarningsLength(0)
-      })
-    })
-  })
-
-  describe('invalid options', () => {
-    it('warns when you bundles is not an array', () => {
-      const config = extendDefaultConfig({
-        rules: {
-          'primer/no-override': [true, {bundles: 'derp'}],
-        },
-      })
-      return lint('.foo { width: 10px; }', config).then(data => {
-        expect(data).not.toHaveErrored()
-        expect(data.results[0].invalidOptionWarnings).toEqual([
-          {
-            text: `The "bundles" option must be an array of valid bundles; got: (not an array)`,
-          },
-        ])
-      })
-    })
-
-    it('warns when you pass an invalid bundle name', () => {
-      const config = extendDefaultConfig({
-        rules: {
-          'primer/no-override': [true, {bundles: ['asdf']}],
-        },
-      })
-      return lint('.foo { width: 10px; }', config).then(data => {
-        expect(data).not.toHaveErrored()
-        expect(data.results[0].invalidOptionWarnings).toEqual([
-          {
-            text: `The "bundles" option must be an array of valid bundles; got: "asdf"`,
-          },
-        ])
       })
     })
   })

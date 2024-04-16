@@ -8,54 +8,11 @@ on:
 
 jobs:
   release-canary:
-    name: Canary
+    name: npm
     if: ${{ github.repository == 'primer/stylelint-config' }}
-
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
-          fetch-depth: 0
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Create .npmrc
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN_SHARED }}
-
-      - name: Publish canary version
-        run: |
-          echo "$( jq '.version = "0.0.0"' package.json )" > package.json
-          echo -e "---\n'@primer/stylelint-config': patch\n---\n\nFake entry to force publishing" > .changeset/force-snapshot-release.md
-          rm -f .changeset/pre.json
-          npx changeset version --snapshot
-          npx changeset publish --tag canary
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Output canary version number
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const package = require(`${process.env.GITHUB_WORKSPACE}/package.json`)
-            github.rest.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: context.sha,
-              state: 'success',
-              context: `Published ${package.name}`,
-              description: package.version,
-              target_url: `https://unpkg.com/${package.name}@${package.version}/`
-            })
+    uses: primer/.github/.github/workflows/release_canary.yml@v1.0.0
+    with:
+      install: npm i
+    secrets:
+      gh_token: ${{ secrets.GITHUB_TOKEN }}
+      npm_token: ${{ secrets.NPM_AUTH_TOKEN_SHARED }}

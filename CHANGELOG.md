@@ -1,5 +1,23 @@
 # Changelog
 
+## 12.9.2
+
+### Patch Changes
+
+- [#388](https://github.com/primer/stylelint-config/pull/388) [`43b1066`](https://github.com/primer/stylelint-config/commit/43b10662c9f48837069690751f42eed1359c7372) Thanks [@langermank](https://github.com/langermank)! - New rule: safegaurd alpha `display` color tokens
+
+## 12.9.1
+
+### Patch Changes
+
+- [#382](https://github.com/primer/stylelint-config/pull/382) [`2cbe3be`](https://github.com/primer/stylelint-config/commit/2cbe3be3cecb4d7e0a9d0ad2be32ebcaceb063a5) Thanks [@langermank](https://github.com/langermank)! - Update `new-color-css-vars` to exclude scale colors
+
+## 12.9.0
+
+### Minor Changes
+
+- [#376](https://github.com/primer/stylelint-config/pull/376) [`a31e0d3`](https://github.com/primer/stylelint-config/commit/a31e0d392cf73c623ae8a8cf957796ede4386e00) Thanks [@langermank](https://github.com/langermank)! - Adds new plugin: `new-color-vars-have-fallback` to check that if new Primitive v8 colors are used, they have a fallback value.
+
 ## 12.8.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
-const dedent = require('dedent')
-const stylelint = require('stylelint')
-const pluginPath = require.resolve('../plugins/box-shadow')
+import dedent from 'dedent'
+import stylelint from 'stylelint'
+import pluginPath from '../plugins/box-shadow.js'
 
 const ruleName = 'primer/box-shadow'
 const configWithOptions = args => ({

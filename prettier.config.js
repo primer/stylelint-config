@@ -1,1 +1,3 @@
-module.exports = require('@github/prettier-config')
+import prettierConfig from '@github/prettier-config'
+
+export default prettierConfig

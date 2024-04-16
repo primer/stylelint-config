@@ -1,13 +1,12 @@
 import stylelint from 'stylelint'
 import matchAll from 'string.prototype.matchall'
 
-export const ruleName = 'primer/no-scale-colors'
+export const ruleName = 'primer/no-display-colors'
 export const messages = stylelint.utils.ruleMessages(ruleName, {
-  rejected: varName =>
-    `${varName} is a non-functional scale color and cannot be used without being wrapped in the color-variables mixin`,
+  rejected: varName => `${varName} is in alpha and should be used with caution with approval from the Primer team`,
 })
 
-// Match CSS variable references (e.g var(--color-text-primary))
+// Match CSS variable references (e.g var(--display-blue-fgColor))
 // eslint-disable-next-line no-useless-escape
 const variableReferenceRegex = /var\(([^\),]+)(,.*)?\)/g
 
@@ -34,7 +33,7 @@ export default stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 
         for (const [, variableName] of matchAll(decl.value, variableReferenceRegex)) {
           log(`Found variable reference ${variableName}`)
-          if (variableName.match(/^--color-(scale|auto)-/)) {
+          if (variableName.match(/^--display-.*/)) {
             stylelint.utils.report({
               message: messages.rejected(variableName),
               node: decl,

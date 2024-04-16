@@ -1,22 +1,22 @@
-const TapMap = require('tap-map')
-const globby = require('globby')
-const matchAll = require('string.prototype.matchall')
-const stylelint = require('stylelint')
-const {readFileSync} = require('fs')
+import TapMap from 'tap-map'
+import globby from 'globby'
+import matchAll from 'string.prototype.matchall'
+import stylelint from 'stylelint'
+import {readFileSync} from 'fs'
 
-const ruleName = 'primer/no-unused-vars'
+export const ruleName = 'primer/no-unused-vars'
 
 const cwd = process.cwd()
 const COLON = ':'
 const SCSS_VARIABLE_PATTERN = /(\$[-\w]+)/g
 
-const messages = stylelint.utils.ruleMessages(ruleName, {
+export const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: name => `The variable "${name}" is not referenced.`,
 })
 
 const cache = new TapMap()
 
-module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
+export default stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   if (!enabled) {
     return noop
   }

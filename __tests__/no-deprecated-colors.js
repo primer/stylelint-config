@@ -1,15 +1,11 @@
-const path = require('path')
-const {ruleName} = require('../plugins/no-deprecated-colors')
+import {ruleName} from '../plugins/no-deprecated-colors.js'
 
 // eslint-disable-next-line no-undef
 testRule({
-  plugins: ['./plugins/no-deprecated-colors.js'],
+  plugins: ['./plugins/no-deprecated-colors'],
   ruleName,
   config: [
     true,
-    {
-      deprecatedFile: path.join(__dirname, '../plugins/lib/primitives-v8.json'),
-    },
   ],
   fix: true,
   accept: [
@@ -75,7 +71,6 @@ testRule({
       config: [
         true,
         {
-          deprecatedFile: path.join(__dirname, '../plugins/lib/primitives-v8.json'),
           inlineFallback: false,
         },
       ],
@@ -98,12 +93,11 @@ testRule({
 })
 // eslint-disable-next-line no-undef
 testRule({
-  plugins: ['./plugins/no-deprecated-colors.js'],
+  plugins: ['./plugins/no-deprecated-colors'],
   ruleName,
   config: [
     true,
     {
-      deprecatedFile: path.join(__dirname, '../plugins/lib/primitives-v8.json'),
       inlineFallback: true,
     },
   ],
@@ -164,7 +158,6 @@ testRule({
       config: [
         true,
         {
-          deprecatedFile: path.join(__dirname, '../plugins/lib/primitives-v8.json'),
           inlineFallback: false,
         },
       ],

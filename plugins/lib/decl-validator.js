@@ -1,11 +1,11 @@
-const anymatch = require('anymatch')
-const valueParser = require('postcss-value-parser')
-const TapMap = require('tap-map')
+import anymatch from 'anymatch'
+import valueParser from 'postcss-value-parser'
+import TapMap from 'tap-map'
 
 const SKIP_VALUE_NODE_TYPES = new Set(['space', 'div'])
 const SKIP_AT_RULE_NAMES = new Set(['each', 'for', 'function', 'mixin'])
 
-module.exports = function declarationValidator(rules, options = {}) {
+export default function declarationValidator(rules, options = {}) {
   const {formatMessage = defaultMessageFormatter, variables, verbose = false} = options
   const variableReplacements = new TapMap()
   if (variables) {

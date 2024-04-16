@@ -1,17 +1,17 @@
-const stylelint = require('stylelint')
-const {requirePrimerFile} = require('./lib/primer')
+import stylelint from 'stylelint'
+import primerJson from '@primer/css/dist/stats/primer.json' with {type: 'json'}
 
 const ruleName = 'primer/no-override'
 const CLASS_PATTERN = /(\.[-\w]+)/
 const CLASS_PATTERN_ALL = new RegExp(CLASS_PATTERN, 'g')
 const CLASS_PATTERN_ONLY = /^\.[-\w]+(:{1,2}[-\w]+)?$/
 
-module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
+export default stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   if (!enabled) {
     return noop
   }
 
-  const {bundles = ['utilities'], ignoreSelectors = []} = options
+  const {ignoreSelectors = []} = options
 
   const isSelectorIgnored =
     typeof ignoreSelectors === 'function'
@@ -22,50 +22,30 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
           })
         }
 
-  const primerMeta = requirePrimerFile('dist/meta.json')
-  const availableBundles = Object.keys(primerMeta.bundles)
-
   // These map selectors to the bundle in which they're defined.
   // If there's no entry for a given selector, it means that it's not defined
   // in one of the *specified* bundles, since we're iterating over the list of
   // bundle names in the options.
-  const immutableSelectors = new Map()
-  const immutableClassSelectors = new Map()
+  const immutableSelectors = new Set()
+  const immutableClassSelectors = new Set()
 
-  for (const bundle of bundles) {
-    if (!availableBundles.includes(bundle)) {
-      continue
-    }
-    const stats = requirePrimerFile(`dist/stats/${bundle}.json`)
-    const selectors = stats.selectors.values
-    for (const selector of selectors) {
-      immutableSelectors.set(selector, bundle)
-      for (const classSelector of getClassSelectors(selector)) {
-        immutableClassSelectors.set(classSelector, bundle)
-      }
+  const selectors = primerJson.selectors.values
+  for (const selector of selectors) {
+    immutableSelectors.add(selector)
+    for (const classSelector of getClassSelectors(selector)) {
+      immutableClassSelectors.add(classSelector)
     }
   }
 
   const messages = stylelint.utils.ruleMessages(ruleName, {
-    rejected: ({rule, selector, bundle}) => {
-      const definedIn = ` (defined in @primer/css/${bundle})`
+    rejected: ({rule, selector}) => {
       const ruleSelector = collapseWhitespace(rule.selector)
       const context = selector === rule.selector ? '' : ` in "${ruleSelector}"`
-      return `"${collapseWhitespace(selector)}" should not be overridden${context}${definedIn}.`
+      return `Primer CSS class "${collapseWhitespace(selector)}" should not be overridden${context}.`
     },
   })
 
   return (root, result) => {
-    if (!Array.isArray(bundles) || bundles.some(bundle => !availableBundles.includes(bundle))) {
-      const invalidBundles = Array.isArray(bundles)
-        ? `"${bundles.filter(bundle => !availableBundles.includes(bundle)).join('", "')}"`
-        : '(not an array)'
-      result.warn(`The "bundles" option must be an array of valid bundles; got: ${invalidBundles}`, {
-        stylelintType: 'invalidOption',
-        stylelintReference: 'https://github.com/primer/stylelint-config#options',
-      })
-    }
-
     const report = subject =>
       stylelint.utils.report({
         message: messages.rejected(subject),
@@ -81,7 +61,6 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
           if (!isSelectorIgnored(selector)) {
             return report({
               rule,
-              bundle: immutableSelectors.get(selector),
               selector,
             })
           }
@@ -94,7 +73,6 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
           if (!isSelectorIgnored(classSelector)) {
             return report({
               rule,
-              bundle: immutableClassSelectors.get(classSelector),
               selector: classSelector,
             })
           }

@@ -1,8 +1,8 @@
-const {ruleName} = require('../plugins/utilities')
+import {ruleName} from '../plugins/utilities.js'
 
 // eslint-disable-next-line no-undef
 testRule({
-  plugins: ['./plugins/utilities.js'],
+  plugins: ['./plugins/utilities'],
   customSyntax: 'postcss-scss',
   ruleName,
   config: [true],

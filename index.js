@@ -1,22 +1,44 @@
-const browsers = require('./browsers')
-const propertyOrder = require('./property-order')
+import browsers from '@github/browserslist-config'
+import propertyOrder from './property-order.js'
+import scssSyntax from 'postcss-scss'
 
-module.exports = {
+import borders from './plugins/borders.js'
+import boxShadow from './plugins/box-shadow.js'
+import colors from './plugins/colors.js'
+import noDeprecatedColors from './plugins/no-deprecated-colors.js'
+import noOverride from './plugins/no-override.js'
+import noScaleColors from './plugins/no-scale-colors.js'
+import noUndefinedVars from './plugins/no-undefined-vars.js'
+import noUnusedVars from './plugins/no-unused-vars.js'
+import responsiveWidths from './plugins/responsive-widths.js'
+import spacing from './plugins/spacing.js'
+import typography from './plugins/typography.js'
+import utilities from './plugins/utilities.js'
+import newColorVarsHaveFallback from './plugins/new-color-vars-have-fallback.js'
+import noDisplayColors from './plugins/no-display-colors.js'
+
+/** @type {import('stylelint').Config} */
+export default {
   extends: ['stylelint-config-standard'],
   ignoreFiles: ['**/*.js', '**/*.cjs'],
   plugins: [
     'stylelint-no-unsupported-browser-features',
     'stylelint-order',
-    './plugins/box-shadow',
-    './plugins/colors',
-    './plugins/no-deprecated-colors',
-    './plugins/no-experimental-vars',
-    './plugins/no-override',
-    './plugins/no-scale-colors',
-    './plugins/no-undefined-vars',
-    './plugins/no-unused-vars',
-    './plugins/responsive-widths',
-    './plugins/utilities',
+    'stylelint-scss',
+    borders,
+    boxShadow,
+    colors,
+    noDeprecatedColors,
+    noOverride,
+    noScaleColors,
+    noUndefinedVars,
+    noUnusedVars,
+    responsiveWidths,
+    spacing,
+    typography,
+    utilities,
+    newColorVarsHaveFallback,
+    noDisplayColors,
   ],
   rules: {
     'alpha-value-notation': 'number',
@@ -53,12 +75,6 @@ module.exports = {
     'primer/box-shadow': true,
     'primer/colors': true,
     'primer/no-deprecated-colors': true,
-    'primer/no-experimental-vars': [
-      true,
-      {
-        designTokens: '@primer/primitives/tokens-v2-private/docs/docValues.json',
-      },
-    ],
     'primer/no-override': true,
     'primer/no-undefined-vars': [
       true,
@@ -87,7 +103,7 @@ module.exports = {
   overrides: [
     {
       files: ['*.scss', '**/*.scss'],
-      customSyntax: require('postcss-scss'),
+      customSyntax: scssSyntax,
       plugins: ['stylelint-scss', './plugins/borders', './plugins/typography', './plugins/spacing'],
       rules: {
         'scss/at-extend-no-missing-placeholder': true,
@@ -97,10 +113,7 @@ module.exports = {
         'scss/function-quote-no-quoted-strings-inside': true,
         'scss/function-unquote-no-unquoted-strings-inside': true,
         'scss/no-duplicate-mixins': true,
-        'scss/selector-no-redundant-nesting-selector': true,
-        'primer/borders': true,
-        'primer/spacing': true,
-        'primer/typography': true
+        'scss/selector-no-redundant-nesting-selector': true
       },
     },
     {
