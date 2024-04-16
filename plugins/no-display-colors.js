@@ -1,8 +1,8 @@
-const stylelint = require('stylelint')
-const matchAll = require('string.prototype.matchall')
+import stylelint from 'stylelint'
+import matchAll from 'string.prototype.matchall'
 
-const ruleName = 'primer/no-display-colors'
-const messages = stylelint.utils.ruleMessages(ruleName, {
+export const ruleName = 'primer/no-display-colors'
+export const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: varName => `${varName} is in alpha and should be used with caution with approval from the Primer team`,
 })
 
@@ -10,7 +10,7 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 // eslint-disable-next-line no-useless-escape
 const variableReferenceRegex = /var\(([^\),]+)(,.*)?\)/g
 
-module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
+export default stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   if (!enabled) {
     return noop
   }
@@ -48,6 +48,3 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 })
 
 function noop() {}
-
-module.exports.ruleName = ruleName
-module.exports.messages = messages

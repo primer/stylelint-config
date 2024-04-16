@@ -1,6 +1,6 @@
-const {createVariableRule} = require('./lib/variable-rules')
+import {createVariableRule} from './lib/variable-rules.js'
 
-module.exports = createVariableRule(
+export default createVariableRule(
   'primer/box-shadow',
   {
     'box shadow': {

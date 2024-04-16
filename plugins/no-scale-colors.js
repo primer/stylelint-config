@@ -1,8 +1,8 @@
-const stylelint = require('stylelint')
-const matchAll = require('string.prototype.matchall')
+import stylelint from 'stylelint'
+import matchAll from 'string.prototype.matchall'
 
-const ruleName = 'primer/no-scale-colors'
-const messages = stylelint.utils.ruleMessages(ruleName, {
+export const ruleName = 'primer/no-scale-colors'
+export const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: varName =>
     `${varName} is a non-functional scale color and cannot be used without being wrapped in the color-variables mixin`,
 })
@@ -11,7 +11,7 @@ const messages = stylelint.utils.ruleMessages(ruleName, {
 // eslint-disable-next-line no-useless-escape
 const variableReferenceRegex = /var\(([^\),]+)(,.*)?\)/g
 
-module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
+export default stylelint.createPlugin(ruleName, (enabled, options = {}) => {
   if (!enabled) {
     return noop
   }
@@ -49,6 +49,3 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}) => {
 })
 
 function noop() {}
-
-module.exports.ruleName = ruleName
-module.exports.messages = messages

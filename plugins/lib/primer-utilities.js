@@ -1,7 +1,7 @@
 // Meant as temp until we can move to primitives or css
 const colorTypes = ['accent', 'success', 'attention', 'severe', 'danger', 'open', 'closed', 'done', 'sponsors']
 
-module.exports = {
+export default {
   color: [
     {
       value: 'var(--color-fg-default)',

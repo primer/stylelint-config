@@ -1,8 +1,8 @@
-const {ruleName} = require('../plugins/spacing')
+import {ruleName} from '../plugins/spacing.js'
 
 // eslint-disable-next-line no-undef
 testRule({
-  plugins: ['./plugins/spacing.js'],
+  plugins: ['./plugins/spacing'],
   customSyntax: 'postcss-scss',
   ruleName,
   config: [true],

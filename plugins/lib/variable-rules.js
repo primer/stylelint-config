@@ -1,27 +1,12 @@
-const stylelint = require('stylelint')
-const {requirePrimerFile} = require('./primer')
-const declarationValidator = require('./decl-validator')
+import stylelint from 'stylelint'
+import declarationValidator from './decl-validator.js'
+import variables from '@primer/css/dist/variables.json' with {type: 'json'}
 
-const CSS_IMPORTANT = '!important'
-const CSS_DIRECTIONS = ['top', 'right', 'bottom', 'left']
-const CSS_CORNERS = ['top-right', 'bottom-right', 'bottom-left', 'top-left']
+export const CSS_IMPORTANT = '!important'
+export const CSS_DIRECTIONS = ['top', 'right', 'bottom', 'left']
+export const CSS_CORNERS = ['top-right', 'bottom-right', 'bottom-left', 'top-left']
 
-module.exports = {
-  createVariableRule,
-  CSS_DIRECTIONS,
-  CSS_CORNERS,
-  CSS_IMPORTANT,
-}
-
-function createVariableRule(ruleName, rules, url) {
-  let variables = {}
-  try {
-    variables = requirePrimerFile('dist/variables.json')
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn(`Unable to get variables.json from @primer/css. Replacements will need to be specified manually.`)
-  }
-
+export function createVariableRule(ruleName, rules, url) {
   const plugin = stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
     if (enabled === false) {
       return noop

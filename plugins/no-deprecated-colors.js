@@ -1,8 +1,8 @@
-const stylelint = require('stylelint')
-const matchAll = require('string.prototype.matchall')
-
-const ruleName = 'primer/no-deprecated-colors'
-const messages = stylelint.utils.ruleMessages(ruleName, {
+import stylelint from 'stylelint'
+import matchAll from 'string.prototype.matchall'
+import variableChecks from './lib/primitives-v8.json' with {type: 'json'}
+export const ruleName = 'primer/no-deprecated-colors'
+export const messages = stylelint.utils.ruleMessages(ruleName, {
   rejected: (varName, replacement, property) => {
     if (replacement === null) {
       return `Variable ${varName} is deprecated for property ${property}. Please consult the primer color docs for a replacement. https://primer.style/primitives/storybook/?path=/story/migration-tables`
@@ -19,7 +19,7 @@ const variableReferenceRegex = /var\(([^\),]+)(,.*)?\)/g
 const replacedVars = {}
 const newVars = {}
 
-module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
+export default stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
   const {inlineFallback = false} = options
 
   if (!enabled) {
@@ -32,9 +32,6 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
 
   // Keep track of declarations we've already seen
   const seen = new WeakMap()
-
-  // eslint-disable-next-line import/no-dynamic-require
-  const variableChecks = require(options.deprecatedFile || './lib/primitives-v8.json')
 
   const lintResult = (root, result) => {
     // Walk all declarations
@@ -98,6 +95,3 @@ module.exports = stylelint.createPlugin(ruleName, (enabled, options = {}, contex
 })
 
 function noop() {}
-
-module.exports.ruleName = ruleName
-module.exports.messages = messages

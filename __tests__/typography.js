@@ -1,6 +1,6 @@
-const dedent = require('dedent')
-const stylelint = require('stylelint')
-const pluginPath = require.resolve('../plugins/typography')
+import dedent from 'dedent'
+import stylelint from 'stylelint'
+import pluginPath from '../plugins/typography.js'
 
 const ruleName = 'primer/typography'
 const configWithOptions = args => ({

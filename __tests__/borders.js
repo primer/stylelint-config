@@ -1,10 +1,10 @@
-const dedent = require('dedent')
-const stylelint = require('stylelint')
-const pluginPath = require.resolve('../plugins/borders')
+import dedent from 'dedent'
+import stylelint from 'stylelint'
+import borders from '../plugins/borders.js'
 
 const ruleName = 'primer/borders'
 const configWithOptions = args => ({
-  plugins: [pluginPath],
+  plugins: [borders],
   rules: {
     [ruleName]: args,
   },
