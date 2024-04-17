@@ -12,6 +12,7 @@ describe('primer/no-unused-vars', () => {
   it('finds unused vars', () => {
     const config = {
       plugins: [pluginPath],
+      customSyntax: 'postcss-scss',
       rules: {
         [ruleName]: [true, {files: fixture('*.scss')}],
       },
@@ -30,6 +31,7 @@ describe('primer/no-unused-vars', () => {
   it(`doesn't run when disabled`, () => {
     const config = {
       plugins: [pluginPath],
+      customSyntax: 'postcss-scss',
       rules: {
         [ruleName]: false,
       },
@@ -48,6 +50,7 @@ describe('primer/no-unused-vars', () => {
   it(`talks a lot with {verbose: true}`, () => {
     const config = {
       plugins: [pluginPath],
+      customSyntax: 'postcss-scss',
       rules: {
         [ruleName]: [true, {files: fixture('*.scss'), verbose: true}],
       },

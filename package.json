@@ -5,6 +5,7 @@
   "author": "GitHub, Inc.",
   "license": "MIT",
   "type": "module",
+  "main": "./dist/index.cjs",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -32,10 +33,12 @@
     "node": ">16.0.0"
   },
   "scripts": {
+    "pretest": "npm run build",
     "build": "rollup -c",
     "clean": "rimraf dist",
-    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest --coverage false",
-    "test:stylelint": "stylelint __tests__/__fixtures__/uses-vars.scss",
+    "test": "npm run test:jest && npm run test:stylelint",
+    "test:jest": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest --coverage false",
+    "test:stylelint": "stylelint __tests__/__fixtures__/good/",
     "lint": "eslint .",
     "release": "changeset publish"
   },
@@ -46,6 +49,7 @@
     "anymatch": "^3.1.1",
     "globby": "^11.0.1",
     "postcss-scss": "^4.0.2",
+    "postcss-styled-syntax": "^0.6.4",
     "postcss-value-parser": "^4.0.2",
     "string.prototype.matchall": "^4.0.2",
     "stylelint": "^16.3.1",
@@ -88,7 +92,8 @@
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "__tests__/utils"
+      "__tests__/utils",
+      "__tests__/__fixtures__"
     ]
   }
 }

@@ -1,6 +1,5 @@
 import browsers from '@github/browserslist-config'
 import propertyOrder from './property-order.js'
-import scssSyntax from 'postcss-scss'
 
 import borders from './plugins/borders.js'
 import boxShadow from './plugins/box-shadow.js'
@@ -20,12 +19,11 @@ import noDisplayColors from './plugins/no-display-colors.js'
 /** @type {import('stylelint').Config} */
 export default {
   extends: ['stylelint-config-standard'],
-  customSyntax: scssSyntax,
   ignoreFiles: ['**/*.js', '**/*.cjs'],
+  reportNeedlessDisables: true,
   plugins: [
     'stylelint-no-unsupported-browser-features',
     'stylelint-order',
-    'stylelint-scss',
     borders,
     boxShadow,
     colors,
@@ -72,7 +70,15 @@ export default {
     'no-invalid-position-at-import-rule': [true, {ignoreAtRules: ['use']}],
     'number-max-precision': null,
     'order/properties-order': propertyOrder,
-    'plugin/no-unsupported-browser-features': [true, {severity: 'warning', browsers}],
+    'plugin/no-unsupported-browser-features': [
+      true,
+      {
+        severity: 'warning',
+        ignore: ['css-nesting'],
+        ignorePartialSupport: true,
+        browsers,
+      },
+    ],
     'primer/borders': true,
     'primer/box-shadow': true,
     'primer/colors': true,
@@ -87,15 +93,6 @@ export default {
     'primer/spacing': true,
     'primer/typography': true,
     'primer/utilities': null,
-    'primer/new-color-vars-have-fallback': [true, {severity: 'error'}],
-    'scss/at-extend-no-missing-placeholder': true,
-    'scss/at-rule-no-unknown': true,
-    'scss/declaration-nested-properties-no-divided-groups': true,
-    'scss/dollar-variable-no-missing-interpolation': true,
-    'scss/function-quote-no-quoted-strings-inside': true,
-    'scss/function-unquote-no-unquoted-strings-inside': true,
-    'scss/no-duplicate-mixins': true,
-    'scss/selector-no-redundant-nesting-selector': true,
     'selector-class-pattern': null,
     'selector-max-compound-selectors': 3,
     'selector-max-id': 0,
@@ -113,4 +110,81 @@ export default {
     'media-query-no-invalid': null,
     'media-feature-range-notation': ['prefix'],
   },
+  overrides: [
+    {
+      files: ['**/*.scss'],
+      customSyntax: 'postcss-scss',
+      plugins: ['stylelint-scss'],
+      rules: {
+        'scss/at-extend-no-missing-placeholder': true,
+        'scss/at-rule-no-unknown': true,
+        'scss/declaration-nested-properties-no-divided-groups': true,
+        'scss/dollar-variable-no-missing-interpolation': true,
+        'scss/function-quote-no-quoted-strings-inside': true,
+        'scss/function-unquote-no-unquoted-strings-inside': true,
+        'scss/no-duplicate-mixins': true,
+        'scss/selector-no-redundant-nesting-selector': true,
+      },
+    },
+    {
+      files: ['**/*.tsx'],
+      customSyntax: 'postcss-styled-syntax',
+      rules: {
+        'order/properties-order': null,
+        'rule-empty-line-before': null,
+        'declaration-empty-line-before': null,
+        'comment-empty-line-before': null,
+        'length-zero-no-unit': null,
+        'selector-max-type': null,
+        'primer/spacing': null,
+        'primer/colors': null,
+        'primer/borders': null,
+        'primer/typography': null,
+        'primer/box-shadow': null,
+        'primer/no-deprecated-colors': [
+          true,
+          {
+            inlineFallback: true,
+          },
+        ],
+        'primer/no-scale-colors': true,
+        'primer/no-display-colors': true,
+        'primer/utilities': null,
+        'property-no-unknown': [
+          true,
+          {
+            ignoreProperties: ['@container', 'container-type'],
+          },
+        ],
+        'primer/no-override': null,
+      },
+    },
+    {
+      files: ['**/*.pcss'],
+      rules: {
+        'media-feature-range-notation': null,
+        'import-notation': null,
+        'custom-property-pattern': null,
+        'selector-class-pattern': null,
+        'keyframes-name-pattern': null,
+        'no-descending-specificity': null,
+        'declaration-block-no-redundant-longhand-properties': null,
+        'color-function-notation': 'legacy',
+        'selector-nested-pattern': '^&\\s?\\W',
+        'at-rule-no-unknown': [
+          true,
+          {
+            ignoreAtRules: ['mixin', 'define-mixin'],
+          },
+        ],
+        'primer/no-deprecated-colors': true,
+      },
+    },
+    {
+      files: ['**/*.module.css'],
+      rules: {
+        'primer/no-override': null,
+      },
+    },
+  ],
 }
