@@ -69,7 +69,14 @@ export default {
     'no-invalid-position-at-import-rule': [true, {ignoreAtRules: ['use']}],
     'number-max-precision': null,
     'order/properties-order': propertyOrder,
-    'plugin/no-unsupported-browser-features': [true, {severity: 'warning', browsers}],
+    'plugin/no-unsupported-browser-features': [
+      true,
+      {
+        severity: 'warning',
+        ignore: ['css-nesting'],
+        browsers,
+      },
+    ],
     'primer/borders': true,
     'primer/box-shadow': true,
     'primer/colors': true,
@@ -119,13 +126,13 @@ export default {
     },
     {
       files: ['*.tsx', '**/*.tsx'],
+      customSyntax: 'postcss-styled-syntax',
       rules: {
         'order/properties-order': null,
         'rule-empty-line-before': null,
         'declaration-empty-line-before': null,
         'comment-empty-line-before': null,
         'length-zero-no-unit': null,
-        'scss/selector-no-redundant-nesting-selector': null,
         'selector-max-type': null,
         'primer/spacing': null,
         'primer/colors': null,
@@ -138,7 +145,8 @@ export default {
             inlineFallback: true,
           },
         ],
-        'primer/no-scale-colors': null,
+        'primer/no-scale-colors': true,
+        'primer/no-display-colors': true,
         'primer/utilities': null,
         'property-no-unknown': [
           true,
