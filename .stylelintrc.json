@@ -1,1 +1,1 @@
-{ "extends": ["./dist/index.cjs"] }
+{ "extends": ["./dist/index"] }

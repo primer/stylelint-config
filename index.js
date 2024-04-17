@@ -156,12 +156,6 @@ export default {
             ignoreProperties: ['@container', 'container-type'],
           },
         ],
-        'scss/at-rule-no-unknown': [
-          true,
-          {
-            ignoreAtRules: ['container', 'container-type'],
-          },
-        ],
         'primer/no-override': null,
       },
     },
