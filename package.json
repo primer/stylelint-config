@@ -89,7 +89,8 @@
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "__tests__/utils"
+      "__tests__/utils",
+      "__tests__/__fixtures__"
     ]
   }
 }
