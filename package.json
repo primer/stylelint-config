@@ -32,6 +32,7 @@
     "node": ">16.0.0"
   },
   "scripts": {
+    "postinstall": "npm run build",
     "build": "rollup -c",
     "clean": "rimraf dist",
     "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest --coverage false",
