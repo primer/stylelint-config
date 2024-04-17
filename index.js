@@ -112,7 +112,7 @@ export default {
   },
   overrides: [
     {
-      files: ['*.scss', '**/*.scss'],
+      files: ['**/*.scss'],
       customSyntax: 'postcss-scss',
       plugins: ['stylelint-scss'],
       rules: {
@@ -127,7 +127,7 @@ export default {
       },
     },
     {
-      files: ['*.tsx', '**/*.tsx'],
+      files: ['**/*.tsx'],
       customSyntax: 'postcss-styled-syntax',
       rules: {
         'order/properties-order': null,
@@ -160,7 +160,7 @@ export default {
       },
     },
     {
-      files: ['*.pcss', '**/*.pcss'],
+      files: ['**/*.pcss'],
       rules: {
         'media-feature-range-notation': null,
         'import-notation': null,
