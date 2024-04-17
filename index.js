@@ -20,6 +20,7 @@ import noDisplayColors from './plugins/no-display-colors.js'
 export default {
   extends: ['stylelint-config-standard'],
   ignoreFiles: ['**/*.js', '**/*.cjs'],
+  reportNeedlessDisables: true,
   plugins: [
     'stylelint-no-unsupported-browser-features',
     'stylelint-order',
@@ -122,7 +123,7 @@ export default {
         'scss/function-quote-no-quoted-strings-inside': true,
         'scss/function-unquote-no-unquoted-strings-inside': true,
         'scss/no-duplicate-mixins': true,
-        'scss/selector-no-redundant-nesting-selector': true
+        'scss/selector-no-redundant-nesting-selector': true,
       },
     },
     {
@@ -167,6 +168,8 @@ export default {
     {
       files: ['*.pcss', '**/*.pcss'],
       rules: {
+        'media-feature-range-notation': null,
+        'import-notation': null,
         'custom-property-pattern': null,
         'selector-class-pattern': null,
         'keyframes-name-pattern': null,
