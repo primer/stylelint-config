@@ -74,6 +74,7 @@ export default {
       {
         severity: 'warning',
         ignore: ['css-nesting'],
+        ignorePartialSupport: true,
         browsers,
       },
     ],
