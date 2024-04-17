@@ -1,1 +1,1 @@
-{ "extends": ["./dist/index"], "cache": false }
+{ "extends": ["./dist/index.cjs"], "cache": false }

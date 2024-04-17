@@ -33,10 +33,11 @@
     "node": ">16.0.0"
   },
   "scripts": {
-    "postinstall": "npm run build",
+    "pretest": "npm run build",
     "build": "rollup -c",
     "clean": "rimraf dist",
-    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest --coverage false",
+    "test": "npm run test:jest && npm run test:stylelint",
+    "test:jest": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest --coverage false",
     "test:stylelint": "stylelint __tests__/__fixtures__/good/",
     "lint": "eslint .",
     "release": "changeset publish"
