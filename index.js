@@ -180,5 +180,11 @@ export default {
         'primer/no-deprecated-colors': true,
       },
     },
+    {
+      files: ['**/*.module.css'],
+      rules: {
+        'primer/no-override': null,
+      },
+    },
   ],
 }
