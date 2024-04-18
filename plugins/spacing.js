@@ -1,39 +1,19 @@
 import stylelint from 'stylelint'
-import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.cjs'
+import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.mjs'
 import valueParser from 'postcss-value-parser'
+import docValues from '@primer/primitives/tokens-v2-private/docs/docValues.json' with {type: 'json'}
 
-// TODO: Pull this in from primer/primitives
-const spacerValues = {
-  '$spacer-1': '4px',
-  '$spacer-2': '8px',
-  '$spacer-3': '16px',
-  '$spacer-4': '24px',
-  '$spacer-5': '32px',
-  '$spacer-6': '40px',
-  '$spacer-7': '48px',
-  '$spacer-8': '64px',
-  '$spacer-9': '80px',
-  '$spacer-10': '96px',
-  '$spacer-11': '112px',
-  '$spacer-12': '128px',
-  '$em-spacer-1': '0.0625em',
-  '$em-spacer-2': '0.125em',
-  '$em-spacer-3': '0.25em',
-  '$em-spacer-4': '0.375em',
-  '$em-spacer-5': '0.5em',
-  '$em-spacer-6': '0.75em',
-}
-
-export const ruleName = 'primer/spacing'
-export const messages = stylelint.utils.ruleMessages(ruleName, {
-  rejected: (value, replacement) => {
-    if (replacement === null) {
-      return `Please use a primer spacer variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs`
-    }
-
-    return `Please replace ${value} with spacing variable '${replacement}'.`
-  },
+const sizes = docValues['tokens/base/size/size.json'].map(size => {
+  return {
+    name: `--${size['name']}`,
+    values: Object.values(size['original']).concat(size['value']),
+  }
 })
+
+const {
+  createPlugin,
+  utils: {report, ruleMessages, validateOptions},
+} = stylelint
 
 const walkGroups = (root, validate) => {
   for (const node of root.nodes) {
@@ -46,58 +26,76 @@ const walkGroups = (root, validate) => {
   return root
 }
 
-// eslint-disable-next-line no-unused-vars
-export default stylelint.createPlugin(ruleName, (enabled, options = {}, context) => {
-  if (!enabled) {
-    return noop
-  }
+export const ruleName = 'primer/spacing'
+export const messages = ruleMessages(ruleName, {
+  rejected: (value, replacement) => {
+    if (!replacement) {
+      return `Please use a primer size variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/foundations/primitives/size`
+    }
 
-  const lintResult = (root, result) => {
-    root.walk(decl => {
-      if (decl.type !== 'decl' || !decl.prop.match(/^(padding|margin)/)) {
-        return noop
-      }
+    return `Please replace ${value} with size variable '${replacement['name']}'.`
+  },
+})
+
+const meta = {
+  fixable: true,
+}
+
+// Props that we want to check
+const propList = ['padding', 'margin']
+
+/** @type {import('stylelint').Rule} */
+const ruleFunction = (primary, secondaryOptions, context) => {
+  return (root, result) => {
+    const validOptions = validateOptions(result, ruleName, {
+      actual: primary,
+      possible: [true],
+    })
+
+    if (!validOptions) return
+
+    root.walkDecls(declNode => {
+      const {prop, value} = declNode
+
+      if (!propList.some(spacingProp => prop.includes(spacingProp))) return
 
       const problems = []
 
-      const parsedValue = walkGroups(valueParser(decl.value), node => {
-        // Remove leading negative sign, if any.
-        const cleanValue = node.value.replace(/^-/g, '')
-
+      const parsedValue = walkGroups(valueParser(value), node => {
         // Only check word types. https://github.com/TrySound/postcss-value-parser#word
         if (node.type !== 'word') {
           return
         }
+        console.log(node.value)
 
         // Exact values to ignore.
         if (['*', '+', '-', '/', '0', 'auto', 'inherit', 'initial'].includes(node.value)) {
           return
         }
 
-        const valueUnit = valueParser.unit(cleanValue)
+        const valueUnit = valueParser.unit(node.value)
 
         if (valueUnit && (valueUnit.unit === '' || !/^[0-9.]+$/.test(valueUnit.number))) {
           return
         }
 
-        // If the a variable is found in the value, skip it.
+        // If the variable is found in the value, skip it.
         if (
-          Object.keys(spacerValues).some(variable =>
-            new RegExp(`${variable.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(cleanValue),
+          sizes.some(variable =>
+            new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(node.value),
           )
         ) {
           return
         }
 
-        const replacement = Object.keys(spacerValues).find(spacer => spacerValues[spacer] === cleanValue) || null
-        const valueMatch = replacement ? spacerValues[replacement] : node.value
+        const replacement = sizes.find(variable => variable.values.includes(node.value))
 
         if (replacement && context.fix) {
-          node.value = node.value.replace(valueMatch, replacement)
+          node.value = node.value.replace(node.value, `var(${replacement['name']})`)
         } else {
           problems.push({
-            index: declarationValueIndex(decl) + node.sourceIndex,
-            message: messages.rejected(valueMatch, replacement),
+            index: declarationValueIndex(declNode) + node.sourceIndex,
+            message: messages.rejected(node.value, replacement),
           })
         }
 
@@ -105,15 +103,15 @@ export default stylelint.createPlugin(ruleName, (enabled, options = {}, context)
       })
 
       if (context.fix) {
-        decl.value = parsedValue.toString()
+        declNode.value = parsedValue.toString()
       }
 
       if (problems.length) {
         for (const err of problems) {
-          stylelint.utils.report({
+          report({
             index: err.index,
             message: err.message,
-            node: decl,
+            node: declNode,
             result,
             ruleName,
           })
@@ -121,8 +119,10 @@ export default stylelint.createPlugin(ruleName, (enabled, options = {}, context)
       }
     })
   }
+}
 
-  return lintResult
-})
+ruleFunction.ruleName = ruleName
+ruleFunction.messages = messages
+ruleFunction.meta = meta
 
-function noop() {}
+export default createPlugin(ruleName, ruleFunction)

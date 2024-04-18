@@ -1,67 +1,68 @@
-import {ruleName} from '../plugins/spacing.js'
+import plugin from '../plugins/spacing.js'
+
+const plugins = [plugin];
+const {
+  ruleName,
+  rule: { messages }
+} = plugin
 
 // eslint-disable-next-line no-undef
 testRule({
-  plugins: ['./plugins/spacing'],
-  customSyntax: 'postcss-scss',
+  plugins,
   ruleName,
-  config: [true],
+  config: [true, { }],
   fix: true,
+  cache: false,
   accept: [
     {
-      code: '.x { padding: $spacer-4; }',
-      description: 'One variable is valid.',
+      code: '.x { padding: var(--base-size-4); }',
+      description: 'CSS > One variable is valid.',
     },
     {
-      code: '.x { padding: $spacer-4 $spacer-3; }',
-      description: 'Two variables are valid.',
+      code: '.x { padding-bottom: var(--base-size-4); }',
+      description: 'CSS > Works on property partial match.',
+    },
+    {
+      code: '.x { padding: var(--base-size-4) var(--base-size-8); }',
+      description: 'CSS > Two variables are valid.',
     },
     {
       code: '.x { padding: 0 0; }',
-      description: 'Ignore zero values.',
+      description: 'CSS > Ignore zero values.',
     },
     {
       code: '.x { margin: auto; }',
-      description: 'Ignore auto values.',
+      description: 'CSS > Ignore auto values.',
     },
     {
-      code: '.x { padding: calc($spacer-4 * 2); }',
-      description: 'Finds variable calc values.',
-    },
-    {
-      code: '.x { padding: calc(#{$spacer-4} * 2); }',
-      description: 'Finds interpolated calc values.',
-    },
-    {
-      code: '.x { padding: $spacer-1; .y { padding: $spacer-1; } }',
-      description: 'Nested css works.',
+      code: '.x { padding: calc(var(--base-size-4) * 2); }',
+      description: 'CSS > Finds variable calc values.',
     },
   ],
   reject: [
     {
-      code: '.x { padding-bottom: 0.3em; }',
+      code: '.x { padding-bottom: 1px; }',
       unfixable: true,
-      message:
-        "Please use a primer spacer variable instead of '0.3em'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
+      message: messages.rejected('1px'),
       line: 1,
       column: 22,
-      description: 'Errors on non-spacer em values.',
+      description: "Errors on value not in spacer list",
+    },
+    {
+      code: '.x { padding-bottom: 0.25rem; }',
+      fixed: '.x { padding-bottom: var(--base-size-4); }',
+      message: messages.rejected('0.25rem', { 'name': '--base-size-4' }),
+      line: 1,
+      column: 22,
+      description: "Replaces '0.25rem' with 'var(--base-size-4)'.",
     },
     {
       code: '.x { padding: 4px; }',
-      fixed: '.x { padding: $spacer-1; }',
-      message: `Please replace 4px with spacing variable '$spacer-1'. (primer/spacing)`,
+      fixed: '.x { padding: var(--base-size-4); }',
+      message: messages.rejected('4px', { 'name': '--base-size-4' }),
       line: 1,
       column: 15,
-      description: "Replaces '4px' with '$spacer-1'.",
-    },
-    {
-      code: '.x { padding: 0.5em; }',
-      fixed: '.x { padding: $em-spacer-5; }',
-      message: `Please replace 0.5em with spacing variable '$em-spacer-5'. (primer/spacing)`,
-      line: 1,
-      column: 15,
-      description: "Replaces '0.5em' with '$em-spacer-5'.",
+      description: "Replaces '4px' with '--base-size-4'.",
     },
     {
       code: '.x { padding: -4px; }',
@@ -174,4 +175,20 @@ testRule({
       ],
     },
   ],
+})
+
+testRule({
+  plugins,
+  ruleName,
+  customSyntax: 'postcss-scss',
+  codeFilename: 'example.scss',
+  config: [true, { }],
+  fix: true,
+  cache: false,
+  accept: [
+    {
+      code: '.x { padding: var(--base-size-4); .y { padding: var(--base-size-8); } }',
+      description: 'SCSS > Nested css works.',
+    },
+  ]
 })
