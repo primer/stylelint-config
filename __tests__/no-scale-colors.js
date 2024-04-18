@@ -4,7 +4,6 @@ import {fileURLToPath} from 'url'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
-// eslint-disable-next-line no-undef
 testRule({
   plugins: ['./plugins/no-scale-colors'],
   ruleName,

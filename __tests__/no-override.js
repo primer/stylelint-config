@@ -18,9 +18,7 @@ describe('primer/no-override', () => {
     return lint('.ml-1 { width: 10px; }').then(data => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
-      expect(data).toHaveWarnings([
-        `Primer CSS class ".ml-1" should not be overridden. (primer/no-override)`,
-      ])
+      expect(data).toHaveWarnings([`Primer CSS class ".ml-1" should not be overridden. (primer/no-override)`])
     })
   })
 
@@ -29,9 +27,7 @@ describe('primer/no-override', () => {
     return lint(`${selector} { width: 10px; }`).then(data => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(1)
-      expect(data).toHaveWarnings([
-        `Primer CSS class "${selector}" should not be overridden. (primer/no-override)`,
-      ])
+      expect(data).toHaveWarnings([`Primer CSS class "${selector}" should not be overridden. (primer/no-override)`])
     })
   })
 

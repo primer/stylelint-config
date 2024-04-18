@@ -1,12 +1,9 @@
 import {ruleName} from '../plugins/no-deprecated-colors.js'
 
-// eslint-disable-next-line no-undef
 testRule({
   plugins: ['./plugins/no-deprecated-colors'],
   ruleName,
-  config: [
-    true,
-  ],
+  config: [true],
   fix: true,
   accept: [
     {code: '.x { color: var(--fgColor-default); }'},
@@ -91,7 +88,7 @@ testRule({
     },
   ],
 })
-// eslint-disable-next-line no-undef
+
 testRule({
   plugins: ['./plugins/no-deprecated-colors'],
   ruleName,

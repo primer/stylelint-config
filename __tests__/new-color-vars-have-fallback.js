@@ -1,6 +1,5 @@
 import {ruleName} from '../plugins/new-color-vars-have-fallback.js'
 
-// eslint-disable-next-line no-undef
 testRule({
   plugins: ['./plugins/new-color-vars-have-fallback'],
   customSyntax: 'postcss-scss',

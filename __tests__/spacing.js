@@ -1,16 +1,16 @@
 import plugin from '../plugins/spacing.js'
 
-const plugins = [plugin];
+const plugins = [plugin]
 const {
   ruleName,
-  rule: { messages }
+  rule: {messages},
 } = plugin
 
-// eslint-disable-next-line no-undef
+// General Tests
 testRule({
   plugins,
   ruleName,
-  config: [true, { }],
+  config: [true, {}],
   fix: true,
   cache: false,
   accept: [
@@ -46,12 +46,12 @@ testRule({
       message: messages.rejected('1px'),
       line: 1,
       column: 22,
-      description: "CSS > Errors on value not in spacer list",
+      description: 'CSS > Errors on value not in spacer list',
     },
     {
       code: '.x { padding-bottom: 0.25rem; }',
       fixed: '.x { padding-bottom: var(--base-size-4); }',
-      message: messages.rejected('0.25rem', { 'name': '--base-size-4' }),
+      message: messages.rejected('0.25rem', {name: '--base-size-4'}),
       line: 1,
       column: 22,
       description: "CSS > Replaces '0.25rem' with 'var(--base-size-4)'.",
@@ -59,7 +59,7 @@ testRule({
     {
       code: '.x { padding: 4px; }',
       fixed: '.x { padding: var(--base-size-4); }',
-      message: messages.rejected('4px', { 'name': '--base-size-4' }),
+      message: messages.rejected('4px', {name: '--base-size-4'}),
       line: 1,
       column: 15,
       description: "CSS > Replaces '4px' with '--base-size-4'.",
@@ -67,7 +67,7 @@ testRule({
     {
       code: '.x { padding: -4px; }',
       unfixable: true,
-      message: messages.rejected('-4px', { 'name': '--base-size-4' }),
+      message: messages.rejected('-4px', {name: '--base-size-4'}),
       line: 1,
       column: 15,
       description: "CSS > Replaces '-4px' with '-$spacer-1'.",
@@ -76,7 +76,7 @@ testRule({
       code: '.x { padding: calc(8px * 2); }',
       fixed: '.x { padding: calc(var(--base-size-8) * 2); }',
       description: 'CSS > Replaces "8px" with "var(--base-size-8)" inside calc.',
-      message: messages.rejected('8px', { 'name': '--base-size-8' }),
+      message: messages.rejected('8px', {name: '--base-size-8'}),
       line: 1,
       column: 20,
     },
@@ -90,14 +90,14 @@ testRule({
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message: messages.rejected('4px', { 'name': '--base-size-4' }),
+          message: messages.rejected('4px', {name: '--base-size-4'}),
         },
         {
           column: 45,
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message: messages.rejected('12px', { 'name': '--base-size-12' }),
+          message: messages.rejected('12px', {name: '--base-size-12'}),
         },
       ],
     },
@@ -118,7 +118,7 @@ testRule({
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message: messages.rejected('4px', { 'name': '--base-size-4' }),
+          message: messages.rejected('4px', {name: '--base-size-4'}),
         },
       ],
     },
@@ -141,12 +141,13 @@ testRule({
   ],
 })
 
+// SCSS Specific Tests
 testRule({
   plugins,
   ruleName,
   customSyntax: 'postcss-scss',
   codeFilename: 'example.scss',
-  config: [true, { }],
+  config: [true, {}],
   fix: true,
   cache: false,
   accept: [
@@ -156,6 +157,14 @@ testRule({
     },
   ],
   reject: [
+    {
+      code: '.x { padding: -$spacer-1; }',
+      unfixable: true,
+      message: messages.rejected('-$spacer-1'),
+      line: 1,
+      column: 15,
+      description: 'SCSS > Fails on negative SCSS variable.',
+    },
     {
       code: '.x { padding: 3px; .y { padding: 3px; .z { padding: 3px; } } }',
       unfixable: true,
@@ -183,6 +192,33 @@ testRule({
           message: messages.rejected('3px'),
         },
       ],
+    },
+  ],
+})
+
+// SCSS Specific Tests
+testRule({
+  plugins,
+  ruleName,
+  customSyntax: 'postcss-styled-syntax',
+  codeFilename: 'example.tsx',
+  config: [true, {}],
+  fix: true,
+  cache: false,
+  accept: [
+    {
+      code: '.x { padding: var(--base-size-4); .y { padding: var(--base-size-8); } }',
+      description: 'TSX > Nested css works.',
+    },
+  ],
+  reject: [
+    {
+      code: '.x { padding: -$spacer-1; }',
+      unfixable: true,
+      message: messages.rejected('-$spacer-1'),
+      line: 1,
+      column: 15,
+      description: 'TSX > Fails on negative SCSS variable.',
     },
   ],
 })
