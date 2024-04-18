@@ -5,7 +5,6 @@ import borders from './plugins/borders.js'
 import boxShadow from './plugins/box-shadow.js'
 import colors from './plugins/colors.js'
 import noUndefinedVars from './plugins/no-undefined-vars.js'
-import noUnusedVars from './plugins/no-unused-vars.js'
 import responsiveWidths from './plugins/responsive-widths.js'
 import spacing from './plugins/spacing.js'
 import typography from './plugins/typography.js'
@@ -24,7 +23,6 @@ export default {
     boxShadow,
     colors,
     noUndefinedVars,
-    noUnusedVars,
     responsiveWidths,
     spacing,
     typography,
@@ -78,7 +76,6 @@ export default {
       true,
       {severity: 'warning', files: 'node_modules/@primer/primitives/dist/scss/colors*/*.scss'},
     ],
-    'primer/no-unused-vars': [true, {severity: 'warning'}],
     'primer/responsive-widths': true,
     'primer/spacing': true,
     'primer/typography': true,
