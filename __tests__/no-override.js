@@ -1,13 +1,14 @@
-import {lint, extendDefaultConfig} from './utils/index.js'
+import {lint} from './utils/index.js'
 import noOverride from '../plugins/no-override.js'
 
 describe('primer/no-override', () => {
   it(`doesn't run when disabled`, () => {
-    const config = extendDefaultConfig({
+    const config = {
+      plugins: [noOverride],
       rules: {
         'primer/no-override': false,
       },
-    })
+    }
     return lint(`.ml-1 { width: 10px; }`, config).then(data => {
       expect(data).not.toHaveErrored()
       expect(data).toHaveWarningsLength(0)
@@ -57,7 +58,8 @@ describe('primer/no-override', () => {
 
   describe('ignoreSelectors option', () => {
     it('ignores selectors listed as strings', () => {
-      const config = extendDefaultConfig({
+      const config = {
+        plugins: [noOverride],
         rules: {
           'primer/no-override': [
             true,
@@ -66,15 +68,16 @@ describe('primer/no-override', () => {
             },
           ],
         },
-      })
-      return lint(`.px-4 { margin: 0 $spacer-1 !important; }`, config).then(data => {
+      }
+      return lint(`.px-4 { margin: 0 var(--base-size-4) !important; }`, config).then(data => {
         expect(data).not.toHaveErrored()
         expect(data).toHaveWarningsLength(0)
       })
     })
 
     it('ignores selectors listed as regular expressions', () => {
-      const config = extendDefaultConfig({
+      const config = {
+        plugins: [noOverride],
         rules: {
           'primer/no-override': [
             true,
@@ -83,15 +86,16 @@ describe('primer/no-override', () => {
             },
           ],
         },
-      })
-      return lint(`.px-4 { margin: 0 $spacer-1 !important; }`, config).then(data => {
+      }
+      return lint(`.px-4 { margin: 0 var(--base-size-4) !important; }`, config).then(data => {
         expect(data).not.toHaveErrored()
         expect(data).toHaveWarningsLength(0)
       })
     })
 
     it('ignores selectors when ignoreSelectors is a function', () => {
-      const config = extendDefaultConfig({
+      const config = {
+        plugins: [noOverride],
         rules: {
           'primer/no-override': [
             true,
@@ -100,8 +104,8 @@ describe('primer/no-override', () => {
             },
           ],
         },
-      })
-      return lint(`.px-4 { margin: 0 $spacer-1 !important; }`, config).then(data => {
+      }
+      return lint(`.px-4 { margin: 0 var(--base-size-4) !important; }`, config).then(data => {
         expect(data).not.toHaveErrored()
         expect(data).toHaveWarningsLength(0)
       })
