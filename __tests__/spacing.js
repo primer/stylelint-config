@@ -46,7 +46,7 @@ testRule({
       message: messages.rejected('1px'),
       line: 1,
       column: 22,
-      description: "Errors on value not in spacer list",
+      description: "CSS > Errors on value not in spacer list",
     },
     {
       code: '.x { padding-bottom: 0.25rem; }',
@@ -54,7 +54,7 @@ testRule({
       message: messages.rejected('0.25rem', { 'name': '--base-size-4' }),
       line: 1,
       column: 22,
-      description: "Replaces '0.25rem' with 'var(--base-size-4)'.",
+      description: "CSS > Replaces '0.25rem' with 'var(--base-size-4)'.",
     },
     {
       code: '.x { padding: 4px; }',
@@ -62,117 +62,81 @@ testRule({
       message: messages.rejected('4px', { 'name': '--base-size-4' }),
       line: 1,
       column: 15,
-      description: "Replaces '4px' with '--base-size-4'.",
+      description: "CSS > Replaces '4px' with '--base-size-4'.",
     },
     {
       code: '.x { padding: -4px; }',
-      fixed: '.x { padding: -$spacer-1; }',
-      message: `Please replace 4px with spacing variable '$spacer-1'. (primer/spacing)`,
+      unfixable: true,
+      message: messages.rejected('-4px', { 'name': '--base-size-4' }),
       line: 1,
       column: 15,
-      description: "Replaces '-4px' with '-$spacer-1'.",
+      description: "CSS > Replaces '-4px' with '-$spacer-1'.",
     },
     {
       code: '.x { padding: calc(8px * 2); }',
-      fixed: '.x { padding: calc($spacer-2 * 2); }',
-      description: 'Replaces "8px" with "$spacer-2" inside calc.',
-      message: `Please replace 8px with spacing variable '$spacer-2'. (primer/spacing)`,
+      fixed: '.x { padding: calc(var(--base-size-8) * 2); }',
+      description: 'CSS > Replaces "8px" with "var(--base-size-8)" inside calc.',
+      message: messages.rejected('8px', { 'name': '--base-size-8' }),
       line: 1,
       column: 20,
     },
     {
-      code: '.x { padding: 6px ($spacer-3 + 12px + $spacer-2); }',
-      unfixable: true,
-      description: 'Complex calc expression.',
+      code: '.x { padding: 4px calc(var(--base-size-8) + 12px + var(--base-size-8)); }',
+      fixed: '.x { padding: var(--base-size-4) calc(var(--base-size-8) + var(--base-size-12) + var(--base-size-8)); }',
+      description: 'CSS > Complex calc expression.',
       warnings: [
         {
           column: 15,
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message:
-            "Please use a primer spacer variable instead of '6px'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
+          message: messages.rejected('4px', { 'name': '--base-size-4' }),
         },
         {
-          column: 32,
+          column: 45,
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message:
-            "Please use a primer spacer variable instead of '12px'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
+          message: messages.rejected('12px', { 'name': '--base-size-12' }),
         },
       ],
     },
     {
       code: '.x { padding: 3px 4px; }',
-      fixed: '.x { padding: 3px $spacer-1; }',
-      description: "Replaces '4px' with '$spacer-1' and errors on '3px'.",
+      fixed: '.x { padding: 3px var(--base-size-4); }',
+      description: "CSS > Replaces '4px' with 'var(--base-size-4)' and errors on '3px'.",
       warnings: [
         {
           column: 15,
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message:
-            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
+          message: messages.rejected('3px'),
         },
         {
           column: 19,
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message: "Please replace 4px with spacing variable '$spacer-1'. (primer/spacing)",
+          message: messages.rejected('4px', { 'name': '--base-size-4' }),
         },
       ],
     },
     {
-      code: '.x { padding: $spacer-100; }',
+      code: '.x { padding: var(--my-space); }',
       unfixable: true,
-      message:
-        "Please use a primer spacer variable instead of '$spacer-100'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
+      message: messages.rejected('--my-space'),
       line: 1,
-      column: 15,
-      description: 'Errors on non-primer spacer.',
+      column: 19,
+      description: 'CSS > Errors on non-primer spacer.',
     },
     {
-      code: '.x { margin-right: (-$spacing-task-item-1); }',
+      code: '.x { margin-right: calc(var(--my-space) * -1); }',
       unfixable: true,
-      message:
-        "Please use a primer spacer variable instead of '-$spacing-task-item-1'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
+      message: messages.rejected('--my-space'),
       line: 1,
-      column: 21,
-      description: 'Errors on non-primer spacer in parens.',
-    },
-    {
-      code: '.x { padding: 3px; .y { padding: 3px; .z { padding: 3px; } } }',
-      unfixable: true,
-      description: 'Rejects nested CSS.',
-      warnings: [
-        {
-          column: 15,
-          line: 1,
-          rule: 'primer/spacing',
-          severity: 'error',
-          message:
-            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
-        },
-        {
-          column: 34,
-          line: 1,
-          rule: 'primer/spacing',
-          severity: 'error',
-          message:
-            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
-        },
-        {
-          column: 53,
-          line: 1,
-          rule: 'primer/spacing',
-          severity: 'error',
-          message:
-            "Please use a primer spacer variable instead of '3px'. Consult the primer docs for a suitable replacement. https://primer.style/css/storybook/?path=/docs/support-spacing--docs (primer/spacing)",
-        },
-      ],
+      column: 29,
+      description: 'CSS > Errors on non-primer spacer in parens.',
     },
   ],
 })
@@ -190,5 +154,35 @@ testRule({
       code: '.x { padding: var(--base-size-4); .y { padding: var(--base-size-8); } }',
       description: 'SCSS > Nested css works.',
     },
-  ]
+  ],
+  reject: [
+    {
+      code: '.x { padding: 3px; .y { padding: 3px; .z { padding: 3px; } } }',
+      unfixable: true,
+      description: 'SCSS > Rejects nested CSS.',
+      warnings: [
+        {
+          column: 15,
+          line: 1,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message: messages.rejected('3px'),
+        },
+        {
+          column: 34,
+          line: 1,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message: messages.rejected('3px'),
+        },
+        {
+          column: 53,
+          line: 1,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message: messages.rejected('3px'),
+        },
+      ],
+    },
+  ],
 })

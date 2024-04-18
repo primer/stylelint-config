@@ -33,7 +33,7 @@ export const messages = ruleMessages(ruleName, {
       return `Please use a primer size variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/foundations/primitives/size`
     }
 
-    return `Please replace ${value} with size variable '${replacement['name']}'.`
+    return `Please replace '${value}' with size variable '${replacement['name']}'.`
   },
 })
 
@@ -66,7 +66,6 @@ const ruleFunction = (primary, secondaryOptions, context) => {
         if (node.type !== 'word') {
           return
         }
-        console.log(node.value)
 
         // Exact values to ignore.
         if (['*', '+', '-', '/', '0', 'auto', 'inherit', 'initial'].includes(node.value)) {
@@ -75,7 +74,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
 
         const valueUnit = valueParser.unit(node.value)
 
-        if (valueUnit && (valueUnit.unit === '' || !/^[0-9.]+$/.test(valueUnit.number))) {
+        if (valueUnit && (valueUnit.unit === '' || !/^-?[0-9.]+$/.test(valueUnit.number))) {
           return
         }
 
@@ -88,9 +87,10 @@ const ruleFunction = (primary, secondaryOptions, context) => {
           return
         }
 
-        const replacement = sizes.find(variable => variable.values.includes(node.value))
+        const replacement = sizes.find(variable => variable.values.includes(node.value.replace('-', '')))
+        const fixable = replacement && valueUnit && !valueUnit.number.includes('-')
 
-        if (replacement && context.fix) {
+        if (fixable && context.fix) {
           node.value = node.value.replace(node.value, `var(${replacement['name']})`)
         } else {
           problems.push({
