@@ -95,6 +95,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
         } else {
           problems.push({
             index: declarationValueIndex(declNode) + node.sourceIndex,
+            endIndex: declarationValueIndex(declNode) + node.sourceIndex + node.value.length,
             message: messages.rejected(node.value, replacement),
           })
         }
@@ -110,6 +111,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
         for (const err of problems) {
           report({
             index: err.index,
+            endIndex: err.endIndex,
             message: err.message,
             node: declNode,
             result,
