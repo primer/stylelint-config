@@ -3,9 +3,11 @@
   overflow: hidden;
 }
 
-.gradient {
+:root {
   --offset: -500px;
+}
 
+.gradient {
   position: absolute;
   top: 0;
   /* stylelint-disable-next-line primer/responsive-widths */
@@ -18,7 +20,6 @@
 }
 
 .gradient-left {
-  /* stylelint-disable primer/no-undefined-vars */
   top: var(--offset);
   left: var(--offset);
   /* stylelint-disable-next-line primer/colors */
@@ -79,20 +80,20 @@
 }
 
 .marketplace-item {
-  box-shadow: var(--shadow-resting-small, var(--color-shadow-small));
+  box-shadow: var(--shadow-resting-small);
 }
 
 .marketplace-item:hover,
 .marketplace-item:focus-within {
-  background-color: var(--bgColor-muted, var(--color-canvas-subtle));
+  background-color: var(--bgColor-muted);
 }
 
 .marketplace-item:focus-within {
-  outline: 2px solid var(--fgColor-accent, var(--color-accent-fg));
+  outline: 2px solid var(--fgColor-accent);
 }
 
 .marketplace-item-link {
-  color: var(--fgColor-default, var(--color-fg-default));
+  color: var(--fgColor-default);
 }
 
 .marketplace-item-link:hover {
