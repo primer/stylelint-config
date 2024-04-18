@@ -13,7 +13,6 @@ import responsiveWidths from './plugins/responsive-widths.js'
 import spacing from './plugins/spacing.js'
 import typography from './plugins/typography.js'
 import utilities from './plugins/utilities.js'
-import newColorVarsHaveFallback from './plugins/new-color-vars-have-fallback.js'
 import noDisplayColors from './plugins/no-display-colors.js'
 
 /** @type {import('stylelint').Config} */
@@ -36,7 +35,6 @@ export default {
     spacing,
     typography,
     utilities,
-    newColorVarsHaveFallback,
     noDisplayColors,
   ],
   rules: {
