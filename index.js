@@ -10,10 +10,14 @@ import typography from './plugins/typography.js'
 import utilities from './plugins/utilities.js'
 import noDisplayColors from './plugins/no-display-colors.js'
 
+import {createRequire} from 'node:module'
+
+const require = createRequire(import.meta.url)
+
 /** @type {import('stylelint').Config} */
 export default {
   extends: ['stylelint-config-standard'],
-  ignoreFiles: ['**/*.js', '**/*.cjs'],
+  ignoreFiles: ['**/*.js', '**/*.cjs', '**/*.ts', '**/*.mjs'],
   reportNeedlessDisables: true,
   plugins: [
     'stylelint-value-no-unknown-custom-properties',
@@ -42,18 +46,18 @@ export default {
       {
         severity: 'warning',
         importFrom: [
-          './node_modules/@primer/primitives/dist/css/functional/size/size-coarse.css',
-          './node_modules/@primer/primitives/dist/css/functional/size/border.css',
-          './node_modules/@primer/primitives/dist/css/functional/size/size.css',
-          './node_modules/@primer/primitives/dist/css/functional/size/size-fine.css',
-          './node_modules/@primer/primitives/dist/css/functional/size/breakpoints.css',
-          './node_modules/@primer/primitives/dist/css/functional/size/viewport.css',
-          './node_modules/@primer/primitives/dist/css/functional/motion/motion.css',
-          './node_modules/@primer/primitives/dist/css/functional/themes/light.css',
-          './node_modules/@primer/primitives/dist/css/functional/typography/typography.css',
-          './node_modules/@primer/primitives/dist/css/base/size/size.css',
-          './node_modules/@primer/primitives/dist/css/base/typography/typography.css',
-        ],
+          '@primer/primitives/dist/css/functional/size/size-coarse.css',
+          '@primer/primitives/dist/css/functional/size/border.css',
+          '@primer/primitives/dist/css/functional/size/size.css',
+          '@primer/primitives/dist/css/functional/size/size-fine.css',
+          '@primer/primitives/dist/css/functional/size/breakpoints.css',
+          '@primer/primitives/dist/css/functional/size/viewport.css',
+          '@primer/primitives/dist/css/functional/motion/motion.css',
+          '@primer/primitives/dist/css/functional/themes/light.css',
+          '@primer/primitives/dist/css/functional/typography/typography.css',
+          '@primer/primitives/dist/css/base/size/size.css',
+          '@primer/primitives/dist/css/base/typography/typography.css',
+        ].map(path => require.resolve(path)),
       },
     ],
     'custom-property-pattern': null,
