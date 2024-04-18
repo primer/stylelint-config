@@ -36,6 +36,10 @@ testRule({
       description: 'CSS > Ignore auto values.',
     },
     {
+      code: '.x { top: 100%; bottom: 100vh; }',
+      description: 'CSS > Ignore top with non-spacer units.',
+    },
+    {
       code: '.x { border-top-width: 4px; }',
       description: 'CSS > Ignores values with top in name.',
     },

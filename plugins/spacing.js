@@ -78,6 +78,11 @@ const ruleFunction = (primary, secondaryOptions, context) => {
           return
         }
 
+        // Skip if the value unit isn't a supported unit.
+        if (valueUnit && !['px', 'rem', 'em'].includes(valueUnit.unit)) {
+          return
+        }
+
         // If the variable is found in the value, skip it.
         if (
           sizes.some(variable =>
