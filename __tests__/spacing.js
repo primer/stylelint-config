@@ -36,6 +36,10 @@ testRule({
       description: 'CSS > Ignore auto values.',
     },
     {
+      code: '.x { border-top-width: 4px; }',
+      description: 'CSS > Ignores values with top in name.',
+    },
+    {
       code: '.x { padding: calc(var(--base-size-4) * 2); }',
       description: 'CSS > Finds variable calc values.',
     },
@@ -64,6 +68,55 @@ testRule({
       line: 1,
       column: 15,
       description: "CSS > Replaces '4px' with '--base-size-4'.",
+    },
+    {
+      code: '.x { padding: 4px; margin: 4px; top: 4px; right: 4px; bottom: 4px; left: 4px; }',
+      fixed: '.x { padding: var(--base-size-4); margin: var(--base-size-4); top: var(--base-size-4); right: var(--base-size-4); bottom: var(--base-size-4); left: var(--base-size-4); }',
+      description: "CSS > Replaces '4px' with '--base-size-4'.",
+      warnings: [
+        {
+          column: 15,
+          line: 1,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message: messages.rejected('4px', {name: '--base-size-4'}),
+        },
+        {
+          column: 28,
+          line: 1,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message: messages.rejected('4px', {name: '--base-size-4'}),
+        },
+        {
+          column: 38,
+          line: 1,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message: messages.rejected('4px', {name: '--base-size-4'}),
+        },
+        {
+          column: 50,
+          line: 1,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message: messages.rejected('4px', {name: '--base-size-4'}),
+        },
+        {
+          column: 63,
+          line: 1,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message: messages.rejected('4px', {name: '--base-size-4'}),
+        },
+        {
+          column: 74,
+          line: 1,
+          rule: 'primer/spacing',
+          severity: 'error',
+          message: messages.rejected('4px', {name: '--base-size-4'}),
+        },
+      ],
     },
     {
       code: '.x { padding: -4px; }',

@@ -33,9 +33,10 @@ describe('stylelint-config', () => {
         }
       `).then(data => {
       expect(data).toHaveErrored()
-      expect(data).toHaveWarningsLength(2)
+      expect(data).toHaveWarningsLength(3)
       expect(data).toHaveWarnings([
         'Expected "top" to come before "width" (order/properties-order)',
+        "Please use a primer size variable instead of '.2em'. Consult the primer docs for a suitable replacement. https://primer.style/foundations/primitives/size (primer/spacing)",
         'Unexpected value "initial" for property "max-width" (declaration-property-value-disallowed-list)',
       ])
     })

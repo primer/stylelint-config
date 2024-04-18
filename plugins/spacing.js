@@ -42,7 +42,7 @@ const meta = {
 }
 
 // Props that we want to check
-const propList = ['padding', 'margin']
+const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left']
 
 /** @type {import('stylelint').Rule} */
 const ruleFunction = (primary, secondaryOptions, context) => {
@@ -57,7 +57,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
     root.walkDecls(declNode => {
       const {prop, value} = declNode
 
-      if (!propList.some(spacingProp => prop.includes(spacingProp))) return
+      if (!propList.some(spacingProp => prop.startsWith(spacingProp))) return
 
       const problems = []
 
