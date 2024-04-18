@@ -248,5 +248,4 @@ module.exports = {
 - `disableFix` is a boolean that can disable auto-fixing of this rule when running `stylelint --fix` to auto-fix other rules.
 
 [primer css]: https://primer.style/css
-[globby]: https://www.npmjs.com/package/globby
 [glob patterns]: http://tldp.org/LDP/GNU-Linux-Tools-Summary/html/x11655.htm
