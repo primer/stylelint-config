@@ -1,5 +1,5 @@
 ---
-"@primer/stylelint-config": patch
+"@primer/stylelint-config": major
 ---
 
 **BREAKING CHANGE:** Removing plugins from the config.
