@@ -1,5 +1,5 @@
 import stylelint from 'stylelint'
-import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.mjs'
+import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.cjs'
 import valueParser from 'postcss-value-parser'
 import docValues from '@primer/primitives/tokens-v2-private/docs/docValues.json' with {type: 'json'}
 
