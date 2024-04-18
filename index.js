@@ -4,7 +4,6 @@ import propertyOrder from './property-order.js'
 import borders from './plugins/borders.js'
 import boxShadow from './plugins/box-shadow.js'
 import colors from './plugins/colors.js'
-import noScaleColors from './plugins/no-scale-colors.js'
 import noUndefinedVars from './plugins/no-undefined-vars.js'
 import noUnusedVars from './plugins/no-unused-vars.js'
 import responsiveWidths from './plugins/responsive-widths.js'
@@ -24,7 +23,6 @@ export default {
     borders,
     boxShadow,
     colors,
-    noScaleColors,
     noUndefinedVars,
     noUnusedVars,
     responsiveWidths,
@@ -133,7 +131,6 @@ export default {
         'primer/borders': null,
         'primer/typography': null,
         'primer/box-shadow': null,
-        'primer/no-scale-colors': true,
         'primer/no-display-colors': true,
         'primer/utilities': null,
         'property-no-unknown': [
