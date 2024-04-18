@@ -77,6 +77,29 @@ testRule({
       description: "CSS > Replaces '4px' with '--base-size-4'.",
     },
     {
+      code: '.x { padding: 3px; margin: 5px; }',
+      fixed: '.x { padding: var(--base-size-4); margin: var(--base-size-4); }',
+      description: "CSS > Replaces +- pixel values with closest variable '--base-size-4'.",
+      warnings: [
+        {
+          message: messages.rejected('3px', {name: '--base-size-4'}),
+          line: 1,
+          column: 15,
+          endColumn: 18,
+          rule: 'primer/spacing',
+          severity: 'error',
+        },
+        {
+          message: messages.rejected('5px', {name: '--base-size-4'}),
+          line: 1,
+          column: 28,
+          endColumn: 31,
+          rule: 'primer/spacing',
+          severity: 'error',
+        },
+      ],
+    },
+    {
       code: '.x { padding: 4px; margin: 4px; top: 4px; right: 4px; bottom: 4px; left: 4px; }',
       fixed:
         '.x { padding: var(--base-size-4); margin: var(--base-size-4); top: var(--base-size-4); right: var(--base-size-4); bottom: var(--base-size-4); left: var(--base-size-4); }',
@@ -174,9 +197,9 @@ testRule({
       ],
     },
     {
-      code: '.x { padding: 3px 4px; }',
-      fixed: '.x { padding: 3px var(--base-size-4); }',
-      description: "CSS > Replaces '4px' with 'var(--base-size-4)' and errors on '3px'.",
+      code: '.x { padding: 2px 4px; }',
+      fixed: '.x { padding: 2px var(--base-size-4); }',
+      description: "CSS > Replaces '4px' with 'var(--base-size-4)' and errors on '2px'.",
       warnings: [
         {
           endColumn: 18,
@@ -184,7 +207,7 @@ testRule({
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message: messages.rejected('3px'),
+          message: messages.rejected('2px'),
         },
         {
           endColumn: 22,
@@ -243,7 +266,7 @@ testRule({
       description: 'SCSS > Fails on negative SCSS variable.',
     },
     {
-      code: '.x { padding: 3px; .y { padding: 3px; .z { padding: 3px; } } }',
+      code: '.x { padding: 2px; .y { padding: 2px; .z { padding: 2px; } } }',
       unfixable: true,
       description: 'SCSS > Rejects nested CSS.',
       warnings: [
@@ -253,7 +276,7 @@ testRule({
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message: messages.rejected('3px'),
+          message: messages.rejected('2px'),
         },
         {
           column: 34,
@@ -261,7 +284,7 @@ testRule({
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message: messages.rejected('3px'),
+          message: messages.rejected('2px'),
         },
         {
           column: 53,
@@ -269,7 +292,7 @@ testRule({
           line: 1,
           rule: 'primer/spacing',
           severity: 'error',
-          message: messages.rejected('3px'),
+          message: messages.rejected('2px'),
         },
       ],
     },

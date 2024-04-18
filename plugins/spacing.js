@@ -4,9 +4,16 @@ import valueParser from 'postcss-value-parser'
 import docValues from '@primer/primitives/tokens-v2-private/docs/docValues.json' with {type: 'json'}
 
 const sizes = docValues['tokens/base/size/size.json'].map(size => {
+  const values = [size['value']]
+  for (const value of Object.values(size['original'])) {
+    values.push(value)
+    values.push(`${parseInt(value) + 1}px`)
+    values.push(`${parseInt(value) - 1}px`)
+  }
+
   return {
     name: `--${size['name']}`,
-    values: Object.values(size['original']).concat(size['value']),
+    values,
   }
 })
 
@@ -33,7 +40,7 @@ export const messages = ruleMessages(ruleName, {
       return `Please use a primer size variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/foundations/primitives/size`
     }
 
-    return `Please replace '${value}' with size variable '${replacement['name']}'.`
+    return `Please replace '${value}' with size variable '${replacement['name']}'. https://primer.style/foundations/primitives/size`
   },
 })
 
