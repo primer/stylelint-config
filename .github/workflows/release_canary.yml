@@ -1,10 +1,5 @@
 name: Release
-on:
-  push:
-    branches-ignore:
-      - 'main'
-      - 'changeset-release/**'
-      - 'dependabot/**'
+on: [workflow_dispatch]
 
 jobs:
   release-canary:
