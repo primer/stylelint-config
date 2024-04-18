@@ -1,4 +1,5 @@
 import plugin from '../plugins/spacing.js'
+import dedent from 'dedent'
 
 const plugins = [plugin]
 const {
@@ -196,7 +197,7 @@ testRule({
   ],
 })
 
-// SCSS Specific Tests
+// Styled Syntax Specific Tests
 testRule({
   plugins,
   ruleName,
@@ -207,18 +208,30 @@ testRule({
   cache: false,
   accept: [
     {
-      code: '.x { padding: var(--base-size-4); .y { padding: var(--base-size-8); } }',
-      description: 'TSX > Nested css works.',
+      code: dedent`
+        const X = styled.div\`
+          padding: var(--base-size-4);
+        \`;
+      `,
+      description: 'TSX > Styled components work.',
     },
   ],
   reject: [
     {
-      code: '.x { padding: -$spacer-1; }',
-      unfixable: true,
-      message: messages.rejected('-$spacer-1'),
-      line: 1,
-      column: 15,
-      description: 'TSX > Fails on negative SCSS variable.',
+      code: dedent`
+        const X = styled.div\`
+          padding: 4px;
+        \`;
+      `,
+      fixed: dedent`
+        const X = styled.div\`
+          padding: var(--base-size-4);
+        \`;
+      `,
+      message: messages.rejected('4px', {name: '--base-size-4'}),
+      line: 2,
+      column: 12,
+      description: 'TSX > Fails on pixel value.',
     },
   ],
 })
