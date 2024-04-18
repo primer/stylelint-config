@@ -10,13 +10,6 @@ import typography from './plugins/typography.js'
 import utilities from './plugins/utilities.js'
 import noDisplayColors from './plugins/no-display-colors.js'
 
-import path from 'path'
-import {fileURLToPath} from 'url'
-
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
-
-
-
 /** @type {import('stylelint').Config} */
 export default {
   extends: ['stylelint-config-standard'],
@@ -49,17 +42,17 @@ export default {
       {
         severity: 'warning',
         importFrom: [
-          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/size/size-coarse.css'),
-          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/size/border.css'),
-          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/size/size.css'),
-          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/size/size-fine.css'),
-          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/size/breakpoints.css'),
-          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/size/viewport.css'),
-          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/motion/motion.css'),
-          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/themes/light.css'),
-          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/typography/typography.css'),
-          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/base/size/size.css'),
-          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/base/typography/typography.css'),
+          './node_modules/@primer/primitives/dist/css/functional/size/size-coarse.css',
+          './node_modules/@primer/primitives/dist/css/functional/size/border.css',
+          './node_modules/@primer/primitives/dist/css/functional/size/size.css',
+          './node_modules/@primer/primitives/dist/css/functional/size/size-fine.css',
+          './node_modules/@primer/primitives/dist/css/functional/size/breakpoints.css',
+          './node_modules/@primer/primitives/dist/css/functional/size/viewport.css',
+          './node_modules/@primer/primitives/dist/css/functional/motion/motion.css',
+          './node_modules/@primer/primitives/dist/css/functional/themes/light.css',
+          './node_modules/@primer/primitives/dist/css/functional/typography/typography.css',
+          './node_modules/@primer/primitives/dist/css/base/size/size.css',
+          './node_modules/@primer/primitives/dist/css/base/typography/typography.css',
         ],
       },
     ],
