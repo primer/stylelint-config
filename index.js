@@ -4,7 +4,6 @@ import propertyOrder from './property-order.js'
 import borders from './plugins/borders.js'
 import boxShadow from './plugins/box-shadow.js'
 import colors from './plugins/colors.js'
-import noDeprecatedColors from './plugins/no-deprecated-colors.js'
 import noOverride from './plugins/no-override.js'
 import noScaleColors from './plugins/no-scale-colors.js'
 import noUndefinedVars from './plugins/no-undefined-vars.js'
@@ -26,7 +25,6 @@ export default {
     borders,
     boxShadow,
     colors,
-    noDeprecatedColors,
     noOverride,
     noScaleColors,
     noUndefinedVars,
@@ -80,7 +78,6 @@ export default {
     'primer/borders': true,
     'primer/box-shadow': true,
     'primer/colors': true,
-    'primer/no-deprecated-colors': true,
     'primer/no-override': true,
     'primer/no-undefined-vars': [
       true,
@@ -139,12 +136,6 @@ export default {
         'primer/borders': null,
         'primer/typography': null,
         'primer/box-shadow': null,
-        'primer/no-deprecated-colors': [
-          true,
-          {
-            inlineFallback: true,
-          },
-        ],
         'primer/no-scale-colors': true,
         'primer/no-display-colors': true,
         'primer/utilities': null,
@@ -175,7 +166,6 @@ export default {
             ignoreAtRules: ['mixin', 'define-mixin'],
           },
         ],
-        'primer/no-deprecated-colors': true,
       },
     },
     {
