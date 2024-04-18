@@ -23,7 +23,7 @@ export default [
     ...baseConfig,
     output: {
       format: 'esm',
-      file: 'dist/index.js',
+      file: 'dist/index.mjs',
     },
   },
   {
