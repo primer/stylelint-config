@@ -4,7 +4,6 @@ import propertyOrder from './property-order.js'
 import borders from './plugins/borders.js'
 import boxShadow from './plugins/box-shadow.js'
 import colors from './plugins/colors.js'
-import noOverride from './plugins/no-override.js'
 import noScaleColors from './plugins/no-scale-colors.js'
 import noUndefinedVars from './plugins/no-undefined-vars.js'
 import noUnusedVars from './plugins/no-unused-vars.js'
@@ -25,7 +24,6 @@ export default {
     borders,
     boxShadow,
     colors,
-    noOverride,
     noScaleColors,
     noUndefinedVars,
     noUnusedVars,
@@ -78,7 +76,6 @@ export default {
     'primer/borders': true,
     'primer/box-shadow': true,
     'primer/colors': true,
-    'primer/no-override': true,
     'primer/no-undefined-vars': [
       true,
       {severity: 'warning', files: 'node_modules/@primer/primitives/dist/scss/colors*/*.scss'},
@@ -145,7 +142,6 @@ export default {
             ignoreProperties: ['@container', 'container-type'],
           },
         ],
-        'primer/no-override': null,
       },
     },
     {
@@ -170,9 +166,7 @@ export default {
     },
     {
       files: ['**/*.module.css'],
-      rules: {
-        'primer/no-override': null,
-      },
+      rules: {},
     },
   ],
 }

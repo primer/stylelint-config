@@ -7,7 +7,6 @@ This directory contains all of our custom stylelint plugins, each of which provi
 - [Primer stylelint plugins](#primer-stylelint-plugins)
     - [Rules](#rules)
   - [Usage](#usage)
-  - [`primer/no-override`](#primerno-override)
   - [`primer/no-unused-vars`](#primerno-unused-vars)
   - [`primer/no-undefined-vars`](#primerno-undefined-vars)
   - [`primer/no-scale-colors`](#primerno-scale-colors)
@@ -32,35 +31,7 @@ If you're _not_ using or extending `@primer/stylelint-config`, you can still ref
 ```js
 // stylelint.config.js
 module.exports = {
-  plugins: ['@primer/stylelint-config/plugins/no-override', '@primer/stylelint-config/plugins/no-unused-vars']
-}
-```
-
-## `primer/no-override`
-
-This rule prohibits "overriding" class selectors defined in [Primer CSS]. By default, it will only fail selectors that target utility classes:
-
-```scss
-// FAIL
-.mt-0 {
-  /* literally anything */
-}
-```
-
-You can further constrain overrides to exclude _any_ class selector in Primer by providing additional names in the `bundles` option:
-
-```js
-// stylelint.config.js
-module.exports = {
-  // ...
-  rules: {
-    'primer/no-override': [
-      true,
-      {
-        bundles: ['utilities', core', 'product', 'marketing']
-      }
-    ]
-  }
+  plugins: ['@primer/stylelint-config/plugins/no-unused-vars']
 }
 ```
 
