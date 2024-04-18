@@ -7,7 +7,6 @@ This directory contains all of our custom stylelint plugins, each of which provi
 - [Primer stylelint plugins](#primer-stylelint-plugins)
     - [Rules](#rules)
   - [Usage](#usage)
-  - [`primer/no-undefined-vars`](#primerno-undefined-vars)
   - [`primer/colors`](#primercolors)
   - [`primer/spacing`](#primerspacing)
   - [`primer/typography`](#primertypography)
@@ -32,35 +31,6 @@ module.exports = {
   plugins: ['@primer/stylelint-config/plugins/colors']
 }
 ```
-
-## `primer/no-undefined-vars`
-
-This rule prohibits any usages of undefined CSS variables.
-
-```scss
-:root {
-  --color-text-primary: #000;
-}
-
-body {
-  color: var(--color-text-primary);
-}
-/**          ↑
- *           OK: --color-text-primary is defined */
-
-body {
-  color: var(--color-foo);
-}
-/**          ↑
- *           FAIL: --color-foo is not defined */
-```
-
-For the purposes of this rule, a CSS variable declaration is any text starting with `--` and immediately followed by a colon.
-
-Because there isn't a good way for a stylelint plugin to know what CSS variables are defined, it needs to be told where to look for declarations in its options:
-
-- `files` is a single path, glob, or array of paths and globs, that tells the plugin which files (relative to the current working directory) to scan for CSS variable declarations. The default is `['**/*.scss', '!node_modules']`, which tells [globby] to find all the `.scss` files recursively and ignore the `node_modules` directory.
-- `verbose` is a boolean that enables chatty `console.warn()` messages telling you what the plugin found, which can aid in debugging more complicated project layouts.
 
 ## `primer/colors`
 

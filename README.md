@@ -30,7 +30,6 @@ Primer Stylelint Config extends the [stylelint-config-standard](https://github.c
 - [stylelint-order](https://github.com/hudochenkov/stylelint-order): Order-related linting rules for stylelint. Properties must be [sorted according to this list](https://github.com/primer/stylelint-config/blob/main/property-order.js).
 - [stylelint-scss](https://github.com/kristerkari/stylelint-scss): A collection of SCSS specific linting rules for stylelint
   - [scss/selector-no-redundant-nesting-selector](https://github.com/kristerkari/stylelint-scss/blob/master/src/rules/selector-no-redundant-nesting-selector/README.md): Disallow redundant nesting selectors (`&`).
-- [primer/no-undefined-vars](./plugins/#primerno-undefined-vars): Prohibits usage of undefined CSS variables.
 - [primer/colors](./plugins/#primercolors): Enforces the use of certain color variables.
 - [primer/spacing](./plugins/#primerspacing): Enforces the use of spacing variables for margin and padding.
 - [primer/typography](./plugins/#primertypography): Enforces the use of typography variables for certain CSS properties.

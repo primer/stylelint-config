@@ -4,12 +4,18 @@ import propertyOrder from './property-order.js'
 import borders from './plugins/borders.js'
 import boxShadow from './plugins/box-shadow.js'
 import colors from './plugins/colors.js'
-import noUndefinedVars from './plugins/no-undefined-vars.js'
 import responsiveWidths from './plugins/responsive-widths.js'
 import spacing from './plugins/spacing.js'
 import typography from './plugins/typography.js'
 import utilities from './plugins/utilities.js'
 import noDisplayColors from './plugins/no-display-colors.js'
+
+import path from 'path'
+import {fileURLToPath} from 'url'
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
+
+
 
 /** @type {import('stylelint').Config} */
 export default {
@@ -17,12 +23,12 @@ export default {
   ignoreFiles: ['**/*.js', '**/*.cjs'],
   reportNeedlessDisables: true,
   plugins: [
+    'stylelint-value-no-unknown-custom-properties',
     'stylelint-no-unsupported-browser-features',
     'stylelint-order',
     borders,
     boxShadow,
     colors,
-    noUndefinedVars,
     responsiveWidths,
     spacing,
     typography,
@@ -38,6 +44,25 @@ export default {
     'color-named': 'never',
     'color-no-invalid-hex': true,
     'comment-no-empty': null,
+    'csstools/value-no-unknown-custom-properties': [
+      true,
+      {
+        severity: 'warning',
+        importFrom: [
+          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/size/size-coarse.css'),
+          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/size/border.css'),
+          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/size/size.css'),
+          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/size/size-fine.css'),
+          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/size/breakpoints.css'),
+          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/size/viewport.css'),
+          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/motion/motion.css'),
+          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/themes/light.css'),
+          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/functional/typography/typography.css'),
+          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/base/size/size.css'),
+          path.join(__dirname, '../node_modules/@primer/primitives/dist/css/base/typography/typography.css'),
+        ],
+      },
+    ],
     'custom-property-pattern': null,
     'declaration-block-no-duplicate-properties': [true, {ignore: ['consecutive-duplicates']}],
     'declaration-block-no-redundant-longhand-properties': null,
@@ -72,10 +97,6 @@ export default {
     'primer/borders': true,
     'primer/box-shadow': true,
     'primer/colors': true,
-    'primer/no-undefined-vars': [
-      true,
-      {severity: 'warning', files: 'node_modules/@primer/primitives/dist/scss/colors*/*.scss'},
-    ],
     'primer/responsive-widths': true,
     'primer/spacing': true,
     'primer/typography': true,
