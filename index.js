@@ -10,10 +10,14 @@ import typography from './plugins/typography.js'
 import utilities from './plugins/utilities.js'
 import noDisplayColors from './plugins/no-display-colors.js'
 
+import {createRequire} from 'node:module'
+
+const require = createRequire(import.meta.url)
+
 /** @type {import('stylelint').Config} */
 export default {
   extends: ['stylelint-config-standard'],
-  ignoreFiles: ['**/*.js', '**/*.cjs'],
+  ignoreFiles: ['**/*.js', '**/*.cjs', '**/*.ts', '**/*.mjs'],
   reportNeedlessDisables: true,
   plugins: [
     'stylelint-value-no-unknown-custom-properties',
@@ -42,18 +46,18 @@ export default {
       {
         severity: 'warning',
         importFrom: [
-          './node_modules/@primer/primitives/dist/css/functional/size/size-coarse.css',
-          './node_modules/@primer/primitives/dist/css/functional/size/border.css',
-          './node_modules/@primer/primitives/dist/css/functional/size/size.css',
-          './node_modules/@primer/primitives/dist/css/functional/size/size-fine.css',
-          './node_modules/@primer/primitives/dist/css/functional/size/breakpoints.css',
-          './node_modules/@primer/primitives/dist/css/functional/size/viewport.css',
-          './node_modules/@primer/primitives/dist/css/functional/motion/motion.css',
-          './node_modules/@primer/primitives/dist/css/functional/themes/light.css',
-          './node_modules/@primer/primitives/dist/css/functional/typography/typography.css',
-          './node_modules/@primer/primitives/dist/css/base/size/size.css',
-          './node_modules/@primer/primitives/dist/css/base/typography/typography.css',
-        ],
+          '@primer/primitives/dist/css/functional/size/size-coarse.css',
+          '@primer/primitives/dist/css/functional/size/border.css',
+          '@primer/primitives/dist/css/functional/size/size.css',
+          '@primer/primitives/dist/css/functional/size/size-fine.css',
+          '@primer/primitives/dist/css/functional/size/breakpoints.css',
+          '@primer/primitives/dist/css/functional/size/viewport.css',
+          '@primer/primitives/dist/css/functional/motion/motion.css',
+          '@primer/primitives/dist/css/functional/themes/light.css',
+          '@primer/primitives/dist/css/functional/typography/typography.css',
+          '@primer/primitives/dist/css/base/size/size.css',
+          '@primer/primitives/dist/css/base/typography/typography.css',
+        ].map(path => require.resolve(path)),
       },
     ],
     'custom-property-pattern': null,
@@ -94,6 +98,13 @@ export default {
     'primer/spacing': true,
     'primer/typography': true,
     'primer/utilities': null,
+    'primer/no-display-colors': true,
+    'property-no-unknown': [
+      true,
+      {
+        ignoreProperties: ['@container', 'container-type'],
+      },
+    ],
     'selector-class-pattern': null,
     'selector-max-compound-selectors': 3,
     'selector-max-id': 0,
@@ -142,14 +153,7 @@ export default {
         'primer/borders': null,
         'primer/typography': null,
         'primer/box-shadow': null,
-        'primer/no-display-colors': true,
         'primer/utilities': null,
-        'property-no-unknown': [
-          true,
-          {
-            ignoreProperties: ['@container', 'container-type'],
-          },
-        ],
       },
     },
     {
@@ -174,7 +178,39 @@ export default {
     },
     {
       files: ['**/*.module.css'],
-      rules: {},
+      rules: {
+        // Don't support nesting until it's more broadly shipped
+        'max-nesting-depth': [0],
+        'property-no-unknown': [
+          true,
+          {
+            ignoreProperties: ['composes', 'compose-with'],
+            ignoreSelectors: [':export', /^:import/],
+          },
+        ],
+        'selector-pseudo-class-no-unknown': [
+          true,
+          {ignorePseudoClasses: ['export', 'import', 'global', 'local', 'external']},
+        ],
+        'selector-type-no-unknown': [
+          true,
+          {
+            ignoreTypes: ['from'],
+          },
+        ],
+        'function-no-unknown': [
+          true,
+          {
+            ignoreFunctions: ['global'],
+          },
+        ],
+        // temporarily disabiling Primer plugins while we work on upgrades https://github.com/github/primer/issues/3165
+        'primer/spacing': null,
+        'primer/borders': null,
+        'primer/typography': null,
+        'primer/box-shadow': null,
+        'primer/utilities': null,
+      },
     },
   ],
 }
