@@ -178,7 +178,39 @@ export default {
     },
     {
       files: ['**/*.module.css'],
-      rules: {},
+      rules: {
+        // Don't support nesting until it's more broadly shipped
+        'max-nesting-depth': [0],
+        'property-no-unknown': [
+          true,
+          {
+            ignoreProperties: ['composes', 'compose-with'],
+            ignoreSelectors: [':export', /^:import/],
+          },
+        ],
+        'selector-pseudo-class-no-unknown': [
+          true,
+          {ignorePseudoClasses: ['export', 'import', 'global', 'local', 'external']},
+        ],
+        'selector-type-no-unknown': [
+          true,
+          {
+            ignoreTypes: ['from'],
+          },
+        ],
+        'function-no-unknown': [
+          true,
+          {
+            ignoreFunctions: ['global'],
+          },
+        ],
+        // temporarily disabiling Primer plugins while we work on upgrades https://github.com/github/primer/issues/3165
+        'primer/spacing': null,
+        'primer/borders': null,
+        'primer/typography': null,
+        'primer/box-shadow': null,
+        'primer/utilities': null,
+      },
     },
   ],
 }
