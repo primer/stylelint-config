@@ -98,6 +98,7 @@ export default {
     'primer/spacing': true,
     'primer/typography': true,
     'primer/utilities': null,
+    'primer/no-display-colors': true,
     'selector-class-pattern': null,
     'selector-max-compound-selectors': 3,
     'selector-max-id': 0,
@@ -146,7 +147,6 @@ export default {
         'primer/borders': null,
         'primer/typography': null,
         'primer/box-shadow': null,
-        'primer/no-display-colors': true,
         'primer/utilities': null,
         'property-no-unknown': [
           true,
