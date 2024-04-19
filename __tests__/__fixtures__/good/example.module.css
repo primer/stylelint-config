@@ -55,7 +55,6 @@
 }
 
 .negative-margin {
-  /* stylelint-disable-next-line primer/spacing */
   margin: -0.5rem;
 }
 
@@ -120,7 +119,6 @@
   place-items: center;
   width: var(--container-size);
   height: var(--container-size);
-  /* stylelint-disable-next-line primer/spacing */
   padding: var(--space-xsmall);
 }
 
@@ -135,10 +133,12 @@
 }
 
 .details {
+  /* stylelint-disable-next-line max-nesting-depth */
   &[open] .down-icon {
     display: none !important;
   }
 
+  /* stylelint-disable-next-line max-nesting-depth */
   &:not([open]) .up-icon {
     display: none !important;
   }
