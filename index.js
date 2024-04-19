@@ -99,6 +99,12 @@ export default {
     'primer/typography': true,
     'primer/utilities': null,
     'primer/no-display-colors': true,
+    'property-no-unknown': [
+      true,
+      {
+        ignoreProperties: ['@container', 'container-type'],
+      },
+    ],
     'selector-class-pattern': null,
     'selector-max-compound-selectors': 3,
     'selector-max-id': 0,
@@ -148,12 +154,6 @@ export default {
         'primer/typography': null,
         'primer/box-shadow': null,
         'primer/utilities': null,
-        'property-no-unknown': [
-          true,
-          {
-            ignoreProperties: ['@container', 'container-type'],
-          },
-        ],
       },
     },
     {
