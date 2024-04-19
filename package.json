@@ -5,6 +5,7 @@
   "author": "GitHub, Inc.",
   "license": "MIT",
   "type": "module",
+  "main": "dist/index.cjs",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
