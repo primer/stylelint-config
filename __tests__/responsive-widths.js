@@ -1,6 +1,5 @@
 import {ruleName} from '../plugins/responsive-widths.js'
 
-// eslint-disable-next-line no-undef
 testRule({
   plugins: ['./plugins/responsive-widths'],
   customSyntax: 'postcss-scss',

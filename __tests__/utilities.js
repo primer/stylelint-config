@@ -1,6 +1,5 @@
 import {ruleName} from '../plugins/utilities.js'
 
-// eslint-disable-next-line no-undef
 testRule({
   plugins: ['./plugins/utilities'],
   customSyntax: 'postcss-scss',
