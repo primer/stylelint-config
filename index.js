@@ -4,39 +4,32 @@ import propertyOrder from './property-order.js'
 import borders from './plugins/borders.js'
 import boxShadow from './plugins/box-shadow.js'
 import colors from './plugins/colors.js'
-import noDeprecatedColors from './plugins/no-deprecated-colors.js'
-import noOverride from './plugins/no-override.js'
-import noScaleColors from './plugins/no-scale-colors.js'
-import noUndefinedVars from './plugins/no-undefined-vars.js'
-import noUnusedVars from './plugins/no-unused-vars.js'
 import responsiveWidths from './plugins/responsive-widths.js'
 import spacing from './plugins/spacing.js'
 import typography from './plugins/typography.js'
 import utilities from './plugins/utilities.js'
-import newColorVarsHaveFallback from './plugins/new-color-vars-have-fallback.js'
 import noDisplayColors from './plugins/no-display-colors.js'
+
+import {createRequire} from 'node:module'
+
+const require = createRequire(import.meta.url)
 
 /** @type {import('stylelint').Config} */
 export default {
   extends: ['stylelint-config-standard'],
-  ignoreFiles: ['**/*.js', '**/*.cjs'],
+  ignoreFiles: ['**/*.js', '**/*.cjs', '**/*.ts', '**/*.mjs'],
   reportNeedlessDisables: true,
   plugins: [
+    'stylelint-value-no-unknown-custom-properties',
     'stylelint-no-unsupported-browser-features',
     'stylelint-order',
     borders,
     boxShadow,
     colors,
-    noDeprecatedColors,
-    noOverride,
-    noScaleColors,
-    noUndefinedVars,
-    noUnusedVars,
     responsiveWidths,
     spacing,
     typography,
     utilities,
-    newColorVarsHaveFallback,
     noDisplayColors,
   ],
   rules: {
@@ -48,6 +41,25 @@ export default {
     'color-named': 'never',
     'color-no-invalid-hex': true,
     'comment-no-empty': null,
+    'csstools/value-no-unknown-custom-properties': [
+      true,
+      {
+        severity: 'warning',
+        importFrom: [
+          '@primer/primitives/dist/css/functional/size/size-coarse.css',
+          '@primer/primitives/dist/css/functional/size/border.css',
+          '@primer/primitives/dist/css/functional/size/size.css',
+          '@primer/primitives/dist/css/functional/size/size-fine.css',
+          '@primer/primitives/dist/css/functional/size/breakpoints.css',
+          '@primer/primitives/dist/css/functional/size/viewport.css',
+          '@primer/primitives/dist/css/functional/motion/motion.css',
+          '@primer/primitives/dist/css/functional/themes/light.css',
+          '@primer/primitives/dist/css/functional/typography/typography.css',
+          '@primer/primitives/dist/css/base/size/size.css',
+          '@primer/primitives/dist/css/base/typography/typography.css',
+        ].map(path => require.resolve(path)),
+      },
+    ],
     'custom-property-pattern': null,
     'declaration-block-no-duplicate-properties': [true, {ignore: ['consecutive-duplicates']}],
     'declaration-block-no-redundant-longhand-properties': null,
@@ -82,17 +94,17 @@ export default {
     'primer/borders': true,
     'primer/box-shadow': true,
     'primer/colors': true,
-    'primer/no-deprecated-colors': true,
-    'primer/no-override': true,
-    'primer/no-undefined-vars': [
-      true,
-      {severity: 'warning', files: 'node_modules/@primer/primitives/dist/scss/colors*/*.scss'},
-    ],
-    'primer/no-unused-vars': [true, {severity: 'warning'}],
     'primer/responsive-widths': true,
     'primer/spacing': true,
     'primer/typography': true,
     'primer/utilities': null,
+    'primer/no-display-colors': true,
+    'property-no-unknown': [
+      true,
+      {
+        ignoreProperties: ['@container', 'container-type'],
+      },
+    ],
     'selector-class-pattern': null,
     'selector-max-compound-selectors': 3,
     'selector-max-id': 0,
@@ -141,22 +153,7 @@ export default {
         'primer/borders': null,
         'primer/typography': null,
         'primer/box-shadow': null,
-        'primer/no-deprecated-colors': [
-          true,
-          {
-            inlineFallback: true,
-          },
-        ],
-        'primer/no-scale-colors': true,
-        'primer/no-display-colors': true,
         'primer/utilities': null,
-        'property-no-unknown': [
-          true,
-          {
-            ignoreProperties: ['@container', 'container-type'],
-          },
-        ],
-        'primer/no-override': null,
       },
     },
     {
@@ -177,13 +174,42 @@ export default {
             ignoreAtRules: ['mixin', 'define-mixin'],
           },
         ],
-        'primer/no-deprecated-colors': true,
       },
     },
     {
       files: ['**/*.module.css'],
       rules: {
-        'primer/no-override': null,
+        // Don't support nesting until it's more broadly shipped
+        'max-nesting-depth': [0],
+        'property-no-unknown': [
+          true,
+          {
+            ignoreProperties: ['composes', 'compose-with'],
+            ignoreSelectors: [':export', /^:import/],
+          },
+        ],
+        'selector-pseudo-class-no-unknown': [
+          true,
+          {ignorePseudoClasses: ['export', 'import', 'global', 'local', 'external']},
+        ],
+        'selector-type-no-unknown': [
+          true,
+          {
+            ignoreTypes: ['from'],
+          },
+        ],
+        'function-no-unknown': [
+          true,
+          {
+            ignoreFunctions: ['global'],
+          },
+        ],
+        // temporarily disabiling Primer plugins while we work on upgrades https://github.com/github/primer/issues/3165
+        'primer/spacing': null,
+        'primer/borders': null,
+        'primer/typography': null,
+        'primer/box-shadow': null,
+        'primer/utilities': null,
       },
     },
   ],

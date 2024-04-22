@@ -1,4 +1,5 @@
 import {lint} from './utils/index.js'
+import stylelint from 'stylelint'
 
 const SAFE_SCSS_EXAMPLE = `
   .Component { float: left; }
@@ -48,5 +49,20 @@ describe('stylelint-config', () => {
       expect(data).not.toHaveResultsLength(0)
       expect(data).toHaveDeprecationsLength(0)
     })
+  })
+
+  it('resolves css files correctly', async () => {
+    const config = await stylelint.resolveConfig('./__fixtures__/good/example.css');
+    expect(config).not.toHaveProperty('customSyntax')
+  })
+
+  it('resolves tsx files correctly', async () => {
+    const config = await stylelint.resolveConfig('./__fixtures__/good/example.tsx');
+    expect(config).toHaveProperty('customSyntax', 'postcss-styled-syntax')
+  })
+
+  it('resolves scss files correctly', async () => {
+    const config = await stylelint.resolveConfig('./__fixtures__/good/example.scss');
+    expect(config).toHaveProperty('customSyntax', 'postcss-scss')
   })
 })

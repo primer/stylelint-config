@@ -3,9 +3,11 @@
   overflow: hidden;
 }
 
-.gradient {
+:root {
   --offset: -500px;
+}
 
+.gradient {
   position: absolute;
   top: 0;
   /* stylelint-disable-next-line primer/responsive-widths */
@@ -18,16 +20,13 @@
 }
 
 .gradient-left {
-  /* stylelint-disable-next-line primer/spacing, primer/no-undefined-vars */
   top: var(--offset);
-  /* stylelint-disable-next-line primer/spacing, primer/no-undefined-vars */
   left: var(--offset);
   /* stylelint-disable-next-line primer/colors */
   background: radial-gradient(30% 70% at 50% 50%, rgb(130 80 223 / 0.2) 0%, rgb(130 80 223 / 0) 100%);
 }
 
 .gradient-right {
-  /* stylelint-disable-next-line primer/spacing, primer/no-undefined-vars */
   right: var(--offset);
   /* stylelint-disable-next-line primer/colors */
   background: radial-gradient(30% 70% at 50% 50%, rgb(9 107 222 / 0.3) 0%, rgb(9 107 222 / 0) 100%);
@@ -39,16 +38,13 @@
 }
 
 .header-background {
-  /* stylelint-disable-next-line primer/spacing */
   top: -220px;
-  /* stylelint-disable-next-line primer/spacing */
   right: -110px;
   height: 580px;
 }
 
 .header-copilot {
   top: -35%;
-  /* stylelint-disable-next-line primer/spacing */
   right: 100px;
   height: 146px;
 }
@@ -59,7 +55,6 @@
 }
 
 .negative-margin {
-  /* stylelint-disable-next-line primer/spacing */
   margin: -0.5rem;
 }
 
@@ -84,20 +79,20 @@
 }
 
 .marketplace-item {
-  box-shadow: var(--shadow-resting-small, var(--color-shadow-small));
+  box-shadow: var(--shadow-resting-small);
 }
 
 .marketplace-item:hover,
 .marketplace-item:focus-within {
-  background-color: var(--bgColor-muted, var(--color-canvas-subtle));
+  background-color: var(--bgColor-muted);
 }
 
 .marketplace-item:focus-within {
-  outline: 2px solid var(--fgColor-accent, var(--color-accent-fg));
+  outline: 2px solid var(--fgColor-accent);
 }
 
 .marketplace-item-link {
-  color: var(--fgColor-default, var(--color-fg-default));
+  color: var(--fgColor-default);
 }
 
 .marketplace-item-link:hover {
@@ -124,7 +119,6 @@
   place-items: center;
   width: var(--container-size);
   height: var(--container-size);
-  /* stylelint-disable-next-line primer/spacing */
   padding: var(--space-xsmall);
 }
 
@@ -139,10 +133,12 @@
 }
 
 .details {
+  /* stylelint-disable-next-line max-nesting-depth */
   &[open] .down-icon {
     display: none !important;
   }
 
+  /* stylelint-disable-next-line max-nesting-depth */
   &:not([open]) .up-icon {
     display: none !important;
   }
