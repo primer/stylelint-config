@@ -51,17 +51,17 @@ describe('stylelint-config', () => {
   })
 
   it('resolves css files correctly', async () => {
-    const config = await stylelint.resolveConfig('./__fixtures__/good/example.css');
+    const config = await stylelint.resolveConfig('./__fixtures__/good/example.css')
     expect(config).not.toHaveProperty('customSyntax')
   })
 
   it('resolves tsx files correctly', async () => {
-    const config = await stylelint.resolveConfig('./__fixtures__/good/example.tsx');
+    const config = await stylelint.resolveConfig('./__fixtures__/good/example.tsx')
     expect(config).toHaveProperty('customSyntax', 'postcss-styled-syntax')
   })
 
   it('resolves scss files correctly', async () => {
-    const config = await stylelint.resolveConfig('./__fixtures__/good/example.scss');
+    const config = await stylelint.resolveConfig('./__fixtures__/good/example.scss')
     expect(config).toHaveProperty('customSyntax', 'postcss-scss')
   })
 })
