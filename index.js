@@ -179,8 +179,6 @@ export default {
     {
       files: ['**/*.module.css'],
       rules: {
-        // Don't support nesting until it's more broadly shipped
-        'max-nesting-depth': [0],
         'property-no-unknown': [
           true,
           {
@@ -210,6 +208,7 @@ export default {
         'primer/typography': null,
         'primer/box-shadow': null,
         'primer/utilities': null,
+        'scss/selector-no-redundant-nesting-selector': null,
       },
     },
   ],
