@@ -179,8 +179,6 @@ export default {
     {
       files: ['**/*.module.css'],
       rules: {
-        // Don't support nesting until it's more broadly shipped
-        'max-nesting-depth': [0],
         'property-no-unknown': [
           true,
           {
