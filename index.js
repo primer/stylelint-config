@@ -208,7 +208,6 @@ export default {
         'primer/typography': null,
         'primer/box-shadow': null,
         'primer/utilities': null,
-        'scss/selector-no-redundant-nesting-selector': null,
       },
     },
   ],

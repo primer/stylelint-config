@@ -133,12 +133,10 @@
 }
 
 .details {
-  /* stylelint-disable-next-line max-nesting-depth */
   &[open] .down-icon {
     display: none !important;
   }
 
-  /* stylelint-disable-next-line max-nesting-depth */
   &:not([open]) .up-icon {
     display: none !important;
   }
