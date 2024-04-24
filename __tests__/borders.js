@@ -29,5 +29,14 @@ testRule({
       endColumn: 25,
       description: 'CSS > Errors on value not in spacer list',
     },
+    {
+      code: '.x { padding-bottom: 0.25rem; }',
+      fixed: '.x { padding-bottom: var(--base-size-4); }',
+      message: messages.rejected('0.25rem', {name: '--base-size-4'}),
+      line: 1,
+      column: 22,
+      endColumn: 29,
+      description: "CSS > Replaces '0.25rem' with 'var(--base-size-4)'.",
+    },
   ],
 })

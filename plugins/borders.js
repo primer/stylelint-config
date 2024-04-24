@@ -12,7 +12,7 @@ for (const variable of Object.keys(borderSizes)) {
   //   values.push(`${parseInt(value) - 1}px`)
   // }
   if (variable.includes('borderWidth')) {
-    const value = borderSizes[variable].replace(/\(\)/g)
+    const value = borderSizes[variable]['value'].replace(/max|\(|\)/g, '').split(',')[0]
     sizes.push({
       name: `--${variable}`,
       values: [value],
