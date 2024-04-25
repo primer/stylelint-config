@@ -4,13 +4,8 @@ import valueParser from 'postcss-value-parser'
 import borderSizes from '@primer/primitives/dist/styleLint/functional/size/border.json' with {type: 'json'}
 
 const sizes = []
+const radii = []
 for (const variable of Object.keys(borderSizes)) {
-  // const values = [size['value']]
-  // for (const value of Object.values(size['original'])) {
-  //   values.push(value)
-  //   values.push(`${parseInt(value) + 1}px`)
-  //   values.push(`${parseInt(value) - 1}px`)
-  // }
   if (variable.includes('borderWidth')) {
     const value = borderSizes[variable]['value'].replace(/max|\(|\)/g, '').split(',')[0]
     sizes.push({
@@ -18,13 +13,15 @@ for (const variable of Object.keys(borderSizes)) {
       values: [value],
     })
   }
-  // return {
-  //   name: `--${size['name']}`,
-  //   values,
-  // }
-}
 
-console.log(sizes)
+  if (variable.includes('borderRadius')) {
+    const value = borderSizes[variable]['value']
+    radii.push({
+      name: `--${variable}`,
+      values: value,
+    })
+  }
+}
 
 const {
   createPlugin,
@@ -42,7 +39,7 @@ const walkGroups = (root, validate) => {
   return root
 }
 
-export const ruleName = 'primer/spacing'
+export const ruleName = 'primer/borders'
 export const messages = ruleMessages(ruleName, {
   rejected: (value, replacement) => {
     if (!replacement) {
@@ -58,7 +55,7 @@ const meta = {
 }
 
 // Props that we want to check
-const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left']
+const propList = ['border', 'border-width', 'border-radius']
 
 /** @type {import('stylelint').Rule} */
 const ruleFunction = (primary, secondaryOptions, context) => {
@@ -67,24 +64,30 @@ const ruleFunction = (primary, secondaryOptions, context) => {
       actual: primary,
       possible: [true],
     })
+    const validValues = [...sizes, ...radii]
 
     if (!validOptions) return
 
     root.walkDecls(declNode => {
       const {prop, value} = declNode
 
-      if (!propList.some(spacingProp => prop.startsWith(spacingProp))) return
+      if (!propList.some(borderProp => prop.startsWith(borderProp))) return
 
       const problems = []
 
       const parsedValue = walkGroups(valueParser(value), node => {
+        const checkForVariable = (vars, nodeValue) => vars.some(variable =>
+          new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(nodeValue),
+        )
+
         // Only check word types. https://github.com/TrySound/postcss-value-parser#word
         if (node.type !== 'word') {
           return
         }
 
+        // TODO: figure out a better way to forbid border styles other than 'solid' and 'dashed'
         // Exact values to ignore.
-        if (['*', '+', '-', '/', '0', 'auto', 'inherit', 'initial'].includes(node.value)) {
+        if (['*', '+', '-', '/', '0', 'none', 'inherit', 'initial', 'revert', 'revert-layer', 'unset', 'solid', 'dashed'].includes(node.value)) {
           return
         }
 
@@ -101,14 +104,22 @@ const ruleFunction = (primary, secondaryOptions, context) => {
 
         // If the variable is found in the value, skip it.
         if (
-          sizes.some(variable =>
-            new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(node.value),
-          )
+          prop.includes('width') || prop === 'border'
         ) {
-          return
+          if (checkForVariable(sizes, node.value)) {
+            return
+          }
         }
 
-        const replacement = sizes.find(variable => variable.values.includes(node.value.replace('-', '')))
+        if (
+          prop.includes('radius')
+        ) {
+          if (checkForVariable(radii, node.value)) {
+            return
+          }
+        }
+
+        const replacement = validValues.find(variable => variable.values.includes(node.value.replace('-', '')))
         const fixable = replacement && valueUnit && !valueUnit.number.includes('-')
 
         if (fixable && context.fix) {
