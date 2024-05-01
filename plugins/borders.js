@@ -41,12 +41,21 @@ const walkGroups = (root, validate) => {
 
 export const ruleName = 'primer/borders'
 export const messages = ruleMessages(ruleName, {
-  rejected: (value, replacement) => {
-    if (!replacement) {
-      return `Please use a primer size variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/foundations/primitives/size`
+  rejected: (value, replacement, propName) => {
+    if  (propName && propName.includes('radius') && value.includes('borderWidth')) {
+      return `Border radius variables can not be used for border widths`
     }
 
-    return `Please replace '${value}' with size variable '${replacement['name']}'. https://primer.style/foundations/primitives/size`
+    if  (propName && propName.includes('width') || propName === 'border' && value.includes('borderRadius')) {
+      return `Border width variables can not be used for border radii`
+    }
+
+
+    if (!replacement) {
+      return `Please use a Primer border variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/foundations/primitives/size#border`
+    }
+
+    return `Please replace '${value}' with a Primer border variable '${replacement['name']}'. https://primer.style/foundations/primitives/size#border`
   },
 })
 
@@ -102,6 +111,18 @@ const ruleFunction = (primary, secondaryOptions, context) => {
           return
         }
 
+        // if we're looking at the border property that sets color in shorthand, don't bother checking the color
+        if (
+          // using border shorthand
+          prop === 'border' &&
+          // includes a color as a third space-separated value
+          value.split(' ').length > 2 &&
+          // the color in the third space-separated value includes `node.value`
+          value.split(' ').slice(2).some(color => color.includes(node.value))
+        ) {
+          return
+        }
+
         // If the variable is found in the value, skip it.
         if (
           prop.includes('width') || prop === 'border'
@@ -128,7 +149,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
           problems.push({
             index: declarationValueIndex(declNode) + node.sourceIndex,
             endIndex: declarationValueIndex(declNode) + node.sourceIndex + node.value.length,
-            message: messages.rejected(node.value, replacement),
+            message: messages.rejected(node.value, replacement, prop),
           })
         }
 

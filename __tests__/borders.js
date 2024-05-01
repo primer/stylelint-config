@@ -73,7 +73,7 @@ testRule({
     {
       code: '.x { border-width: var(--borderRadius-small); }',
       unfixable: true,
-      message: 'Border radius variables can not be used for border widths', // TODO: handle this in the plugin
+      message: messages.rejected('var(--borderRadius-small)', undefined, 'border-width'), // TODO: handle this in the plugin
       line: 1,
       column: 24,
       endColumn: 44,
@@ -100,8 +100,8 @@ testRule({
     },
     {
       code: '.x { border-radius: var(--borderWidth-thin); }',
-      fixable: false,
-      message: 'Border width variables can not be used for border radii', // TODO: handle this in the plugin
+      unfixable: true,
+      message: messages.rejected('var(--borderWidth-thin)', undefined, 'border-radius'), // TODO: handle this in the plugin
       line: 1,
       column: 25,
       endColumn: 43,
