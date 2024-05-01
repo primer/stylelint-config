@@ -94,7 +94,6 @@ const ruleFunction = (primary, secondaryOptions, context) => {
           return
         }
 
-        // TODO: figure out a better way to forbid border styles other than 'solid' and 'dashed'
         // Exact values to ignore.
         if (['*', '+', '-', '/', '0', 'none', 'inherit', 'initial', 'revert', 'revert-layer', 'unset', 'solid', 'dashed'].includes(node.value)) {
           return
