@@ -317,6 +317,15 @@ testRule({
       `,
       description: 'TSX > Styled components work.',
     },
+    {
+      code: dedent`
+        export const IconContainer = styled(Box)\`
+          flex-shrink: 0;
+          padding: \${themeGet('space.3')};
+        \`
+      `,
+      description: 'TSX > Ignores themeGet.',
+    },
   ],
   reject: [
     {

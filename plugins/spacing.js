@@ -50,6 +50,8 @@ const meta = {
 
 // Props that we want to check
 const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left']
+// Values that we want to ignore
+const valueList = ['${']
 
 /** @type {import('stylelint').Rule} */
 const ruleFunction = (primary, secondaryOptions, context) => {
@@ -65,6 +67,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
       const {prop, value} = declNode
 
       if (!propList.some(spacingProp => prop.startsWith(spacingProp))) return
+      if (valueList.some(valueToIgnore => value.includes(valueToIgnore))) return
 
       const problems = []
 
