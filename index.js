@@ -148,7 +148,6 @@ export default {
         'comment-empty-line-before': null,
         'length-zero-no-unit': null,
         'selector-max-type': null,
-        'primer/spacing': null,
         'primer/colors': null,
         'primer/borders': null,
         'primer/typography': null,
