@@ -1,21 +1,7 @@
 import stylelint from 'stylelint'
 import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.cjs'
 import valueParser from 'postcss-value-parser'
-import docValues from '@primer/primitives/tokens-v2-private/docs/docValues.json' with {type: 'json'}
-
-const sizes = docValues['tokens/base/size/size.json'].map(size => {
-  const values = [size['value']]
-  for (const value of Object.values(size['original'])) {
-    values.push(value)
-    values.push(`${parseInt(value) + 1}px`)
-    values.push(`${parseInt(value) - 1}px`)
-  }
-
-  return {
-    name: `--${size['name']}`,
-    values,
-  }
-})
+import {primitivesVariables} from './lib/primitives.js'
 
 const {
   createPlugin,
@@ -48,14 +34,16 @@ const meta = {
   fixable: true,
 }
 
-// Props that we want to check
-const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left']
-// Values that we want to ignore
-const valueList = ['${']
-
 /** @type {import('stylelint').Rule} */
 const ruleFunction = (primary, secondaryOptions, context) => {
-  return (root, result) => {
+  return async (root, result) => {
+    // Props that we want to check
+    const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left']
+    // Values that we want to ignore
+    const valueList = ['${']
+
+    const sizes = await primitivesVariables('size')
+
     const validOptions = validateOptions(result, ruleName, {
       actual: primary,
       possible: [true],
