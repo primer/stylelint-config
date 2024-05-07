@@ -205,7 +205,6 @@ export default {
           },
         ],
         // temporarily disabiling Primer plugins while we work on upgrades https://github.com/github/primer/issues/3165
-        'primer/spacing': null,
         'primer/borders': null,
         'primer/typography': null,
         'primer/box-shadow': null,
