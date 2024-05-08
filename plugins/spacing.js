@@ -1,7 +1,7 @@
 import stylelint from 'stylelint'
 import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.cjs'
 import valueParser from 'postcss-value-parser'
-import {primitivesVariables} from './lib/primitives.js'
+import {primitivesVariables} from './lib/utils.js'
 
 const {
   createPlugin,
