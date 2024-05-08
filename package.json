@@ -45,7 +45,7 @@
   "dependencies": {
     "@github/browserslist-config": "^1.0.0",
     "@primer/css": "^21.0.8",
-    "@primer/primitives": "^8.0.0",
+    "@primer/primitives": "^7.17.1",
     "anymatch": "^3.1.1",
     "postcss-scss": "^4.0.2",
     "postcss-styled-syntax": "^0.6.4",
@@ -53,16 +53,22 @@
     "string.prototype.matchall": "^4.0.2",
     "stylelint": "^16.3.1",
     "stylelint-config-standard": "^36.0.0",
+    "stylelint-css-modules-no-global-scoped-selector": "^1.0.2",
     "stylelint-no-unsupported-browser-features": "^8.0.0",
     "stylelint-order": "^6.0.4",
     "stylelint-scss": "^6.2.0",
     "stylelint-value-no-unknown-custom-properties": "^6.0.1",
     "tap-map": "^1.0.0"
   },
+  "overrides": {
+    "stylelint-css-modules-no-global-scoped-selector": {
+      "stylelint": "$stylelint"
+    }
+  },
   "prettier": "@github/prettier-config",
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "2.26.1",
+    "@changesets/cli": "2.27.1",
     "@github/prettier-config": "^0.0.6",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.1.0",
