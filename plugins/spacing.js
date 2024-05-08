@@ -43,6 +43,12 @@ const ruleFunction = (primary, secondaryOptions, context) => {
     const valueList = ['${']
 
     const sizes = await primitivesVariables('size')
+    sizes.map(size => {
+      const values = size['values']
+      const px = values.find(value => value.includes('px'))
+      values.push(`${parseInt(px) + 1}px`)
+      values.push(`${parseInt(px) - 1}px`)
+    })
 
     const validOptions = validateOptions(result, ruleName, {
       actual: primary,

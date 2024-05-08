@@ -19,8 +19,6 @@ export async function primitivesVariables(type) {
     for (const key of Object.keys(data)) {
       const size = data[key]
       const values = size['value']
-      values.push(`${parseInt(size['original']['value']) + 1}px`)
-      values.push(`${parseInt(size['original']['value']) - 1}px`)
 
       variables.push({
         name: `--${size['name']}`,
