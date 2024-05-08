@@ -53,6 +53,7 @@
     "string.prototype.matchall": "^4.0.2",
     "stylelint": "^16.3.1",
     "stylelint-config-standard": "^36.0.0",
+    "stylelint-css-modules-no-global-scoped-selector": "^1.0.2",
     "stylelint-no-unsupported-browser-features": "^8.0.0",
     "stylelint-order": "^6.0.4",
     "stylelint-scss": "^6.2.0",
