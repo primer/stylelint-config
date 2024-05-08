@@ -178,6 +178,7 @@ export default {
     },
     {
       files: ['**/*.module.css'],
+      plugins: ['stylelint-css-modules-no-global-scoped-selector'],
       rules: {
         'property-no-unknown': [
           true,
@@ -202,6 +203,7 @@ export default {
             ignoreFunctions: ['global'],
           },
         ],
+        'css-modules/no-global-scoped-selector': true,
         // temporarily disabiling Primer plugins while we work on upgrades https://github.com/github/primer/issues/3165
         'primer/spacing': null,
         'primer/borders': null,
