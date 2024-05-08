@@ -3,6 +3,7 @@
   overflow: hidden;
 }
 
+/* stylelint-disable-next-line css-modules/no-global-scoped-selector */
 :root {
   --offset: -500px;
 }
