@@ -1,23 +1,12 @@
 import stylelint from 'stylelint'
 import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.cjs'
 import valueParser from 'postcss-value-parser'
-import {primitivesVariables} from './lib/utils.js'
+import {primitivesVariables, walkGroups} from './lib/utils.js'
 
 const {
   createPlugin,
   utils: {report, ruleMessages, validateOptions},
 } = stylelint
-
-const walkGroups = (root, validate) => {
-  for (const node of root.nodes) {
-    if (node.type === 'function') {
-      walkGroups(node, validate)
-    } else {
-      validate(node)
-    }
-  }
-  return root
-}
 
 export const ruleName = 'primer/spacing'
 export const messages = ruleMessages(ruleName, {
@@ -29,10 +18,6 @@ export const messages = ruleMessages(ruleName, {
     return `Please replace '${value}' with size variable '${replacement['name']}'. https://primer.style/foundations/primitives/size`
   },
 })
-
-const meta = {
-  fixable: true,
-}
 
 /** @type {import('stylelint').Rule} */
 const ruleFunction = (primary, secondaryOptions, context) => {
@@ -134,6 +119,8 @@ const ruleFunction = (primary, secondaryOptions, context) => {
 
 ruleFunction.ruleName = ruleName
 ruleFunction.messages = messages
-ruleFunction.meta = meta
+ruleFunction.meta = {
+  fixable: true,
+}
 
 export default createPlugin(ruleName, ruleFunction)

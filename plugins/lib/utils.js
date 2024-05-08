@@ -29,3 +29,14 @@ export async function primitivesVariables(type) {
 
   return variables
 }
+
+export function walkGroups(root, validate) {
+  for (const node of root.nodes) {
+    if (node.type === 'function') {
+      walkGroups(node, validate)
+    } else {
+      validate(node)
+    }
+  }
+  return root
+}
