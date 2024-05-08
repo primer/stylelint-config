@@ -1,3 +1,7 @@
+import {createRequire} from 'node:module'
+
+const require = createRequire(import.meta.url)
+
 export async function primitivesVariables(type) {
   const variables = []
 
@@ -9,11 +13,8 @@ export async function primitivesVariables(type) {
   }
 
   for (const file of files) {
-    const {default: data} = await import(`@primer/primitives/dist/styleLint/${file}`, {
-      assert: {
-        type: 'json',
-      },
-    })
+    // eslint-disable-next-line import/no-dynamic-require
+    const data = require(`@primer/primitives/dist/styleLint/${file}`)
 
     for (const key of Object.keys(data)) {
       const size = data[key]
