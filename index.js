@@ -148,7 +148,6 @@ export default {
         'comment-empty-line-before': null,
         'length-zero-no-unit': null,
         'selector-max-type': null,
-        'primer/spacing': null,
         'primer/colors': null,
         'primer/borders': null,
         'primer/typography': null,
@@ -205,7 +204,6 @@ export default {
         ],
         'css-modules/no-global-scoped-selector': true,
         // temporarily disabiling Primer plugins while we work on upgrades https://github.com/github/primer/issues/3165
-        'primer/spacing': null,
         'primer/borders': null,
         'primer/typography': null,
         'primer/box-shadow': null,

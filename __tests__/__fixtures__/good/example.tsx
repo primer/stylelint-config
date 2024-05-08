@@ -9,8 +9,9 @@ import {TOAST_ANIMATION_LENGTH, type ToastItem, ToastType} from './types'
 type IToastCloseButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'>
 
 const StyledButton = styled.button`
-  padding: 8px;
-  margin: 8px 10px 8px 0px;
+  padding: var(--base-size-8);
+  /* stylelint-disable-next-line primer/spacing */
+  margin: var(--base-size-8) 10px var(--base-size-8) 0px;
   border-radius: 3px;
   color: ${themeGet('colors.fg.onEmphasis')};
   border: 0;
@@ -87,8 +88,10 @@ export const StyledToast = styled.div`
   box-sizing: border-box;
   overflow: hidden;
   max-width: 400px;
+  /* stylelint-disable-next-line primer/spacing */
   bottom: 66px;
-  left: 12px;z-index:99;
+  left: var(--base-size-12);
+  z-index:99;
 
   animation: ${toastEnter} ${TOAST_ANIMATION_LENGTH}ms cubic-bezier(0.25, 1, 0.5, 1);
 
