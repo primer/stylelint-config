@@ -1,55 +1,23 @@
 import stylelint from 'stylelint'
 import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.cjs'
 import valueParser from 'postcss-value-parser'
-import borderSizes from '@primer/primitives/dist/styleLint/functional/size/border.json' with {type: 'json'}
-
-const sizes = []
-const radii = []
-for (const variable of Object.keys(borderSizes)) {
-  if (variable.includes('borderWidth')) {
-    const value = borderSizes[variable]['value'].replace(/max|\(|\)/g, '').split(',')[0]
-    sizes.push({
-      name: `--${variable}`,
-      values: [value],
-    })
-  }
-
-  if (variable.includes('borderRadius')) {
-    const value = borderSizes[variable]['value']
-    radii.push({
-      name: `--${variable}`,
-      values: value,
-    })
-  }
-}
+import {walkGroups, primitivesVariables} from './lib/utils.js'
 
 const {
   createPlugin,
-  utils: {report, ruleMessages, validateOptions},
+  utils: {report, ruleMessages},
 } = stylelint
-
-const walkGroups = (root, validate) => {
-  for (const node of root.nodes) {
-    if (node.type === 'function') {
-      walkGroups(node, validate)
-    } else {
-      validate(node)
-    }
-  }
-  return root
-}
 
 export const ruleName = 'primer/borders'
 export const messages = ruleMessages(ruleName, {
   rejected: (value, replacement, propName) => {
-    if  (propName && propName.includes('radius') && value.includes('borderWidth')) {
+    if (propName && propName.includes('radius') && value.includes('borderWidth')) {
       return `Border radius variables can not be used for border widths`
     }
 
-    if  (propName && propName.includes('width') || propName === 'border' && value.includes('borderRadius')) {
+    if ((propName && propName.includes('width')) || (propName === 'border' && value.includes('borderRadius'))) {
       return `Border width variables can not be used for border radii`
     }
-
 
     if (!replacement) {
       return `Please use a Primer border variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/foundations/primitives/size#border`
@@ -59,24 +27,74 @@ export const messages = ruleMessages(ruleName, {
   },
 })
 
-const meta = {
-  fixable: true,
-}
+const variables = primitivesVariables('border')
+const sizes = []
+const radii = []
 
 // Props that we want to check
 const propList = ['border', 'border-width', 'border-radius']
 
+for (const variable of variables) {
+  const name = variable['name']
+
+  if (name.includes('borderWidth')) {
+    const value = variable['values']
+      .pop()
+      .replace(/max|\(|\)/g, '')
+      .split(',')[0]
+    sizes.push({
+      name,
+      values: [value],
+    })
+  }
+
+  if (name.includes('borderRadius')) {
+    radii.push(variable)
+  }
+}
+
+const indentifyBorder = (prop, value) => {
+  const borderProperties = {
+    color: undefined,
+    width: undefined,
+    style: undefined,
+    radius: undefined,
+  }
+
+  const match = prop.match(/^border(-top|-right|-bottom|-left)*(-color|-radius|-style|-width)?$/)
+  if (!match) return borderProperties
+
+  const [, , property] = match
+
+  if (property) {
+    switch (property) {
+      case '-color':
+        borderProperties.color = value
+        break
+      case '-width':
+        borderProperties.width = value
+        break
+      case '-style':
+        borderProperties.style = value
+        break
+      case '-radius':
+        borderProperties.radius = value
+        break
+    }
+  } else if (prop === 'border') {
+    const parsedValue = valueParser(value)
+    const values = parsedValue.nodes
+      .filter(node => node.type === 'word' || node.type === 'function')
+      .map(node => node.value)
+    console.log(values)
+  }
+
+  return borderProperties
+}
+
 /** @type {import('stylelint').Rule} */
 const ruleFunction = (primary, secondaryOptions, context) => {
   return (root, result) => {
-    const validOptions = validateOptions(result, ruleName, {
-      actual: primary,
-      possible: [true],
-    })
-    const validValues = [...sizes, ...radii]
-
-    if (!validOptions) return
-
     root.walkDecls(declNode => {
       const {prop, value} = declNode
 
@@ -84,10 +102,17 @@ const ruleFunction = (primary, secondaryOptions, context) => {
 
       const problems = []
 
+      console.log(indentifyBorder(prop, value))
+
+      return
       const parsedValue = walkGroups(valueParser(value), node => {
-        const checkForVariable = (vars, nodeValue) => vars.some(variable =>
-          new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(nodeValue),
-        )
+        const nodeValue = node.value
+        // console.log(indentifyBorder(prop, nodeValue))
+
+        const checkForVariable = (vars, nodeValue) =>
+          vars.some(variable =>
+            new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(nodeValue),
+          )
 
         // Only check word types. https://github.com/TrySound/postcss-value-parser#word
         if (node.type !== 'word') {
@@ -95,7 +120,23 @@ const ruleFunction = (primary, secondaryOptions, context) => {
         }
 
         // Exact values to ignore.
-        if (['*', '+', '-', '/', '0', 'none', 'inherit', 'initial', 'revert', 'revert-layer', 'unset', 'solid', 'dashed'].includes(node.value)) {
+        if (
+          [
+            '*',
+            '+',
+            '-',
+            '/',
+            '0',
+            'none',
+            'inherit',
+            'initial',
+            'revert',
+            'revert-layer',
+            'unset',
+            'solid',
+            'dashed',
+          ].includes(node.value)
+        ) {
           return
         }
 
@@ -117,23 +158,22 @@ const ruleFunction = (primary, secondaryOptions, context) => {
           // includes a color as a third space-separated value
           value.split(' ').length > 2 &&
           // the color in the third space-separated value includes `node.value`
-          value.split(' ').slice(2).some(color => color.includes(node.value))
+          value
+            .split(' ')
+            .slice(2)
+            .some(color => color.includes(node.value))
         ) {
           return
         }
 
         // If the variable is found in the value, skip it.
-        if (
-          prop.includes('width') || prop === 'border'
-        ) {
+        if (prop.includes('width') || prop === 'border') {
           if (checkForVariable(sizes, node.value)) {
             return
           }
         }
 
-        if (
-          prop.includes('radius')
-        ) {
+        if (prop.includes('radius')) {
           if (checkForVariable(radii, node.value)) {
             return
           }
@@ -177,6 +217,8 @@ const ruleFunction = (primary, secondaryOptions, context) => {
 
 ruleFunction.ruleName = ruleName
 ruleFunction.messages = messages
-ruleFunction.meta = meta
+ruleFunction.meta = {
+  fixable: true,
+}
 
 export default createPlugin(ruleName, ruleFunction)

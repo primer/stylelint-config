@@ -19,22 +19,24 @@ export const messages = ruleMessages(ruleName, {
   },
 })
 
+// Props that we want to check
+const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left']
+// Values that we want to ignore
+const valueList = ['${']
+
+const sizes = primitivesVariables('spacing')
+
+// Add +-1px to each value
+for (const size of sizes) {
+  const values = size['values']
+  const px = values.find(value => value.includes('px'))
+  values.push(`${parseInt(px) + 1}px`)
+  values.push(`${parseInt(px) - 1}px`)
+}
+
 /** @type {import('stylelint').Rule} */
 const ruleFunction = (primary, secondaryOptions, context) => {
-  return async (root, result) => {
-    // Props that we want to check
-    const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left']
-    // Values that we want to ignore
-    const valueList = ['${']
-
-    const sizes = await primitivesVariables('size')
-    sizes.map(size => {
-      const values = size['values']
-      const px = values.find(value => value.includes('px'))
-      values.push(`${parseInt(px) + 1}px`)
-      values.push(`${parseInt(px) - 1}px`)
-    })
-
+  return (root, result) => {
     const validOptions = validateOptions(result, ruleName, {
       actual: primary,
       possible: [true],

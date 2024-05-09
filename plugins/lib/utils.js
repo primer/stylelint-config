@@ -2,13 +2,16 @@ import {createRequire} from 'node:module'
 
 const require = createRequire(import.meta.url)
 
-export async function primitivesVariables(type) {
+export function primitivesVariables(type) {
   const variables = []
 
   const files = []
   switch (type) {
-    case 'size':
+    case 'spacing':
       files.push('base/size/size.json')
+      break
+    case 'border':
+      files.push('functional/size/border.json')
       break
   }
 
@@ -18,7 +21,7 @@ export async function primitivesVariables(type) {
 
     for (const key of Object.keys(data)) {
       const size = data[key]
-      const values = size['value']
+      const values = typeof size['value'] === 'string' ? [size['value']] : size['value']
 
       variables.push({
         name: `--${size['name']}`,
