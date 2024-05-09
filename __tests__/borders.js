@@ -48,6 +48,10 @@ testRule({
       code: '.x { border-radius: var(--borderRadius-large) var(--borderRadius-small); }',
       description: 'CSS > Accepts border-radius shorthand with variables',
     },
+    {
+      code: '.x { border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted); }',
+      description: 'CSS > Accepts directional border-bottom',
+    },
     // Figure out how to allow `calc()` values
   ],
   reject: [

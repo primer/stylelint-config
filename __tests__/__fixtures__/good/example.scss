@@ -9,15 +9,15 @@
   list-style: none;
   cursor: pointer;
   background: var(--overlay-bgColor);
-  border: $border-width $border-style var(--borderColor-default);
-  border-radius: $border-radius;
+  border: var(--borderWidth-thin) solid var(--borderColor-default);
+  border-radius: var(--borderRadius-small);
   box-shadow: var(--shadow-resting-medium);
 
   .li {
     display: block;
     padding: var(--base-size-4) var(--base-size-8);
     font-weight: $font-weight-semibold;
-    border-bottom: $border-width $border-style var(--borderColor-muted);
+    border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted);
 
     .foo {
       font-weight: $font-weight-normal;
@@ -26,13 +26,13 @@
 
     &:last-child {
       border-bottom: 0;
-      border-bottom-right-radius: $border-radius;
-      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: var(--borderRadius-small);
+      border-bottom-left-radius: var(--borderRadius-small);
     }
 
     &:first-child {
-      border-top-left-radius: $border-radius;
-      border-top-right-radius: $border-radius;
+      border-top-left-radius: var(--borderRadius-small);
+      border-top-right-radius: var(--borderRadius-small);
     }
 
     &:hover {
