@@ -10,7 +10,7 @@ jobs:
   release-canary:
     name: npm
     if: ${{ github.repository == 'primer/stylelint-config' }}
-    uses: primer/.github/.github/workflows/release_canary.yml@v2.0.0
+    uses: primer/.github/.github/workflows/release_canary.yml@fix_api_call_github_rest
     with:
       install: npm i
     secrets:
