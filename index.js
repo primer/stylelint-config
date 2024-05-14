@@ -7,7 +7,6 @@ import colors from './plugins/colors.js'
 import responsiveWidths from './plugins/responsive-widths.js'
 import spacing from './plugins/spacing.js'
 import typography from './plugins/typography.js'
-import utilities from './plugins/utilities.js'
 import noDisplayColors from './plugins/no-display-colors.js'
 
 import {createRequire} from 'node:module'
@@ -29,7 +28,6 @@ export default {
     responsiveWidths,
     spacing,
     typography,
-    utilities,
     noDisplayColors,
   ],
   rules: {
@@ -97,7 +95,6 @@ export default {
     'primer/responsive-widths': true,
     'primer/spacing': true,
     'primer/typography': true,
-    'primer/utilities': null,
     'primer/no-display-colors': true,
     'property-no-unknown': [
       true,
@@ -152,7 +149,6 @@ export default {
         'primer/borders': null,
         'primer/typography': null,
         'primer/box-shadow': null,
-        'primer/utilities': null,
       },
     },
     {
@@ -207,7 +203,6 @@ export default {
         'primer/borders': null,
         'primer/typography': null,
         'primer/box-shadow': null,
-        'primer/utilities': null,
       },
     },
   ],

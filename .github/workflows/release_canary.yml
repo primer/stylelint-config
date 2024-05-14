@@ -1,11 +1,16 @@
 name: Release
-on: [workflow_dispatch]
+on:
+  push:
+    branches-ignore:
+      - 'main'
+      - 'changeset-release/**'
+      - 'dependabot/**'
 
 jobs:
   release-canary:
     name: npm
     if: ${{ github.repository == 'primer/stylelint-config' }}
-    uses: primer/.github/.github/workflows/release_canary.yml@v2.0.0
+    uses: primer/.github/.github/workflows/release_canary.yml@v2.0.1
     with:
       install: npm i
     secrets:
