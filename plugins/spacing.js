@@ -29,9 +29,11 @@ const sizes = primitivesVariables('spacing')
 // Add +-1px to each value
 for (const size of sizes) {
   const values = size['values']
-  const px = values.find(value => value.includes('px'))
-  values.push(`${parseInt(px) + 1}px`)
-  values.push(`${parseInt(px) - 1}px`)
+  const px = parseInt(values.find(value => value.includes('px')))
+  if (![2, 6].includes(px)) {
+    values.push(`${px + 1}px`)
+    values.push(`${px - 1}px`)
+  }
 }
 
 /** @type {import('stylelint').Rule} */
