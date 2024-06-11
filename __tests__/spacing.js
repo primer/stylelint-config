@@ -245,6 +245,15 @@ testRule({
       endColumn: 39,
       description: 'CSS > Errors on non-primer spacer in parens.',
     },
+    {
+      code: '.x { padding: var(--space-small); }',
+      unfixable: true,
+      message: messages.rejected('--space-small'),
+      line: 1,
+      column: 29,
+      endColumn: 39,
+      description: 'CSS > Errors on deprecated primer space tokens.',
+    },
   ],
 })
 
