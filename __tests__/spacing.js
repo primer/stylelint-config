@@ -24,7 +24,7 @@ testRule({
       description: 'CSS > Works on property partial match.',
     },
     {
-      code: '.x { padding: var(--base-size-4) var(--base-size-8); }',
+      code: '.x { gap: var(--base-size-4) var(--base-size-8); }',
       description: 'CSS > Two variables are valid.',
     },
     {
@@ -246,13 +246,22 @@ testRule({
       description: 'CSS > Errors on non-primer spacer in parens.',
     },
     {
-      code: '.x { padding: var(--space-small); }',
+      code: '.x { gap: var(--space-small); }',
       unfixable: true,
       message: messages.rejected('--space-small'),
       line: 1,
       column: 29,
       endColumn: 39,
-      description: 'CSS > Errors on deprecated primer space tokens.',
+      description: 'CSS > Errors on gap property with non-primer spacer.',
+    },
+    {
+      code: '.x { grid-gap: 12px; }',
+      unfixable: true,
+      message: messages.rejected('--space-small'),
+      line: 1,
+      column: 29,
+      endColumn: 39,
+      description: 'CSS > Errors on gap property with pixel value.',
     },
   ],
 })

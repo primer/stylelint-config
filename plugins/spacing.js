@@ -38,7 +38,7 @@ const meta = {
 const ruleFunction = (primary, secondaryOptions, context) => {
   return async (root, result) => {
     // Props that we want to check
-    const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left']
+    const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left', 'gap', 'grid-gap']
     // Values that we want to ignore
     const valueList = ['${']
 
