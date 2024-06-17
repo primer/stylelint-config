@@ -128,7 +128,7 @@
   width: var(--container-size);
   height: var(--container-size);
   /* stylelint-disable-next-line primer/spacing */
-  padding: var(--space-xsmall);
+  padding: var(--mySpace-xsmall);
 }
 
 .marketplace-logo--large {
