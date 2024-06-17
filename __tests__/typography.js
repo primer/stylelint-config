@@ -1,4 +1,3 @@
-// TODO: add tests for hard-coded values that match multiple variables
 import plugin from '../plugins/typography.js'
 
 const plugins = [plugin]
