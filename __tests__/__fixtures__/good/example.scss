@@ -16,11 +16,11 @@
   .li {
     display: block;
     padding: var(--base-size-4) var(--base-size-8);
-    font-weight: $font-weight-semibold;
+    font-weight: var(--base-text-weight-semibold);
     border-bottom: $border-width $border-style var(--borderColor-muted);
 
     .foo {
-      font-weight: $font-weight-normal;
+      font-weight: var(--base-text-weight-normal);
       color: var(--fgColor-muted);
     }
 
