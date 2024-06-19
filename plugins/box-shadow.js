@@ -32,8 +32,6 @@ for (const variable of variables) {
   }
 }
 
-console.log(shadows)
-
 /** @type {import('stylelint').Rule} */
 const ruleFunction = (primary, secondaryOptions, context) => {
   return (root, result) => {
@@ -52,10 +50,11 @@ const ruleFunction = (primary, secondaryOptions, context) => {
 
       if (prop !== 'box-shadow') return
 
+      if (value === 'none') return
+
       const problems = []
 
       const checkForVariable = (vars, nodeValue) => {
-
         return vars.some(variable =>
           new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(nodeValue),
         )

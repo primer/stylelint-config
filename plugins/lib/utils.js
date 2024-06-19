@@ -21,7 +21,7 @@ export function primitivesVariables(type) {
       files.push('functional/themes/dark.json')
       files.push('functional/themes/light.json')
       break
-}
+  }
 
   for (const file of files) {
     // eslint-disable-next-line import/no-dynamic-require
