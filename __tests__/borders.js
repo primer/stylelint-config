@@ -164,5 +164,5 @@ testRule({
       `,
       description: 'TSX > Ignores themeGet.',
     },
-  ]
+  ],
 })
