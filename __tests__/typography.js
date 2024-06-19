@@ -175,47 +175,24 @@ testRule({
       description: "CSS > Errors on '1.5' line-height and suggests '--text-title-lineHeight-large', '--text-title-lineHeight-small', or '--text-body-lineHeight-large'.",
     },
     // Font family
-    // TODO: figure out how to handle values with spaces in them
-    // Will these be unfixable since we won't know for sure that they want `--fontStack-system`/`--fontStack-sansSerif` and not `--fontStack-monospace`?
     {
       code: '.x { font-family: Comic Sans; }',
       unfixable: true,
       message: messages.rejected('Comic Sans'),
       line: 1,
-      column: 14,
-      endColumn: 18,
+      column: 19,
+      endColumn: 29,
       description: 'CSS > Errors on value not in font family list',
     },
     // Font shorthand
     {
       code: '.x { font: bold 24px/1 sans-serif; }',
       unfixable: true,
-      message: messages.rejected('small-caps bold 24px/1 sans-serif'),
+      message: messages.rejected('bold 24px/1 sans-serif'),
       line: 1,
-      column: 14,
-      endColumn: 18,
+      column: 12,
+      endColumn: 34,
       description: 'CSS > Errors on hard-coded value not in font shorthand list',
     },
-    // // should we allow this to pass since the value is the same as `--text-display-shorthand`?
-    // // should we suggest `--text-display-shorthand` as a replacement?
-    // {
-    //   code: '.x { font: var(--text-display-weight) var(--text-display-size) / var(--text-display-lineHeight) var(--fontStack-sansSerif); }',
-    //   unfixable: true,
-    //   message: messages.rejected('var(--text-display-weight) var(--text-display-size) / var(--text-display-lineHeight) var(--fontStack-sansSerif)'),
-    //   line: 1,
-    //   column: 14,
-    //   endColumn: 18,
-    //   description: 'CSS > Errors on CSS variables not in font shorthand list',
-    // },
-    // // only test for this if we want to allow people to use `font` shorthand with valid CSS variable combinations
-    // // {
-    // //   code: '.x { font: var(--base-text-weight-normal) var(--text-display-size) / var(--text-body-lineHeight-small) var(--fontStack-sansSerif); }',
-    // //   unfixable: true,
-    // //   message: messages.rejected('var(--base-text-weight-normal) var(--text-display-size) / var(--text-body-lineHeight-small) var(--fontStack-sansSerif)'),
-    // //   line: 1,
-    // //   column: 14,
-    // //   endColumn: 18,
-    // //   description: 'CSS > Errors on CSS variable combinations that do not match font shorthand variable values',
-    // // },
   ],
 })

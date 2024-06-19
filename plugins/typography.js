@@ -90,96 +90,77 @@ const ruleFunction = (primary, secondaryOptions, context) => {
 
       const problems = []
 
-      // Possible way to get around values with spaces: just do something else for those props
-      // This might help instead of `valueParser`: https://github.com/bramstein/css-font-parser
-      // const parsedValue = prop === 'font-family' ?  : walkGroups(valueParser(value), node => {
-      const parsedValue = walkGroups(valueParser(value), node => {
-        const checkForVariable = (vars, nodeValue) =>
-          vars.some(variable =>
-            new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(nodeValue),
-          )
+      const checkForVariable = (vars, nodeValue) =>
+        vars.some(variable =>
+          new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(nodeValue),
+        )
 
-        // Only check word types. https://github.com/TrySound/postcss-value-parser#word
-        if (node.type !== 'word') {
-          return
-        }
+      // Exact values to ignore.
+      if (value === 'inherit') {
+        return
+      }
 
-        // Exact values to ignore.
-        if (node.value === 'inherit') {
-          return
-        }
-
-        switch(prop) {
-          case 'font-size':
-            validValues = fontSizes
-            break
-          case 'font-weight':
-            validValues = fontWeights
-            break
-          case 'line-height':
-            validValues = lineHeights
-            break
-          case 'font-family':
-            validValues = fontStacks
-            break
-          case 'font':
-            validValues = fontShorthands
-            break
-          default:
-            validValues = []
-        }
+      switch(prop) {
+        case 'font-size':
+          validValues = fontSizes
+          break
+        case 'font-weight':
+          validValues = fontWeights
+          break
+        case 'line-height':
+          validValues = lineHeights
+          break
+        case 'font-family':
+          validValues = fontStacks
+          break
+        case 'font':
+          validValues = fontShorthands
+          break
+        default:
+          validValues = []
+      }
 
 
-        if (checkForVariable(validValues, node.value)) {
-          return
-        }
+      if (checkForVariable(validValues, value)) {
+        return
+      }
 
-        // TODO: clean this up
-        const getReplacements = () => {
-          const replacementTokens = validValues.filter(variable => {
-            // if `variable.values` is a string or number like we'd get from `line-height: 1.6` or `font-weight: 500`
-            // we can just compare the values directly
-            if (!(variable.values instanceof Array)) {
-              let nodeValue = node.value
+      const getReplacements = () => {
+        const replacementTokens = validValues.filter(variable => {
+          if (!(variable.values instanceof Array)) {
+            let nodeValue = value
 
-              if (prop === 'font-weight') {
-                nodeValue = getClosestFontWeight(fontWeightKeywordMap[node.value] || node.value, fontWeights)
-              }
-
-              return variable.values.toString() === nodeValue.toString()
+            if (prop === 'font-weight') {
+              nodeValue = getClosestFontWeight(fontWeightKeywordMap[value] || value, fontWeights)
             }
 
-            return variable.values.includes(node.value.replace('-', ''))
-          })
-
-          if (!replacementTokens.length) {
-            return
+            return variable.values.toString() === nodeValue.toString()
           }
 
-          if (replacementTokens.length > 1) {
-            return replacementTokens
-          }
+          return variable.values.includes(value.replace('-', ''))
+        })
 
-          return replacementTokens[0]
-        }
-        const replacement = getReplacements()
-        const fixable = replacement && !replacement.length
-
-        if (fixable && context.fix) {
-          node.value = node.value.replace(node.value, `var(${replacement['name']})`)
-        } else {
-          problems.push({
-            index: declarationValueIndex(declNode) + node.sourceIndex,
-            endIndex: declarationValueIndex(declNode) + node.sourceIndex + node.value.length,
-            message: messages.rejected(node.value, replacement, prop),
-          })
+        if (!replacementTokens.length) {
+          return
         }
 
-        return
-      })
+        if (replacementTokens.length > 1) {
+          return replacementTokens
+        }
 
-      if (context.fix) {
-        declNode.value = parsedValue.toString()
+        return replacementTokens[0]
+      }
+      const replacement = getReplacements()
+      const fixable = replacement && !replacement.length
+
+      if (fixable && context.fix) {
+        declNode.value = value.replace(value, `var(${replacement['name']})`)
+      } else {
+        problems.push({
+          index: declarationValueIndex(declNode),
+          endIndex: declarationValueIndex(declNode) + value.length,
+          message: messages.rejected(value, replacement, prop),
+        })
       }
 
       if (problems.length) {
