@@ -76,7 +76,7 @@ testRule({
     {
       code: '.x { font-size: 1.25rem; }',
       unfixable: true,
-      message: messages.rejected('1.25rem', [{ name: '--text-title-size-medium' }, { name: '--text-subtitle-size' }]),
+      message: messages.rejected('1.25rem', [{name: '--text-title-size-medium'}, {name: '--text-subtitle-size'}]),
       line: 1,
       column: 17,
       endColumn: 24,
@@ -90,7 +90,8 @@ testRule({
       line: 1,
       column: 19,
       endColumn: 22,
-      description: "CSS > Errors on font-weight of 500 and suggests '--base-text-weight-medium' or '--text-display-weight'.",
+      description:
+        "CSS > Errors on font-weight of 500 and suggests '--base-text-weight-medium' or '--text-display-weight'.",
     },
     {
       code: '.x { font-weight: 100; }',
@@ -104,11 +105,17 @@ testRule({
     {
       code: '.x { font-weight: 800; }',
       unfixable: true,
-      message: messages.rejected('800', [{name: '--base-text-weight-semibold'}, {name: '--text-title-weight-large'}, {name: '--text-title-weight-medium'}, {name: '--text-title-weight-small'}]),
+      message: messages.rejected('800', [
+        {name: '--base-text-weight-semibold'},
+        {name: '--text-title-weight-large'},
+        {name: '--text-title-weight-medium'},
+        {name: '--text-title-weight-small'},
+      ]),
       line: 1,
       column: 19,
       endColumn: 22,
-      description: "CSS > Errors on font-weight greater than 600 and suggests '--base-text-weight-semibold', '--text-title-weight-large', '--text-title-weight-medium', or '--text-title-weight-small'.",
+      description:
+        "CSS > Errors on font-weight greater than 600 and suggests '--base-text-weight-semibold', '--text-title-weight-large', '--text-title-weight-medium', or '--text-title-weight-small'.",
     },
     {
       code: '.x { font-weight: lighter; }',
@@ -122,29 +129,49 @@ testRule({
     {
       code: '.x { font-weight: bold; }',
       unfixable: true,
-      message: messages.rejected('bold', [{name: '--base-text-weight-semibold'}, {name: '--text-title-weight-large'}, {name: '--text-title-weight-medium'}, {name: '--text-title-weight-small'}]),
+      message: messages.rejected('bold', [
+        {name: '--base-text-weight-semibold'},
+        {name: '--text-title-weight-large'},
+        {name: '--text-title-weight-medium'},
+        {name: '--text-title-weight-small'},
+      ]),
       line: 1,
       column: 19,
       endColumn: 23,
-      description: "CSS > Errors on 'bold' font-weight keyword and suggests '--base-text-weight-semibold', '--text-title-weight-large', '--text-title-weight-medium', or '--text-title-weight-small'.",
+      description:
+        "CSS > Errors on 'bold' font-weight keyword and suggests '--base-text-weight-semibold', '--text-title-weight-large', '--text-title-weight-medium', or '--text-title-weight-small'.",
     },
     {
       code: '.x { font-weight: bolder; }',
       unfixable: true,
-      message: messages.rejected('bolder', [{name: '--base-text-weight-semibold'}, {name: '--text-title-weight-large'}, {name: '--text-title-weight-medium'}, {name: '--text-title-weight-small'}]),
+      message: messages.rejected('bolder', [
+        {name: '--base-text-weight-semibold'},
+        {name: '--text-title-weight-large'},
+        {name: '--text-title-weight-medium'},
+        {name: '--text-title-weight-small'},
+      ]),
       line: 1,
       column: 19,
       endColumn: 25,
-      description: "CSS > Errors on 'bolder' font-weight keyword and suggests '--base-text-weight-semibold', '--text-title-weight-large', '--text-title-weight-medium', or '--text-title-weight-small'.",
+      description:
+        "CSS > Errors on 'bolder' font-weight keyword and suggests '--base-text-weight-semibold', '--text-title-weight-large', '--text-title-weight-medium', or '--text-title-weight-small'.",
     },
     {
       code: '.x { font-weight: normal; }',
       unfixable: true,
-      message: messages.rejected('normal', [{name: '--base-text-weight-normal'}, {name: '--text-subtitle-weight'}, {name: '--text-body-weight'}, {name: '--text-caption-weight'}, {name: '--text-codeBlock-weight'}, {name: '--text-codeInline-weight'}]),
+      message: messages.rejected('normal', [
+        {name: '--base-text-weight-normal'},
+        {name: '--text-subtitle-weight'},
+        {name: '--text-body-weight'},
+        {name: '--text-caption-weight'},
+        {name: '--text-codeBlock-weight'},
+        {name: '--text-codeInline-weight'},
+      ]),
       line: 1,
       column: 19,
       endColumn: 25,
-      description: "CSS > Errors on 'normal' font-weight keyword and suggests '--base-text-weight-normal', '--text-subtitle-weight', '--text-body-weight', '--text-caption-weight', '--text-codeBlock-weight' or '--text-codeInline-weight'.",
+      description:
+        "CSS > Errors on 'normal' font-weight keyword and suggests '--base-text-weight-normal', '--text-subtitle-weight', '--text-body-weight', '--text-caption-weight', '--text-codeBlock-weight' or '--text-codeInline-weight'.",
     },
     // Line heights
     {
@@ -168,11 +195,16 @@ testRule({
     {
       code: '.x { line-height: 1.5; }',
       unfixable: true,
-      message: messages.rejected('1.5', [{name: '--text-title-lineHeight-large'}, {name: '--text-title-lineHeight-small'}, {name: '--text-body-lineHeight-large'}]),
+      message: messages.rejected('1.5', [
+        {name: '--text-title-lineHeight-large'},
+        {name: '--text-title-lineHeight-small'},
+        {name: '--text-body-lineHeight-large'},
+      ]),
       line: 1,
       column: 19,
       endColumn: 22,
-      description: "CSS > Errors on '1.5' line-height and suggests '--text-title-lineHeight-large', '--text-title-lineHeight-small', or '--text-body-lineHeight-large'.",
+      description:
+        "CSS > Errors on '1.5' line-height and suggests '--text-title-lineHeight-large', '--text-title-lineHeight-small', or '--text-body-lineHeight-large'.",
     },
     // Font family
     {
