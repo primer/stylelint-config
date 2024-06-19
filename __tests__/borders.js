@@ -61,6 +61,10 @@ testRule({
       code: '.x { border: var(--borderWidth-thin) solid transparent; }',
       description: 'CSS > Accepts transparent colors',
     },
+    {
+      code: '.x { border-bottom-color: var(--borderColor-muted); }',
+      description: 'CSS > Accepts border-bottom-color props',
+    },
     // Figure out how to allow `calc()` values
   ],
   reject: [
