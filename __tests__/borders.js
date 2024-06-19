@@ -150,7 +150,7 @@ testRule({
       line: 1,
       column: 25,
       endColumn: 43,
-      description: 'CSS > Does not accept a border width variable for border radius.',
+      description: 'CSS > Does not autofix 1px to borderWidth-thin variable.',
     },
   ],
 })
