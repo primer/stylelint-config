@@ -65,6 +65,10 @@ testRule({
       code: '.x { border-bottom-color: var(--borderColor-muted); }',
       description: 'CSS > Accepts border-bottom-color props',
     },
+    {
+      code: '.x { border-color: red; }',
+      description: 'CSS > Ignores border-color prop',
+    },
     // Figure out how to allow `calc()` values
   ],
   reject: [
