@@ -33,6 +33,8 @@ const radii = []
 
 // Props that we want to check
 const propList = ['border', 'border-width', 'border-radius']
+// Values that we want to ignore
+const valueList = ['${']
 
 const borderShorthand = (prop) => /^border(\-(top|right|bottom|left))?$/.test(prop)
 
@@ -70,6 +72,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
       const {prop, value} = declNode
 
       if (!propList.some(borderProp => prop.startsWith(borderProp))) return
+      if (valueList.some(valueToIgnore => value.includes(valueToIgnore))) return
 
       const problems = []
 
@@ -100,6 +103,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
             'unset',
             'solid',
             'dashed',
+            'transparent',
           ].includes(node.value)
         ) {
           return

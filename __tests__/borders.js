@@ -1,4 +1,5 @@
 import plugin from '../plugins/borders.js'
+import dedent from 'dedent'
 
 const plugins = [plugin]
 const {
@@ -51,6 +52,14 @@ testRule({
     {
       code: '.x { border-bottom: var(--borderWidth-thin) solid var(--borderColor-muted); }',
       description: 'CSS > Accepts directional border-bottom',
+    },
+    {
+      code: '.x { border-color: transparent; }',
+      description: 'CSS > Accepts transparent colors',
+    },
+    {
+      code: '.x { border: var(--borderWidth-thin) solid transparent; }',
+      description: 'CSS > Accepts transparent colors',
     },
     // Figure out how to allow `calc()` values
   ],
@@ -135,4 +144,25 @@ testRule({
       description: 'CSS > Does not accept a border width variable for border radius.',
     },
   ],
+})
+
+// Styled Syntax Specific Tests
+testRule({
+  plugins,
+  ruleName,
+  customSyntax: 'postcss-styled-syntax',
+  codeFilename: 'example.tsx',
+  config: [true, {}],
+  fix: true,
+  cache: false,
+  accept: [
+    {
+      code: dedent`
+        export const IconContainer = styled(Box)\`
+          border-radius: \${themeGet('radii.2')};
+        \`
+      `,
+      description: 'TSX > Ignores themeGet.',
+    },
+  ]
 })
