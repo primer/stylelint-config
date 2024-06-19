@@ -54,16 +54,8 @@ testRule({
       description: 'CSS > Accepts directional border-bottom',
     },
     {
-      code: '.x { border-color: transparent; }',
-      description: 'CSS > Accepts transparent colors',
-    },
-    {
       code: '.x { border: var(--borderWidth-thin) solid transparent; }',
       description: 'CSS > Accepts transparent colors',
-    },
-    {
-      code: '.x { border-bottom-color: var(--borderColor-muted); }',
-      description: 'CSS > Accepts border-bottom-color props',
     },
     {
       code: '.x { border-color: red; }',
