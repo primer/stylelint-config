@@ -36,7 +36,7 @@ const propList = ['border', 'border-width', 'border-radius']
 // Values that we want to ignore
 const valueList = ['${']
 
-const borderShorthand = (prop) => /^border(\-(top|right|bottom|left))?$/.test(prop)
+const borderShorthand = prop => /^border(-(top|right|bottom|left))?$/.test(prop)
 
 for (const variable of variables) {
   const name = variable['name']
