@@ -15,7 +15,7 @@ export const messages = ruleMessages(ruleName, {
       return `Border radius variables can not be used for border widths`
     }
 
-    if ((propName && propName.includes('width')) || (propName === 'border' && value.includes('borderRadius'))) {
+    if ((propName && propName.includes('width')) || (borderShorthand(propName) && value.includes('borderRadius'))) {
       return `Border width variables can not be used for border radii`
     }
 
@@ -33,6 +33,8 @@ const radii = []
 
 // Props that we want to check
 const propList = ['border', 'border-width', 'border-radius']
+
+const borderShorthand = (prop) => /^border(\-(top|right|bottom|left))?$/.test(prop)
 
 for (const variable of variables) {
   const name = variable['name']
@@ -117,7 +119,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
         // if we're looking at the border property that sets color in shorthand, don't bother checking the color
         if (
           // using border shorthand
-          prop === 'border' &&
+          borderShorthand(prop) &&
           // includes a color as a third space-separated value
           value.split(' ').length > 2 &&
           // the color in the third space-separated value includes `node.value`
@@ -130,7 +132,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
         }
 
         // If the variable is found in the value, skip it.
-        if (prop.includes('width') || prop === 'border') {
+        if (prop.includes('width') || borderShorthand(prop)) {
           if (checkForVariable(sizes, node.value)) {
             return
           }
