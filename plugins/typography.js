@@ -1,7 +1,6 @@
 import stylelint from 'stylelint'
 import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.cjs'
-import valueParser from 'postcss-value-parser'
-import {primitivesVariables, walkGroups} from './lib/utils.js'
+import {primitivesVariables} from './lib/utils.js'
 
 const {
   createPlugin,
@@ -10,7 +9,7 @@ const {
 
 export const ruleName = 'primer/typography'
 export const messages = ruleMessages(ruleName, {
-  rejected: (value, replacement, propName) => {
+  rejected: (value, replacement) => {
     // no possible replacement
     if (!replacement) {
       return `Please use a Primer typography variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/foundations/primitives/typography`
@@ -33,8 +32,8 @@ const fontWeightKeywordMap = {
   lighter: 300,
 }
 const getClosestFontWeight = (goalWeightNumber, fontWeightsTokens) => {
-  return fontWeightsTokens.reduce((prev, curr) => 
-    Math.abs(curr.values - goalWeightNumber) < Math.abs(prev.values - goalWeightNumber) ? curr : prev
+  return fontWeightsTokens.reduce((prev, curr) =>
+    Math.abs(curr.values - goalWeightNumber) < Math.abs(prev.values - goalWeightNumber) ? curr : prev,
   ).values
 }
 
@@ -100,7 +99,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
         return
       }
 
-      switch(prop) {
+      switch (prop) {
         case 'font-size':
           validValues = fontSizes
           break
@@ -119,7 +118,6 @@ const ruleFunction = (primary, secondaryOptions, context) => {
         default:
           validValues = []
       }
-
 
       if (checkForVariable(validValues, value)) {
         return

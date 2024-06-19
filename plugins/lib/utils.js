@@ -17,7 +17,7 @@ export function primitivesVariables(type) {
       files.push('base/typography/typography.json')
       files.push('functional/typography/typography.json')
       break
-}
+  }
 
   for (const file of files) {
     // eslint-disable-next-line import/no-dynamic-require
