@@ -143,6 +143,15 @@ testRule({
       endColumn: 43,
       description: 'CSS > Does not accept a border width variable for border radius.',
     },
+    {
+      code: '.x { border-radius: 1px; }',
+      unfixable: true,
+      message: messages.rejected('1px', undefined, 'border-radius'),
+      line: 1,
+      column: 25,
+      endColumn: 43,
+      description: 'CSS > Does not accept a border width variable for border radius.',
+    },
   ],
 })
 
