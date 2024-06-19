@@ -103,6 +103,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
             'unset',
             'solid',
             'dashed',
+            'dotted',
             'transparent',
           ].includes(node.value)
         ) {
