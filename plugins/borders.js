@@ -72,6 +72,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
       const {prop, value} = declNode
 
       if (!propList.some(borderProp => prop.startsWith(borderProp))) return
+      if (/^border(-(top|right|bottom|left|block-start|block-end|inline-start|inline-end))?-color$/.test(prop)) return
       if (valueList.some(valueToIgnore => value.includes(valueToIgnore))) return
 
       const problems = []
