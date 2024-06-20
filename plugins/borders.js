@@ -151,7 +151,9 @@ const ruleFunction = (primary, secondaryOptions, context) => {
           }
         }
 
-        const replacement = validValues.find(variable => variable.values.includes(node.value.replace('-', '')))
+        const replacement = (prop.includes('radius') ? radii : sizes).find(variable =>
+          variable.values.includes(node.value.replace('-', '')),
+        )
         const fixable = replacement && valueUnit && !valueUnit.number.includes('-')
 
         if (fixable && context.fix) {
