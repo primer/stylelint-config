@@ -65,7 +65,6 @@ const ruleFunction = (primary, secondaryOptions, context) => {
       actual: primary,
       possible: [true],
     })
-    const validValues = [...sizes, ...radii]
 
     if (!validOptions) return
 
