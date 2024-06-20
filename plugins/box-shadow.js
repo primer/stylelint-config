@@ -10,12 +10,11 @@ const {
 export const ruleName = 'primer/box-shadow'
 export const messages = ruleMessages(ruleName, {
   rejected: (value, replacement) => {
-    // TODO: Decide if we just want to link to Storybook, or if we want to add new pages to https://primer.style/foundations/primitives
     if (!replacement) {
-      return `Please use a Primer box-shadow variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/primitives/storybook/?path=/story/color-functional-shadows--shadows`
+      return `Please use a Primer box-shadow variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/foundations/primitives/color#shadow or https://primer.style/foundations/primitives/size#border-size`
     }
 
-    return `Please replace '${value}' with a Primer box-shadow variable '${replacement['name']}'. https://primer.style/primitives/storybook/?path=/story/color-functional-shadows--shadows`
+    return `Please replace '${value}' with a Primer box-shadow variable '${replacement['name']}'. https://primer.style/foundations/primitives/color#shadow or https://primer.style/foundations/primitives/size#border-size`
   },
 })
 
@@ -27,7 +26,7 @@ for (const variable of variables) {
 
   // TODO: Decide if this is safe. Someday we might have variables that
   // have 'shadow' in the name but aren't full box-shadows.
-  if (name.includes('shadow')) {
+  if (name.includes('shadow') || name.includes('boxShadow')) {
     shadows.push(variable)
   }
 }
@@ -43,8 +42,6 @@ const ruleFunction = (primary, secondaryOptions, context) => {
 
     if (!validOptions) return
 
-    // TODO: determine if it's safe to look at the whole declaration value
-    // instead of each node in the value
     root.walkDecls(declNode => {
       const {prop, value} = declNode
 

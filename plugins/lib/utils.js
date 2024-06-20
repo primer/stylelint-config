@@ -18,8 +18,8 @@ export function primitivesVariables(type) {
       files.push('functional/typography/typography.json')
       break
     case 'box-shadow':
-      files.push('functional/themes/dark.json')
       files.push('functional/themes/light.json')
+      files.push('functional/size/border.json')
       break
   }
 
