@@ -1,64 +1,197 @@
-import {createVariableRule} from './lib/variable-rules.js'
+import stylelint from 'stylelint'
+import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.cjs'
+import valueParser from 'postcss-value-parser'
+import {walkGroups, primitivesVariables} from './lib/utils.js'
 
-export default createVariableRule(
-  'primer/borders',
-  {
-    border: {
-      expects: 'a border variable',
-      props: 'border{,-top,-right,-bottom,-left}',
-      values: ['$border', 'none', '0'],
-      components: ['border-width', 'border-style', 'border-color'],
-      replacements: {
-        // because shorthand border properties ¯\_(ツ)_/¯
-        '$border-width $border-style $border-gray': '$border',
-        '$border-width $border-gray $border-style': '$border',
-        '$border-style $border-width $border-gray': '$border',
-        '$border-style $border-gray $border-width': '$border',
-        '$border-gray $border-width $border-style': '$border',
-        '$border-gray $border-style $border-width': '$border',
-        '$border-width $border-style $border-color': '$border',
-        '$border-width $border-color $border-style': '$border',
-        '$border-style $border-width $border-color': '$border',
-        '$border-style $border-color $border-width': '$border',
-        '$border-color $border-width $border-style': '$border',
-        '$border-color $border-style $border-width': '$border',
-      },
-    },
-    'border color': {
-      expects: 'a border color variable',
-      props: 'border{,-top,-right,-bottom,-left}-color',
-      values: [
-        '$border-*',
-        'transparent',
-        'currentColor',
-        // Match variables in any of the following formats: --color-border-*, --color-*-border-*, --color-*-border, --borderColor-, *borderColor*
-        /var\(--color-(.+-)*border(-.+)*\)/,
-        /var\(--color-[^)]+\)/,
-        /var\(--borderColor-[^)]+\)/,
-        /var\((.+-)*borderColor(-.+)*\)/,
-      ],
-      replacements: {
-        '$border-gray': '$border-color',
-      },
-    },
-    'border style': {
-      expects: 'a border style variable',
-      props: 'border{,-top,-right,-bottom,-left}-style',
-      values: ['$border-style', 'none'],
-    },
-    'border width': {
-      expects: 'a border width variable',
-      props: 'border{,-top,-right,-bottom,-left}-width',
-      values: ['$border-width*', '0'],
-    },
-    'border radius': {
-      expects: 'a border radius variable',
-      props: 'border{,-{top,bottom}-{left,right}}-radius',
-      values: ['$border-radius', '0', '50%', 'inherit'],
-      replacements: {
-        '100%': '50%',
-      },
-    },
+const {
+  createPlugin,
+  utils: {report, ruleMessages, validateOptions},
+} = stylelint
+
+export const ruleName = 'primer/borders'
+export const messages = ruleMessages(ruleName, {
+  rejected: (value, replacement, propName) => {
+    if (propName && propName.includes('radius') && value.includes('borderWidth')) {
+      return `Border radius variables can not be used for border widths`
+    }
+
+    if ((propName && propName.includes('width')) || (borderShorthand(propName) && value.includes('borderRadius'))) {
+      return `Border width variables can not be used for border radii`
+    }
+
+    if (!replacement) {
+      return `Please use a Primer border variable instead of '${value}'. Consult the primer docs for a suitable replacement. https://primer.style/foundations/primitives/size#border`
+    }
+
+    return `Please replace '${value}' with a Primer border variable '${replacement['name']}'. https://primer.style/foundations/primitives/size#border`
   },
-  'https://primer.style/css/utilities/borders',
-)
+})
+
+const variables = primitivesVariables('border')
+const sizes = []
+const radii = []
+
+// Props that we want to check
+const propList = ['border', 'border-width', 'border-radius']
+// Values that we want to ignore
+const valueList = ['${']
+
+const borderShorthand = prop =>
+  /^border(-(top|right|bottom|left|block-start|block-end|inline-start|inline-end))?$/.test(prop)
+
+for (const variable of variables) {
+  const name = variable['name']
+
+  if (name.includes('borderWidth')) {
+    const value = variable['values']
+      .pop()
+      .replace(/max|\(|\)/g, '')
+      .split(',')[0]
+    sizes.push({
+      name,
+      values: [value],
+    })
+  }
+
+  if (name.includes('borderRadius')) {
+    radii.push(variable)
+  }
+}
+
+/** @type {import('stylelint').Rule} */
+const ruleFunction = (primary, secondaryOptions, context) => {
+  return (root, result) => {
+    const validOptions = validateOptions(result, ruleName, {
+      actual: primary,
+      possible: [true],
+    })
+
+    if (!validOptions) return
+
+    root.walkDecls(declNode => {
+      const {prop, value} = declNode
+
+      if (!propList.some(borderProp => prop.startsWith(borderProp))) return
+      if (/^border(-(top|right|bottom|left|block-start|block-end|inline-start|inline-end))?-color$/.test(prop)) return
+      if (valueList.some(valueToIgnore => value.includes(valueToIgnore))) return
+
+      const problems = []
+
+      const parsedValue = walkGroups(valueParser(value), node => {
+        const checkForVariable = (vars, nodeValue) =>
+          vars.some(variable =>
+            new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(nodeValue),
+          )
+
+        // Only check word types. https://github.com/TrySound/postcss-value-parser#word
+        if (node.type !== 'word') {
+          return
+        }
+
+        // Exact values to ignore.
+        if (
+          [
+            '*',
+            '+',
+            '-',
+            '/',
+            '0',
+            'none',
+            'inherit',
+            'initial',
+            'revert',
+            'revert-layer',
+            'unset',
+            'solid',
+            'dashed',
+            'dotted',
+            'transparent',
+          ].includes(node.value)
+        ) {
+          return
+        }
+
+        const valueUnit = valueParser.unit(node.value)
+
+        if (valueUnit && (valueUnit.unit === '' || !/^-?[0-9.]+$/.test(valueUnit.number))) {
+          return
+        }
+
+        // Skip if the value unit isn't a supported unit.
+        if (valueUnit && !['px', 'rem', 'em'].includes(valueUnit.unit)) {
+          return
+        }
+
+        // if we're looking at the border property that sets color in shorthand, don't bother checking the color
+        if (
+          // using border shorthand
+          borderShorthand(prop) &&
+          // includes a color as a third space-separated value
+          value.split(' ').length > 2 &&
+          // the color in the third space-separated value includes `node.value`
+          value
+            .split(' ')
+            .slice(2)
+            .some(color => color.includes(node.value))
+        ) {
+          return
+        }
+
+        // If the variable is found in the value, skip it.
+        if (prop.includes('width') || borderShorthand(prop)) {
+          if (checkForVariable(sizes, node.value)) {
+            return
+          }
+        }
+
+        if (prop.includes('radius')) {
+          if (checkForVariable(radii, node.value)) {
+            return
+          }
+        }
+
+        const replacement = (prop.includes('radius') ? radii : sizes).find(variable =>
+          variable.values.includes(node.value.replace('-', '')),
+        )
+        const fixable = replacement && valueUnit && !valueUnit.number.includes('-')
+
+        if (fixable && context.fix) {
+          node.value = node.value.replace(node.value, `var(${replacement['name']})`)
+        } else {
+          problems.push({
+            index: declarationValueIndex(declNode) + node.sourceIndex,
+            endIndex: declarationValueIndex(declNode) + node.sourceIndex + node.value.length,
+            message: messages.rejected(node.value, replacement, prop),
+          })
+        }
+
+        return
+      })
+
+      if (context.fix) {
+        declNode.value = parsedValue.toString()
+      }
+
+      if (problems.length) {
+        for (const err of problems) {
+          report({
+            index: err.index,
+            endIndex: err.endIndex,
+            message: err.message,
+            node: declNode,
+            result,
+            ruleName,
+          })
+        }
+      }
+    })
+  }
+}
+
+ruleFunction.ruleName = ruleName
+ruleFunction.messages = messages
+ruleFunction.meta = {
+  fixable: true,
+}
+
+export default createPlugin(ruleName, ruleFunction)

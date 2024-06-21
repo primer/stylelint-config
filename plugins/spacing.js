@@ -1,23 +1,12 @@
 import stylelint from 'stylelint'
 import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.cjs'
 import valueParser from 'postcss-value-parser'
-import {primitivesVariables} from './lib/primitives.js'
+import {primitivesVariables, walkGroups} from './lib/utils.js'
 
 const {
   createPlugin,
   utils: {report, ruleMessages, validateOptions},
 } = stylelint
-
-const walkGroups = (root, validate) => {
-  for (const node of root.nodes) {
-    if (node.type === 'function') {
-      walkGroups(node, validate)
-    } else {
-      validate(node)
-    }
-  }
-  return root
-}
 
 export const ruleName = 'primer/spacing'
 export const messages = ruleMessages(ruleName, {
@@ -30,20 +19,26 @@ export const messages = ruleMessages(ruleName, {
   },
 })
 
-const meta = {
-  fixable: true,
+// Props that we want to check
+const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left']
+// Values that we want to ignore
+const valueList = ['${']
+
+const sizes = primitivesVariables('spacing')
+
+// Add +-1px to each value
+for (const size of sizes) {
+  const values = size['values']
+  const px = parseInt(values.find(value => value.includes('px')))
+  if (![2, 6].includes(px)) {
+    values.push(`${px + 1}px`)
+    values.push(`${px - 1}px`)
+  }
 }
 
 /** @type {import('stylelint').Rule} */
 const ruleFunction = (primary, secondaryOptions, context) => {
-  return async (root, result) => {
-    // Props that we want to check
-    const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left']
-    // Values that we want to ignore
-    const valueList = ['${']
-
-    const sizes = await primitivesVariables('size')
-
+  return (root, result) => {
     const validOptions = validateOptions(result, ruleName, {
       actual: primary,
       possible: [true],
@@ -128,6 +123,8 @@ const ruleFunction = (primary, secondaryOptions, context) => {
 
 ruleFunction.ruleName = ruleName
 ruleFunction.messages = messages
-ruleFunction.meta = meta
+ruleFunction.meta = {
+  fixable: true,
+}
 
 export default createPlugin(ruleName, ruleFunction)
