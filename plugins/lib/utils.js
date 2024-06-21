@@ -2,13 +2,16 @@ import {createRequire} from 'node:module'
 
 const require = createRequire(import.meta.url)
 
-export async function primitivesVariables(type) {
+export function primitivesVariables(type) {
   const variables = []
 
   const files = []
   switch (type) {
-    case 'size':
+    case 'spacing':
       files.push('base/size/size.json')
+      break
+    case 'border':
+      files.push('functional/size/border.json')
       break
   }
 
@@ -18,12 +21,7 @@ export async function primitivesVariables(type) {
 
     for (const key of Object.keys(data)) {
       const size = data[key]
-      const values = size['value']
-      const intValue = parseInt(size['original']['value'])
-      if (![2, 6].includes(intValue)) {
-        values.push(`${intValue + 1}px`)
-        values.push(`${intValue - 1}px`)
-      }
+      const values = typeof size['value'] === 'string' ? [size['value']] : size['value']
 
       variables.push({
         name: `--${size['name']}`,
@@ -33,4 +31,15 @@ export async function primitivesVariables(type) {
   }
 
   return variables
+}
+
+export function walkGroups(root, validate) {
+  for (const node of root.nodes) {
+    if (node.type === 'function') {
+      walkGroups(node, validate)
+    } else {
+      validate(node)
+    }
+  }
+  return root
 }

@@ -12,7 +12,7 @@ const StyledButton = styled.button`
   padding: var(--base-size-8);
   /* stylelint-disable-next-line primer/spacing */
   margin: var(--base-size-8) 10px var(--base-size-8) 0px;
-  border-radius: 3px;
+  border-radius: var(--borderRadius-small);
   color: ${themeGet('colors.fg.onEmphasis')};
   border: 0;
   background: transparent;
