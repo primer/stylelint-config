@@ -62,7 +62,8 @@
   },
   "overrides": {
     "stylelint-css-modules-no-global-scoped-selector": {
-      "stylelint": "$stylelint"
+      "stylelint": "$stylelint",
+      "postcss-modules-local-by-default": "^4.0.0"
     }
   },
   "prettier": "@github/prettier-config",
