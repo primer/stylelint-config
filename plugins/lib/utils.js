@@ -13,6 +13,10 @@ export function primitivesVariables(type) {
     case 'border':
       files.push('functional/size/border.json')
       break
+    case 'typography':
+      files.push('base/typography/typography.json')
+      files.push('functional/typography/typography.json')
+      break
   }
 
   for (const file of files) {
