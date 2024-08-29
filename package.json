@@ -78,7 +78,7 @@
     "jest-preset-stylelint": "^7.0.0",
     "prettier": "^3.2.5",
     "rimraf": "^6.0.1",
-    "rollup": "^4.14.3"
+    "rollup": "^4.21.1"
   },
   "jest": {
     "transform": {},
