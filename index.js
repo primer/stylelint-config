@@ -146,7 +146,6 @@ export default {
         'length-zero-no-unit': null,
         'selector-max-type': null,
         'primer/colors': null,
-        'primer/typography': null,
         'primer/box-shadow': null,
       },
     },
@@ -197,7 +196,6 @@ export default {
           },
         ],
         // temporarily disabiling Primer plugins while we work on upgrades https://github.com/github/primer/issues/3165
-        'primer/typography': null,
         'primer/box-shadow': null,
       },
     },

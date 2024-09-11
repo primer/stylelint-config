@@ -103,12 +103,14 @@ export const StyledToast = styled.div`
 export const ToastAction = styled.button<SxProp>`
   background-color: transparent;
   border: 0;
+  /* stylelint-disable-next-line primer/typography */
   font-weight: ${themeGet('fontWeights.bold')};
   margin-left: ${themeGet('space.2')};
 
   margin-top: ${themeGet('space.3')};
   margin-bottom: ${themeGet('space.3')};
   color: ${themeGet('colors.fg.onEmphasis')};
+  /* stylelint-disable-next-line primer/typography */
   font-size: ${themeGet('fontSizes.1')};
   font-family: inherit;
   outline: none;
