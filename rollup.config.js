@@ -24,6 +24,7 @@ export default [
     output: {
       format: 'esm',
       file: 'dist/index.mjs',
+      importAttributesKey: 'with',
     },
   },
   {
