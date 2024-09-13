@@ -1,5 +1,38 @@
 # Changelog
 
+## 13.0.0
+
+### Major Changes
+
+- [#397](https://github.com/primer/stylelint-config/pull/397) [`255a3c4`](https://github.com/primer/stylelint-config/commit/255a3c4cebb453243978b24f35516ed55443c81e) Thanks [@jonrohan](https://github.com/jonrohan)! - Removing `primer/no-experimental-vars` plugin from config.
+
+- [#415](https://github.com/primer/stylelint-config/pull/415) [`86cf24f`](https://github.com/primer/stylelint-config/commit/86cf24f5c1f3f51b5085a5808a5406bc04e47b68) Thanks [@jonrohan](https://github.com/jonrohan)! - Deleting primer/utilities plugin
+
+- [#401](https://github.com/primer/stylelint-config/pull/401) [`0a7bc7e`](https://github.com/primer/stylelint-config/commit/0a7bc7eeaec4b6ea63cbc7bda150ea61a3b5d346) Thanks [@jonrohan](https://github.com/jonrohan)! - **BREAKING CHANGE:** Removing plugins from the config.
+
+  - primer/new-color-vars-have-fallback
+  - primer/no-deprecated-colors
+  - primer/no-override
+  - primer/no-scale-colors
+  - primer/no-undefined-vars
+  - primer/no-unused-vars
+
+- [#397](https://github.com/primer/stylelint-config/pull/397) [`255a3c4`](https://github.com/primer/stylelint-config/commit/255a3c4cebb453243978b24f35516ed55443c81e) Thanks [@jonrohan](https://github.com/jonrohan)! - Upgrade to latest stylelint and make esm the default module format
+
+### Minor Changes
+
+- [#429](https://github.com/primer/stylelint-config/pull/429) [`6d80a4d`](https://github.com/primer/stylelint-config/commit/6d80a4def84a803d078e7c425ece4761c0dcbce6) Thanks [@mperrotti](https://github.com/mperrotti)! - Rewrite box-shadow lint plugin for css vars.
+
+- [#403](https://github.com/primer/stylelint-config/pull/403) [`2c9e2de`](https://github.com/primer/stylelint-config/commit/2c9e2de5ea64754587109098352fef80718b9b30) Thanks [@mattcosta7](https://github.com/mattcosta7)! - Update config to alloy nesting in css modules
+
+- [#417](https://github.com/primer/stylelint-config/pull/417) [`3318d25`](https://github.com/primer/stylelint-config/commit/3318d25f78f5a2a25dbe9aec077145c2a33db3af) Thanks [@jonrohan](https://github.com/jonrohan)! - Upgrade to @primer/primitives@8.2.0
+
+- [#368](https://github.com/primer/stylelint-config/pull/368) [`0ed9a47`](https://github.com/primer/stylelint-config/commit/0ed9a4723cc1c5a1d7bbd2a36da064e76634d1b9) Thanks [@jonrohan](https://github.com/jonrohan)! - Change config to accept multiple file types `.css, .scss, .modules.css, .tsx, .pcss`
+
+- [#400](https://github.com/primer/stylelint-config/pull/400) [`e708ed2`](https://github.com/primer/stylelint-config/commit/e708ed2ad2789e2acabcb8cb64eb99735ea87d17) Thanks [@jonrohan](https://github.com/jonrohan)! - Update primer/spacing for CSS properties
+
+- [`4c22d43`](https://github.com/primer/stylelint-config/commit/4c22d43342857e282802f242445e25f562001a79) Thanks [@jonrohan](https://github.com/jonrohan)! - Updating `primer/borders` plugin to work for new primitives and CSS vars
+
 ## 12.9.2
 
 ### Patch Changes
