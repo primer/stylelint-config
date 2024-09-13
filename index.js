@@ -146,7 +146,6 @@ export default {
         'length-zero-no-unit': null,
         'selector-max-type': null,
         'primer/colors': null,
-        'primer/box-shadow': null,
       },
     },
     {
@@ -195,8 +194,6 @@ export default {
             ignoreFunctions: ['global'],
           },
         ],
-        // temporarily disabiling Primer plugins while we work on upgrades https://github.com/github/primer/issues/3165
-        'primer/box-shadow': null,
       },
     },
   ],
