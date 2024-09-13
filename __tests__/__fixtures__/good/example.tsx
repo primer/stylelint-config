@@ -21,6 +21,7 @@ const StyledButton = styled.button`
 
   /* can be removed if using Primer IconButton component */
   &:focus {
+    /* stylelint-disable-next-line primer/box-shadow */
     box-shadow: 0 0 0 2px ${themeGet('colors.accent.fg')};
   }
 `
@@ -81,6 +82,7 @@ export const StyledToast = styled.div`
   position: fixed;
   display: flex;
   gap: ${themeGet('space.2')};
+  /* stylelint-disable-next-line primer/box-shadow */
   box-shadow: ${themeGet('shadows.shadow.large')};
   background-color: ${themeGet('colors.neutral.emphasisPlus')};
   border-radius: ${themeGet('radii.2')};
@@ -123,6 +125,7 @@ export const ToastAction = styled.button<SxProp>`
 
   &:focus {
     border-color: transparent;
+    /* stylelint-disable-next-line primer/box-shadow */
     box-shadow: 0 0 0 3px ${themeGet('colors.border.default')};
   }
   ${sx}
