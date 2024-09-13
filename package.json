@@ -1,6 +1,6 @@
 {
   "name": "@primer/stylelint-config",
-  "version": "12.9.2",
+  "version": "13.0.0",
   "description": "Sharable stylelint config used by GitHub's CSS",
   "author": "GitHub, Inc.",
   "license": "MIT",
