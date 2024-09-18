@@ -65,7 +65,6 @@ export default {
     'declaration-property-value-disallowed-list': {
       '/^transition/': ['/all/'],
       '/^background/': ['http:', 'https:'],
-      '/^border/': ['none'],
       '/.+/': ['initial'],
     },
     'function-calc-no-unspaced-operator': true,
