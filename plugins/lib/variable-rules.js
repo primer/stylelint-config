@@ -30,7 +30,7 @@ export function createVariableRule(ruleName, rules, url) {
 
     // The stylelint docs suggest respecting a "disableFix" rule option that
     // overrides the "global" context.fix (--fix) linting option.
-    const {verbose = false, disableFix} = options
+    const {disableFix} = options
     const fixEnabled = context && context.fix && !disableFix
     const seen = new WeakMap()
 
