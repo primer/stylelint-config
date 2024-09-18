@@ -85,7 +85,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
     root.walkDecls(declNode => {
       const {prop, value} = declNode
 
-      if (!propList.some(typographyProp => prop.startsWith(typographyProp))) return
+      if (!propList.some(typographyProp => prop === typographyProp)) return
 
       const problems = []
 

@@ -43,6 +43,10 @@ testRule({
       code: '.x { font: var(--text-display-shorthand); }',
       description: 'CSS > Accepts font shorthand variables',
     },
+    {
+      code: '.x { font-style: italic; }',
+      description: 'CSS > Ignores font-style property',
+    },
   ],
   reject: [
     // Font sizes
