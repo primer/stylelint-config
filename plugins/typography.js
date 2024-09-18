@@ -27,7 +27,7 @@ export const messages = ruleMessages(ruleName, {
 
 const fontWeightKeywordMap = {
   normal: 400,
-  bold: 600,
+  bold: 700,
   bolder: 600,
   lighter: 300,
 }
@@ -72,7 +72,7 @@ for (const variable of variables) {
 }
 
 /** @type {import('stylelint').Rule} */
-const ruleFunction = (primary, secondaryOptions, context) => {
+const ruleFunction = primary => {
   return (root, result) => {
     const validOptions = validateOptions(result, ruleName, {
       actual: primary,
@@ -85,7 +85,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
     root.walkDecls(declNode => {
       const {prop, value} = declNode
 
-      if (!propList.some(typographyProp => prop.startsWith(typographyProp))) return
+      if (!propList.some(typographyProp => prop === typographyProp)) return
 
       const problems = []
 
@@ -142,24 +142,24 @@ const ruleFunction = (primary, secondaryOptions, context) => {
           return
         }
 
-        if (replacementTokens.length > 1) {
-          return replacementTokens
-        }
-
         return replacementTokens[0]
       }
       const replacement = getReplacements()
       const fixable = replacement && !replacement.length
-
-      if (fixable && context.fix) {
-        declNode.value = value.replace(value, `var(${replacement['name']})`)
-      } else {
-        problems.push({
-          index: declarationValueIndex(declNode),
-          endIndex: declarationValueIndex(declNode) + value.length,
-          message: messages.rejected(value, replacement, prop),
-        })
+      let fixedValue = ''
+      if (fixable) {
+        fixedValue = value.replace(value, `var(${replacement['name']})`)
       }
+
+      problems.push({
+        index: declarationValueIndex(declNode),
+        endIndex: declarationValueIndex(declNode) + value.length,
+        message: messages.rejected(value, replacement, prop),
+        fix: () => {
+          if (!fixable) return
+          declNode.value = fixedValue
+        },
+      })
 
       if (problems.length) {
         for (const err of problems) {
@@ -170,6 +170,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
             node: declNode,
             result,
             ruleName,
+            fix: err.fix,
           })
         }
       }
