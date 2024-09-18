@@ -59,7 +59,7 @@ for (const variable of variables) {
 }
 
 /** @type {import('stylelint').Rule} */
-const ruleFunction = (primary, secondaryOptions, context) => {
+const ruleFunction = primary => {
   return (root, result) => {
     const validOptions = validateOptions(result, ruleName, {
       actual: primary,
@@ -74,8 +74,6 @@ const ruleFunction = (primary, secondaryOptions, context) => {
       if (!propList.some(borderProp => prop.startsWith(borderProp))) return
       if (/^border(-(top|right|bottom|left|block-start|block-end|inline-start|inline-end))?-color$/.test(prop)) return
       if (valueList.some(valueToIgnore => value.includes(valueToIgnore))) return
-
-      const problems = []
 
       const parsedValue = walkGroups(valueParser(value), node => {
         const checkForVariable = (vars, nodeValue) =>
@@ -155,35 +153,24 @@ const ruleFunction = (primary, secondaryOptions, context) => {
         )
         const fixable = replacement && valueUnit && !valueUnit.number.includes('-')
 
-        if (fixable && context.fix) {
-          node.value = node.value.replace(node.value, `var(${replacement['name']})`)
-        } else {
-          problems.push({
-            index: declarationValueIndex(declNode) + node.sourceIndex,
-            endIndex: declarationValueIndex(declNode) + node.sourceIndex + node.value.length,
-            message: messages.rejected(node.value, replacement, prop),
-          })
-        }
+        report({
+          index: declarationValueIndex(declNode) + node.sourceIndex,
+          endIndex: declarationValueIndex(declNode) + node.sourceIndex + node.value.length,
+          message: messages.rejected(node.value, replacement, prop),
+          node: declNode,
+          result,
+          ruleName,
+          fix: () => {
+            if (fixable) {
+              node.value = node.value.replace(node.value, `var(${replacement['name']})`)
+            }
+          },
+        })
 
         return
       })
 
-      if (context.fix) {
-        declNode.value = parsedValue.toString()
-      }
-
-      if (problems.length) {
-        for (const err of problems) {
-          report({
-            index: err.index,
-            endIndex: err.endIndex,
-            message: err.message,
-            node: declNode,
-            result,
-            ruleName,
-          })
-        }
-      }
+      declNode.value = parsedValue.toString()
     })
   }
 }
