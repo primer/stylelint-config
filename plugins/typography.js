@@ -27,7 +27,7 @@ export const messages = ruleMessages(ruleName, {
 
 const fontWeightKeywordMap = {
   normal: 400,
-  bold: 600,
+  bold: 700,
   bolder: 600,
   lighter: 300,
 }
@@ -140,10 +140,6 @@ const ruleFunction = (primary, secondaryOptions, context) => {
 
         if (!replacementTokens.length) {
           return
-        }
-
-        if (replacementTokens.length > 1) {
-          return replacementTokens
         }
 
         return replacementTokens[0]
