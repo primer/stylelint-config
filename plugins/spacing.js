@@ -37,7 +37,7 @@ for (const size of sizes) {
 }
 
 /** @type {import('stylelint').Rule} */
-const ruleFunction = (primary, secondaryOptions, context) => {
+const ruleFunction = primary => {
   return (root, result) => {
     const validOptions = validateOptions(result, ruleName, {
       actual: primary,
@@ -51,8 +51,6 @@ const ruleFunction = (primary, secondaryOptions, context) => {
 
       if (!propList.some(spacingProp => prop.startsWith(spacingProp))) return
       if (valueList.some(valueToIgnore => value.includes(valueToIgnore))) return
-
-      const problems = []
 
       const parsedValue = walkGroups(valueParser(value), node => {
         // Only check word types. https://github.com/TrySound/postcss-value-parser#word
@@ -87,36 +85,24 @@ const ruleFunction = (primary, secondaryOptions, context) => {
 
         const replacement = sizes.find(variable => variable.values.includes(node.value.replace('-', '')))
         const fixable = replacement && valueUnit && !valueUnit.number.includes('-')
-
-        if (fixable && context.fix) {
-          node.value = node.value.replace(node.value, `var(${replacement['name']})`)
-        } else {
-          problems.push({
-            index: declarationValueIndex(declNode) + node.sourceIndex,
-            endIndex: declarationValueIndex(declNode) + node.sourceIndex + node.value.length,
-            message: messages.rejected(node.value, replacement),
-          })
+        let fix = undefined
+        if (fixable) {
+          fix = () => {
+            node.value = node.value.replace(node.value, `var(${replacement['name']})`)
+          }
         }
-
-        return
+        report({
+          index: declarationValueIndex(declNode) + node.sourceIndex,
+          endIndex: declarationValueIndex(declNode) + node.sourceIndex + node.value.length,
+          message: messages.rejected(node.value, replacement),
+          node: declNode,
+          result,
+          ruleName,
+          fix,
+        })
       })
 
-      if (context.fix) {
-        declNode.value = parsedValue.toString()
-      }
-
-      if (problems.length) {
-        for (const err of problems) {
-          report({
-            index: err.index,
-            endIndex: err.endIndex,
-            message: err.message,
-            node: declNode,
-            result,
-            ruleName,
-          })
-        }
-      }
+      declNode.value = parsedValue.toString()
     })
   }
 }

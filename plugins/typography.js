@@ -87,8 +87,6 @@ const ruleFunction = primary => {
 
       if (!propList.some(typographyProp => prop === typographyProp)) return
 
-      const problems = []
-
       const checkForVariable = (vars, nodeValue) =>
         vars.some(variable =>
           new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(nodeValue),
@@ -146,34 +144,22 @@ const ruleFunction = primary => {
       }
       const replacement = getReplacements()
       const fixable = replacement && !replacement.length
-      let fixedValue = ''
+      let fix = undefined
       if (fixable) {
-        fixedValue = value.replace(value, `var(${replacement['name']})`)
+        fix = () => {
+          declNode.value = value.replace(value, `var(${replacement['name']})`)
+        }
       }
 
-      problems.push({
+      report({
         index: declarationValueIndex(declNode),
         endIndex: declarationValueIndex(declNode) + value.length,
         message: messages.rejected(value, replacement, prop),
-        fix: () => {
-          if (!fixable) return
-          declNode.value = fixedValue
-        },
+        node: declNode,
+        result,
+        ruleName,
+        fix,
       })
-
-      if (problems.length) {
-        for (const err of problems) {
-          report({
-            index: err.index,
-            endIndex: err.endIndex,
-            message: err.message,
-            node: declNode,
-            result,
-            ruleName,
-            fix: err.fix,
-          })
-        }
-      }
     })
   }
 }

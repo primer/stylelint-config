@@ -46,16 +46,10 @@ export function createVariableRule(ruleName, rules, url) {
           const validated = validate(decl)
           const {valid, fixable, replacement, errors} = validated
           if (valid) {
-            // eslint-disable-next-line no-console
-            if (verbose) console.warn(`valid: "${decl.toString()}" in: "${rule.selector}"`)
             return
           } else if (fixEnabled && fixable) {
-            // eslint-disable-next-line no-console
-            if (verbose) console.warn(`  fixed: ${replacement}`)
             decl.value = replacement
           } else {
-            // eslint-disable-next-line no-console
-            if (verbose) console.warn(`  ${errors.length} error(s)`)
             for (const error of errors) {
               const message = stylelint.utils
                 .ruleMessages(ruleName, {

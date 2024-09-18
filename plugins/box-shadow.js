@@ -32,7 +32,7 @@ for (const variable of variables) {
 }
 
 /** @type {import('stylelint').Rule} */
-const ruleFunction = (primary, secondaryOptions, context) => {
+const ruleFunction = primary => {
   return (root, result) => {
     const validOptions = validateOptions(result, ruleName, {
       actual: primary,
@@ -49,8 +49,6 @@ const ruleFunction = (primary, secondaryOptions, context) => {
 
       if (value === 'none') return
 
-      const problems = []
-
       const checkForVariable = (vars, nodeValue) => {
         return vars.some(variable =>
           new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(nodeValue),
@@ -62,29 +60,22 @@ const ruleFunction = (primary, secondaryOptions, context) => {
       }
 
       const replacement = validValues.find(variable => variable.values.includes(value))
-
-      if (replacement && context.fix) {
-        declNode.value = value.replace(value, `var(${replacement['name']})`)
-      } else {
-        problems.push({
-          index: declarationValueIndex(declNode),
-          endIndex: declarationValueIndex(declNode) + value.length,
-          message: messages.rejected(value, replacement),
-        })
-      }
-
-      if (problems.length) {
-        for (const err of problems) {
-          report({
-            index: err.index,
-            endIndex: err.endIndex,
-            message: err.message,
-            node: declNode,
-            result,
-            ruleName,
-          })
+      let fix = undefined
+      if (replacement) {
+        fix = () => {
+          declNode.value = value.replace(value, `var(${replacement['name']})`)
         }
       }
+
+      report({
+        index: declarationValueIndex(declNode),
+        endIndex: declarationValueIndex(declNode) + value.length,
+        message: messages.rejected(value, replacement),
+        node: declNode,
+        result,
+        ruleName,
+        fix,
+      })
     })
   }
 }
