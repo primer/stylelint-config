@@ -146,16 +146,20 @@ const ruleFunction = (primary, secondaryOptions, context) => {
       }
       const replacement = getReplacements()
       const fixable = replacement && !replacement.length
-
-      if (fixable && context.fix) {
-        declNode.value = value.replace(value, `var(${replacement['name']})`)
-      } else {
-        problems.push({
-          index: declarationValueIndex(declNode),
-          endIndex: declarationValueIndex(declNode) + value.length,
-          message: messages.rejected(value, replacement, prop),
-        })
+      let fixedValue = ''
+      if (fixable) {
+        fixedValue = value.replace(value, `var(${replacement['name']})`)
       }
+
+      problems.push({
+        index: declarationValueIndex(declNode),
+        endIndex: declarationValueIndex(declNode) + value.length,
+        message: messages.rejected(value, replacement, prop),
+        fix: () => {
+          if (!fixable) return
+          declNode.value = fixedValue
+        },
+      })
 
       if (problems.length) {
         for (const err of problems) {
@@ -166,6 +170,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
             node: declNode,
             result,
             ruleName,
+            fix: err.fix,
           })
         }
       }
