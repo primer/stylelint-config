@@ -32,7 +32,7 @@ for (const variable of variables) {
 }
 
 /** @type {import('stylelint').Rule} */
-const ruleFunction = (primary, secondaryOptions, context) => {
+const ruleFunction = primary => {
   return (root, result) => {
     const validOptions = validateOptions(result, ruleName, {
       actual: primary,
@@ -62,16 +62,21 @@ const ruleFunction = (primary, secondaryOptions, context) => {
       }
 
       const replacement = validValues.find(variable => variable.values.includes(value))
-
-      if (replacement && context.fix) {
-        declNode.value = value.replace(value, `var(${replacement['name']})`)
-      } else {
-        problems.push({
-          index: declarationValueIndex(declNode),
-          endIndex: declarationValueIndex(declNode) + value.length,
-          message: messages.rejected(value, replacement),
-        })
+      let fixedValue = undefined
+      if (replacement) {
+        fixedValue = value.replace(value, `var(${replacement['name']})`)
       }
+
+      problems.push({
+        index: declarationValueIndex(declNode),
+        endIndex: declarationValueIndex(declNode) + value.length,
+        message: messages.rejected(value, replacement),
+        fix: () => {
+          if (fixedValue) {
+            declNode.value = fixedValue
+          }
+        },
+      })
 
       if (problems.length) {
         for (const err of problems) {
@@ -82,6 +87,7 @@ const ruleFunction = (primary, secondaryOptions, context) => {
             node: declNode,
             result,
             ruleName,
+            fix: err.fix,
           })
         }
       }
