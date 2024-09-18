@@ -49,8 +49,6 @@ const ruleFunction = primary => {
 
       if (value === 'none') return
 
-      const problems = []
-
       const checkForVariable = (vars, nodeValue) => {
         return vars.some(variable =>
           new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(nodeValue),
@@ -62,35 +60,22 @@ const ruleFunction = primary => {
       }
 
       const replacement = validValues.find(variable => variable.values.includes(value))
-      let fixedValue = undefined
+      let fix = undefined
       if (replacement) {
-        fixedValue = value.replace(value, `var(${replacement['name']})`)
+        fix = () => {
+          declNode.value = value.replace(value, `var(${replacement['name']})`)
+        }
       }
 
-      problems.push({
+      report({
         index: declarationValueIndex(declNode),
         endIndex: declarationValueIndex(declNode) + value.length,
         message: messages.rejected(value, replacement),
-        fix: () => {
-          if (fixedValue) {
-            declNode.value = fixedValue
-          }
-        },
+        node: declNode,
+        result,
+        ruleName,
+        fix,
       })
-
-      if (problems.length) {
-        for (const err of problems) {
-          report({
-            index: err.index,
-            endIndex: err.endIndex,
-            message: err.message,
-            node: declNode,
-            result,
-            ruleName,
-            fix: err.fix,
-          })
-        }
-      }
     })
   }
 }

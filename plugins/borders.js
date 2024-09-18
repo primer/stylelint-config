@@ -152,7 +152,12 @@ const ruleFunction = primary => {
           variable.values.includes(node.value.replace('-', '')),
         )
         const fixable = replacement && valueUnit && !valueUnit.number.includes('-')
-
+        let fix = undefined
+        if (fixable) {
+          fix = () => {
+            node.value = node.value.replace(node.value, `var(${replacement['name']})`)
+          }
+        }
         report({
           index: declarationValueIndex(declNode) + node.sourceIndex,
           endIndex: declarationValueIndex(declNode) + node.sourceIndex + node.value.length,
@@ -160,11 +165,7 @@ const ruleFunction = primary => {
           node: declNode,
           result,
           ruleName,
-          fix: () => {
-            if (fixable) {
-              node.value = node.value.replace(node.value, `var(${replacement['name']})`)
-            }
-          },
+          fix,
         })
 
         return
