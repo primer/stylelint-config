@@ -1,5 +1,15 @@
 # Changelog
 
+## 13.0.1
+
+### Patch Changes
+
+- [#479](https://github.com/primer/stylelint-config/pull/479) [`930e5f2`](https://github.com/primer/stylelint-config/commit/930e5f24bc01b7eebc07b085689314eea5f8e1c5) Thanks [@jonrohan](https://github.com/jonrohan)! - Stylelint fixes based on feedback:
+
+  - `font-style` should allow keywords, `italic, normal`
+  - border should allow `none` https://stylelint.io/user-guide/rules/declaration-property-value-disallowed-list
+  - Update autofix in typography to always replace with the first suggestion
+
 ## 13.0.0
 
 ### Major Changes
