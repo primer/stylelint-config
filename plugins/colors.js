@@ -30,7 +30,17 @@ const validProps = {
   '^stroke$': ['fgColor', 'iconColor', 'bgColor', 'borderColor'],
 }
 
-const validValues = ['none', 'currentcolor', 'inherit', 'initial', 'unset', 'revert', 'revert-layer', 'transparent']
+const validValues = [
+  'none',
+  'currentcolor',
+  'inherit',
+  'initial',
+  'unset',
+  'revert',
+  'revert-layer',
+  'transparent',
+  '0',
+]
 const propType = prop => {
   if (/^color/.test(prop)) {
     return 'fg'
