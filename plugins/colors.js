@@ -1,6 +1,7 @@
 import stylelint from 'stylelint'
 import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.cjs'
-import {primitivesVariables} from './lib/utils.js'
+import {primitivesVariables, hasValidColor} from './lib/utils.js'
+import valueParser from 'postcss-value-parser'
 
 const {
   createPlugin,
@@ -44,13 +45,13 @@ const validValues = [
 const propType = prop => {
   if (/^color/.test(prop)) {
     return 'fg'
-  } else if (/^background(-color)?/.test(prop)) {
+  } else if (/^background(-color)?$/.test(prop)) {
     return 'bg'
-  } else if (/^border(-top|-right|-bottom|-left|-inline|-block)*(-color)?/.test(prop)) {
+  } else if (/^border(-top|-right|-bottom|-left|-inline|-block)*(-color)?$/.test(prop)) {
     return 'border'
-  } else if (/^fill/.test(prop)) {
+  } else if (/^fill$/.test(prop)) {
     return 'fg'
-  } else if (/^stroke/.test(prop)) {
+  } else if (/^stroke$/.test(prop)) {
     return 'fg'
   }
   return undefined
@@ -70,34 +71,59 @@ const ruleFunction = primary => {
     })
     if (!validOptions) return
 
+    const valueIsCorrectType = (value, types) => types.some(type => value.includes(type))
+
     root.walkDecls(declNode => {
       const {prop, value} = declNode
 
       if (!Object.keys(validProps).some(validProp => new RegExp(validProp).test(prop))) return
       if (validValues.includes(value)) return
 
-      const index = declarationValueIndex(declNode)
-      const endIndex = declarationValueIndex(declNode) + value.length
+      for (const re in validProps) {
+        const types = validProps[re]
+        if (new RegExp(re).test(prop)) {
+          valueParser(value).walk(valueNode => {
+            if (valueNode.type !== 'word' && valueNode.type !== 'function') return
 
-      if (variables.some(variable => new RegExp(variable['name']).test(value))) {
-        for (const re in validProps) {
-          const types = validProps[re]
-          if (new RegExp(re).test(prop)) {
-            if (types.some(type => value.includes(type))) {
+            if (hasValidColor(valueNode.value)) {
+              const rejectedValue =
+                valueNode.type === 'function'
+                  ? `${valueNode.value}(${valueParser.stringify(valueNode.nodes)})`
+                  : valueNode.value
+
+              report({
+                index: declarationValueIndex(declNode) + valueNode.sourceIndex,
+                endIndex: declarationValueIndex(declNode) + valueNode.sourceEndIndex,
+                message: messages.rejected(rejectedValue, propType(prop)),
+                node: declNode,
+                result,
+                ruleName,
+              })
               return
             }
-          }
+
+            if (
+              variables.some(variable => new RegExp(variable['name']).test(valueNode.value)) &&
+              valueIsCorrectType(valueNode.value, types)
+            ) {
+              return
+            }
+
+            if (!valueNode.value.includes('Color')) {
+              return
+            }
+
+            report({
+              index: declarationValueIndex(declNode) + valueNode.sourceIndex,
+              endIndex: declarationValueIndex(declNode) + valueNode.sourceEndIndex,
+              message: messages.rejected(`var(${valueNode.value})`, propType(prop)),
+              node: declNode,
+              result,
+              ruleName,
+            })
+          })
         }
       }
-
-      report({
-        index,
-        endIndex,
-        message: messages.rejected(value, propType(prop)),
-        node: declNode,
-        result,
-        ruleName,
-      })
     })
   }
 }

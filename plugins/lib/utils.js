@@ -44,6 +44,19 @@ export function primitivesVariables(type) {
   return variables
 }
 
+const HAS_VALID_HEX = /#(?:[\da-f]{3,4}|[\da-f]{6}|[\da-f]{8})(?:$|[^\da-f])/i
+const COLOR_FUNCTION_NAMES = ['rgb', 'rgba', 'hsl', 'hsla', 'hwb', 'lab', 'lch', 'oklab', 'oklch']
+
+/**
+ * Check if a value contains a valid 3, 4, 6 or 8 digit hex
+ *
+ * @param {string} value
+ * @returns {boolean}
+ */
+export function hasValidColor(value) {
+  return HAS_VALID_HEX.test(value) || COLOR_FUNCTION_NAMES.includes(value)
+}
+
 export function walkGroups(root, validate) {
   for (const node of root.nodes) {
     if (node.type === 'function') {
