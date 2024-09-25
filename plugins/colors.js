@@ -85,7 +85,7 @@ const ruleFunction = primary => {
           valueParser(value).walk(valueNode => {
             if (valueNode.type !== 'word' && valueNode.type !== 'function') return
 
-            if (hasValidColor(valueNode.value)) {
+            if (hasValidColor(valueNode.value) || /^\$/.test(valueNode.value)) {
               const rejectedValue =
                 valueNode.type === 'function'
                   ? `${valueNode.value}(${valueParser.stringify(valueNode.nodes)})`

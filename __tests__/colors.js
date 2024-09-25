@@ -123,6 +123,15 @@ testRule({
       description: 'CSS > Errors when using a hex color variable for a fg prop',
     },
     {
+      code: '.x { color: $static-color-white; }',
+      unfixable: true,
+      message: messages.rejected('$static-color-white', 'fg'),
+      line: 1,
+      column: 13,
+      endColumn: 32,
+      description: 'CSS > Errors when using a sass variable',
+    },
+    {
       code: '.x { color: var(--bgColor-default); }',
       unfixable: true,
       message: messages.rejected('var(--bgColor-default)', 'fg'),
