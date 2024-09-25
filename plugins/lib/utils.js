@@ -21,6 +21,9 @@ export function primitivesVariables(type) {
       files.push('functional/themes/light.json')
       files.push('functional/size/border.json')
       break
+    case 'colors':
+      files.push('functional/themes/light.json')
+      break
   }
 
   for (const file of files) {
