@@ -135,10 +135,10 @@ testRule({
     {
       code: '.x { border: var(--borderWidth-thin) solid var(--fgColor-default); }',
       unfixable: true,
-      message: messages.rejected('var(--fgColor-default)', 'border'),
+      message: messages.rejected('var(--borderWidth-thin) solid var(--fgColor-default)', 'border'),
       line: 1,
-      column: 24,
-      endColumn: 46,
+      column: 14,
+      endColumn: 66,
       description: 'CSS > Errors when using a fg color variable for a border prop',
     },
   ],

@@ -11,13 +11,13 @@ export const ruleName = 'primer/colors'
 export const messages = ruleMessages(ruleName, {
   rejected: (value, type) => {
     if (type === 'fg') {
-      return `Please replace '${value}' with a Primer foreground color variable. https://primer.style/foundations/primitives/color#foreground`
+      return `Please use a Primer foreground color variable instead of '${value}'. https://primer.style/foundations/primitives/color#foreground`
     } else if (type === 'bg') {
-      return `Please replace '${value}' with a Primer background color variable. https://primer.style/foundations/primitives/color#background`
+      return `Please use a Primer background color variable instead of '${value}'. https://primer.style/foundations/primitives/color#background`
     } else if (type === 'border') {
-      return `Please replace '${value}' with a Primer border color variable. https://primer.style/foundations/primitives/color#border`
+      return `Please use a Primer border color variable instead of '${value}'. https://primer.style/foundations/primitives/color#border`
     }
-    return `Please replace '${value}' with a Primer color variable. https://primer.style/foundations/primitives/color`
+    return `Please use with a Primer color variable instead of '${value}'. https://primer.style/foundations/primitives/color`
   },
 })
 
