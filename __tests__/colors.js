@@ -123,15 +123,6 @@ testRule({
       description: 'CSS > Errors when using a hex color variable for a fg prop',
     },
     {
-      code: '.x { color: $static-color-white; }',
-      unfixable: true,
-      message: messages.rejected('$static-color-white', 'fg'),
-      line: 1,
-      column: 13,
-      endColumn: 32,
-      description: 'CSS > Errors when using a sass variable',
-    },
-    {
       code: '.x { color: var(--bgColor-default); }',
       unfixable: true,
       message: messages.rejected('var(--bgColor-default)', 'fg'),
@@ -193,6 +184,38 @@ testRule({
       column: 91,
       endColumn: 95,
       description: 'CSS > Errors when using a hex color variable for a background prop',
+    },
+  ],
+})
+
+// SCSS Specific Tests
+testRule({
+  plugins,
+  ruleName,
+  customSyntax: 'postcss-scss',
+  codeFilename: 'example.scss',
+  config: [true, {}],
+  fix: true,
+  cache: false,
+  accept: [],
+  reject: [
+    {
+      code: '.x { color: $static-color-white; }',
+      unfixable: true,
+      message: messages.rejected('$static-color-white', 'fg'),
+      line: 1,
+      column: 13,
+      endColumn: 32,
+      description: 'SCSS > Errors when using a sass variable',
+    },
+    {
+      code: '.x { background-color: darken($static-color-blue-000, 4%); }',
+      unfixable: true,
+      message: messages.rejected('$static-color-blue-000', 'bg'),
+      line: 1,
+      column: 31,
+      endColumn: 53,
+      description: 'SCSS > Errors when using a sass variable',
     },
   ],
 })
