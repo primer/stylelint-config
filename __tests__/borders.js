@@ -152,6 +152,15 @@ testRule({
       endColumn: 24,
       description: 'CSS > Does not autofix 1px to borderWidth-thin variable.',
     },
+    {
+      code: '.x { border: 1px solid var(--borderColor-default); }',
+      fixed: '.x { border: var(--borderWidth-thin) solid var(--borderColor-default); }',
+      message: messages.rejected('1px', {name: '--borderWidth-thin'}),
+      line: 1,
+      column: 14,
+      endColumn: 17,
+      description: 'CSS > Places error border on 1px for shorthand border.',
+    },
   ],
 })
 
