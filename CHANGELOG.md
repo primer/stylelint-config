@@ -1,5 +1,15 @@
 # Changelog
 
+## 13.1.0
+
+### Minor Changes
+
+- [#491](https://github.com/primer/stylelint-config/pull/491) [`a615645`](https://github.com/primer/stylelint-config/commit/a615645054778a596e918909ddb0931d018585be) Thanks [@jonrohan](https://github.com/jonrohan)! - Refactor the primer/colors variable to use primitives values match up props
+
+### Patch Changes
+
+- [#482](https://github.com/primer/stylelint-config/pull/482) [`b4c3fb0`](https://github.com/primer/stylelint-config/commit/b4c3fb010bf8cb84be54cdcaa73964249ab23053) Thanks [@dependabot](https://github.com/apps/dependabot)! - Bump stylelint-scss from 6.6.0 to 6.7.0 in the production-dependencies group
+
 ## 13.0.1
 
 ### Patch Changes
