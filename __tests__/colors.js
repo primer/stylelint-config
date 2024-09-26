@@ -19,6 +19,10 @@ testRule({
       description: 'CSS > Accepts foreground color variables',
     },
     {
+      code: '.x { color: var(--fgColor-default, var(--color-fg-default)); }',
+      description: 'CSS > Ignores fallback old colors',
+    },
+    {
       code: '.x { background-color: var(--bgColor-default); }',
       description: 'CSS > Accepts background color variables',
     },

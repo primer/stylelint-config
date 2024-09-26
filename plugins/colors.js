@@ -120,6 +120,11 @@ const ruleFunction = primary => {
               return
             }
 
+            // Ignore old system colors --color-*
+            if (valueNode.value.startsWith('--color-')) {
+              return
+            }
+
             // Property is shortand and value doesn't include color
             if (
               (/^border(-top|-right|-bottom|-left|-inline|-block)*$/.test(prop) || /^background$/.test(prop)) &&
