@@ -77,13 +77,13 @@ const ruleFunction = primary => {
       const {prop, value} = declNode
 
       if (!Object.keys(validProps).some(validProp => new RegExp(validProp).test(prop))) return
-      if (validValues.includes(value)) return
 
       for (const re in validProps) {
         const types = validProps[re]
         if (new RegExp(re).test(prop)) {
           valueParser(value).walk(valueNode => {
             if (valueNode.type !== 'word' && valueNode.type !== 'function') return
+            if (validValues.includes(valueNode.value)) return
 
             if (hasValidColor(valueNode.value) || /^\$/.test(valueNode.value)) {
               const rejectedValue =
@@ -102,6 +102,12 @@ const ruleFunction = primary => {
               return
             }
 
+            // Skip functions
+            if (valueNode.type === 'function') {
+              return
+            }
+
+            // Variable exists and is the correct type (fg, bg, border)
             if (
               variables.some(variable => new RegExp(variable['name']).test(valueNode.value)) &&
               valueIsCorrectType(valueNode.value, types)
@@ -109,7 +115,16 @@ const ruleFunction = primary => {
               return
             }
 
-            if (!valueNode.value.includes('Color')) {
+            // Value doesn't start with variable --
+            if (!valueNode.value.startsWith('--')) {
+              return
+            }
+
+            // Property is shortand and value doesn't include color
+            if (
+              (/^border(-top|-right|-bottom|-left|-inline|-block)*$/.test(prop) || /^background$/.test(prop)) &&
+              !valueNode.value.toLowerCase().includes('color')
+            ) {
               return
             }
 

@@ -185,6 +185,15 @@ testRule({
       endColumn: 95,
       description: 'CSS > Errors when using a hex color variable for a background prop',
     },
+    {
+      code: '.x { color: var(--base-color-scale-purple-5); }',
+      unfixable: true,
+      message: messages.rejected('var(--base-color-scale-purple-5)', 'fg'),
+      line: 1,
+      column: 17,
+      endColumn: 44,
+      description: 'CSS > Errors when using a variable not in primitives',
+    },
   ],
 })
 
