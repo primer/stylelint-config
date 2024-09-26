@@ -121,7 +121,11 @@ const ruleFunction = primary => {
             }
 
             // Ignore old system colors --color-*
-            if (valueNode.value.startsWith('--color-')) {
+            if (
+              [/--color-(.+-)*text(-.+)*/, /--color-(.+-)*fg(-.+)*/, /--color-[^)]+/].some(oldSysRe =>
+                oldSysRe.test(valueNode.value),
+              )
+            ) {
               return
             }
 
