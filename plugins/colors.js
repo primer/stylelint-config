@@ -42,6 +42,7 @@ const validValues = [
   'transparent',
   '0',
 ]
+
 const propType = prop => {
   if (/^color/.test(prop)) {
     return 'fg'
@@ -56,6 +57,7 @@ const propType = prop => {
   }
   return undefined
 }
+
 variables = variables.filter(variable => {
   const name = variable['name']
   // remove shadow and boxShadow variables
@@ -76,78 +78,83 @@ const ruleFunction = primary => {
     root.walkDecls(declNode => {
       const {prop, value} = declNode
 
+      // Skip if prop is not a valid color prop
       if (!Object.keys(validProps).some(validProp => new RegExp(validProp).test(prop))) return
 
-      for (const re in validProps) {
-        const types = validProps[re]
-        if (new RegExp(re).test(prop)) {
-          valueParser(value).walk(valueNode => {
-            if (valueNode.type !== 'word' && valueNode.type !== 'function') return
-            if (validValues.includes(valueNode.value)) return
+      // Get the valid types for the prop
+      const types = validProps[Object.keys(validProps).find(re => new RegExp(re).test(prop))]
 
-            if (hasValidColor(valueNode.value) || /^\$/.test(valueNode.value)) {
-              const rejectedValue =
-                valueNode.type === 'function'
-                  ? `${valueNode.value}(${valueParser.stringify(valueNode.nodes)})`
-                  : valueNode.value
+      // Walk the value split
+      valueParser(value).walk(valueNode => {
+        // Skip if value is not a word or function
+        if (valueNode.type !== 'word' && valueNode.type !== 'function') return
 
-              report({
-                index: declarationValueIndex(declNode) + valueNode.sourceIndex,
-                endIndex: declarationValueIndex(declNode) + valueNode.sourceEndIndex,
-                message: messages.rejected(rejectedValue, propType(prop)),
-                node: declNode,
-                result,
-                ruleName,
-              })
-              return
-            }
+        // Skip if value is a valid value
+        if (validValues.includes(valueNode.value)) return
 
-            // Skip functions
-            if (valueNode.type === 'function') {
-              return
-            }
+        if (hasValidColor(valueNode.value) || /^\$/.test(valueNode.value)) {
+          const rejectedValue =
+            valueNode.type === 'function'
+              ? `${valueNode.value}(${valueParser.stringify(valueNode.nodes)})`
+              : valueNode.value
 
-            // Variable exists and is the correct type (fg, bg, border)
-            if (
-              variables.some(variable => new RegExp(variable['name']).test(valueNode.value)) &&
-              valueIsCorrectType(valueNode.value, types)
-            ) {
-              return
-            }
-
-            // Value doesn't start with variable --
-            if (!valueNode.value.startsWith('--')) {
-              return
-            }
-
-            // Ignore old system colors --color-*
-            if (
-              [/--color-(.+-)*text(-.+)*/, /--color-(.+-)*fg(-.+)*/, /--color-[^)]+/].some(oldSysRe =>
-                oldSysRe.test(valueNode.value),
-              )
-            ) {
-              return
-            }
-
-            // Property is shortand and value doesn't include color
-            if (
-              (/^border(-top|-right|-bottom|-left|-inline|-block)*$/.test(prop) || /^background$/.test(prop)) &&
-              !valueNode.value.toLowerCase().includes('color')
-            ) {
-              return
-            }
-
-            report({
-              index: declarationValueIndex(declNode) + valueNode.sourceIndex,
-              endIndex: declarationValueIndex(declNode) + valueNode.sourceEndIndex,
-              message: messages.rejected(`var(${valueNode.value})`, propType(prop)),
-              node: declNode,
-              result,
-              ruleName,
-            })
+          report({
+            index: declarationValueIndex(declNode) + valueNode.sourceIndex,
+            endIndex: declarationValueIndex(declNode) + valueNode.sourceEndIndex,
+            message: messages.rejected(rejectedValue, propType(prop)),
+            node: declNode,
+            result,
+            ruleName,
           })
+          return
         }
-      }
+
+        // Skip functions
+        if (valueNode.type === 'function') {
+          return
+        }
+
+        // Variable exists and is the correct type (fg, bg, border)
+        if (
+          variables.some(variable => new RegExp(variable['name']).test(valueNode.value)) &&
+          valueIsCorrectType(valueNode.value, types)
+        ) {
+          return
+        }
+
+        // Value doesn't start with variable --
+        if (!valueNode.value.startsWith('--')) {
+          return
+        }
+
+        // Ignore old system colors --color-*
+        if (
+          [
+            /^--color-(?:[a-zA-Z0-9-]+-)*text(?:-[a-zA-Z0-9-]+)*$/,
+            /^--color-(?:[a-zA-Z0-9-]+-)*fg(?:-[a-zA-Z0-9-]+)*$/,
+            /^--color-[^)]+$/,
+          ].some(oldSysRe => oldSysRe.test(valueNode.value))
+        ) {
+          return
+        }
+
+        // Property is shortand and value doesn't include color
+        if (
+          (/^border(-top|-right|-bottom|-left|-inline|-block)*$/.test(prop) || /^background$/.test(prop)) &&
+          !valueNode.value.toLowerCase().includes('color')
+        ) {
+          return
+        }
+
+        report({
+          index: declarationValueIndex(declNode) + valueNode.sourceIndex,
+          endIndex: declarationValueIndex(declNode) + valueNode.sourceEndIndex,
+          message: messages.rejected(`var(${valueNode.value})`, propType(prop)),
+          node: declNode,
+          result,
+          ruleName,
+        })
+      })
     })
   }
 }
