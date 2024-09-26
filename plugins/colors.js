@@ -131,7 +131,7 @@ const ruleFunction = primary => {
         if (
           [
             /^--color-(?:[a-zA-Z0-9-]+-)*text(?:-[a-zA-Z0-9-]+)*$/,
-            /^--color-(?:[a-zA-Z0-9-]+-)*fg(?:-[a-zA-Z0-9-]+)*$/,
+            /^--color-(?:[a-zA-Z0-9-](?!-))*-fg(?:-[a-zA-Z0-9-]+)*$/,
             /^--color-[^)]+$/,
           ].some(oldSysRe => oldSysRe.test(valueNode.value))
         ) {
