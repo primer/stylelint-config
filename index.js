@@ -20,7 +20,7 @@ export default {
   reportNeedlessDisables: true,
   plugins: [
     'stylelint-value-no-unknown-custom-properties',
-    'stylelint-no-unsupported-browser-features',
+    'stylelint-browser-compat',
     'stylelint-order',
     borders,
     boxShadow,
@@ -79,13 +79,16 @@ export default {
     'no-invalid-position-at-import-rule': [true, {ignoreAtRules: ['use']}],
     'number-max-precision': null,
     'order/properties-order': propertyOrder,
-    'plugin/no-unsupported-browser-features': [
+    'plugin/browser-compat': [
       true,
       {
         severity: 'warning',
-        ignore: ['css-nesting'],
-        ignorePartialSupport: true,
-        browsers,
+        allow: {
+          flagged: false,
+          partialImplementation: true,
+          prefix: true,
+        },
+        browserslist: browsers,
       },
     ],
     'primer/borders': true,
