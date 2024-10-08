@@ -1,5 +1,11 @@
 # Changelog
 
+## 13.1.1
+
+### Patch Changes
+
+- [#500](https://github.com/primer/stylelint-config/pull/500) [`e0d5847`](https://github.com/primer/stylelint-config/commit/e0d5847e84a364140815a80fa22c59852c966d79) Thanks [@jonrohan](https://github.com/jonrohan)! - Removing no-unsupported-browser-features and replacing with browser-compat
+
 ## 13.1.0
 
 ### Minor Changes
