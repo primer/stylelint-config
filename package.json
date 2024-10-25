@@ -44,7 +44,6 @@
   },
   "dependencies": {
     "@github/browserslist-config": "^1.0.0",
-    "@primer/primitives": "^9.0.1",
     "postcss-scss": "^4.0.2",
     "postcss-styled-syntax": "^0.6.4",
     "postcss-value-parser": "^4.0.2",
@@ -76,6 +75,9 @@
     "prettier": "^3.2.5",
     "rimraf": "^6.0.1",
     "rollup": "^4.21.1"
+  },
+  "peerDependencies": {
+    "@primer/primitives": "9.x || 10.x"
   },
   "jest": {
     "transform": {},
