@@ -81,7 +81,7 @@ export default {
       {
         severity: 'warning',
         allow: {
-          features: ["properties.scrollbar-width"],
+          features: ['properties.scrollbar-width', 'properties.scrollbar-gutter', 'properties.scrollbar-color'],
           flagged: false,
           partialImplementation: true,
           prefix: true,
