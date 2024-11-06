@@ -1,5 +1,4 @@
 import browsers from '@github/browserslist-config'
-import propertyOrder from './property-order.js'
 
 import borders from './plugins/borders.js'
 import boxShadow from './plugins/box-shadow.js'
@@ -21,7 +20,6 @@ export default {
   plugins: [
     'stylelint-value-no-unknown-custom-properties',
     'stylelint-browser-compat',
-    'stylelint-order',
     borders,
     boxShadow,
     colors,
@@ -78,7 +76,6 @@ export default {
     'no-duplicate-selectors': true,
     'no-invalid-position-at-import-rule': [true, {ignoreAtRules: ['use']}],
     'number-max-precision': null,
-    'order/properties-order': propertyOrder,
     'plugin/browser-compat': [
       true,
       {
@@ -141,7 +138,6 @@ export default {
       files: ['**/*.tsx'],
       customSyntax: 'postcss-styled-syntax',
       rules: {
-        'order/properties-order': null,
         'rule-empty-line-before': null,
         'declaration-empty-line-before': null,
         'comment-empty-line-before': null,
