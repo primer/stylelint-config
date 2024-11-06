@@ -117,6 +117,7 @@ export default {
     'keyframe-selector-notation': ['percentage-unless-within-keyword-only-block'],
     'media-query-no-invalid': null,
     'media-feature-range-notation': ['prefix'],
+    'comment-empty-line-before': null,
   },
   overrides: [
     {
@@ -140,7 +141,6 @@ export default {
       rules: {
         'rule-empty-line-before': null,
         'declaration-empty-line-before': null,
-        'comment-empty-line-before': null,
         'length-zero-no-unit': null,
         'selector-max-type': null,
         'primer/colors': null,
