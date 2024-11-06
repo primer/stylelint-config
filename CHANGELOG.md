@@ -1,5 +1,15 @@
 # Changelog
 
+## 13.2.0
+
+### Minor Changes
+
+- [#510](https://github.com/primer/stylelint-config/pull/510) [`79f2330`](https://github.com/primer/stylelint-config/commit/79f233081b8a4af3065199395ee3297b73bcaf8b) Thanks [@langermank](https://github.com/langermank)! - Update `primer/primitives` dependency
+
+### Patch Changes
+
+- [#520](https://github.com/primer/stylelint-config/pull/520) [`ad6fafd`](https://github.com/primer/stylelint-config/commit/ad6fafd7072dd05ab47ce9aab949ec0653ffe9fa) Thanks [@iansan5653](https://github.com/iansan5653)! - Remove comment-empty-line-before and order/properties-order rules
+
 ## 13.1.1
 
 ### Patch Changes
