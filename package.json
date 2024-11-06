@@ -44,7 +44,7 @@
   "dependencies": {
     "@github/browserslist-config": "^1.0.0",
     "postcss-scss": "^4.0.2",
-    "postcss-styled-syntax": "^0.6.4",
+    "postcss-styled-syntax": "^0.7.0",
     "postcss-value-parser": "^4.0.2",
     "string.prototype.matchall": "^4.0.2",
     "stylelint": "^16.3.1",
