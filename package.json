@@ -26,7 +26,6 @@
   ],
   "files": [
     "dist/",
-    "property-order.js",
     "plugins/"
   ],
   "engines": {
@@ -51,7 +50,6 @@
     "stylelint": "^16.3.1",
     "stylelint-browser-compat": "^1.0.0-beta.136",
     "stylelint-config-standard": "^36.0.0",
-    "stylelint-order": "^6.0.4",
     "stylelint-scss": "^6.2.0",
     "stylelint-value-no-unknown-custom-properties": "^6.0.1"
   },
