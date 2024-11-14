@@ -1,5 +1,11 @@
 # Changelog
 
+## 13.2.1
+
+### Patch Changes
+
+- [#526](https://github.com/primer/stylelint-config/pull/526) [`8672c88`](https://github.com/primer/stylelint-config/commit/8672c884c830caa93cbd59cf3d96baf30347b3a0) Thanks [@dependabot](https://github.com/apps/dependabot)! - Bump the production-dependencies group across 1 directory with 2 updates
+
 ## 13.2.0
 
 ### Minor Changes
