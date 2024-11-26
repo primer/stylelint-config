@@ -1,5 +1,11 @@
 # Changelog
 
+## 13.2.2
+
+### Patch Changes
+
+- [#539](https://github.com/primer/stylelint-config/pull/539) [`2067c41`](https://github.com/primer/stylelint-config/commit/2067c4166d799ea2dbc6e90c5a6cef27ac67817a) Thanks [@jonrohan](https://github.com/jonrohan)! - Making fixes for primitives v10 rc
+
 ## 13.2.1
 
 ### Patch Changes
