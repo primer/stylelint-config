@@ -31,11 +31,12 @@ export function primitivesVariables(type) {
     const data = require(`@primer/primitives/dist/styleLint/${file}`)
 
     for (const key of Object.keys(data)) {
-      const size = data[key]
-      const values = typeof size['value'] === 'string' ? [size['value']] : size['value']
+      const token = data[key]
+      const valueProp = '$value' in token ? '$value' : 'value'
+      const values = typeof token[valueProp] === 'string' ? [token[valueProp]] : token[valueProp]
 
       variables.push({
-        name: `--${size['name']}`,
+        name: `--${token['name']}`,
         values,
       })
     }
