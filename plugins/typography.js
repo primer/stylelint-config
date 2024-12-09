@@ -1,5 +1,5 @@
 import stylelint from 'stylelint'
-import {declarationValueIndex} from 'stylelint/lib/utils/nodeFieldIndices.mjs'
+import {declarationValueIndex} from 'stylelint/lib/utils/nodeFieldIndices.cjs'
 import {primitivesVariables} from './lib/utils.js'
 
 const {
