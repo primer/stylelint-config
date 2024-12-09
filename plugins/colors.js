@@ -1,5 +1,5 @@
 import stylelint from 'stylelint'
-import declarationValueIndex from 'stylelint/lib/utils/declarationValueIndex.cjs'
+import {declarationValueIndex} from 'stylelint/lib/utils/nodeFieldIndices.cjs'
 import {primitivesVariables, hasValidColor} from './lib/utils.js'
 import valueParser from 'postcss-value-parser'
 
