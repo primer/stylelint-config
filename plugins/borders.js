@@ -28,6 +28,10 @@ export const messages = ruleMessages(ruleName, {
 })
 
 const variables = primitivesVariables('border')
+const shorthandVariables = primitivesVariables('border-shorthand').filter(variable => variable.name.includes('border-'))
+const borderVariables = variables.concat(shorthandVariables)
+// console.log(borderVariables)
+
 const sizes = []
 const radii = []
 
