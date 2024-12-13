@@ -13,6 +13,9 @@ export function primitivesVariables(type) {
     case 'border':
       files.push('functional/size/border.json')
       break
+    case 'border-shorthand':
+      files.push('functional/themes/light.json')
+      break
     case 'typography':
       files.push('base/typography/typography.json')
       files.push('functional/typography/typography.json')
