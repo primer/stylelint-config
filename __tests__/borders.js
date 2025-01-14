@@ -40,6 +40,10 @@ testRule({
       code: '.x { border: inherit; border: initial; border: revert; border: revert-layer; border: unset; }',
       description: 'CSS > Allows global values',
     },
+    {
+      code: '.x { border: var(--border-default) }',
+      description: 'Accepts border shorthand',
+    },
     // Border radii
     {
       code: '.x { border-radius: var(--borderRadius-medium); }',
