@@ -48,7 +48,6 @@ export default {
           '@primer/primitives/dist/css/functional/size/size-fine.css',
           '@primer/primitives/dist/css/functional/size/breakpoints.css',
           '@primer/primitives/dist/css/functional/size/viewport.css',
-          '@primer/primitives/dist/css/functional/motion/motion.css',
           '@primer/primitives/dist/css/functional/themes/light.css',
           '@primer/primitives/dist/css/functional/typography/typography.css',
           '@primer/primitives/dist/css/base/size/size.css',
