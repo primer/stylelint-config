@@ -34,13 +34,16 @@ testRule({
       description: 'CSS > Errors on value not in box-shadow list',
     },
     {
-      code: '.x { box-shadow: 0px 3px 6px 0px #25292e1f; }',
+      code: '.x { box-shadow: 0px 1px 1px 0px #25292e1a, 0px 3px 6px 0px #25292e1f; }',
       fixed: '.x { box-shadow: var(--shadow-resting-medium); }',
-      message: messages.rejected('0px 3px 6px 0px #25292e1f', {name: '--shadow-resting-medium'}),
+      message: messages.rejected('0px 1px 1px 0px #25292e1a, 0px 3px 6px 0px #25292e1f', {
+        name: '--shadow-resting-medium',
+      }),
       line: 1,
       column: 18,
-      endColumn: 43,
-      description: "CSS > Replaces '0px 3px 6px 0px #25292e1f' with 'var(--shadow-resting-medium)'.",
+      endColumn: 70,
+      description:
+        "CSS > Replaces '0px 1px 1px 0px #25292e1a, 0px 3px 6px 0px #25292e1f' with 'var(--shadow-resting-medium)'.",
     },
     {
       code: '.x { box-shadow: var(--borderWidth-thin); }',
