@@ -1,5 +1,16 @@
 # Changelog
 
+## 13.3.0
+
+### Minor Changes
+
+- [#610](https://github.com/primer/stylelint-config/pull/610) [`baf4786`](https://github.com/primer/stylelint-config/commit/baf4786ad26112003edddb4f8856b3d9428c8a89) Thanks [@langermank](https://github.com/langermank)! - - Remove unused motion token file
+  - Bump `primer/primitives` 10.4.0
+
+### Patch Changes
+
+- [#600](https://github.com/primer/stylelint-config/pull/600) [`c172b55`](https://github.com/primer/stylelint-config/commit/c172b55d518cd723ff700c4381a149150fc4e833) Thanks [@dependabot](https://github.com/apps/dependabot)! - Bump the production-dependencies group across 1 directory with 2 updates
+
 ## 13.2.3
 
 ### Patch Changes
