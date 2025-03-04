@@ -162,12 +162,12 @@ testRule({
     },
     {
       code: '.x { line-height: 1.5; }',
-      fixed: '.x { line-height: var(--text-title-lineHeight-large); }',
-      message: messages.rejected('1.5', {name: '--text-title-lineHeight-large'}),
+      fixed: '.x { line-height: var(--text-body-lineHeight-large); }',
+      message: messages.rejected('1.5', {name: '--text-body-lineHeight-large'}),
       line: 1,
       column: 19,
       endColumn: 22,
-      description: "CSS > Errors on '1.5' line-height and suggests '--text-title-lineHeight-large'.",
+      description: "CSS > Errors on '1.5' line-height and suggests '--text-body-lineHeight-large'.",
     },
     // Font family
     {
