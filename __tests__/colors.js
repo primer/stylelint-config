@@ -205,7 +205,7 @@ testRule({
       line: 1,
       column: 22,
       endColumn: 44,
-      description: 'CSS > Errors when using a dispaly scale variable outside of charts & other specific use cases',
+      description: 'CSS > Errors when using a dispaly scale variable',
     },
     {
       code: '.x { background-color: var(--display-blue-scale-1); }',
@@ -214,7 +214,7 @@ testRule({
       line: 1,
       column: 28,
       endColumn: 50,
-      description: 'CSS > Errors when using a dispaly scale variable outside of charts & other specific use cases',
+      description: 'CSS > Errors when using a dispaly scale variable',
     },
     {
       code: '.x { background-image: linear-gradient(var(--display-blue-scale-1), var(--bgColor-default)); }',
@@ -223,7 +223,7 @@ testRule({
       line: 1,
       column: 44,
       endColumn: 66,
-      description: 'CSS > Errors when using a dispaly scale variable outside of charts & other specific use cases',
+      description: 'CSS > Errors when using a dispaly scale variable',
     },
     {
       code: '.x { color: var(--display-blue-scale-1); }',
@@ -232,7 +232,7 @@ testRule({
       line: 1,
       column: 17,
       endColumn: 39,
-      description: 'CSS > Errors when using a dispaly scale variable outside of charts & other specific use cases',
+      description: 'CSS > Errors when using a dispaly scale variable',
     },
     {
       code: '.x { color: var(--display-blue-scale-1); }',
@@ -241,7 +241,7 @@ testRule({
       line: 1,
       column: 17,
       endColumn: 39,
-      description: 'CWHATTTTT?',
+      description: 'CSS > Errors when using a dispaly scale variable',
     },
     {
       code: '.x { border-color: var(--display-blue-scale-9); }',
@@ -250,7 +250,7 @@ testRule({
       line: 1,
       column: 24,
       endColumn: 46,
-      description: 'CSS > Errors when using a dispaly scale variable outside of charts & other specific use cases',
+      description: 'CSS > Errors when using a dispaly scale variable',
     },
   ],
 })
