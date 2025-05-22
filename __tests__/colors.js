@@ -205,7 +205,7 @@ testRule({
       line: 1,
       column: 22,
       endColumn: 44,
-      description: 'CSS > Errors when using a dispaly scale variable',
+      description: 'CSS > Errors when using a display scale variable',
     },
     {
       code: '.x { background-color: var(--display-blue-scale-1); }',
