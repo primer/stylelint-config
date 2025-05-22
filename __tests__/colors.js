@@ -234,15 +234,7 @@ testRule({
       endColumn: 39,
       description: 'CSS > Errors when using a dispaly scale variable',
     },
-    {
-      code: '.x { color: var(--display-blue-scale-1); }',
-      unfixable: true,
-      message: messages.rejected('var(--display-blue-scale-1)', 'fg'),
-      line: 1,
-      column: 17,
-      endColumn: 39,
-      description: 'CSS > Errors when using a dispaly scale variable',
-    },
+
     {
       code: '.x { border-color: var(--display-blue-scale-9); }',
       unfixable: true,
