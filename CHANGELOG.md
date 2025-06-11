@@ -1,5 +1,11 @@
 # Changelog
 
+## 13.3.1
+
+### Patch Changes
+
+- [#621](https://github.com/primer/stylelint-config/pull/621) [`125cf8c`](https://github.com/primer/stylelint-config/commit/125cf8ce9c7a7418d643bb3db37f1bd88b036900) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - The declarationValueIndex function moved from lib/utils/declarationValueIndex to lib/utils/nodeFieldIndices
+
 ## 13.3.0
 
 ### Minor Changes
