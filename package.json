@@ -76,7 +76,7 @@
     "rollup": "^4.21.1"
   },
   "peerDependencies": {
-    "@primer/primitives": "9.x || 10.x"
+    "@primer/primitives": "10.x || 11.x"
   },
   "jest": {
     "transform": {},
