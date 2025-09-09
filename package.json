@@ -1,6 +1,6 @@
 {
   "name": "@primer/stylelint-config",
-  "version": "13.3.0",
+  "version": "13.3.2",
   "description": "Sharable stylelint config used by GitHub's CSS",
   "author": "GitHub, Inc.",
   "license": "MIT",
@@ -47,7 +47,7 @@
     "postcss-styled-syntax": "^0.7.0",
     "postcss-value-parser": "^4.0.2",
     "string.prototype.matchall": "^4.0.2",
-    "stylelint": "^16.11.0",
+    "stylelint": "^16.20.0",
     "stylelint-browser-compat": "^1.0.0-beta.140",
     "stylelint-config-standard": "^38.0.0",
     "stylelint-scss": "^6.2.0",
@@ -76,7 +76,7 @@
     "rollup": "^4.21.1"
   },
   "peerDependencies": {
-    "@primer/primitives": "9.x || 10.x"
+    "@primer/primitives": "10.x || 11.x"
   },
   "jest": {
     "transform": {},

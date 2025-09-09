@@ -60,6 +60,7 @@ export default stylelint.createPlugin(ruleName, (enabled, options = {}, context)
             if (parseInt(valueUnit.number) > 320) {
               problems.push({
                 index: declarationValueIndex(decl) + node.sourceIndex,
+                endIndex: declarationValueIndex(decl) + node.sourceIndex + node.value.length,
                 message: messages.rejected(node.value),
               })
             }
@@ -68,6 +69,7 @@ export default stylelint.createPlugin(ruleName, (enabled, options = {}, context)
             if (parseInt(valueUnit.number) > 100) {
               problems.push({
                 index: declarationValueIndex(decl) + node.sourceIndex,
+                endIndex: declarationValueIndex(decl) + node.sourceIndex + node.value.length,
                 message: messages.rejected(node.value),
               })
             }
@@ -79,6 +81,7 @@ export default stylelint.createPlugin(ruleName, (enabled, options = {}, context)
         for (const err of problems) {
           stylelint.utils.report({
             index: err.index,
+            endIndex: err.endIndex,
             message: err.message,
             node: decl,
             result,

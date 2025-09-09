@@ -1,5 +1,17 @@
 # Changelog
 
+## 13.3.2
+
+### Patch Changes
+
+- [#634](https://github.com/primer/stylelint-config/pull/634) [`f5c6775`](https://github.com/primer/stylelint-config/commit/f5c6775b10d2ac2894608d7ae3e3549096915083) Thanks [@lukasoppermann](https://github.com/lukasoppermann)! - Update primitives dep
+
+## 13.3.1
+
+### Patch Changes
+
+- [#621](https://github.com/primer/stylelint-config/pull/621) [`125cf8c`](https://github.com/primer/stylelint-config/commit/125cf8ce9c7a7418d643bb3db37f1bd88b036900) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - The declarationValueIndex function moved from lib/utils/declarationValueIndex to lib/utils/nodeFieldIndices
+
 ## 13.3.0
 
 ### Minor Changes
