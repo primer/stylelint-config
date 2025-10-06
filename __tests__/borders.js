@@ -21,6 +21,14 @@ testRule({
       description: 'CSS > Accepts border shorthand with variables',
     },
     {
+      code: '.x { border: var(--border-default); }',
+      description: 'CSS > Accepts border default variable shorthand',
+    },
+    {
+      code: '.x { border-left: var(--border-default); }',
+      description: 'CSS > Accepts border default variable directional longhand',
+    },
+    {
       code: '.x { border-width: var(--borderWidth-thin); }',
       description: 'CSS > Accepts border shorthand with variables',
     },

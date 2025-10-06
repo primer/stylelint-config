@@ -30,6 +30,7 @@ export const messages = ruleMessages(ruleName, {
 const variables = primitivesVariables('border')
 const sizes = []
 const radii = []
+const compositeBorders = []
 
 // Props that we want to check
 const propList = ['border', 'border-width', 'border-radius']
@@ -55,6 +56,15 @@ for (const variable of variables) {
 
   if (name.includes('borderRadius')) {
     radii.push(variable)
+  }
+
+  // Composite border tokens (explicit allowlist approach)
+  const compositeBorderTokenNames = [
+    '--border-default',
+    // Add other known composite border tokens here as needed
+  ]
+  if (compositeBorderTokenNames.includes(name)) {
+    compositeBorders.push(variable)
   }
 }
 
@@ -138,6 +148,10 @@ const ruleFunction = primary => {
         // If the variable is found in the value, skip it.
         if (prop.includes('width') || borderShorthand(prop)) {
           if (checkForVariable(sizes, node.value)) {
+            return
+          }
+          // Check for composite border variables on border shorthand
+          if (borderShorthand(prop) && checkForVariable(compositeBorders, node.value)) {
             return
           }
         }
