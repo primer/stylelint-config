@@ -1,5 +1,11 @@
 # Changelog
 
+## 13.4.0
+
+### Minor Changes
+
+- [#640](https://github.com/primer/stylelint-config/pull/640) [`b352a6d`](https://github.com/primer/stylelint-config/commit/b352a6d26f02c34888f176df4fa9e5a7ed18caa3) Thanks [@jonrohan](https://github.com/jonrohan)! - Add support for composite border variables and update variable sources
+
 ## 13.3.2
 
 ### Patch Changes
