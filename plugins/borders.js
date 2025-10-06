@@ -58,13 +58,12 @@ for (const variable of variables) {
     radii.push(variable)
   }
 
-  // Composite border tokens (e.g., border-default, border-muted)
-  if (
-    name.startsWith('--border-') &&
-    !name.includes('borderWidth') &&
-    !name.includes('borderRadius') &&
-    !name.includes('borderColor')
-  ) {
+  // Composite border tokens (explicit allowlist approach)
+  const compositeBorderTokenNames = [
+    '--border-default',
+    // Add other known composite border tokens here as needed
+  ]
+  if (compositeBorderTokenNames.includes(name)) {
     compositeBorders.push(variable)
   }
 }
