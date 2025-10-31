@@ -1,12 +1,23 @@
 name: Release
+
 on:
   push:
-    branches:
-      - 'main'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+  checks: write
+  statuses: write
+
 jobs:
-  release:
-    name: Final
-    if: ${{ github.repository == 'primer/stylelint-config' }}
+  release-main:
+    name: Main
+    if: ${{ github.repository == 'primer/stylelint-config' && github.ref_name == 'main' }}
 
     runs-on: ubuntu-latest
     steps:
@@ -15,7 +26,6 @@ jobs:
         with:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
-          persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
@@ -30,6 +40,50 @@ jobs:
           title: Release Tracking
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
           publish: npm run release
+
+  release-canary:
+    name: Canary
+    if: ${{ github.repository == 'primer/stylelint-config' && github.ref_name != 'main' && github.ref_name != 'changeset-release/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node_version: 24
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Publish canary release
+        run: |
+          echo "$( jq '.version = "0.0.0"' package.json )" > package.json
+          echo -e "---\n$( jq .name package.json ): patch\n---\n\nFake entry to force publishing" > .changeset/force-snapshot-release.md
+          npx changeset version --snapshot
+          npx changeset publish --tag canary
         env:
-          GITHUB_TOKEN: ${{ secrets.GPR_AUTH_TOKEN_SHARED }}
-          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN_SHARED }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Output canary version
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const package = require(`${process.env.GITHUB_WORKSPACE}/package.json`)
+            github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: `Published ${package.name}`,
+              description: package.version,
+              target_url: `https://unpkg.com/${package.name}@${package.version}/`
+            })
+      - uses: primer/.github/.github/actions/upload-versions@main
