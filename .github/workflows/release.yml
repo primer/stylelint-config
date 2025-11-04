@@ -86,4 +86,13 @@ jobs:
               description: package.version,
               target_url: `https://unpkg.com/${package.name}@${package.version}/`
             })
-      - uses: primer/.github/.github/actions/upload-versions@main
+      - name: Upload versions json file
+        uses: primer/.github/.github/actions/upload-versions@main
+
+  release-candidate:
+    name: Candidate
+    if: ${{ github.repository == 'primer/stylelint-config' && github.ref_name == 'changeset-release/main' }}
+    uses: primer/.github/.github/workflows/release_candidate.yml@main
+    secrets:
+      gh_token: ${{ secrets.GITHUB_TOKEN }}
+      npm_token: ${{ secrets.NPM_AUTH_TOKEN_SHARED }}
