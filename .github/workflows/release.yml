@@ -10,7 +10,7 @@ concurrency:
 
 permissions:
   id-token: write # Required for OIDC
-  contents: read
+  contents: write
   checks: write
   statuses: write
 
