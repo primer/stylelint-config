@@ -1,5 +1,11 @@
 # Changelog
 
+## 13.4.1
+
+### Patch Changes
+
+- [#647](https://github.com/primer/stylelint-config/pull/647) [`14b173d`](https://github.com/primer/stylelint-config/commit/14b173d96a4ec93918ba9fb3328d27b695918f68) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - Update primer/primitives to version 11.3.0
+
 ## 13.4.0
 
 ### Minor Changes
