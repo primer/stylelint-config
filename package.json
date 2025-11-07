@@ -49,7 +49,7 @@
     "string.prototype.matchall": "^4.0.2",
     "stylelint": "^16.20.0",
     "stylelint-browser-compat": "^1.0.0-beta.140",
-    "stylelint-config-standard": "^38.0.0",
+    "stylelint-config-standard": "^39.0.1",
     "stylelint-scss": "^6.2.0",
     "stylelint-value-no-unknown-custom-properties": "^6.0.1"
   },
