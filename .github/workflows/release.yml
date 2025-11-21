@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
@@ -97,6 +97,6 @@ jobs:
   release-candidate:
     name: Candidate
     if: ${{ github.repository == 'primer/stylelint-config' && github.ref_name == 'changeset-release/main' }}
-    uses: primer/.github/.github/workflows/release_candidate.yml@v2.3.0
+    uses: primer/.github/.github/workflows/release_candidate.yml@v2.4.0
     secrets:
       gh_token: ${{ secrets.GITHUB_TOKEN }}
