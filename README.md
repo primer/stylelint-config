@@ -17,7 +17,7 @@ Within your [stylelint config object](http://stylelint.io/user-guide/configurati
 ```json
 {
   "extends": ["@primer/stylelint-config"],
-  "rules": { }
+  "rules": {}
 }
 ```
 
@@ -36,7 +36,7 @@ Primer Stylelint Config extends the [stylelint-config-standard](https://github.c
 - [primer/borders](./plugins/#primerborders): Enforces the use of certain variables for border properties.
 - [primer/box-shadow](./plugins/#primerbox-shadow): Enforces the use of certain variables for `box-shadow`.
 - [primer/responsive-widths](./plugins/#primerresponsive-widths): Errors on `width` and `min-width` that is larger than the minimum browser size supported. `320px`
-- [primer/namespace-spacing](./plugins/#primernamespace-spacing): Enforces the use of `pr-` namespace prefix for spacing utility classes like margin and padding.
+- [primer/namespace-spacing](./plugins/#primernamespace-spacing): Enforces the use of `pr-` namespace prefix for spacing utility classes like margin and padding. (Disabled by default)
 
 ## License
 

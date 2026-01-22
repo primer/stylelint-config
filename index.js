@@ -103,6 +103,7 @@ export default {
     'primer/typography': true,
     'primer/no-display-colors': true,
     'primer/namespace-spacing': true,
+    'primer/namespace-spacing': null,
     'property-no-unknown': [
       true,
       {
