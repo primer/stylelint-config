@@ -2,10 +2,10 @@ import stylelint from 'stylelint'
 
 const {
   createPlugin,
-  utils: {report, ruleMessages, validateOptions},
+  utils: { report, ruleMessages, validateOptions },
 } = stylelint
 
-export const ruleName = 'primer/selector-class-namespace'
+export const ruleName = 'primer/namespace-spacing'
 export const messages = ruleMessages(ruleName, {
   rejected: className => {
     return `Class "${className}" must be namespaced with "pr-" prefix. Use "pr-${className}" instead.`
@@ -36,16 +36,16 @@ const UTILITY_PATTERNS = [
 function isUnamespacedUtilityClass(className) {
   // Check if it matches any utility pattern first
   const matchesUtilityPattern = UTILITY_PATTERNS.some(pattern => pattern.test(className))
-  
+
   if (!matchesUtilityPattern) {
     return false
   }
-  
+
   // If it matches a utility pattern, check if it has the proper pr- namespace
   // We need to check for pr-m-, pr-p-, pr-mt-, etc. patterns, not just pr-
   // because pr-4 itself is a utility class (padding-right)
   const hasProperNamespace = /^pr-(m|p|mt|mr|mb|ml|mx|my|pt|pr|pb|pl|px|py)-\d+$/.test(className)
-  
+
   // Return true if it matches a utility pattern but doesn't have proper namespace
   return !hasProperNamespace
 }
@@ -62,17 +62,17 @@ const ruleFunction = primary => {
 
     root.walkRules(rule => {
       // Parse the selector to extract class names
-      const {selector} = rule
-      
+      const { selector } = rule
+
       // Match all class selectors in the rule
       // This regex matches .classname patterns
       const classMatches = selector.matchAll(/\.([a-zA-Z0-9_-]+)/g)
-      
+
       for (const match of classMatches) {
         const fullMatch = match[0] // Full match including the dot
         const className = match[1] // Class name without the dot
         const classStartIndex = match.index
-        
+
         if (isUnamespacedUtilityClass(className)) {
           report({
             message: messages.rejected(className),

@@ -13,7 +13,7 @@ This directory contains all of our custom stylelint plugins, each of which provi
   - [`primer/borders`](#primerborders)
   - [`primer/box-shadow`](#primerbox-shadow)
   - [`primer/responsive-widths`](#primerresponsive-widths)
-  - [`primer/selector-class-namespace`](#primerselector-class-namespace)
+  - [`primer/namespace-spacing`](#primernamespace-spacing)
   - [Variable rules](#variable-rules)
     - [Variable rule options](#variable-rule-options)
 
@@ -84,7 +84,7 @@ This [variable rule](#variable-rules) enforces the use of `$box-shadow*` variabl
 
 This plugin checks for `width` and `min-width` declarations that use a value less than the minimum browser size. `320px`
 
-## `primer/selector-class-namespace`
+## `primer/namespace-spacing`
 
 This plugin enforces that utility classes for margin and padding use the `pr-` namespace prefix. This ensures consistency and prevents naming conflicts.
 

@@ -1,10 +1,10 @@
-import plugin from '../plugins/selector-class-namespace.js'
+import plugin from '../plugins/namespace-spacing.js'
 import dedent from 'dedent'
 
 const plugins = [plugin]
 const {
   ruleName,
-  rule: {messages},
+  rule: { messages },
 } = plugin
 
 // General CSS Tests
