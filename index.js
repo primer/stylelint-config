@@ -7,6 +7,7 @@ import responsiveWidths from './plugins/responsive-widths.js'
 import spacing from './plugins/spacing.js'
 import typography from './plugins/typography.js'
 import noDisplayColors from './plugins/no-display-colors.js'
+import selectorClassNamespace from './plugins/selector-class-namespace.js'
 
 import {createRequire} from 'node:module'
 
@@ -27,6 +28,7 @@ export default {
     spacing,
     typography,
     noDisplayColors,
+    selectorClassNamespace,
   ],
   rules: {
     'alpha-value-notation': 'number',
@@ -100,6 +102,7 @@ export default {
     'primer/spacing': true,
     'primer/typography': true,
     'primer/no-display-colors': true,
+    'primer/selector-class-namespace': true,
     'property-no-unknown': [
       true,
       {
