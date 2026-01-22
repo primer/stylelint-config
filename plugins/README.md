@@ -13,6 +13,7 @@ This directory contains all of our custom stylelint plugins, each of which provi
   - [`primer/borders`](#primerborders)
   - [`primer/box-shadow`](#primerbox-shadow)
   - [`primer/responsive-widths`](#primerresponsive-widths)
+  - [`primer/selector-class-namespace`](#primerselector-class-namespace)
   - [Variable rules](#variable-rules)
     - [Variable rule options](#variable-rule-options)
 
@@ -82,6 +83,32 @@ This [variable rule](#variable-rules) enforces the use of `$box-shadow*` variabl
 ## `primer/responsive-widths`
 
 This plugin checks for `width` and `min-width` declarations that use a value less than the minimum browser size. `320px`
+
+## `primer/selector-class-namespace`
+
+This plugin enforces that utility classes for margin and padding use the `pr-` namespace prefix. This ensures consistency and prevents naming conflicts.
+
+```css
+.m-2 {
+  margin: 8px;
+}
+/**  ↑
+ *   FAIL: Use .pr-m-2 instead */
+
+.pr-m-2 {
+  margin: var(--base-size-8);
+}
+/**      ↑
+ *       OK: Properly namespaced */
+```
+
+The rule checks for common utility class patterns:
+- Margin: `.m-*`, `.mt-*`, `.mr-*`, `.mb-*`, `.ml-*`, `.mx-*`, `.my-*`
+- Padding: `.p-*`, `.pt-*`, `.pr-*`, `.pb-*`, `.pl-*`, `.px-*`, `.py-*`
+
+All of these classes must be prefixed with `pr-` to be valid:
+- ✅ `.pr-m-2`, `.pr-p-3`, `.pr-mt-4`, `.pr-px-5`
+- ❌ `.m-2`, `.p-3`, `.mt-4`, `.px-5`
 
 ## Variable rules
 
