@@ -9,7 +9,7 @@ import typography from './plugins/typography.js'
 import noDisplayColors from './plugins/no-display-colors.js'
 import namespaceSpacing from './plugins/namespace-spacing.js'
 
-import { createRequire } from 'node:module'
+import {createRequire} from 'node:module'
 
 const require = createRequire(import.meta.url)
 
@@ -58,7 +58,7 @@ export default {
       },
     ],
     'custom-property-pattern': null,
-    'declaration-block-no-duplicate-properties': [true, { ignore: ['consecutive-duplicates'] }],
+    'declaration-block-no-duplicate-properties': [true, {ignore: ['consecutive-duplicates']}],
     'declaration-block-no-redundant-longhand-properties': null,
     'declaration-block-no-shorthand-property-overrides': true,
     'declaration-property-value-disallowed-list': {
@@ -75,7 +75,7 @@ export default {
     'media-feature-name-no-vendor-prefix': null,
     'no-descending-specificity': null,
     'no-duplicate-selectors': true,
-    'no-invalid-position-at-import-rule': [true, { ignoreAtRules: ['use'] }],
+    'no-invalid-position-at-import-rule': [true, {ignoreAtRules: ['use']}],
     'number-max-precision': null,
     'plugin/browser-compat': [
       true,
@@ -186,7 +186,7 @@ export default {
         ],
         'selector-pseudo-class-no-unknown': [
           true,
-          { ignorePseudoClasses: ['export', 'import', 'global', 'local', 'external'] },
+          {ignorePseudoClasses: ['export', 'import', 'global', 'local', 'external']},
         ],
         'selector-type-no-unknown': [
           true,

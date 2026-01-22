@@ -4,7 +4,7 @@ import dedent from 'dedent'
 const plugins = [plugin]
 const {
   ruleName,
-  rule: { messages },
+  rule: {messages},
 } = plugin
 
 // General CSS Tests
