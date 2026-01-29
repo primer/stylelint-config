@@ -150,6 +150,9 @@ export default {
         'length-zero-no-unit': null,
         'selector-max-type': null,
         'primer/colors': null,
+        // Disable nesting-selector-no-missing-scoping-root for CSS-in-JS
+        // In styled-components, the & selector is valid and refers to the component itself
+        'nesting-selector-no-missing-scoping-root': null,
       },
     },
     {
