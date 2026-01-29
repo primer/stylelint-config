@@ -44,6 +44,7 @@ export default {
         importFrom: [
           '@primer/primitives/dist/css/functional/size/size-coarse.css',
           '@primer/primitives/dist/css/functional/size/border.css',
+          '@primer/primitives/dist/css/functional/size/radius.css',
           '@primer/primitives/dist/css/functional/size/size.css',
           '@primer/primitives/dist/css/functional/size/size-fine.css',
           '@primer/primitives/dist/css/functional/size/breakpoints.css',
@@ -149,6 +150,9 @@ export default {
         'length-zero-no-unit': null,
         'selector-max-type': null,
         'primer/colors': null,
+        // Disable nesting-selector-no-missing-scoping-root for CSS-in-JS
+        // In styled-components, the & selector is valid and refers to the component itself
+        'nesting-selector-no-missing-scoping-root': null,
       },
     },
     {
