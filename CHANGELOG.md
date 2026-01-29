@@ -1,5 +1,11 @@
 # Changelog
 
+## 13.4.2
+
+### Patch Changes
+
+- [#656](https://github.com/primer/stylelint-config/pull/656) [`6ea7735`](https://github.com/primer/stylelint-config/commit/6ea7735e21d2aa0fd9bab7f787f16b61e9ac4103) Thanks [@copilot-swe-agent](https://github.com/apps/copilot-swe-agent)! - Update @primer/primitives to version 11.4.0
+
 ## 13.4.1
 
 ### Patch Changes
@@ -86,7 +92,6 @@
 ### Patch Changes
 
 - [#479](https://github.com/primer/stylelint-config/pull/479) [`930e5f2`](https://github.com/primer/stylelint-config/commit/930e5f24bc01b7eebc07b085689314eea5f8e1c5) Thanks [@jonrohan](https://github.com/jonrohan)! - Stylelint fixes based on feedback:
-
   - `font-style` should allow keywords, `italic, normal`
   - border should allow `none` https://stylelint.io/user-guide/rules/declaration-property-value-disallowed-list
   - Update autofix in typography to always replace with the first suggestion
@@ -100,7 +105,6 @@
 - [#415](https://github.com/primer/stylelint-config/pull/415) [`86cf24f`](https://github.com/primer/stylelint-config/commit/86cf24f5c1f3f51b5085a5808a5406bc04e47b68) Thanks [@jonrohan](https://github.com/jonrohan)! - Deleting primer/utilities plugin
 
 - [#401](https://github.com/primer/stylelint-config/pull/401) [`0a7bc7e`](https://github.com/primer/stylelint-config/commit/0a7bc7eeaec4b6ea63cbc7bda150ea61a3b5d346) Thanks [@jonrohan](https://github.com/jonrohan)! - **BREAKING CHANGE:** Removing plugins from the config.
-
   - primer/new-color-vars-have-fallback
   - primer/no-deprecated-colors
   - primer/no-override
