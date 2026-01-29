@@ -44,6 +44,7 @@ export default {
         importFrom: [
           '@primer/primitives/dist/css/functional/size/size-coarse.css',
           '@primer/primitives/dist/css/functional/size/border.css',
+          '@primer/primitives/dist/css/functional/size/radius.css',
           '@primer/primitives/dist/css/functional/size/size.css',
           '@primer/primitives/dist/css/functional/size/size-fine.css',
           '@primer/primitives/dist/css/functional/size/breakpoints.css',
