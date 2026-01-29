@@ -149,6 +149,7 @@ export default {
         'length-zero-no-unit': null,
         'selector-max-type': null,
         'primer/colors': null,
+        'nesting-selector-no-missing-scoping-root': null,
       },
     },
     {
