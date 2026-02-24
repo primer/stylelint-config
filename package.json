@@ -36,7 +36,7 @@
     "build": "rollup -c",
     "clean": "rimraf dist",
     "test": "npm run test:jest && npm run test:stylelint",
-    "test:jest": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest --coverage false",
+    "test:jest": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules --require ./__tests__/jest-helpers/native-require.cjs\" jest --coverage false",
     "test:stylelint": "stylelint __tests__/__fixtures__/good/",
     "lint": "eslint .",
     "release": "changeset publish"
@@ -87,12 +87,16 @@
       "src/**/*.js",
       "plugins/**/*.js"
     ],
+    "moduleNameMapper": {
+      "^stylelint$": "<rootDir>/__tests__/jest-helpers/stylelint-shim.cjs"
+    },
     "setupFilesAfterEnv": [
       "<rootDir>/__tests__/utils/setup.js"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",
       "__tests__/utils",
+      "__tests__/jest-helpers",
       "__tests__/__fixtures__"
     ]
   }
