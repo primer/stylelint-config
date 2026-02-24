@@ -29,7 +29,7 @@
     "plugins/"
   ],
   "engines": {
-    "node": ">16.0.0"
+    "node": ">=20.19.0"
   },
   "scripts": {
     "pretest": "npm run build",
@@ -47,10 +47,10 @@
     "postcss-styled-syntax": "^0.7.0",
     "postcss-value-parser": "^4.0.2",
     "string.prototype.matchall": "^4.0.2",
-    "stylelint": "^16.20.0",
-    "stylelint-browser-compat": "^1.0.0-beta.140",
-    "stylelint-config-standard": "^39.0.1",
-    "stylelint-scss": "^6.2.0",
+    "stylelint": "^17.0.0",
+    "stylelint-browser-compat": "^1.0.0-beta.188",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-scss": "^7.0.0",
     "stylelint-value-no-unknown-custom-properties": "^6.0.1"
   },
   "prettier": "@github/prettier-config",
@@ -71,7 +71,7 @@
     "eslint-plugin-prettier": "^5.1.3",
     "globals": "^17.2.0",
     "jest": "^30.2.0",
-    "jest-preset-stylelint": "^8.0.0",
+    "jest-preset-stylelint": "^9.1.0",
     "prettier": "^3.2.5",
     "rimraf": "^6.0.1",
     "rollup": "^4.21.1"
