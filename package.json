@@ -29,7 +29,7 @@
     "plugins/"
   ],
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=22.0.0"
   },
   "scripts": {
     "pretest": "npm run build",
