@@ -1,1 +1,1 @@
-{ "extends": ["./dist/index.cjs"], "ignoreFiles": ["**/*.js", "**/*.cjs", "**/*.ts", "**/*.mjs"], "cache": false }
+{ "extends": ["./dist/index.mjs"], "ignoreFiles": ["**/*.js", "**/*.cjs", "**/*.ts", "**/*.mjs"], "cache": false }
