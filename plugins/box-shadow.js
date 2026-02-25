@@ -59,7 +59,10 @@ const ruleFunction = primary => {
         return
       }
 
-      const replacement = validValues.find(variable => variable.values.includes(value))
+      const normalizedValue = value.replace(/\b0px\b/g, '0')
+      const replacement = validValues.find(
+        variable => variable.values.includes(value) || variable.values.includes(normalizedValue),
+      )
       let fix = undefined
       if (replacement) {
         fix = () => {

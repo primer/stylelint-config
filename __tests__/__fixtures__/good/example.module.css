@@ -138,6 +138,8 @@
 .marketplace-logo-img {
   width: var(--logo-size);
   height: var(--logo-size);
+  border-radius: var(--borderRadius-default);
+  border: var(--borderWidth-default) solid var(--borderColor-default);
 }
 
 .details {

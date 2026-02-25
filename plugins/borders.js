@@ -10,6 +10,8 @@ const {
 
 export const ruleName = 'primer/borders'
 export const messages = ruleMessages(ruleName, {
+  recommendAlternative: (token, recommended) =>
+    `Consider using '${recommended}' instead of '${token}'. https://primer.style/foundations/primitives/size#border`,
   rejected: (value, replacement, propName) => {
     if (propName && propName.includes('radius') && value.includes('borderWidth')) {
       return `Border radius variables can not be used for border widths`
@@ -43,7 +45,7 @@ const borderShorthand = prop =>
 for (const variable of variables) {
   const name = variable['name']
 
-  if (name.includes('borderWidth')) {
+  if (name.includes('borderWidth') && name !== '--borderWidth-default') {
     const value = variable['values']
       .pop()
       .replace(/max|\(|\)/g, '')
@@ -150,6 +152,19 @@ const ruleFunction = primary => {
           if (checkForVariable(sizes, node.value)) {
             return
           }
+          // Accept borderWidth-default but warn to use borderWidth-thin
+          if (/--borderWidth-default\b/.test(node.value)) {
+            report({
+              index: declarationValueIndex(declNode) + node.sourceIndex,
+              endIndex: declarationValueIndex(declNode) + node.sourceIndex + node.value.length,
+              message: messages.recommendAlternative('--borderWidth-default', '--borderWidth-thin'),
+              node: declNode,
+              result,
+              ruleName,
+              severity: 'warning',
+            })
+            return
+          }
           // Check for composite border variables on border shorthand
           if (borderShorthand(prop) && checkForVariable(compositeBorders, node.value)) {
             return
@@ -158,6 +173,18 @@ const ruleFunction = primary => {
 
         if (prop.includes('radius')) {
           if (checkForVariable(radii, node.value)) {
+            // Warn when using borderRadius-default, recommend borderRadius-medium
+            if (/--borderRadius-default\b/.test(node.value)) {
+              report({
+                index: declarationValueIndex(declNode) + node.sourceIndex,
+                endIndex: declarationValueIndex(declNode) + node.sourceIndex + node.value.length,
+                message: messages.recommendAlternative('--borderRadius-default', '--borderRadius-medium'),
+                node: declNode,
+                result,
+                ruleName,
+                severity: 'warning',
+              })
+            }
             return
           }
         }

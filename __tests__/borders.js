@@ -169,6 +169,24 @@ testRule({
       endColumn: 17,
       description: 'CSS > Places error border on 1px for shorthand border.',
     },
+    {
+      code: '.x { border-radius: var(--borderRadius-default); }',
+      unfixable: true,
+      message: messages.recommendAlternative('--borderRadius-default', '--borderRadius-medium'),
+      line: 1,
+      column: 25,
+      endColumn: 47,
+      description: "CSS > Warns to use '--borderRadius-medium' instead of '--borderRadius-default'.",
+    },
+    {
+      code: '.x { border-width: var(--borderWidth-default); }',
+      unfixable: true,
+      message: messages.recommendAlternative('--borderWidth-default', '--borderWidth-thin'),
+      line: 1,
+      column: 24,
+      endColumn: 45,
+      description: "CSS > Warns to use '--borderWidth-thin' instead of '--borderWidth-default'.",
+    },
   ],
 })
 
