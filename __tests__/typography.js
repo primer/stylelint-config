@@ -70,12 +70,12 @@ testRule({
     },
     {
       code: '.x { font-size: 2.5rem; }',
-      unfixable: true,
-      message: messages.rejected('2.5rem'),
+      fixed: '.x { font-size: var(--base-text-size-2xl); }',
+      message: messages.rejected('2.5rem', {name: '--base-text-size-2xl'}),
       line: 1,
       column: 17,
       endColumn: 23,
-      description: "CSS > Errors on '2.5rem' (no exact match in primitives).",
+      description: "CSS > Replaces '2.5rem' with 'var(--base-text-size-2xl)'.",
     },
     // Font weights
     {
