@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@primer/stylelint-config.svg)](https://www.npmjs.org/package/@primer/stylelint-config)
 
-> A sharable stylelint config object that enforces GitHub's CSS rules
+> A shareable stylelint config object that enforces GitHub's CSS rules
 
 ## Install
 
