@@ -21,10 +21,6 @@ testRule({
     },
     // Font weights
     {
-      code: '.x { font-weight: var(--base-text-weight-semibold); }',
-      description: 'CSS > Accepts base font weight variables',
-    },
-    {
       code: '.x { font-weight: var(--text-title-weight-medium); }',
       description: 'CSS > Accepts functional font weight variables',
     },
@@ -49,6 +45,34 @@ testRule({
     },
   ],
   reject: [
+    // Base token warnings
+    {
+      code: '.x { font-weight: var(--base-text-weight-semibold); }',
+      unfixable: true,
+      message: messages.baseToken('var(--base-text-weight-semibold)'),
+      line: 1,
+      column: 19,
+      endColumn: 51,
+      description: 'CSS > Warns on base font weight variable',
+    },
+    {
+      code: '.x { font-size: var(--base-text-size-2xl); }',
+      unfixable: true,
+      message: messages.baseToken('var(--base-text-size-2xl)'),
+      line: 1,
+      column: 17,
+      endColumn: 42,
+      description: 'CSS > Warns on base font size variable',
+    },
+    {
+      code: '.x { line-height: var(--base-text-lineHeight-normal); }',
+      unfixable: true,
+      message: messages.baseToken('var(--base-text-lineHeight-normal)'),
+      line: 1,
+      column: 19,
+      endColumn: 53,
+      description: 'CSS > Warns on base line height variable',
+    },
     // Font sizes
     {
       code: '.x { font-size: 42px; }',
