@@ -23,6 +23,8 @@ export const messages = ruleMessages(ruleName, {
     // one possible replacement
     return `Please replace '${value}' with Primer typography variable '${replacement['name']}'. https://primer.style/foundations/primitives/typography`
   },
+  baseToken: value =>
+    `'${value}' is a base token. Consider using a functional Primer typography variable instead. https://primer.style/foundations/primitives/typography`,
 })
 
 const fontWeightKeywordMap = {
@@ -118,6 +120,18 @@ const ruleFunction = primary => {
       }
 
       if (checkForVariable(validValues, value)) {
+        // Warn when using base tokens (e.g. --base-text-weight-*) instead of functional tokens
+        if (/var\(--base-/.test(value)) {
+          report({
+            index: declarationValueIndex(declNode),
+            endIndex: declarationValueIndex(declNode) + value.length,
+            message: messages.baseToken(value),
+            node: declNode,
+            result,
+            ruleName,
+            severity: 'warning',
+          })
+        }
         return
       }
 
@@ -144,10 +158,13 @@ const ruleFunction = primary => {
       }
       const replacement = getReplacements()
       const fixable = replacement && !replacement.length
+      const isBaseTokenFix = fixable && replacement['name'].startsWith('--base-')
+      let didFix = false
       let fix = undefined
       if (fixable) {
         fix = () => {
           declNode.value = value.replace(value, `var(${replacement['name']})`)
+          didFix = true
         }
       }
 
@@ -160,6 +177,20 @@ const ruleFunction = primary => {
         ruleName,
         fix,
       })
+
+      // When auto-fix replaces a value with a base token, also report the base token warning
+      if (didFix && isBaseTokenFix) {
+        const newValue = declNode.value
+        report({
+          index: declarationValueIndex(declNode),
+          endIndex: declarationValueIndex(declNode) + newValue.length,
+          message: messages.baseToken(newValue),
+          node: declNode,
+          result,
+          ruleName,
+          severity: 'warning',
+        })
+      }
     })
   }
 }
