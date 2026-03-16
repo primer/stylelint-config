@@ -23,6 +23,8 @@ export const messages = ruleMessages(ruleName, {
 const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left']
 // Values that we want to ignore
 const valueList = ['${']
+// Exact keyword values that we want to ignore (remain as-is, e.g. `padding: unset`)
+const ignoredExactValues = ['*', '+', '-', '/', '0', 'auto', 'inherit', 'initial', 'unset']
 
 const sizes = primitivesVariables('spacing')
 const allowedSizeVars = primitivesVariables('spacing', {includeFunctional: true})
@@ -67,7 +69,7 @@ const ruleFunction = primary => {
         }
 
         // Exact values to ignore.
-        if (['*', '+', '-', '/', '0', 'auto', 'inherit', 'initial', 'unset'].includes(node.value)) {
+        if (ignoredExactValues.includes(node.value)) {
           return
         }
 
