@@ -40,6 +40,10 @@ testRule({
       description: 'CSS > Ignore auto values.',
     },
     {
+      code: '.x { padding: unset; }',
+      description: 'CSS > Ignore unset values.',
+    },
+    {
       code: '.x { top: 100%; bottom: 100vh; }',
       description: 'CSS > Ignore top with non-spacer units.',
     },
