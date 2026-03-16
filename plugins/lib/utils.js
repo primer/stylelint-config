@@ -2,13 +2,16 @@ import {createRequire} from 'node:module'
 
 const require = createRequire(import.meta.url)
 
-export function primitivesVariables(type) {
+export function primitivesVariables(type, options = {}) {
   const variables = []
 
   const files = []
   switch (type) {
     case 'spacing':
       files.push('base/size/size.json')
+      if (options.includeFunctional) {
+        files.push('functional/size/size.json')
+      }
       break
     case 'border':
       files.push('functional/size/border.json')

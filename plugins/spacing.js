@@ -25,6 +25,7 @@ const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left']
 const valueList = ['${']
 
 const sizes = primitivesVariables('spacing')
+const allowedSizeVars = primitivesVariables('spacing', {includeFunctional: true})
 
 // Add +-1px to each value
 for (const size of sizes) {
@@ -59,7 +60,7 @@ const ruleFunction = primary => {
         }
 
         // Exact values to ignore.
-        if (['*', '+', '-', '/', '0', 'auto', 'inherit', 'initial'].includes(node.value)) {
+        if (['*', '+', '-', '/', '0', 'auto', 'inherit', 'initial', 'unset'].includes(node.value)) {
           return
         }
 
@@ -76,7 +77,7 @@ const ruleFunction = primary => {
 
         // If the variable is found in the value, skip it.
         if (
-          sizes.some(variable =>
+          allowedSizeVars.some(variable =>
             new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(node.value),
           )
         ) {

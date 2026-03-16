@@ -20,6 +20,10 @@ testRule({
       description: 'CSS > One variable is valid.',
     },
     {
+      code: '.x { padding: var(--control-medium-paddingInline-condensed); }',
+      description: 'CSS > Functional size variable (control token) is valid.',
+    },
+    {
       code: '.x { padding-bottom: var(--base-size-4); }',
       description: 'CSS > Works on property partial match.',
     },
