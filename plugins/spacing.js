@@ -27,6 +27,13 @@ const valueList = ['${']
 const sizes = primitivesVariables('spacing')
 const allowedSizeVars = primitivesVariables('spacing', {includeFunctional: true})
 
+const escapeForRegExp = string => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+const allowedSizeVarMatchers = allowedSizeVars.map(variable => {
+  const escapedName = escapeForRegExp(variable['name'])
+  return new RegExp(`${escapedName}\\b`)
+})
+
 // Add +-1px to each value
 for (const size of sizes) {
   const values = size['values']
@@ -76,11 +83,7 @@ const ruleFunction = primary => {
         }
 
         // If the variable is found in the value, skip it.
-        if (
-          allowedSizeVars.some(variable =>
-            new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(node.value),
-          )
-        ) {
+        if (allowedSizeVarMatchers.some(matcher => matcher.test(node.value))) {
           return
         }
 
