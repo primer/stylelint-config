@@ -1,5 +1,11 @@
 # Changelog
 
+## 13.6.0
+
+### Minor Changes
+
+- [#680](https://github.com/primer/stylelint-config/pull/680) [`b370a89`](https://github.com/primer/stylelint-config/commit/b370a89928694e896b0870f6b80aba885da0e73c) Thanks [@lukasoppermann](https://github.com/lukasoppermann)! - Allow functional size tokens (e.g. `--control-medium-paddingInline-condensed`) in the `primer/spacing` rule. Also add `unset` to the list of ignored keyword values.
+
 ## 13.5.0
 
 ### Minor Changes
