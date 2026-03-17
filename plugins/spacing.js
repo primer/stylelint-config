@@ -23,8 +23,18 @@ export const messages = ruleMessages(ruleName, {
 const propList = ['padding', 'margin', 'top', 'right', 'bottom', 'left']
 // Values that we want to ignore
 const valueList = ['${']
+// Exact keyword values that we want to ignore (remain as-is, e.g. `padding: unset`)
+const ignoredExactValues = ['*', '+', '-', '/', '0', 'auto', 'inherit', 'initial', 'unset']
 
 const sizes = primitivesVariables('spacing')
+const allowedSizeVars = primitivesVariables('spacing', {includeFunctional: true})
+
+const escapeForRegExp = string => string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+const allowedSizeVarMatchers = allowedSizeVars.map(variable => {
+  const escapedName = escapeForRegExp(variable['name'])
+  return new RegExp(`${escapedName}\\b`)
+})
 
 // Add +-1px to each value
 for (const size of sizes) {
@@ -59,7 +69,7 @@ const ruleFunction = primary => {
         }
 
         // Exact values to ignore.
-        if (['*', '+', '-', '/', '0', 'auto', 'inherit', 'initial'].includes(node.value)) {
+        if (ignoredExactValues.includes(node.value)) {
           return
         }
 
@@ -75,11 +85,7 @@ const ruleFunction = primary => {
         }
 
         // If the variable is found in the value, skip it.
-        if (
-          sizes.some(variable =>
-            new RegExp(`${variable['name'].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`).test(node.value),
-          )
-        ) {
+        if (allowedSizeVarMatchers.some(matcher => matcher.test(node.value))) {
           return
         }
 
