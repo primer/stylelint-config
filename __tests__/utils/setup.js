@@ -1,3 +1,12 @@
+import {jest} from '@jest/globals'
+import stylelint from 'stylelint'
+
+// Stylelint 17 is ESM-only. CJS plugins (e.g. stylelint-browser-compat) that call
+// require('stylelint') would cause Jest to throw ERR_REQUIRE_ESM. jest.mock intercepts
+// the CJS require() path (checked before the ESM guard) and returns the real stylelint
+// instance loaded via this file's static ESM import.
+jest.mock('stylelint', () => ({__esModule: true, default: stylelint, ...stylelint}))
+
 expect.extend({
   toHaveErrored(data) {
     return {
