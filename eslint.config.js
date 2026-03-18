@@ -21,6 +21,10 @@ export default [
       'github/no-then': 'off',
       'i18n-text/no-en': 'off',
       'import/extensions': ['error', 'ignorePackages'],
+      // stylelint 17 is ESM-only and has no `main` field, only `exports`. The legacy
+      // eslint-import-resolver-node (used by eslint-plugin-import@2) cannot resolve
+      // packages that rely solely on the `exports` field, so we opt out for `stylelint`.
+      'import/no-unresolved': ['error', {ignore: ['^stylelint$']}],
     },
   },
   {
