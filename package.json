@@ -76,6 +76,17 @@
     "rimraf": "^6.0.1",
     "rollup": "^4.21.1"
   },
+  "overrides": {
+    "eslint-plugin-import": {
+      "eslint": "$eslint"
+    },
+    "eslint-plugin-jsx-a11y": {
+      "eslint": "$eslint"
+    },
+    "jest-preset-stylelint": {
+      "stylelint": "$stylelint"
+    }
+  },
   "peerDependencies": {
     "@primer/primitives": "10.x || 11.x"
   },
