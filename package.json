@@ -56,7 +56,7 @@
   "prettier": "@github/prettier-config",
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.0",
-    "@changesets/cli": "3.0.0",
+    "@changesets/cli": "3.0.1",
     "@github/prettier-config": "^0.0.6",
     "@primer/primitives": "^11.5.0",
     "@rollup/plugin-commonjs": "^29.0.0",
