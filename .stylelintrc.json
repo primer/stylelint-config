@@ -1,1 +1,13 @@
-{ "extends": ["./dist/index.cjs"], "ignoreFiles": ["**/*.js", "**/*.cjs", "**/*.ts", "**/*.mjs"], "cache": false }
+{
+  "extends": ["./dist/index.cjs"],
+  "ignoreFiles": ["**/*.js", "**/*.cjs", "**/*.ts", "**/*.mjs"],
+  "cache": false,
+  "overrides": [
+    {
+      "files": ["**/*.pcss"],
+      "rules": {
+        "at-rule-prelude-no-invalid": [true, {"ignoreAtRules": ["mixin"]}]
+      }
+    }
+  ]
+}
