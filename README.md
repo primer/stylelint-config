@@ -7,7 +7,7 @@
 ## Install
 
 ```
-$ npm install --save --dev @primer/stylelint-config stylelint
+$ npm install --save --dev @primer/stylelint-config stylelint stylelint-config-standard
 ```
 
 ## Usage

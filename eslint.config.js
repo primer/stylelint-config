@@ -15,6 +15,11 @@ export default [
         ...globals.es6,
       },
     },
+    settings: {
+      // `eslint-import-resolver-node` cannot resolve Stylelint v17, which only
+      // declares an `exports` map. Treat it as provided by the environment.
+      'import/core-modules': ['stylelint'],
+    },
     rules: {
       ...eslintPluginGithub.getFlatConfigs().recommended.rules,
       'import/no-commonjs': 'off',
