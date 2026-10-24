@@ -12,6 +12,8 @@ jobs:
       - uses: actions/setup-node@v7
       - run: npm ci
       - run: npm run test
+      - run: npm install --no-save stylelint@16 stylelint-config-standard@39
+      - run: npm run test
   lint:
     runs-on: ubuntu-latest
     steps:

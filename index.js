@@ -148,6 +148,7 @@ export default {
         'rule-empty-line-before': null,
         'declaration-empty-line-before': null,
         'length-zero-no-unit': null,
+        'no-invalid-position-declaration': null,
         'selector-max-type': null,
         'primer/colors': null,
         // Disable nesting-selector-no-missing-scoping-root for CSS-in-JS
@@ -168,6 +169,12 @@ export default {
         'color-function-notation': 'legacy',
         'selector-nested-pattern': '^&\\s?\\W',
         'at-rule-no-unknown': [
+          true,
+          {
+            ignoreAtRules: ['mixin', 'define-mixin'],
+          },
+        ],
+        'at-rule-prelude-no-invalid': [
           true,
           {
             ignoreAtRules: ['mixin', 'define-mixin'],
