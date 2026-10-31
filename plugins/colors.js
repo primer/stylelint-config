@@ -25,8 +25,8 @@ export const messages = ruleMessages(ruleName, {
 let variables = primitivesVariables('colors')
 const validProps = {
   '^color$': ['fgColor', 'iconColor'],
-  '^background(-color)?$': ['bgColor'],
-  '^border(-top|-right|-bottom|-left|-inline|-block)*(-color)?$': ['borderColor'],
+  '^background(-color|-image)?$': ['bgColor'],
+  '^border(?:-top|-right|-bottom|-left|-inline|-block)?(?:-color)?$': ['borderColor'],
   '^fill$': ['fgColor', 'iconColor', 'bgColor'],
   '^stroke$': ['fgColor', 'iconColor', 'bgColor', 'borderColor'],
 }
@@ -46,9 +46,9 @@ const validValues = [
 const propType = prop => {
   if (/^color/.test(prop)) {
     return 'fg'
-  } else if (/^background(-color)?$/.test(prop)) {
+  } else if (/^background(-color|-image)?$/.test(prop)) {
     return 'bg'
-  } else if (/^border(-top|-right|-bottom|-left|-inline|-block)*(-color)?$/.test(prop)) {
+  } else if (/^border(?:-top|-right|-bottom|-left|-inline|-block)?(?:-color)?$/.test(prop)) {
     return 'border'
   } else if (/^fill$/.test(prop)) {
     return 'fg'
@@ -137,15 +137,13 @@ const ruleFunction = primary => {
         ) {
           return
         }
-
         // Property is shortand and value doesn't include color
         if (
-          (/^border(-top|-right|-bottom|-left|-inline|-block)*$/.test(prop) || /^background$/.test(prop)) &&
-          !valueNode.value.toLowerCase().includes('color')
+          (/^border(?:-top|-right|-bottom|-left|-inline|-block)?$/.test(prop) || /^background$/.test(prop)) &&
+          ['color', 'scale'].every(word => !valueNode.value.toLowerCase().includes(word))
         ) {
           return
         }
-
         report({
           index: declarationValueIndex(declNode) + valueNode.sourceIndex,
           endIndex: declarationValueIndex(declNode) + valueNode.sourceEndIndex,
