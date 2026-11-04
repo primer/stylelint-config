@@ -1,6 +1,5 @@
 import stylelint from 'stylelint'
-import {declarationValueIndex} from 'stylelint/lib/utils/nodeFieldIndices.cjs'
-import {primitivesVariables} from './lib/utils.js'
+import {declarationValueIndex, primitivesVariables} from './lib/utils.js'
 
 const {
   createPlugin,
