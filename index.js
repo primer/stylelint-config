@@ -131,6 +131,7 @@ export default {
       customSyntax: 'postcss-scss',
       plugins: ['stylelint-scss'],
       rules: {
+        'at-rule-prelude-no-invalid': null,
         'scss/at-extend-no-missing-placeholder': true,
         'scss/at-rule-no-unknown': true,
         'scss/declaration-nested-properties-no-divided-groups': true,
