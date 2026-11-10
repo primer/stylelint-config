@@ -178,7 +178,7 @@ export default {
         'at-rule-prelude-no-invalid': [
           true,
           {
-            ignoreAtRules: ['mixin', 'define-mixin'],
+            ignoreAtRules: ['media', 'mixin', 'define-mixin'],
           },
         ],
       },
