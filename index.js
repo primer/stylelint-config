@@ -131,6 +131,7 @@ export default {
       customSyntax: 'postcss-scss',
       plugins: ['stylelint-scss'],
       rules: {
+        'at-rule-prelude-no-invalid': null,
         'scss/at-extend-no-missing-placeholder': true,
         'scss/at-rule-no-unknown': true,
         'scss/declaration-nested-properties-no-divided-groups': true,
@@ -148,6 +149,7 @@ export default {
         'rule-empty-line-before': null,
         'declaration-empty-line-before': null,
         'length-zero-no-unit': null,
+        'no-invalid-position-declaration': null,
         'selector-max-type': null,
         'primer/colors': null,
         // Disable nesting-selector-no-missing-scoping-root for CSS-in-JS
@@ -171,6 +173,12 @@ export default {
           true,
           {
             ignoreAtRules: ['mixin', 'define-mixin'],
+          },
+        ],
+        'at-rule-prelude-no-invalid': [
+          true,
+          {
+            ignoreAtRules: ['media', 'mixin', 'define-mixin'],
           },
         ],
       },
