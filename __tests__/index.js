@@ -35,10 +35,13 @@ describe('stylelint-config', () => {
       `).then(data => {
       expect(data).toHaveErrored()
       expect(data).toHaveWarningsLength(2)
-      expect(data).toHaveWarnings([
+      expect(data.results[0].warnings[0].text).toEqual(
         "Please use a primer size variable instead of '.2em'. Consult the primer docs for a suitable replacement. https://primer.style/foundations/primitives/size (primer/spacing)",
-        'Unexpected value "initial" for property "max-width" (declaration-property-value-disallowed-list)',
-      ])
+      )
+      // The problem messages are different between Stylelint v16 and v17.
+      expect(data.results[0].warnings[1].text).toMatch(
+        /^(Disallowed|Unexpected) value "initial" for property "max-width" \(declaration-property-value-disallowed-list\)$/,
+      )
     })
   })
 

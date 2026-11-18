@@ -1,6 +1,6 @@
 import stylelint from 'stylelint'
-import {declarationValueIndex} from 'stylelint/lib/utils/nodeFieldIndices.cjs'
 import valueParser from 'postcss-value-parser'
+import {declarationValueIndex} from './lib/utils.js'
 
 export const ruleName = 'primer/responsive-widths'
 

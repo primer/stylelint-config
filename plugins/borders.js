@@ -1,7 +1,6 @@
 import stylelint from 'stylelint'
-import {declarationValueIndex} from 'stylelint/lib/utils/nodeFieldIndices.cjs'
 import valueParser from 'postcss-value-parser'
-import {walkGroups, primitivesVariables} from './lib/utils.js'
+import {declarationValueIndex, walkGroups, primitivesVariables} from './lib/utils.js'
 
 const {
   createPlugin,
