@@ -15,6 +15,12 @@ export default [
         ...globals.es6,
       },
     },
+    settings: {
+      'import/resolver': {
+        typescript: {},
+        node: {},
+      },
+    },
     rules: {
       ...eslintPluginGithub.getFlatConfigs().recommended.rules,
       'import/no-commonjs': 'off',

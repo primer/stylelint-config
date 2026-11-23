@@ -29,7 +29,7 @@
     "plugins/"
   ],
   "engines": {
-    "node": ">16.0.0"
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
   },
   "scripts": {
     "pretest": "npm run build",
@@ -50,7 +50,7 @@
     "stylelint": "^18.0.0",
     "stylelint-browser-compat": "^1.0.0-beta.140",
     "stylelint-config-standard": "^41.0.0",
-    "stylelint-scss": "^6.2.0",
+    "stylelint-scss": "^7.5.0",
     "stylelint-value-no-unknown-custom-properties": "^6.0.1"
   },
   "prettier": "@github/prettier-config",
@@ -65,6 +65,7 @@
     "@typescript-eslint/parser": "^8.0.1",
     "dedent": "^1.5.3",
     "eslint": "^10.7.0",
+    "eslint-import-resolver-typescript": "^4.4.5",
     "eslint-plugin-github": "^6.0.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jest": "^29.2.1",
