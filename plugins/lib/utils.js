@@ -63,6 +63,37 @@ export function hasValidColor(value) {
   return HAS_VALID_HEX.test(value) || COLOR_FUNCTION_NAMES.includes(value)
 }
 
+function countChars(values) {
+  return values.reduce((count, value) => (typeof value === 'string' ? count + value.length : count), 0)
+}
+
+function declarationBetweenIndex(decl) {
+  const {prop} = decl.raws
+  const propIsObject = typeof prop === 'object' && prop !== null
+
+  return countChars([
+    propIsObject && 'prefix' in prop && prop.prefix,
+    (propIsObject && 'raw' in prop && prop.raw) || decl.prop,
+    propIsObject && 'suffix' in prop && prop.suffix,
+  ])
+}
+
+/**
+ * Get the index of a declaration's value.
+ *
+ * Stylelint exposes this helper only as an internal module path. Importing it
+ * directly breaks the CommonJS build, because Stylelint v17 ships it as ESM
+ * only. Keep a local copy so the plugins work with Stylelint v16 and v17.
+ *
+ * @param {import('postcss').Declaration} decl
+ * @returns {number}
+ */
+export function declarationValueIndex(decl) {
+  const {between, value} = decl.raws
+
+  return declarationBetweenIndex(decl) + countChars([between || ':', value && 'prefix' in value && value.prefix])
+}
+
 export function walkGroups(root, validate) {
   for (const node of root.nodes) {
     if (node.type === 'function') {

@@ -1,11 +1,13 @@
 import path from 'path'
-import {messages, ruleName} from '../plugins/no-display-colors.js'
+import plugin, {messages, ruleName} from '../plugins/no-display-colors.js'
 import {fileURLToPath} from 'url'
+
+const plugins = [plugin]
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 testRule({
-  plugins: ['./plugins/no-display-colors'],
+  plugins,
   ruleName,
   config: [
     true,
