@@ -37,7 +37,7 @@ describe('stylelint-config', () => {
       expect(data).toHaveWarningsLength(2)
       expect(data).toHaveWarnings([
         "Please use a primer size variable instead of '.2em'. Consult the primer docs for a suitable replacement. https://primer.style/foundations/primitives/size (primer/spacing)",
-        'Unexpected value "initial" for property "max-width" (declaration-property-value-disallowed-list)',
+        'Disallowed value "initial" for property "max-width" (declaration-property-value-disallowed-list)',
       ])
     })
   })
@@ -63,5 +63,16 @@ describe('stylelint-config', () => {
   it('resolves scss files correctly', async () => {
     const config = await stylelint.resolveConfig('./__fixtures__/good/example.scss')
     expect(config).toHaveProperty('customSyntax', 'postcss-scss')
+  })
+
+  it('accepts PostCSS mixin preludes while validating standard at-rules', async () => {
+    const result = await lint(
+      '@mixin minTouchTarget 48px, 48px; @define-mixin example $size: 48px {} @media blah blah {}',
+      undefined,
+      {codeFilename: 'example.pcss'},
+    )
+    const warnings = result.results[0].warnings.filter(warning => warning.rule === 'at-rule-prelude-no-invalid')
+    expect(warnings).toHaveLength(1)
+    expect(warnings[0].text).toContain('@media')
   })
 })

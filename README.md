@@ -6,6 +6,8 @@
 
 ## Install
 
+Requires Node.js 22.22.2 or later in the 22.x line, 24.15.0 or later in the 24.x line, or Node.js 26 or later.
+
 ```
 $ npm install --save --dev @primer/stylelint-config
 ```

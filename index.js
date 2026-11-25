@@ -167,6 +167,7 @@ export default {
         'declaration-block-no-redundant-longhand-properties': null,
         'color-function-notation': 'legacy',
         'selector-nested-pattern': '^&\\s?\\W',
+        'at-rule-prelude-no-invalid': [true, {ignoreAtRules: ['mixin', 'define-mixin']}],
         'at-rule-no-unknown': [
           true,
           {

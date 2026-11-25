@@ -1,7 +1,7 @@
 import {ruleName} from '../plugins/responsive-widths.js'
 
 testRule({
-  plugins: ['./plugins/responsive-widths'],
+  plugins: ['./plugins/responsive-widths.js'],
   customSyntax: 'postcss-scss',
   ruleName,
   config: [true],

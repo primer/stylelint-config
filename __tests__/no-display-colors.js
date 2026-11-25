@@ -5,7 +5,7 @@ import {fileURLToPath} from 'url'
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 testRule({
-  plugins: ['./plugins/no-display-colors'],
+  plugins: ['./plugins/no-display-colors.js'],
   ruleName,
   config: [
     true,
